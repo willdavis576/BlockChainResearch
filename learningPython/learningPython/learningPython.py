@@ -60,7 +60,6 @@ def main():
 
 def mainProg():
     global blockNumber
-    #global block
     global productNumber
     global serialNumberNum
     global serialNumberStr
@@ -135,4 +134,10 @@ if __name__ == '__main__':
 #	- current product number => DONE!
 #	- what stage of production line => DONE!
 
-#this means I need an array of blockchains. One blockchain for one product
+#this means I need an array of blockchains. One blockchain for one product => DONE!
+
+
+    #targets for tomorrow and Tuesday:
+
+#   - broadcast onto another node (computer)
+#   - use blockchain authentiation to validate data
