@@ -1,4 +1,4 @@
-import hashlib, sys
+import hashlib, sys, random
 from datetime import datetime
 
 #previousHash = '' 
@@ -31,20 +31,23 @@ class blockChain:
     def getTransactions(self):
         return self.transactions
 
-def blockUpdate(blockNumber, transactions):
+   
+def blockUpdate(blockNumber, productNumber, transactions):
     #Generic Blocks after Genesis Block
     for i in range(blockNumber , blockNumber + 1):
         blockNumber = i
-        block[blockNumber] = blockChain(previousHash = block[blockNumber-1].getBlockHash(), transactions = transactions)
-        print(block[blockNumber].getBlockHash())
+        block[[blockNumber][productNumber]] = blockChain(previousHash = block[[blockNumber-1][productNumber]].getBlockHash(), transactions = transactions)
+        print(block[[blockNumber][productNumber]].getBlockHash())
 
 def main():
     blockNumber = 0
+    productNumber = 0
     oldinfo = ''
     counter = 0
+
     #Genesis Block    
-    block[blockNumber] = blockChain(previousHash = '', transactions = "Start production")
-    print(block[blockNumber].getBlockHash())
+    block[[blockNumber][productNumber]] = blockChain(previousHash = '', transactions = "Start production")
+    print(block[[blockNumber][productNumber]].getBlockHash())
     blockNumber = blockNumber + 1 #key part, as each station uploads information, this variable is incremented to generate a new block
  
     while(counter < 4):
@@ -53,17 +56,17 @@ def main():
         info = var + " stage - Part Number (if applicable): " + var2
         print(counter)
         if oldinfo != info:
-            transactions[blockNumber] = info
+            transactions[[blockNumber][productNumber]] = info
             #this gets called everytime there is new data
-            blockUpdate(blockNumber, transactions = transactions[blockNumber])
-            print(block[blockNumber].getTransactions())
+            blockUpdate(blockNumber, productNumber, transactions = transactions[[blockNumber][productNumber]])
+            print(block[[blockNumber][productNumber]].getTransactions())
             blockNumber = blockNumber + 1
             counter = counter + 1
             oldinfo = info
     
     #now there is 10 bits of information, go back and show history.
     for i in range (0, blockNumber):
-        print(str(i) + " " + block[i].getTransactions() + " at time: " + str(block[i].getTimeStamp()))
+        print(str(i) + " " + block[[i][0]].getTransactions() + " at time: " + str(block[[i][0]].getTimeStamp()))
 
 
 if __name__ == '__main__':
@@ -73,8 +76,8 @@ if __name__ == '__main__':
     #each stage of the production line needs to log:
 
 #	- time => DONE!
-#	- part number used
+#	- part number used => DONE!
 #	- current product number 
-#	- what stage of production line
+#	- what stage of production line => DONE!
 
 #this means I need an array of blockchains. One blockchain for one product
