@@ -15,6 +15,7 @@ oldinfo = ''
 counter = 0
 newGenesis = 1
 repeat = 0
+newProduct = ''
 
 class blockChain:
     
@@ -53,7 +54,7 @@ def blockUpdate(blockNumber, productNumber, transactions, serialNumber):
         print(block[blockNumber][productNumber].getBlockHash())
 
 def main():
-    while(True):
+    while(newProduct != "n"):
         mainProg()
         
 
@@ -67,6 +68,7 @@ def mainProg():
     global counter
     global newGenesis
     global repeat
+    global newProduct
     
     while(newGenesis == 1):
             #Setup for genesis block
@@ -111,6 +113,7 @@ def mainProg():
             counter = counter + 1
             oldinfo = info
 
+    
     
     #now there is 10 bits of information, go back and show history.
     for i in range (0, productNumber + 1):
