@@ -54,7 +54,9 @@ def main():
             counter = counter + 1
             oldvar = var
     
-
+    #now there is 10 bits of information, go back and show history.
+    for i in range (0, blockNumber):
+        print(block[i].getTransactions())
 
 
 if __name__ == '__main__':
