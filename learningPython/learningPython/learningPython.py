@@ -40,28 +40,30 @@ def blockUpdate(blockNumber, transactions):
 
 def main():
     blockNumber = 0
-    oldvar = ''
+    oldinfo = ''
     counter = 0
     #Genesis Block    
-    block[blockNumber] = blockChain(previousHash = '', transactions = transactions[blockNumber])
+    block[blockNumber] = blockChain(previousHash = '', transactions = "Start production")
     print(block[blockNumber].getBlockHash())
     blockNumber = blockNumber + 1 #key part, as each station uploads information, this variable is incremented to generate a new block
  
-    while(counter < 11):
-        var = input("What data do you want? ")
+    while(counter < 4):
+        var = input("What stage of the production line? ")
+        var2 = input("part number (if applies)? ")
+        info = var + " stage - Part Number (if applicable): " + var2
         print(counter)
-        if oldvar != var:
-            transactions[blockNumber] = var
+        if oldinfo != info:
+            transactions[blockNumber] = info
             #this gets called everytime there is new data
             blockUpdate(blockNumber, transactions = transactions[blockNumber])
             print(block[blockNumber].getTransactions())
             blockNumber = blockNumber + 1
             counter = counter + 1
-            oldvar = var
+            oldinfo = info
     
     #now there is 10 bits of information, go back and show history.
     for i in range (0, blockNumber):
-        print(block[i].getTransactions() + " " + str(block[i].getTimeStamp()))
+        print(str(i) + " " + block[i].getTransactions() + " at time: " + str(block[i].getTimeStamp()))
 
 
 if __name__ == '__main__':
@@ -70,7 +72,7 @@ if __name__ == '__main__':
 
     #each stage of the production line needs to log:
 
-#	- time
+#	- time => DONE!
 #	- part number used
 #	- current product number 
 #	- what stage of production line
