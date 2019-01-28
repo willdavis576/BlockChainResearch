@@ -61,8 +61,10 @@ def main():
     print(block[[blockNumber][productNumber]].getBlockHash())
     blockNumber = blockNumber + 1 #key part, as each station uploads information, this variable is incremented to generate a new block
  
-    while(counter < 4):
+    while(True):
         var = input("What stage of the production line? ")
+        if var == "finish":
+            break
         var2 = input("part number (if applies)? ")
         if var2 == "":
             var2 = "N/A"
@@ -78,6 +80,7 @@ def main():
             blockNumber = blockNumber + 1
             counter = counter + 1
             oldinfo = info
+        
     
     #now there is 10 bits of information, go back and show history.
     for i in range (0, blockNumber):
