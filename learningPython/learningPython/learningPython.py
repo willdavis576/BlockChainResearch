@@ -1,4 +1,5 @@
 import hashlib, sys
+from datetime import datetime
 
 #previousHash = '' 
 #just copying data for now
@@ -12,10 +13,14 @@ class blockChain:
 	#current data
 	#timestamp
     def __init__(self, previousHash, transactions):
+        self.timeStamp = datetime.now()
         self.previousHash = previousHash
         self.transactions = transactions
-        self.contains = hashlib.sha256(self.transactions.encode()).hexdigest() + previousHash
+        self.contains = hashlib.sha256(self.transactions.encode()).hexdigest() + previousHash + str(self.timeStamp)
         self.blockHash = hashlib.sha256(self.contains.encode()).hexdigest()
+
+    def getTimeStamp(self):
+        return self.timeStamp
  
     def getBlockHash(self):
         return self.blockHash
@@ -56,7 +61,7 @@ def main():
     
     #now there is 10 bits of information, go back and show history.
     for i in range (0, blockNumber):
-        print(block[i].getTransactions())
+        print(block[i].getTransactions() + " " + str(block[i].getTimeStamp()))
 
 
 if __name__ == '__main__':
