@@ -36,20 +36,22 @@ def blockUpdate(blockNumber, transactions):
 def main():
     blockNumber = 0
     oldvar = ''
-    
+    counter = 0
     #Genesis Block    
     block[blockNumber] = blockChain(previousHash = '', transactions = transactions[blockNumber])
     print(block[blockNumber].getBlockHash())
     blockNumber = blockNumber + 1 #key part, as each station uploads information, this variable is incremented to generate a new block
  
-    while(True):
+    while(counter < 11):
         var = input("What data do you want? ")
+        print(counter)
         if oldvar != var:
             transactions[blockNumber] = var
             #this gets called everytime there is new data
             blockUpdate(blockNumber, transactions = transactions[blockNumber])
             print(block[blockNumber].getTransactions())
             blockNumber = blockNumber + 1
+            counter = counter + 1
             oldvar = var
     
 
