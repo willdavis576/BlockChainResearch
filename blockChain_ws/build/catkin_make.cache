@@ -1,2 +1,0 @@
-blockChainPack
--DCATKIN_DEVEL_PREFIX=/home/ros/blockChain_ws/devel -DCMAKE_INSTALL_PREFIX=/home/ros/blockChain_ws/install -G Unix Makefiles
