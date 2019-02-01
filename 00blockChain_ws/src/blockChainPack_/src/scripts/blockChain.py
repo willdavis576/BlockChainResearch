@@ -3,6 +3,7 @@ import hashlib, sys, random, rospy
 from datetime import datetime
 from std_msgs.msg import String
 from std_msgs.msg import Int8
+from blockChainPack_.msg import blockDetail
 
 
 transactions = [['' for _ in range (100)] for _ in range (100)]
@@ -83,7 +84,7 @@ def mainProg():
             break
  
     while(True):
-	pub = rospy.Publisher('publishingBlockStream', Int8, queue_size=10)
+	pub = rospy.Publisher('publishingBlockStream', blockDetail, queue_size=1)
         rospy.init_node('publishBlock', anonymous=False)
         rate = rospy.Rate(10) # 10hz
         var = raw_input("What stage of the production line? ")
@@ -113,7 +114,10 @@ def mainProg():
 	    
 	    #publish data to ROS
 	    #rospy.loginfo(str(pBlockNumber), " ", str(pPartNumber)) #show on terminal
-            pub.publish(blockNumber) #(productNumber)) #publish to publisher
+	    message = blockDetail()
+	    message.blockNumber = blockNumber
+	    message.productNumber = productNumber
+            pub.publish(message) #(productNumber)) #publish to publisher
             blockNumber = blockNumber + 1
             counter = counter + 1
             oldinfo = info
