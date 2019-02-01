@@ -14,17 +14,27 @@
 
 (defclass blockChainPack_::blockDetail
   :super ros::object
-  :slots (_blockNumber _productNumber ))
+  :slots (_blockNumber _productNumber _timeStamp _transactions _serialNumber _blockHash _previousHash ))
 
 (defmethod blockChainPack_::blockDetail
   (:init
    (&key
     ((:blockNumber __blockNumber) 0)
     ((:productNumber __productNumber) 0)
+    ((:timeStamp __timeStamp) "")
+    ((:transactions __transactions) "")
+    ((:serialNumber __serialNumber) "")
+    ((:blockHash __blockHash) "")
+    ((:previousHash __previousHash) "")
     )
    (send-super :init)
    (setq _blockNumber (round __blockNumber))
    (setq _productNumber (round __productNumber))
+   (setq _timeStamp (string __timeStamp))
+   (setq _transactions (string __transactions))
+   (setq _serialNumber (string __serialNumber))
+   (setq _blockHash (string __blockHash))
+   (setq _previousHash (string __previousHash))
    self)
   (:blockNumber
    (&optional __blockNumber)
@@ -32,6 +42,21 @@
   (:productNumber
    (&optional __productNumber)
    (if __productNumber (setq _productNumber __productNumber)) _productNumber)
+  (:timeStamp
+   (&optional __timeStamp)
+   (if __timeStamp (setq _timeStamp __timeStamp)) _timeStamp)
+  (:transactions
+   (&optional __transactions)
+   (if __transactions (setq _transactions __transactions)) _transactions)
+  (:serialNumber
+   (&optional __serialNumber)
+   (if __serialNumber (setq _serialNumber __serialNumber)) _serialNumber)
+  (:blockHash
+   (&optional __blockHash)
+   (if __blockHash (setq _blockHash __blockHash)) _blockHash)
+  (:previousHash
+   (&optional __previousHash)
+   (if __previousHash (setq _previousHash __previousHash)) _previousHash)
   (:serialization-length
    ()
    (+
@@ -39,6 +64,16 @@
     8
     ;; int64 _productNumber
     8
+    ;; string _timeStamp
+    4 (length _timeStamp)
+    ;; string _transactions
+    4 (length _transactions)
+    ;; string _serialNumber
+    4 (length _serialNumber)
+    ;; string _blockHash
+    4 (length _blockHash)
+    ;; string _previousHash
+    4 (length _previousHash)
     ))
   (:serialize
    (&optional strm)
@@ -68,6 +103,16 @@
               (write-long (if (>= _productNumber 0) 0 #xffffffff) s))
              (t                                         ;; integer
               (write-long _productNumber s)(write-long (if (>= _productNumber 0) 0 #xffffffff) s)))
+     ;; string _timeStamp
+       (write-long (length _timeStamp) s) (princ _timeStamp s)
+     ;; string _transactions
+       (write-long (length _transactions) s) (princ _transactions s)
+     ;; string _serialNumber
+       (write-long (length _serialNumber) s) (princ _serialNumber s)
+     ;; string _blockHash
+       (write-long (length _blockHash) s) (princ _blockHash s)
+     ;; string _previousHash
+       (write-long (length _previousHash) s) (princ _previousHash s)
      ;;
      (if (null strm) (get-output-stream-string s))))
   (:deserialize
@@ -96,20 +141,35 @@
                       b0)
                     ((= b1  0) (make-instance bignum :size 1 :bv (integer-vector b0)))
                     (t (make-instance bignum :size 2 :bv (integer-vector b0 (ash b1 1)))))))
+   ;; string _timeStamp
+     (let (n) (setq n (sys::peek buf ptr- :integer)) (incf ptr- 4) (setq _timeStamp (subseq buf ptr- (+ ptr- n))) (incf ptr- n))
+   ;; string _transactions
+     (let (n) (setq n (sys::peek buf ptr- :integer)) (incf ptr- 4) (setq _transactions (subseq buf ptr- (+ ptr- n))) (incf ptr- n))
+   ;; string _serialNumber
+     (let (n) (setq n (sys::peek buf ptr- :integer)) (incf ptr- 4) (setq _serialNumber (subseq buf ptr- (+ ptr- n))) (incf ptr- n))
+   ;; string _blockHash
+     (let (n) (setq n (sys::peek buf ptr- :integer)) (incf ptr- 4) (setq _blockHash (subseq buf ptr- (+ ptr- n))) (incf ptr- n))
+   ;; string _previousHash
+     (let (n) (setq n (sys::peek buf ptr- :integer)) (incf ptr- 4) (setq _previousHash (subseq buf ptr- (+ ptr- n))) (incf ptr- n))
    ;;
    self)
   )
 
-(setf (get blockChainPack_::blockDetail :md5sum-) "b27a6222581411b9d599cbf56966d81d")
+(setf (get blockChainPack_::blockDetail :md5sum-) "392845d38e7dbd0b3e34f5d6ba02ccf6")
 (setf (get blockChainPack_::blockDetail :datatype-) "blockChainPack_/blockDetail")
 (setf (get blockChainPack_::blockDetail :definition-)
       "int64 blockNumber
 int64 productNumber
+string timeStamp
+string transactions
+string serialNumber
+string blockHash
+string previousHash
 
 ")
 
 
 
-(provide :blockChainPack_/blockDetail "b27a6222581411b9d599cbf56966d81d")
+(provide :blockChainPack_/blockDetail "392845d38e7dbd0b3e34f5d6ba02ccf6")
 
 

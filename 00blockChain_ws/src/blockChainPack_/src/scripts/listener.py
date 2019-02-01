@@ -3,7 +3,7 @@ import rospy
 from blockChainPack_.msg import blockDetail
 
 def callback(data):
-    rospy.loginfo(rospy.get_caller_id() + 'I heard %s', (data.blockNumber, data.productNumber))
+    rospy.loginfo('I heard %s', ("Time Stamp for Block " + data.timeStamp, data.transactions, "Serial Number " + data.serialNumber, "Current blockhash: " + data.blockHash, "Previous blockhash: " + data.previousHash))
 
 def listener():
 

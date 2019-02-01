@@ -16,6 +16,7 @@ counter = 0
 newGenesis = 1
 repeat = 0
 newProduct = ''
+message = ''
 
 class blockChain:
     
@@ -50,6 +51,17 @@ def blockUpdate(blockNumber, productNumber, transactions, serialNumber):
         block[blockNumber][productNumber] = blockChain(previousHash = block[blockNumber-1][productNumber].getBlockHash(), transactions = transactions, serialNumber = serialNumber)
         print(block[blockNumber][productNumber].getBlockHash())
 
+def sendMessage():
+    global message
+    message = blockDetail()
+    message.blockNumber = blockNumber
+    message.productNumber = productNumber
+    message.timeStamp = str(block[blockNumber][productNumber].getTimeStamp())
+    message.transactions = block[blockNumber][productNumber].getTransactions()
+    message.serialNumber = block[blockNumber][productNumber].getSerialNumber()
+    message.blockHash = block[blockNumber][productNumber].getBlockHash()
+    message.previousHash = block[blockNumber][productNumber].getPreviousHash()
+
 def main():
     while(newProduct != "n"):
         mainProg()
@@ -65,6 +77,7 @@ def mainProg():
     global newGenesis
     global repeat
     global newProduct
+    global message
 
     
     while(newGenesis == 1):
@@ -112,10 +125,8 @@ def mainProg():
 	    
 	    #publish data to ROS
 	    #rospy.loginfo(str(pBlockNumber), " ", str(pPartNumber)) #show on terminal
-	    message = blockDetail()
-	    message.blockNumber = blockNumber
-	    message.productNumber = productNumber
-            pub.publish(message) #(productNumber)) #publish to publisher
+	    sendMessage()
+            pub.publish(message)
             blockNumber = blockNumber + 1
             counter = counter + 1
             oldinfo = info

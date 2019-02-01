@@ -25,11 +25,21 @@ struct blockDetail_
 
   blockDetail_()
     : blockNumber(0)
-    , productNumber(0)  {
+    , productNumber(0)
+    , timeStamp()
+    , transactions()
+    , serialNumber()
+    , blockHash()
+    , previousHash()  {
     }
   blockDetail_(const ContainerAllocator& _alloc)
     : blockNumber(0)
-    , productNumber(0)  {
+    , productNumber(0)
+    , timeStamp(_alloc)
+    , transactions(_alloc)
+    , serialNumber(_alloc)
+    , blockHash(_alloc)
+    , previousHash(_alloc)  {
   (void)_alloc;
     }
 
@@ -40,6 +50,21 @@ struct blockDetail_
 
    typedef int64_t _productNumber_type;
   _productNumber_type productNumber;
+
+   typedef std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other >  _timeStamp_type;
+  _timeStamp_type timeStamp;
+
+   typedef std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other >  _transactions_type;
+  _transactions_type transactions;
+
+   typedef std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other >  _serialNumber_type;
+  _serialNumber_type serialNumber;
+
+   typedef std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other >  _blockHash_type;
+  _blockHash_type blockHash;
+
+   typedef std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other >  _previousHash_type;
+  _previousHash_type previousHash;
 
 
 
@@ -75,7 +100,7 @@ namespace message_traits
 
 
 
-// BOOLTRAITS {'IsFixedSize': True, 'IsMessage': True, 'HasHeader': False}
+// BOOLTRAITS {'IsFixedSize': False, 'IsMessage': True, 'HasHeader': False}
 // {'blockChainPack_': ['/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg'], 'std_msgs': ['/opt/ros/kinetic/share/std_msgs/cmake/../msg']}
 
 // !!!!!!!!!!! ['__class__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_parsed_fields', 'constants', 'fields', 'full_name', 'has_header', 'header_present', 'names', 'package', 'parsed_fields', 'short_name', 'text', 'types']
@@ -85,12 +110,12 @@ namespace message_traits
 
 template <class ContainerAllocator>
 struct IsFixedSize< ::blockChainPack_::blockDetail_<ContainerAllocator> >
-  : TrueType
+  : FalseType
   { };
 
 template <class ContainerAllocator>
 struct IsFixedSize< ::blockChainPack_::blockDetail_<ContainerAllocator> const>
-  : TrueType
+  : FalseType
   { };
 
 template <class ContainerAllocator>
@@ -119,12 +144,12 @@ struct MD5Sum< ::blockChainPack_::blockDetail_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "b27a6222581411b9d599cbf56966d81d";
+    return "392845d38e7dbd0b3e34f5d6ba02ccf6";
   }
 
   static const char* value(const ::blockChainPack_::blockDetail_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0xb27a6222581411b9ULL;
-  static const uint64_t static_value2 = 0xd599cbf56966d81dULL;
+  static const uint64_t static_value1 = 0x392845d38e7dbd0bULL;
+  static const uint64_t static_value2 = 0x3e34f5d6ba02ccf6ULL;
 };
 
 template<class ContainerAllocator>
@@ -145,6 +170,11 @@ struct Definition< ::blockChainPack_::blockDetail_<ContainerAllocator> >
   {
     return "int64 blockNumber\n\
 int64 productNumber\n\
+string timeStamp\n\
+string transactions\n\
+string serialNumber\n\
+string blockHash\n\
+string previousHash\n\
 ";
   }
 
@@ -165,6 +195,11 @@ namespace serialization
     {
       stream.next(m.blockNumber);
       stream.next(m.productNumber);
+      stream.next(m.timeStamp);
+      stream.next(m.transactions);
+      stream.next(m.serialNumber);
+      stream.next(m.blockHash);
+      stream.next(m.previousHash);
     }
 
     ROS_DECLARE_ALLINONE_SERIALIZER
@@ -187,6 +222,16 @@ struct Printer< ::blockChainPack_::blockDetail_<ContainerAllocator> >
     Printer<int64_t>::stream(s, indent + "  ", v.blockNumber);
     s << indent << "productNumber: ";
     Printer<int64_t>::stream(s, indent + "  ", v.productNumber);
+    s << indent << "timeStamp: ";
+    Printer<std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other > >::stream(s, indent + "  ", v.timeStamp);
+    s << indent << "transactions: ";
+    Printer<std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other > >::stream(s, indent + "  ", v.transactions);
+    s << indent << "serialNumber: ";
+    Printer<std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other > >::stream(s, indent + "  ", v.serialNumber);
+    s << indent << "blockHash: ";
+    Printer<std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other > >::stream(s, indent + "  ", v.blockHash);
+    s << indent << "previousHash: ";
+    Printer<std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other > >::stream(s, indent + "  ", v.previousHash);
   }
 };
 
