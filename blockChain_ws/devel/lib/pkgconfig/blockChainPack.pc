@@ -1,8 +1,0 @@
-prefix=/home/ros/blockChain_ws/devel
-
-Name: blockChainPack
-Description: Description of blockChainPack
-Version: 0.0.0
-Cflags: 
-Libs: -L/home/ros/blockChain_ws/devel/lib 
-Requires: 
