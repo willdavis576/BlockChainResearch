@@ -20,8 +20,6 @@ def callback(data):
     data_to_print = "I heard\nTime Stamp for Block: {0}\nTransactions: {1}\nSerial Number: {2}\nBlockHash: {3}\nPreviousHash: {4}".format(data.timeStamp, data.transactions, data.serialNumber, data.blockHash, data.previousHash)
 
     rospy.loginfo(data_to_print)
-
-    #rospy.loginfo('I heard %s', ("Time Stamp for Block " + data.timeStamp, "\n" + data.transactions, "\nSerial Number " + data.serialNumber, "\nCurrent blockhash: " + data.blockHash, "\nPrevious blockhash: " + data.previousHash))
   
     block[blockNumber][productNumber] = blockChain(previousHash = data.previousHash, transactions = data.transactions, serialNumber = data.serialNumber, timeStamp = data.timeStamp)
 
@@ -67,3 +65,4 @@ def listener():
 
 if __name__ == '__main__':
     listener()
+
