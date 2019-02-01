@@ -1,8 +1,6 @@
 #! /usr/bin/python
 import hashlib, sys, random, rospy
 from datetime import datetime
-from std_msgs.msg import String
-from std_msgs.msg import Int8
 from blockChainPack_.msg import blockDetail
 
 

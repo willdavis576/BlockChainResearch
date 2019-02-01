@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 import rospy
-from std_msgs.msg import Int8
-from std_msgs.msg import String
+from blockChainPack_.msg import blockDetail
 
 def callback(data):
     rospy.loginfo(rospy.get_caller_id() + 'I heard %s', data.data)
@@ -10,7 +9,7 @@ def listener():
 
     rospy.init_node('listener', anonymous=False)
 
-    rospy.Subscriber('publishingBlockStream', Int8, callback)
+    rospy.Subscriber('publishingBlockStream', blockDetail, callback)
   
 
     # spin() simply keeps python from exiting until this node is stopped
