@@ -1,4 +1,4 @@
 <launch>
-	<node pkg="blockChainPack_" type="listener.py" name="publishingBlockStream" output="screen">
+	<node pkg="blockChainPack_" type="listener.py" name="listener" output="screen">
 	</node>
 </launch>

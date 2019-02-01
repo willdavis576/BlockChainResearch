@@ -17,11 +17,15 @@ def callback(data):
     global transactions
     global serialNumber
 
-    #rospy.loginfo('I heard %s', ("Time Stamp for Block " + data.timeStamp, data.transactions, "Serial Number " + data.serialNumber, "Current blockhash: " + data.blockHash, "Previous blockhash: " + data.previousHash))
+    data_to_print = "I heard\nTime Stamp for Block: {0}\nTransactions: {1}\nSerial Number: {2}\nBlockHash: {3}\nPreviousHash: {4}".format(data.timeStamp, data.transactions, data.serialNumber, data.blockHash, data.previousHash)
+
+    rospy.loginfo(data_to_print)
+
+    #rospy.loginfo('I heard %s', ("Time Stamp for Block " + data.timeStamp, "\n" + data.transactions, "\nSerial Number " + data.serialNumber, "\nCurrent blockhash: " + data.blockHash, "\nPrevious blockhash: " + data.previousHash))
   
     block[blockNumber][productNumber] = blockChain(previousHash = data.previousHash, transactions = data.transactions, serialNumber = data.serialNumber, timeStamp = data.timeStamp)
 
-    print(block[blockNumber][productNumber].getPreviousHash() + " " + block[blockNumber][productNumber].getTransactions() + " " + block[blockNumber][productNumber].getSerialNumber() + " " + block[blockNumber][productNumber].getTimeStamp() + " " + block[blockNumber][productNumber].getBlockHash())
+    #print(block[blockNumber][productNumber].getPreviousHash() + " " + block[blockNumber][productNumber].getTransactions() + " " + block[blockNumber][productNumber].getSerialNumber() + " " + block[blockNumber][productNumber].getTimeStamp() + " " + block[blockNumber][productNumber].getBlockHash())
 
     
 class blockChain:
@@ -53,7 +57,7 @@ class blockChain:
 
 def listener():
 
-    rospy.init_node('listener', anonymous=True)
+    rospy.init_node('listener', anonymous=False)
 
     rospy.Subscriber('publishingBlockStream', blockDetail, callback)
   
