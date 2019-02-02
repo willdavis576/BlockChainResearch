@@ -45,11 +45,11 @@ class blockChain:
 
    
 def blockUpdate(blockNumber, productNumber, transactions, serialNumber):
+    #Generic Blocks after Genesis Block
     for i in range(blockNumber , blockNumber + 1):
         blockNumber = i
         block[blockNumber][productNumber] = blockChain(previousHash = block[blockNumber-1][productNumber].getBlockHash(), transactions = transactions, serialNumber = serialNumber)
         print(block[blockNumber][productNumber].getBlockHash())
-
 
 def sendMessage():
     global message
@@ -63,12 +63,8 @@ def sendMessage():
     message.previousHash = block[blockNumber][productNumber].getPreviousHash()
 
 def main():
-    while(True):
-        while not rospy.is_shutdown():
-            while(newProduct != "n"):
-                mainProg()
-        if rospy.is_shutdown():
-            break
+    while(newProduct != "n"):
+        mainProg()
 
 	
 def mainProg():
@@ -122,20 +118,26 @@ def mainProg():
             transactions[blockNumber][productNumber] = info
             serialNumberNum = productNumber
             serialNumber[productNumber] = serialNumberStr + str(serialNumberNum)
+            #this gets called everytime there is new data
             blockUpdate(blockNumber, productNumber, transactions = transactions[blockNumber][productNumber], serialNumber = serialNumber[productNumber])
             print(block[blockNumber][productNumber].getTransactions())
             print(str(blockNumber) + " " + str(productNumber))
+	    
+	    #publish data to ROS
+	    #rospy.loginfo(str(pBlockNumber), " ", str(pPartNumber)) #show on terminal
 	    sendMessage()
             pub.publish(message)
             blockNumber = blockNumber + 1
             counter = counter + 1
-            oldinfo = info   
+            oldinfo = info
 
+    
+    
+    #now there is 10 bits of information, go back and show history.
     for i in range (0, productNumber + 1):
         for j in range (0, blockNumber):
             print(str(j) + " " + block[j][i].getTransactions() + " at time: " + str(block[j][i].getTimeStamp()))
         print(block[0][i].getSerialNumber())
-    
     if repeat == 1:
         productNumber = productNumber + 1
 
