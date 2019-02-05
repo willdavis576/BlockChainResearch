@@ -20,15 +20,13 @@ def callback(data):
 
     productNumber = data.productNumber
     data_to_print = "Time Stamp for Block: {0}\nTransactions: {1}\nSerial Number: {2}\nBlockHash: {3}\nPreviousHash: {4}".format(data.timeStamp, data.transactions, data.serialNumber, data.blockHash, data.previousHash)
-    rospy.loginfo(data_to_print)
+    #rospy.loginfo(data_to_print)
     if runYet[productNumber] == '':
-        f = open("blockChain" + str(productNumber) + ".txt", "w")
-        time.sleep(10)
+        f = open("/home/ros/blockChainGit/00blockChain_ws/blockChain" + str(productNumber) + ".txt", "w")
         f.close()
         runYet[productNumber] = "1"
     if runYet[productNumber] == "1":
-        f = open("blockChain" + str(productNumber) + ".txt", "a")
-        time.sleep(10)
+        f = open("/home/ros/blockChainGit/00blockChain_ws/blockChain" + str(productNumber) + ".txt", "a")
         f.write(str(data_to_print))
         f.write("\n-------------------------------\n")
         f.close()
@@ -67,10 +65,10 @@ class blockChain:
         return self.serialNumber
 
 def listener():
+    rospy.init_node('listener', anonymous="True")
     rospy.Subscriber('publishingBlockStream', blockDetail, callback)
     rospy.spin()
 
 if __name__ == '__main__':
-    rospy.init_node('listener', anonymous=True)
     listener()
 

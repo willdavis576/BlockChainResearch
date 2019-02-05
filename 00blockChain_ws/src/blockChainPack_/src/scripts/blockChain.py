@@ -99,7 +99,7 @@ def mainProg():
         print("genesis: ")
         print(block[blockNumber][productNumber].getBlockHash())
         pub = rospy.Publisher('publishingBlockStream', blockDetail, queue_size=1)
-        rospy.init_node('publishBlock', anonymous=False)
+        rospy.init_node('publishBlock', anonymous="True")
         sendMessage()
         pub.publish(message)
         blockNumber = blockNumber + 1  # key part, as each station uploads information, this variable is incremented to generate a new block
@@ -108,7 +108,7 @@ def mainProg():
 
     while (True):
         pub = rospy.Publisher('publishingBlockStream', blockDetail, queue_size=1)
-        rospy.init_node('publishBlock', anonymous=False)
+        rospy.init_node('publishBlock', anonymous="True")
         rate = rospy.Rate(10)  # 10hz
         var = raw_input("What stage of the production line? ")
         if var == "finish":
