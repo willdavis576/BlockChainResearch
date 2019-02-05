@@ -1,0 +1,4 @@
+<launch>
+	<node pkg="blockChainPack_" type="decentralBlockChain.py" name="publishBlock" output="screen">
+	</node>
+</launch>

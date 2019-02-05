@@ -1,0 +1,6 @@
+<launch>
+	<node pkg="blockChainPack_" type="blockChain.py" name="publishBlock" output="screen">
+	</node>
+	<node pkg="blockChainPack_" type="listener.py" name="listener">
+	</node>
+</launch>
