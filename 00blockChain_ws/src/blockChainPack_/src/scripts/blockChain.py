@@ -165,6 +165,8 @@ if __name__ == '__main__':
 # targets for tomorrow and Tuesday:
 
 #   - broadcast onto another node (computer) => DONE!
+#   - Make all nodes have the same data saved to text files => DONE(ish)!
+#   - Fix bug with only the initial roslaunch receiving the first genesis block data. The rest of the nodes don't receive it, currently
 #   - use blockchain authentiation to validate data
 
 # Authentication ideas:
