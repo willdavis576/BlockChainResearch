@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import rospy, hashlib, time
 from blockChainPack_.msg import blockDetail
+# from blockChainPacl_.msg import blockCatchUp
 
 transactions = [['' for _ in range (100)] for _ in range (100)]
 block = [['' for _ in range (100)] for _ in range (100)]
@@ -38,6 +39,9 @@ def callback(data):
     contains = hashlib.sha256(data.transactions.encode()).hexdigest() + data.previousHash + str(data.timeStamp) + data.serialNumber
     #print(hashlib.sha256(contains.encode()).hexdigest())
 
+# def callback2(data):
+#     if data.newNode == 1:
+
 
 class blockChain:
 
@@ -67,6 +71,7 @@ class blockChain:
 def listener():
     rospy.init_node('listener', anonymous="True")
     rospy.Subscriber('publishingBlockStream', blockDetail, callback)
+    #rospy.Subscriber('nodeCatchUp', blockCatchUp, callback2)
     rospy.spin()
 
 if __name__ == '__main__':
