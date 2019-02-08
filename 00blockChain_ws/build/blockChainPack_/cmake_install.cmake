@@ -33,7 +33,10 @@ if(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/blockChainPack_/msg" TYPE FILE FILES "/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/blockDetail.msg")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/blockChainPack_/msg" TYPE FILE FILES
+    "/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/blockDetail.msg"
+    "/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/nodeOnline.msg"
+    )
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")

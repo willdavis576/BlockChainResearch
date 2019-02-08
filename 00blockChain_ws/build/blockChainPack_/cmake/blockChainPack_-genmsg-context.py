@@ -1,6 +1,6 @@
 # generated from genmsg/cmake/pkg-genmsg.context.in
 
-messages_str = "/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/blockDetail.msg"
+messages_str = "/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/blockDetail.msg;/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/nodeOnline.msg"
 services_str = ""
 pkg_name = "blockChainPack_"
 dependencies_str = "std_msgs"

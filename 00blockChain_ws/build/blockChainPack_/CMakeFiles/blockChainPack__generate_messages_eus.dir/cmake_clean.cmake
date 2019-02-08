@@ -1,6 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/blockChainPack__generate_messages_eus"
   "/home/ros/blockChainGit/00blockChain_ws/devel/share/roseus/ros/blockChainPack_/msg/blockDetail.l"
+  "/home/ros/blockChainGit/00blockChain_ws/devel/share/roseus/ros/blockChainPack_/msg/nodeOnline.l"
   "/home/ros/blockChainGit/00blockChain_ws/devel/share/roseus/ros/blockChainPack_/manifest.l"
 )
 

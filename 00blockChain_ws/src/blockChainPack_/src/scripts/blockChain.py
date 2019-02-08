@@ -2,7 +2,8 @@
 import hashlib, sys, random, rospy
 from datetime import datetime
 from blockChainPack_.msg import blockDetail
-# from blockChainPack_.msg import blockCatchUp
+from blockChainPack_.msg import nodeOnline
+from std_msgs.msg import String
 
 transactions = [['' for _ in range(100)] for _ in range(100)]
 serialNumber = [''] * 100
@@ -13,12 +14,14 @@ serialNumberNum = 0
 serialNumberStr = 'PRODUCT'
 oldinfo = ''
 counter = 0
-newGenesis = 0
+newGenesis = 1
 repeat = 0
 newProduct = ''
 message = ''
+nodeUp = ''
 init = 0
 noGen = 0
+nodeName = "NODE1" ############### THIS IS WHERE YOU SPECIFY A NODE'S NAME #######################
 
 
 class blockChain:
@@ -48,11 +51,7 @@ class blockChain:
         return self.serialNumber
 
 
-# def __init__(self):
-#     pub2 = rospy.Publisher('nodeCatchUp', blockCatchUp, queue_size=1)
-#     message2 = blockCatchUp()
-#     message2.newNode = 1
-#     pub2.publish(message2)
+
 
 
 def blockUpdate(blockNumber, productNumber, transactions, serialNumber):
@@ -96,6 +95,8 @@ def mainProg():
     global repeat
     global newProduct
     global message
+    global nodeName
+    global nodeUp
 
     while (newGenesis == 1):
         # Setup for genesis block
@@ -119,6 +120,12 @@ def mainProg():
     while (True):
         pub = rospy.Publisher('publishingBlockStream', blockDetail, queue_size=1)
         rospy.init_node('publishBlock', anonymous="True")
+
+        nodeUp = rospy.Publisher('nodesOnline', nodeOnline, queue_size=1)
+        message2 = nodeOnline()
+        message2.nodeName = "NODE1"
+        nodeUp.publish(message2)
+
         rate = rospy.Rate(10)  # 10hz
         var = raw_input("What stage of the production line? ")
         if var == "finish":
@@ -178,10 +185,12 @@ if __name__ == '__main__':
 #   - Make all nodes have the same data saved to text files => DONE(ish)!
 #       - Fix bug with only the initial roslaunch receiving the first genesis block data. The rest of the nodes don't receive it, currently
 #           - Idea: maybe all nodes keep track of how many nodes are on the network. Each time a node is launched it recieves a copy of everything
-#             happended so far.
+#             happend so far.
 #           - blockChain.py send out 1 when initialised, if a listener hears it
 #       - Change of plan, all nodes will be specified and all nodes will have a list of all other nodes on the network
 #         initiated or not. This means as soon as a node comes on online it will be updated with the next authentication program.
+#           - Each node needs to also be publishing it's name to a NodesOnline topic and the listeners will create an array comparing nodes online
+#             to a text file of all possible nodes.
 #   - use blockchain authentiation to validate data
 
 # Authentication ideas:

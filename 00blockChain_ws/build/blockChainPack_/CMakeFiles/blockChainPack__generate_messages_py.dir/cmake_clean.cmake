@@ -1,6 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/blockChainPack__generate_messages_py"
   "/home/ros/blockChainGit/00blockChain_ws/devel/lib/python2.7/dist-packages/blockChainPack_/msg/_blockDetail.py"
+  "/home/ros/blockChainGit/00blockChain_ws/devel/lib/python2.7/dist-packages/blockChainPack_/msg/_nodeOnline.py"
   "/home/ros/blockChainGit/00blockChain_ws/devel/lib/python2.7/dist-packages/blockChainPack_/msg/__init__.py"
 )
 

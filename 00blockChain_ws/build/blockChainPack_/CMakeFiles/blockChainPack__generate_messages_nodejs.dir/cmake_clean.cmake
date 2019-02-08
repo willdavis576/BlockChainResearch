@@ -1,6 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/blockChainPack__generate_messages_nodejs"
   "/home/ros/blockChainGit/00blockChain_ws/devel/share/gennodejs/ros/blockChainPack_/msg/blockDetail.js"
+  "/home/ros/blockChainGit/00blockChain_ws/devel/share/gennodejs/ros/blockChainPack_/msg/nodeOnline.js"
 )
 
 # Per-language clean rules from dependency scanning.

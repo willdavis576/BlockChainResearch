@@ -54,6 +54,7 @@ CMAKE_BINARY_DIR = /home/ros/blockChainGit/00blockChain_ws/build
 include blockChainPack_/CMakeFiles/blockChainPack__generate_messages_eus.dir/progress.make
 
 blockChainPack_/CMakeFiles/blockChainPack__generate_messages_eus: /home/ros/blockChainGit/00blockChain_ws/devel/share/roseus/ros/blockChainPack_/msg/blockDetail.l
+blockChainPack_/CMakeFiles/blockChainPack__generate_messages_eus: /home/ros/blockChainGit/00blockChain_ws/devel/share/roseus/ros/blockChainPack_/msg/nodeOnline.l
 blockChainPack_/CMakeFiles/blockChainPack__generate_messages_eus: /home/ros/blockChainGit/00blockChain_ws/devel/share/roseus/ros/blockChainPack_/manifest.l
 
 
@@ -62,12 +63,18 @@ blockChainPack_/CMakeFiles/blockChainPack__generate_messages_eus: /home/ros/bloc
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/ros/blockChainGit/00blockChain_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating EusLisp code from blockChainPack_/blockDetail.msg"
 	cd /home/ros/blockChainGit/00blockChain_ws/build/blockChainPack_ && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/geneus/cmake/../../../lib/geneus/gen_eus.py /home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/blockDetail.msg -IblockChainPack_:/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p blockChainPack_ -o /home/ros/blockChainGit/00blockChain_ws/devel/share/roseus/ros/blockChainPack_/msg
 
+/home/ros/blockChainGit/00blockChain_ws/devel/share/roseus/ros/blockChainPack_/msg/nodeOnline.l: /opt/ros/kinetic/lib/geneus/gen_eus.py
+/home/ros/blockChainGit/00blockChain_ws/devel/share/roseus/ros/blockChainPack_/msg/nodeOnline.l: /home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/nodeOnline.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/ros/blockChainGit/00blockChain_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating EusLisp code from blockChainPack_/nodeOnline.msg"
+	cd /home/ros/blockChainGit/00blockChain_ws/build/blockChainPack_ && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/geneus/cmake/../../../lib/geneus/gen_eus.py /home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/nodeOnline.msg -IblockChainPack_:/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p blockChainPack_ -o /home/ros/blockChainGit/00blockChain_ws/devel/share/roseus/ros/blockChainPack_/msg
+
 /home/ros/blockChainGit/00blockChain_ws/devel/share/roseus/ros/blockChainPack_/manifest.l: /opt/ros/kinetic/lib/geneus/gen_eus.py
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/ros/blockChainGit/00blockChain_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating EusLisp manifest code for blockChainPack_"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/ros/blockChainGit/00blockChain_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating EusLisp manifest code for blockChainPack_"
 	cd /home/ros/blockChainGit/00blockChain_ws/build/blockChainPack_ && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/geneus/cmake/../../../lib/geneus/gen_eus.py -m -o /home/ros/blockChainGit/00blockChain_ws/devel/share/roseus/ros/blockChainPack_ blockChainPack_ std_msgs
 
 blockChainPack__generate_messages_eus: blockChainPack_/CMakeFiles/blockChainPack__generate_messages_eus
 blockChainPack__generate_messages_eus: /home/ros/blockChainGit/00blockChain_ws/devel/share/roseus/ros/blockChainPack_/msg/blockDetail.l
+blockChainPack__generate_messages_eus: /home/ros/blockChainGit/00blockChain_ws/devel/share/roseus/ros/blockChainPack_/msg/nodeOnline.l
 blockChainPack__generate_messages_eus: /home/ros/blockChainGit/00blockChain_ws/devel/share/roseus/ros/blockChainPack_/manifest.l
 blockChainPack__generate_messages_eus: blockChainPack_/CMakeFiles/blockChainPack__generate_messages_eus.dir/build.make
 

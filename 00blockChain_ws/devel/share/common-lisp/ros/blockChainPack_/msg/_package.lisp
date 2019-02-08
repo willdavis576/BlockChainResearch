@@ -3,5 +3,7 @@
   (:export
    "<BLOCKDETAIL>"
    "BLOCKDETAIL"
+   "<NODEONLINE>"
+   "NODEONLINE"
   ))
 
