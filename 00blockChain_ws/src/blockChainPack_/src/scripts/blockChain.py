@@ -7,6 +7,7 @@ from std_msgs.msg import String
 
 transactions = [['' for _ in range(100)] for _ in range(100)]
 serialNumber = [''] * 100
+nodeList = ["NODE1, NODE2, NODE3"]
 block = [['' for _ in range(100)] for _ in range(100)]
 blockNumber = 0
 productNumber = 0
@@ -119,12 +120,6 @@ def mainProg():
 
     while (True):
         pub = rospy.Publisher('publishingBlockStream', blockDetail, queue_size=1)
-        rospy.init_node('publishBlock', anonymous="True")
-
-        nodeUp = rospy.Publisher('nodesOnline', nodeOnline, queue_size=1)
-        message2 = nodeOnline()
-        message2.nodeName = "NODE1"
-        nodeUp.publish(message2)
 
         rate = rospy.Rate(10)  # 10hz
         var = raw_input("What stage of the production line? ")
@@ -167,6 +162,7 @@ def mainProg():
         productNumber = productNumber + 1
 
 if __name__ == '__main__':
+    rospy.init_node('publishBlock', anonymous="True")
     main()
 
 # each stage of the production line needs to log:
