@@ -1,7 +1,7 @@
 <launch>
 	<node pkg="blockChainPack_" type="blockChain.py" name="$(anon publishBlock)" output="screen">
 	</node>
-	<node pkg="blockChainPack_" type="listener.py" name="$(anon listener)">
+	<node pkg="blockChainPack_" type="listener.py" name="$(anon listener)" output="screen">
 	</node>
 	<node pkg="blockChainPack_" type="Node1Emitter.py" name="$(anon nameCall)">
 	</node>

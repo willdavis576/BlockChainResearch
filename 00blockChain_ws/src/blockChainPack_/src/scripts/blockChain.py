@@ -7,7 +7,6 @@ from std_msgs.msg import String
 
 transactions = [['' for _ in range(100)] for _ in range(100)]
 serialNumber = [''] * 100
-nodeList = ["NODE1, NODE2, NODE3"]
 block = [['' for _ in range(100)] for _ in range(100)]
 blockNumber = 0
 productNumber = 0
@@ -50,9 +49,6 @@ class blockChain:
 
     def getSerialNumber(self):
         return self.serialNumber
-
-
-
 
 
 def blockUpdate(blockNumber, productNumber, transactions, serialNumber):
@@ -144,8 +140,8 @@ def mainProg():
             serialNumber[productNumber] = serialNumberStr + str(serialNumberNum)
             blockUpdate(blockNumber, productNumber, transactions=transactions[blockNumber][productNumber],
                         serialNumber=serialNumber[productNumber])
-            print(block[blockNumber][productNumber].getTransactions())
-            print(str(blockNumber) + " " + str(productNumber))
+            # print(block[blockNumber][productNumber].getTransactions())
+            # print(str(blockNumber) + " " + str(productNumber))
             sendMessage()
             pub.publish(message)
             blockNumber = blockNumber + 1
@@ -183,9 +179,9 @@ if __name__ == '__main__':
 #           - Idea: maybe all nodes keep track of how many nodes are on the network. Each time a node is launched it recieves a copy of everything
 #             happend so far.
 #           - blockChain.py send out 1 when initialised, if a listener hears it
-#       - Change of plan, all nodes will be specified and all nodes will have a list of all other nodes on the network
+#       - Change of plan, all nodes will be defined and all nodes will have a list of all other nodes on the network
 #         initiated or not. This means as soon as a node comes on online it will be updated with the next authentication program.
-#           - Each node needs to also be publishing it's name to a NodesOnline topic and the listeners will create an array comparing nodes online
+#           - Each node needs to also be publishing it's name to a /NodesOnline topic and the listeners will create an array comparing nodes online
 #             to a text file of all possible nodes.
 #   - use blockchain authentiation to validate data
 
