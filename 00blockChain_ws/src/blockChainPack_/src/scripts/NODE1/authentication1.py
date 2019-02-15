@@ -29,4 +29,4 @@ if __name__ == '__main__':
 
 # maybe write a custom message
 
-
+# what about just sending the last block hash from each blockchain, if the strings don't match, authentication fails.
