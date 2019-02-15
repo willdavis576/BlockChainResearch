@@ -5,6 +5,8 @@ from blockChainPack_.msg import nodeOnline
 
 transactions = [['' for _ in range (100)] for _ in range (100)]
 block = [['' for _ in range (100)] for _ in range (100)]
+nodeList = ['NODE1', 'NODE2', 'NODE3']
+nodeONOFF = [0,0,0]
 serialNumber = [''] * 100
 block = [['' for _ in range (100)] for _ in range (100)]
 blockNumber = 0
@@ -40,9 +42,8 @@ def callback(data):
     #print(hashlib.sha256(contains.encode()).hexdigest())
 
 def callback2(data):
-    print(data)
-    # if data.nodeName == 'NODE1':
-    #
+    if data.nodeName in nodeList:
+        nodeONOFF[nodeList.index(data.nodeName)] = 1
 
 
 class blockChain:

@@ -181,9 +181,12 @@ if __name__ == '__main__':
 #           - blockChain.py send out 1 when initialised, if a listener hears it
 #       - Change of plan, all nodes will be defined and all nodes will have a list of all other nodes on the network
 #         initiated or not. This means as soon as a node comes on online it will be updated with the next authentication program.
-#           - Each node needs to also be publishing it's name to a /NodesOnline topic and the listeners will create an array comparing nodes online
+#           - Each node needs to also be publishing it's name to a /nodesOnline topic and the listeners will create an array comparing nodes online
 #             to a text file of all possible nodes.
-#   - use blockchain authentiation to validate data
+#                   - Using just a list instead because it's easier
+#                           - Need to create a catchUpListner.py program so it can receive an updated blockchain file after authentication.
+#                                   - For the authentication program, possibley need it seperate as a authenticate.py program.
+#   - use blockchain authentiation to validate data.
 
 # Authentication ideas:
 #	- new script and stream for ask all nodes to do an authentication check
