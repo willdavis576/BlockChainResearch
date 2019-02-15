@@ -2,8 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d548811d-0aca-477e-bfa2-a5ed9f109e3c" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/authentication.py" afterPath="$PROJECT_DIR$/authentication.py" />
-      <change beforePath="$PROJECT_DIR$/listener.py" afterPath="$PROJECT_DIR$/listener.py" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/NODE1/blockChain0.txt" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/NODE1/textfiletest.py" />
+      <change beforePath="$PROJECT_DIR$/../../launch/Node1.launch" afterPath="$PROJECT_DIR$/../../launch/Node1.launch" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/Node1Emitter.py" afterPath="$PROJECT_DIR$/NODE1/Node1Emitter.py" />
+      <change beforePath="$PROJECT_DIR$/authentication.py" afterPath="$PROJECT_DIR$/NODE1/authentication1.py" />
+      <change beforePath="$PROJECT_DIR$/blockChain.py" afterPath="$PROJECT_DIR$/blockChain.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -17,8 +22,8 @@
       <file leaf-file-name="blockChain.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/blockChain.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3690">
-              <caret line="188" column="52" lean-forward="false" selection-start-line="188" selection-start-column="52" selection-end-line="188" selection-end-column="52" />
+            <state relative-caret-position="1385">
+              <caret line="198" column="49" lean-forward="false" selection-start-line="198" selection-start-column="49" selection-end-line="198" selection-end-column="49" />
               <folding>
                 <element signature="e#19#53#0" expanded="true" />
                 <element signature="e#664#1426#0" expanded="false" />
@@ -35,8 +40,8 @@
       <file leaf-file-name="listener.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/listener.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+            <state relative-caret-position="1175">
+              <caret line="70" column="67" lean-forward="true" selection-start-line="70" selection-start-column="21" selection-end-line="70" selection-end-column="67" />
               <folding>
                 <element signature="e#22#60#0" expanded="true" />
                 <element signature="e#1698#2453#0" expanded="false" />
@@ -45,13 +50,33 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="authentication.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/authentication.py">
+      <file leaf-file-name="textfiletest.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/NODE1/textfiletest.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="660">
-              <caret line="22" column="44" lean-forward="false" selection-start-line="22" selection-start-column="44" selection-end-line="22" selection-end-column="44" />
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="authentication1.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/NODE1/authentication1.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="930">
+              <caret line="32" column="0" lean-forward="true" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Node1Emitter.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/NODE1/Node1Emitter.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="720">
+              <caret line="24" column="0" lean-forward="true" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
               <folding>
-                <element signature="e#22#34#0" expanded="true" />
+                <element signature="e#19#36#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -60,7 +85,7 @@
       <file leaf-file-name="listenerTest.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/listenerTest.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="600">
+            <state relative-caret-position="570">
               <caret line="20" column="10" lean-forward="false" selection-start-line="20" selection-start-column="10" selection-end-line="20" selection-end-column="10" />
               <folding>
                 <element signature="e#22#40#0" expanded="true" />
@@ -85,7 +110,7 @@
         <entry file="file://$PROJECT_DIR$/talker2Test.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
-              <caret line="0" column="21" lean-forward="true" selection-start-line="0" selection-start-column="21" selection-end-line="0" selection-end-column="21" />
+              <caret line="0" column="21" lean-forward="false" selection-start-line="0" selection-start-column="21" selection-end-line="0" selection-end-column="21" />
               <folding>
                 <element signature="e#22#34#0" expanded="true" />
               </folding>
@@ -93,17 +118,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Node1Emitter.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Node1Emitter.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="480">
-              <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -125,13 +147,15 @@
         <option value="$PROJECT_DIR$/blockChainMixed.py" />
         <option value="$PROJECT_DIR$/../../../../../raspberryPiFiles/blockChain.py" />
         <option value="$PROJECT_DIR$/NODE1/Node1Block.py" />
-        <option value="$PROJECT_DIR$/NODE1/Node1Emitter.py" />
         <option value="$PROJECT_DIR$/talkerTest.py" />
         <option value="$PROJECT_DIR$/talker2Test.py" />
         <option value="$PROJECT_DIR$/listenerTest.py" />
+        <option value="$PROJECT_DIR$/authentication.py" />
         <option value="$PROJECT_DIR$/blockChain.py" />
         <option value="$PROJECT_DIR$/listener.py" />
-        <option value="$PROJECT_DIR$/authentication.py" />
+        <option value="$PROJECT_DIR$/NODE1/textfiletest.py" />
+        <option value="$PROJECT_DIR$/NODE1/Node1Emitter.py" />
+        <option value="$PROJECT_DIR$/NODE1/authentication1.py" />
       </list>
     </option>
   </component>
@@ -241,6 +265,79 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/blockChain.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3690">
+          <caret line="188" column="52" lean-forward="false" selection-start-line="188" selection-start-column="52" selection-end-line="188" selection-end-column="52" />
+          <folding>
+            <element signature="e#19#53#0" expanded="true" />
+            <element signature="e#664#1426#0" expanded="false" />
+            <element signature="e#1506#1840#0" expanded="false" />
+            <element signature="e#1866#2376#0" expanded="false" />
+            <element signature="e#2395#2563#0" expanded="false" />
+            <element signature="e#2879#3727#0" expanded="false" />
+            <element signature="e#5146#5335#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/listener.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding>
+            <element signature="e#22#60#0" expanded="true" />
+            <element signature="e#1698#2453#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/listenerTest.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="570">
+          <caret line="20" column="10" lean-forward="false" selection-start-line="20" selection-start-column="10" selection-end-line="20" selection-end-column="10" />
+          <folding>
+            <element signature="e#22#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/talkerTest.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+          <folding>
+            <element signature="e#22#34#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/talker2Test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="21" lean-forward="true" selection-start-line="0" selection-start-column="21" selection-end-line="0" selection-end-column="21" />
+          <folding>
+            <element signature="e#22#34#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Node1Emitter.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/authentication.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="630">
+          <caret line="22" column="44" lean-forward="false" selection-start-line="22" selection-start-column="44" selection-end-line="22" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/listener.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1320">
@@ -478,7 +575,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/NODE1/Node1Emitter.py" />
     <entry file="file://$PROJECT_DIR$/NODE1/Node1Listener.py" />
     <entry file="file://$PROJECT_DIR$/NODE1/Node1Block.py" />
     <entry file="file://$PROJECT_DIR$/talkerTest.py">
@@ -502,7 +598,7 @@
     <entry file="file://$PROJECT_DIR$/talker2Test.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="21" lean-forward="true" selection-start-line="0" selection-start-column="21" selection-end-line="0" selection-end-column="21" />
+          <caret line="0" column="21" lean-forward="false" selection-start-line="0" selection-start-column="21" selection-end-line="0" selection-end-column="21" />
           <folding>
             <element signature="e#22#34#0" expanded="true" />
           </folding>
@@ -511,7 +607,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/listenerTest.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="600">
+        <state relative-caret-position="570">
           <caret line="20" column="10" lean-forward="false" selection-start-line="20" selection-start-column="10" selection-end-line="20" selection-end-column="10" />
           <folding>
             <element signature="e#22#40#0" expanded="true" />
@@ -519,10 +615,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/authentication.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="14" column="37" lean-forward="false" selection-start-line="14" selection-start-column="37" selection-end-line="14" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/NODE1/textfiletest.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/blockChain.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3690">
-          <caret line="188" column="52" lean-forward="false" selection-start-line="188" selection-start-column="52" selection-end-line="188" selection-end-column="52" />
+        <state relative-caret-position="1385">
+          <caret line="198" column="49" lean-forward="false" selection-start-line="198" selection-start-column="49" selection-end-line="198" selection-end-column="49" />
           <folding>
             <element signature="e#19#53#0" expanded="true" />
             <element signature="e#664#1426#0" expanded="false" />
@@ -537,8 +649,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/listener.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+        <state relative-caret-position="1175">
+          <caret line="70" column="67" lean-forward="true" selection-start-line="70" selection-start-column="21" selection-end-line="70" selection-end-column="67" />
           <folding>
             <element signature="e#22#60#0" expanded="true" />
             <element signature="e#1698#2453#0" expanded="false" />
@@ -546,13 +658,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/authentication.py">
+    <entry file="file://$PROJECT_DIR$/NODE1/Node1Emitter.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="660">
-          <caret line="22" column="44" lean-forward="false" selection-start-line="22" selection-start-column="44" selection-end-line="22" selection-end-column="44" />
+        <state relative-caret-position="720">
+          <caret line="24" column="0" lean-forward="true" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
           <folding>
-            <element signature="e#22#34#0" expanded="true" />
+            <element signature="e#19#36#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/NODE1/authentication1.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="930">
+          <caret line="32" column="0" lean-forward="true" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>

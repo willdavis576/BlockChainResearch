@@ -3,7 +3,7 @@ import rospy
 from blockChainPack_.msg import nodeOnline
 
 nodeList = ['NODE1', 'NODE2', 'NODE3']
-nodeONOFF = [0,0,0]
+nodeONOFF = [1,0,0]
 
 
 def callback(data):
@@ -12,6 +12,8 @@ def callback(data):
 
 def main():
     rospy.Subscriber('nodesOnline', nodeOnline, callback)
+    rospy.Subscriber('fileDownload', )
+    rospy.spin()
 
 if __name__ == '__main__':
     rospy.init_node('authentication', anonymous="True")
@@ -23,3 +25,8 @@ if __name__ == '__main__':
 # run a comparison script, find the average 
 # if identical, blockchain isn't compromised
 # if not identical, reissue node with uncompromised files
+
+
+# maybe write a custom message
+
+

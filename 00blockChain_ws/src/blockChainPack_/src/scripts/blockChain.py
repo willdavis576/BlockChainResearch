@@ -190,6 +190,10 @@ if __name__ == '__main__':
 
 # Authentication ideas:
 #	- new script and stream for ask all nodes to do an authentication check
-# 	- possibley all nodes remake their blocks and send their hashes to every other node. 
+# 	- possibly all nodes remake their blocks and send their hashes to every other node.
 #	- every other node will listen for other nodes' blockchains and the node names and create an array.
 # 	- if any of the hashes are different are different, that node will be deactivated.
+
+
+
+# - look up what a UTXO data set is in blockchain
