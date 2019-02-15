@@ -1,12 +1,11 @@
 #!/usr/bin/env python
 import rospy, hashlib, message_filters
 from blockChainPack_.msg import blockDetail
-from blockChainPack_.msg import nodeOnline
+
 
 transactions = [['' for _ in range (100)] for _ in range (100)]
 block = [['' for _ in range (100)] for _ in range (100)]
-nodeList = ['NODE1', 'NODE2', 'NODE3']
-nodeONOFF = [0,0,0]
+
 serialNumber = [''] * 100
 block = [['' for _ in range (100)] for _ in range (100)]
 blockNumber = 0
@@ -41,9 +40,6 @@ def callback(data):
     contains = hashlib.sha256(data.transactions.encode()).hexdigest() + data.previousHash + str(data.timeStamp) + data.serialNumber
     #print(hashlib.sha256(contains.encode()).hexdigest())
 
-def callback2(data):
-    if data.nodeName in nodeList:
-        nodeONOFF[nodeList.index(data.nodeName)] = 1
 
 
 class blockChain:
@@ -73,7 +69,6 @@ class blockChain:
 
 def listener():
     rospy.Subscriber('publishingBlockStream', blockDetail, callback)
-    rospy.Subscriber('nodesOnline', nodeOnline, callback2)
     rospy.spin()
 
 if __name__ == '__main__':
