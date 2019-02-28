@@ -5,4 +5,6 @@
 	</node>
 	<node pkg="blockChainPack_" type="Node3Emitter.py" name="$(anon nameCall)">
 	</node>
+	<node pkg="blockChainPack_" type="authentication3.py" name="$(anon authentication)" output="screen">
+	</node>
 </launch>
