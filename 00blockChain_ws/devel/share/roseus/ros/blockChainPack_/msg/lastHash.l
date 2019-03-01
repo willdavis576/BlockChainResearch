@@ -14,26 +14,26 @@
 
 (defclass blockChainPack_::lastHash
   :super ros::object
-  :slots (_nodeName _blockchainNumber _hash ))
+  :slots (_nodeName _productNumber _hash ))
 
 (defmethod blockChainPack_::lastHash
   (:init
    (&key
     ((:nodeName __nodeName) "")
-    ((:blockchainNumber __blockchainNumber) 0)
+    ((:productNumber __productNumber) 0)
     ((:hash __hash) "")
     )
    (send-super :init)
    (setq _nodeName (string __nodeName))
-   (setq _blockchainNumber (round __blockchainNumber))
+   (setq _productNumber (round __productNumber))
    (setq _hash (string __hash))
    self)
   (:nodeName
    (&optional __nodeName)
    (if __nodeName (setq _nodeName __nodeName)) _nodeName)
-  (:blockchainNumber
-   (&optional __blockchainNumber)
-   (if __blockchainNumber (setq _blockchainNumber __blockchainNumber)) _blockchainNumber)
+  (:productNumber
+   (&optional __productNumber)
+   (if __productNumber (setq _productNumber __productNumber)) _productNumber)
   (:hash
    (&optional __hash)
    (if __hash (setq _hash __hash)) _hash)
@@ -42,7 +42,7 @@
    (+
     ;; string _nodeName
     4 (length _nodeName)
-    ;; int64 _blockchainNumber
+    ;; int64 _productNumber
     8
     ;; string _hash
     4 (length _hash)
@@ -53,18 +53,18 @@
               (make-string-output-stream (send self :serialization-length)))))
      ;; string _nodeName
        (write-long (length _nodeName) s) (princ _nodeName s)
-     ;; int64 _blockchainNumber
+     ;; int64 _productNumber
 #+(or :alpha :irix6 :x86_64)
-       (progn (sys::poke _blockchainNumber (send s :buffer) (send s :count) :long) (incf (stream-count s) 8))
+       (progn (sys::poke _productNumber (send s :buffer) (send s :count) :long) (incf (stream-count s) 8))
 #-(or :alpha :irix6 :x86_64)
-       (cond ((and (class _blockchainNumber) (= (length (_blockchainNumber . bv)) 2)) ;; bignum
-              (write-long (ash (elt (_blockchainNumber . bv) 0) 0) s)
-              (write-long (ash (elt (_blockchainNumber . bv) 1) -1) s))
-             ((and (class _blockchainNumber) (= (length (_blockchainNumber . bv)) 1)) ;; big1
-              (write-long (elt (_blockchainNumber . bv) 0) s)
-              (write-long (if (>= _blockchainNumber 0) 0 #xffffffff) s))
+       (cond ((and (class _productNumber) (= (length (_productNumber . bv)) 2)) ;; bignum
+              (write-long (ash (elt (_productNumber . bv) 0) 0) s)
+              (write-long (ash (elt (_productNumber . bv) 1) -1) s))
+             ((and (class _productNumber) (= (length (_productNumber . bv)) 1)) ;; big1
+              (write-long (elt (_productNumber . bv) 0) s)
+              (write-long (if (>= _productNumber 0) 0 #xffffffff) s))
              (t                                         ;; integer
-              (write-long _blockchainNumber s)(write-long (if (>= _blockchainNumber 0) 0 #xffffffff) s)))
+              (write-long _productNumber s)(write-long (if (>= _productNumber 0) 0 #xffffffff) s)))
      ;; string _hash
        (write-long (length _hash) s) (princ _hash s)
      ;;
@@ -73,11 +73,11 @@
    (buf &optional (ptr- 0))
    ;; string _nodeName
      (let (n) (setq n (sys::peek buf ptr- :integer)) (incf ptr- 4) (setq _nodeName (subseq buf ptr- (+ ptr- n))) (incf ptr- n))
-   ;; int64 _blockchainNumber
+   ;; int64 _productNumber
 #+(or :alpha :irix6 :x86_64)
-      (setf _blockchainNumber (prog1 (sys::peek buf ptr- :long) (incf ptr- 8)))
+      (setf _productNumber (prog1 (sys::peek buf ptr- :long) (incf ptr- 8)))
 #-(or :alpha :irix6 :x86_64)
-      (setf _blockchainNumber (let ((b0 (prog1 (sys::peek buf ptr- :integer) (incf ptr- 4)))
+      (setf _productNumber (let ((b0 (prog1 (sys::peek buf ptr- :integer) (incf ptr- 4)))
                   (b1 (prog1 (sys::peek buf ptr- :integer) (incf ptr- 4))))
               (cond ((= b1 -1) b0)
                      ((and (= b1  0)
@@ -91,17 +91,17 @@
    self)
   )
 
-(setf (get blockChainPack_::lastHash :md5sum-) "b2ba33a8c1f1e56810104ccd6ef48d61")
+(setf (get blockChainPack_::lastHash :md5sum-) "8083626d8f7b25c3a89f2539b4ea325f")
 (setf (get blockChainPack_::lastHash :datatype-) "blockChainPack_/lastHash")
 (setf (get blockChainPack_::lastHash :definition-)
       "string nodeName
-int64 blockchainNumber
+int64 productNumber
 string hash
 
 ")
 
 
 
-(provide :blockChainPack_/lastHash "b2ba33a8c1f1e56810104ccd6ef48d61")
+(provide :blockChainPack_/lastHash "8083626d8f7b25c3a89f2539b4ea325f")
 
 

@@ -24,10 +24,10 @@ noGen = 0
 runYet = [''] * 100
 
 nodeList = ['NODE1', 'NODE2', 'NODE3']
-nodeONOFF = [1,0,0]
+nodeONOFF = [0,0,1]
 oldNodeONOFF = [0,0,0]
 
-nodeName = "NODE1" ############### THIS IS WHERE YOU SPECIFY A NODE'S NAME #######################
+nodeName = "NODE3" ############### THIS IS WHERE YOU SPECIFY A NODE'S NAME #######################
 
 
 class blockChain:
@@ -192,6 +192,8 @@ def authentication():
     rospy.spin()
 
 def callbackAuth(data):
+    global nodeONOFF
+    global nodeList
     if data.nodeName in nodeList:
         nodeONOFF[nodeList.index(data.nodeName)] = 1
     print(nodeONOFF)
@@ -200,7 +202,7 @@ def emitter():
     while not rospy.is_shutdown():
         nodeUp = rospy.Publisher('Last_Hash', lastHash, queue_size=1)
         message2 = lastHash()
-        message2.nodeName = "NODE1"
+        message2.nodeName = nodeName
         nodeUp.publish(message2)
         time.sleep(1)
 

@@ -25,12 +25,12 @@ struct lastHash_
 
   lastHash_()
     : nodeName()
-    , blockchainNumber(0)
+    , productNumber(0)
     , hash()  {
     }
   lastHash_(const ContainerAllocator& _alloc)
     : nodeName(_alloc)
-    , blockchainNumber(0)
+    , productNumber(0)
     , hash(_alloc)  {
   (void)_alloc;
     }
@@ -40,8 +40,8 @@ struct lastHash_
    typedef std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other >  _nodeName_type;
   _nodeName_type nodeName;
 
-   typedef int64_t _blockchainNumber_type;
-  _blockchainNumber_type blockchainNumber;
+   typedef int64_t _productNumber_type;
+  _productNumber_type productNumber;
 
    typedef std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other >  _hash_type;
   _hash_type hash;
@@ -124,12 +124,12 @@ struct MD5Sum< ::blockChainPack_::lastHash_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "b2ba33a8c1f1e56810104ccd6ef48d61";
+    return "8083626d8f7b25c3a89f2539b4ea325f";
   }
 
   static const char* value(const ::blockChainPack_::lastHash_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0xb2ba33a8c1f1e568ULL;
-  static const uint64_t static_value2 = 0x10104ccd6ef48d61ULL;
+  static const uint64_t static_value1 = 0x8083626d8f7b25c3ULL;
+  static const uint64_t static_value2 = 0xa89f2539b4ea325fULL;
 };
 
 template<class ContainerAllocator>
@@ -149,7 +149,7 @@ struct Definition< ::blockChainPack_::lastHash_<ContainerAllocator> >
   static const char* value()
   {
     return "string nodeName\n\
-int64 blockchainNumber\n\
+int64 productNumber\n\
 string hash\n\
 ";
   }
@@ -170,7 +170,7 @@ namespace serialization
     template<typename Stream, typename T> inline static void allInOne(Stream& stream, T m)
     {
       stream.next(m.nodeName);
-      stream.next(m.blockchainNumber);
+      stream.next(m.productNumber);
       stream.next(m.hash);
     }
 
@@ -192,8 +192,8 @@ struct Printer< ::blockChainPack_::lastHash_<ContainerAllocator> >
   {
     s << indent << "nodeName: ";
     Printer<std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other > >::stream(s, indent + "  ", v.nodeName);
-    s << indent << "blockchainNumber: ";
-    Printer<int64_t>::stream(s, indent + "  ", v.blockchainNumber);
+    s << indent << "productNumber: ";
+    Printer<int64_t>::stream(s, indent + "  ", v.productNumber);
     s << indent << "hash: ";
     Printer<std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other > >::stream(s, indent + "  ", v.hash);
   }

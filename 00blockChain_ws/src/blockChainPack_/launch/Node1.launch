@@ -1,4 +1,4 @@
 <launch>
-	<node pkg="blockChainPack_" type="blockChain.py" name="$(anon publishBlock)" output="screen">
+	<node pkg="blockChainPack_" type="blockChainNode1.py" name="Node1" output="screen">
 	</node>
 </launch>

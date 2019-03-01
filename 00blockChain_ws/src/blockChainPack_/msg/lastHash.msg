@@ -1,3 +1,3 @@
 string nodeName
-int64 blockchainNumber
+int64 productNumber
 string hash

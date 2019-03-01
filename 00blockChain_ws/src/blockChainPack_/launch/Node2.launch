@@ -1,10 +1,4 @@
 <launch>
-	<node pkg="blockChainPack_" type="blockChain.py" name="$(anon publishBlock)" output="screen">
-	</node>
-	<node pkg="blockChainPack_" type="listener.py" name="$(anon listener)">
-	</node>
-	<node pkg="blockChainPack_" type="Node2Emitter.py" name="$(anon nameCall)">
-	</node>
-	<node pkg="blockChainPack_" type="authentication2.py" name="$(anon authentication)" output="screen">
+	<node pkg="blockChainPack_" type="blockChainNode2.py" name="Node2" output="screen">
 	</node>
 </launch>
