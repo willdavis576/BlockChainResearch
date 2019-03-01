@@ -1,8 +1,9 @@
 #! /usr/bin/python
-import hashlib, sys, random, rospy
+import hashlib, sys, random, rospy, threading, time
 from datetime import datetime
 from blockChainPack_.msg import blockDetail
-import threading
+from blockChainPack_.msg import lastHash
+
 
 transactions = [['' for _ in range(100)] for _ in range(100)]
 serialNumber = [''] * 100
@@ -21,6 +22,11 @@ nodeUp = ''
 init = 0
 noGen = 0
 runYet = [''] * 100
+
+nodeList = ['NODE1', 'NODE2', 'NODE3']
+nodeONOFF = [1,0,0]
+oldNodeONOFF = [0,0,0]
+
 nodeName = "NODE1" ############### THIS IS WHERE YOU SPECIFY A NODE'S NAME #######################
 
 
@@ -181,19 +187,40 @@ def callback(data):
         f.write("\n-------------------------------\n")
         f.close()
 
+def authentication():
+    rospy.Subscriber('Last_Hash', lastHash, callbackAuth)
+    rospy.spin()
+
+def callbackAuth(data):
+    if data.nodeName in nodeList:
+        nodeONOFF[nodeList.index(data.nodeName)] = 1
+    print(nodeONOFF)
+
+def emitter():
+    while not rospy.is_shutdown():
+        nodeUp = rospy.Publisher('Last_Hash', lastHash, queue_size=1)
+        message2 = lastHash()
+        message2.nodeName = "NODE1"
+        nodeUp.publish(message2)
+        time.sleep(1)
 
 
 if __name__ == '__main__':
     rospy.init_node('publishBlock', anonymous="True")
     p1 = threading.Thread(target=main, args=())
     p2 = threading.Thread(target=listener, args=())
+    p3 = threading.Thread(target=authentication, args=())
+    p4 = threading.Thread(target=emitter, args=())
 
     p1.start()
     p2.start()
+    p3.start()
+    p4.start()
 
     p1.join()
     p2.join()
-
+    p3.join()
+    p4.join()
 
 
 # each stage of the production line needs to log:
