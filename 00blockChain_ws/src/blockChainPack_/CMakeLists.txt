@@ -51,7 +51,7 @@ find_package(catkin REQUIRED COMPONENTS
  add_message_files(
    FILES
    blockDetail.msg
-   nodeOnline.msg
+   lastHash.msg
 #   Message2.msg
 )
 

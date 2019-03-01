@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import rospy
-from blockChainPack_.msg import nodeOnline
+from blockChainPack_.msg import lastHash
 
 nodeList = ['NODE1', 'NODE2', 'NODE3']
 nodeONOFF = [1,0,0]
@@ -11,12 +11,11 @@ def callback(data):
         nodeONOFF[nodeList.index(data.nodeName)] = 1
     print(nodeONOFF)
 
-    if nodeONOFF[] != oldNodeONOFF :
+
 
 
 def main():
-    rospy.Subscriber('nodesOnline', nodeOnline, callback)
-    #rospy.Subscriber('fileDownload', )
+    rospy.Subscriber('Last_Hash', lastHash, callback)
     rospy.spin()
 
 if __name__ == '__main__':

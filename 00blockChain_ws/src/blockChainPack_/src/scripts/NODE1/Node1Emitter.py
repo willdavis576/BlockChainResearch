@@ -1,13 +1,13 @@
 #! /usr/bin/python
 import rospy,time
-from blockChainPack_.msg import nodeOnline
+from blockChainPack_.msg import lastHash
 from blockChainPack_.msg import blockDetail
 
 def main():
     while not rospy.is_shutdown():
-        nodeUp = rospy.Publisher('nodesOnline', nodeOnline, queue_size=1)
+        nodeUp = rospy.Publisher('Last_Hash', lastHash, queue_size=1)
         #productNumber = rospy.Subscriber('publishingBlockStream', blockDetail, fileSend)
-        message2 = nodeOnline()
+        message2 = lastHash()
         message2.nodeName = "NODE1"
         nodeUp.publish(message2)
         time.sleep(1)

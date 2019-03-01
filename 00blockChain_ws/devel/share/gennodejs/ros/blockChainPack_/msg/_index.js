@@ -1,10 +1,10 @@
 
 "use strict";
 
-let nodeOnline = require('./nodeOnline.js');
+let lastHash = require('./lastHash.js');
 let blockDetail = require('./blockDetail.js');
 
 module.exports = {
-  nodeOnline: nodeOnline,
+  lastHash: lastHash,
   blockDetail: blockDetail,
 };

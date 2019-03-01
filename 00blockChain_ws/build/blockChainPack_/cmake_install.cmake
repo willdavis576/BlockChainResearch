@@ -35,7 +35,7 @@ endif()
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/blockChainPack_/msg" TYPE FILE FILES
     "/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/blockDetail.msg"
-    "/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/nodeOnline.msg"
+    "/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/lastHash.msg"
     )
 endif()
 

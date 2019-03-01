@@ -3,7 +3,7 @@
   (:export
    "<BLOCKDETAIL>"
    "BLOCKDETAIL"
-   "<NODEONLINE>"
-   "NODEONLINE"
+   "<LASTHASH>"
+   "LASTHASH"
   ))
 
