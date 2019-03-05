@@ -86,7 +86,6 @@ def main():
         if rospy.is_shutdown():
             break
 
-
 def mainProg():
     global blockNumber
     global productNumber
@@ -101,6 +100,8 @@ def mainProg():
     global nodeName
     global nodeUp
 
+    pub = rospy.Publisher('publishingBlockStream', blockDetail, queue_size=1)
+
     while (newGenesis == 1):
         # Setup for genesis block
         repeat = 0
@@ -112,16 +113,14 @@ def mainProg():
                                                        serialNumber=serialNumber[productNumber])
         print("genesis: ")
         print(block[blockNumber][productNumber].getBlockHash())
-        pub = rospy.Publisher('publishingBlockStream', blockDetail, queue_size=1)
-        rospy.init_node('publishBlock', anonymous="True")
         sendMessage()
         pub.publish(message)
-        blockNumber = blockNumber + 1  # key part, as each station uploads information, this variable is incremented to generate a new block
         newGenesis = 0
+        blockNumber = blockNumber + 1  # key part, as each station uploads information, this variable is incremented to generate a new block
         break
 
     while (True):
-        pub = rospy.Publisher('publishingBlockStream', blockDetail, queue_size=1)
+        #pub = rospy.Publisher('publishingBlockStream', blockDetail, queue_size=1)
 
         rate = rospy.Rate(10)  # 10hz
         var = raw_input("What stage of the production line? ")
@@ -171,7 +170,6 @@ def listener():
 
 def callback(data):
     global runYet
-
     productNumber1 = data.productNumber
     data_to_print = "Time Stamp for Block: {0}\nTransactions: {1}\nSerial Number: {2}\nBlockHash: {3}\nPreviousHash: {4}".format(
         data.timeStamp, data.transactions, data.serialNumber, data.blockHash, data.previousHash)
@@ -202,6 +200,7 @@ def emitter():
     global productNumber
     global blockNumber
     global Trigger
+    global transactions
 
     while not rospy.is_shutdown():
         # if Trigger == False:
@@ -214,14 +213,16 @@ def emitter():
         # if Trigger == True:
             for i in range(productNumber + 1):
                 pub = rospy.Publisher('Last_Hash', lastHash, queue_size=1)
-                x = [x for x in transactions if '' in x][0]
                 message2 = lastHash()
                 message2.nodeName = nodeName
                 message2.productNumber = i
-                message2.hash = transactions[transactions.index(x) - 1][i]
-            time.sleep(1)
-            print("Running")
-    rospy.spin()
+                #message2.hash = transactions[transactions.index('') - 1][i]
+                pub.publish(message2)
+                print(transactions[i].index(''))
+                time.sleep(1)
+
+
+    #rospy.spin()
 #
 # def authTrigger():
 #     global Trigger
@@ -232,10 +233,15 @@ def emitter():
 
 if __name__ == '__main__':
     rospy.init_node('publishBlock', anonymous="True")
-    p1 = threading.Thread(target=main, args=())
-    p2 = threading.Thread(target=listener, args=())
+    p1 = threading.Thread(target=listener, args=())
+    p2 = threading.Thread(target=main, args=())
     p3 = threading.Thread(target=authentication, args=())
     p4 = threading.Thread(target=emitter, args=())
+
+    p1.daemon = True
+    p2.daemon = True
+    p3.daemon = True
+    p4.daemon = True
 
     p1.start()
     p2.start()

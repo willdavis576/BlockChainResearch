@@ -196,7 +196,7 @@ def callbackAuth(data):
     global nodeList
     if data.nodeName in nodeList:
         nodeONOFF[nodeList.index(data.nodeName)] = 1
-    print(nodeONOFF)
+    #print(nodeONOFF)
 
 def emitter():
     while not rospy.is_shutdown():
