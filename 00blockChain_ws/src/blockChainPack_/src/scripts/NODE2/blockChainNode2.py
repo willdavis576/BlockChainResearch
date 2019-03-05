@@ -175,12 +175,12 @@ def callback(data):
         data.timeStamp, data.transactions, data.serialNumber, data.blockHash, data.previousHash)
     # rospy.loginfo(data_to_print)
     if runYet[productNumber1] == '':
-        f = open("/home/ros/blockChainGit/00blockChain_ws/blockChain" + str(productNumber) + ".txt", "w")
+        f = open("/home/ros/blockChainGit/00blockChain_ws/src/blockChain" + str(productNumber) + ".txt", "w")
         f.close()
         runYet[productNumber1] = "1"
 
     if runYet[productNumber1] == "1":
-        f = open("/home/ros/blockChainGit/00blockChain_ws/blockChain" + str(productNumber) + ".txt", "a")
+        f = open("/home/ros/blockChainGit/00blockChain_ws/src/blockChain" + str(productNumber) + ".txt", "a")
         f.write(str(data_to_print))
         f.write("\n-------------------------------\n")
         f.close()

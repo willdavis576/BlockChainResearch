@@ -1,6 +1,7 @@
 #! /usr/bin/python
 import hashlib, sys, random, rospy, threading, time
 from datetime import datetime
+from collections import Counter
 from blockChainPack_.msg import blockDetail
 from blockChainPack_.msg import lastHash
 
@@ -175,12 +176,12 @@ def callback(data):
         data.timeStamp, data.transactions, data.serialNumber, data.blockHash, data.previousHash)
     # rospy.loginfo(data_to_print)
     if runYet[productNumber1] == '':
-        f = open("/home/ros/blockChainGit/00blockChain_ws/blockChain" + str(productNumber) + ".txt", "w")
+        f = open("/home/ros/blockChainGit/00blockChain_ws/blockChain" + str(productNumber1) + ".txt", "w")
         f.close()
         runYet[productNumber1] = "1"
 
     if runYet[productNumber1] == "1":
-        f = open("/home/ros/blockChainGit/00blockChain_ws/blockChain" + str(productNumber) + ".txt", "a")
+        f = open("/home/ros/blockChainGit/00blockChain_ws/blockChain" + str(productNumber1) + ".txt", "a")
         f.write(str(data_to_print))
         f.write("\n-------------------------------\n")
         f.close()
@@ -193,7 +194,8 @@ def callbackAuth(data):
     global nodeONOFF
     global nodeList
     if data.nodeName in nodeList:
-        nodeONOFF[nodeList.index(data.nodeName)] = 1
+        nodeONOFF[nodeList.index(data.nodeName)] = 1 #filling in the online array
+
     #print(nodeONOFF)
 
 def emitter():
