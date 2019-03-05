@@ -60,10 +60,10 @@ class blockChain:
 def blockUpdate(blockNumber, productNumber, transactions, serialNumber):
     for i in range(blockNumber, blockNumber + 1):
         blockNumber = i
-        block[blockNumber][productNumber] = blockChain(
-            previousHash=block[blockNumber - 1][productNumber].getBlockHash(), transactions=transactions,
+        block[productNumber][blockNumber] = blockChain(
+            previousHash=block[productNumber][blockNumber - 1].getBlockHash(), transactions=transactions,
             serialNumber=serialNumber)
-        print(block[blockNumber][productNumber].getBlockHash())
+        print(block[productNumber][blockNumber].getBlockHash())
 
 
 def sendMessage():
@@ -71,11 +71,11 @@ def sendMessage():
     message = blockDetail()
     message.blockNumber = blockNumber
     message.productNumber = productNumber
-    message.timeStamp = str(block[blockNumber][productNumber].getTimeStamp())
-    message.transactions = block[blockNumber][productNumber].getTransactions()
-    message.serialNumber = block[blockNumber][productNumber].getSerialNumber()
-    message.blockHash = block[blockNumber][productNumber].getBlockHash()
-    message.previousHash = block[blockNumber][productNumber].getPreviousHash()
+    message.timeStamp = str(block[productNumber][blockNumber].getTimeStamp())
+    message.transactions = block[productNumber][blockNumber].getTransactions()
+    message.serialNumber = block[productNumber][blockNumber].getSerialNumber()
+    message.blockHash = block[productNumber][blockNumber].getBlockHash()
+    message.previousHash = block[productNumber][blockNumber].getPreviousHash()
 
 
 def main():
@@ -109,10 +109,10 @@ def mainProg():
         serialNumber[productNumber] = serialNumberStr + str(serialNumberNum)
 
         # Genesis Block
-        block[blockNumber][productNumber] = blockChain(previousHash='', transactions="Start production",
+        block[productNumber][blockNumber] = blockChain(previousHash='', transactions="Start production",
                                                        serialNumber=serialNumber[productNumber])
         print("genesis: ")
-        print(block[blockNumber][productNumber].getBlockHash())
+        print(block[productNumber][blockNumber].getBlockHash())
         sendMessage()
         pub.publish(message)
         newGenesis = 0
@@ -140,10 +140,10 @@ def mainProg():
         info = var + " stage - Part Number (if applicable): " + var2
 
         if oldinfo != info:
-            transactions[blockNumber][productNumber] = info
+            transactions[productNumber][blockNumber] = info
             serialNumberNum = productNumber
             serialNumber[productNumber] = serialNumberStr + str(serialNumberNum)
-            blockUpdate(blockNumber, productNumber, transactions=transactions[blockNumber][productNumber],
+            blockUpdate(blockNumber, productNumber, transactions=transactions[productNumber][blockNumber],
                         serialNumber=serialNumber[productNumber])
             # print(block[blockNumber][productNumber].getTransactions())
             # print(str(blockNumber) + " " + str(productNumber))

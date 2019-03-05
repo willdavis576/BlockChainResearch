@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d548811d-0aca-477e-bfa2-a5ed9f109e3c" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/../../../../blockChain0.txt" afterPath="$PROJECT_DIR$/../../../../blockChain0.txt" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/NODE1/blockChainNode1.py" afterPath="$PROJECT_DIR$/NODE1/blockChainNode1.py" />
-      <change beforePath="$PROJECT_DIR$/NODE2/blockChainNode2.py" afterPath="$PROJECT_DIR$/NODE2/blockChainNode2.py" />
-      <change beforePath="$PROJECT_DIR$/NODE3/blockChainNode3.py" afterPath="$PROJECT_DIR$/NODE3/blockChainNode3.py" />
       <change beforePath="$PROJECT_DIR$/../../../../../Ideas and send and receives for each of the python programs.txt" afterPath="$PROJECT_DIR$/../../../../../Ideas and send and receives for each of the python programs.txt" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -39,15 +35,12 @@
       <file leaf-file-name="blockChainNode1.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/NODE1/blockChainNode1.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="82">
-              <caret line="65" column="40" lean-forward="true" selection-start-line="65" selection-start-column="40" selection-end-line="65" selection-end-column="40" />
+            <state relative-caret-position="508">
+              <caret line="63" column="61" lean-forward="false" selection-start-line="63" selection-start-column="61" selection-end-line="63" selection-end-column="61" />
               <folding>
                 <element signature="e#19#70#0" expanded="true" />
                 <element signature="e#767#1529#0" expanded="false" />
-                <element signature="e#1969#2479#0" expanded="false" />
                 <element signature="e#2498#2666#0" expanded="false" />
-                <element signature="e#5463#5544#0" expanded="false" />
-                <element signature="e#5571#6338#0" expanded="false" />
                 <element signature="e#7661#8122#0" expanded="false" />
                 <element signature="e#8125#8174#0" expanded="false" />
               </folding>
@@ -349,15 +342,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/NODE1/blockChainNode1.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="82">
-          <caret line="65" column="40" lean-forward="true" selection-start-line="65" selection-start-column="40" selection-end-line="65" selection-end-column="40" />
+        <state relative-caret-position="508">
+          <caret line="63" column="61" lean-forward="false" selection-start-line="63" selection-start-column="61" selection-end-line="63" selection-end-column="61" />
           <folding>
             <element signature="e#19#70#0" expanded="true" />
             <element signature="e#767#1529#0" expanded="false" />
-            <element signature="e#1969#2479#0" expanded="false" />
             <element signature="e#2498#2666#0" expanded="false" />
-            <element signature="e#5463#5544#0" expanded="false" />
-            <element signature="e#5571#6338#0" expanded="false" />
             <element signature="e#7661#8122#0" expanded="false" />
             <element signature="e#8125#8174#0" expanded="false" />
           </folding>

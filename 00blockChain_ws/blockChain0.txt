@@ -1,18 +1,24 @@
-Time Stamp for Block: 2019-03-05 12:54:32.478950
-Transactions: sdf stage - Part Number (if applicable): sdf
+Time Stamp for Block: 2019-03-05 13:03:22.344622
+Transactions: fgh stage - Part Number (if applicable): fgh
 Serial Number: PRODUCT0
-BlockHash: 877e7e984ce699cd28d6c7a8850233c8464db19f81b9712a5e3e5429ec3c8ce1
-PreviousHash: 0e412bb7421e80906826dcd1bbd5dbc22123f82fc1e68810c935bf2d9241f179
+BlockHash: fc9a7fafc434260749df0df9926db58fd799ca4fff5c9dd567703ab51155807a
+PreviousHash: ba66c8dd45ebcea5561af2e9df2ae4d010210a3cf43b562bae37244873f14509
 -------------------------------
-Time Stamp for Block: 2019-03-05 12:54:35.304688
-Transactions:  stage - Part Number (if applicable): sdf
+Time Stamp for Block: 2019-03-05 13:03:23.255998
+Transactions: fgh stage - Part Number (if applicable): N/A
 Serial Number: PRODUCT0
-BlockHash: c42727d26feb603fd230a27ebce9449912d2e6dcf7979ca5a5331c04ecbab2e1
-PreviousHash: 877e7e984ce699cd28d6c7a8850233c8464db19f81b9712a5e3e5429ec3c8ce1
+BlockHash: 127b08aa3713043ae3c24a1de5671ec9f04d8c1f3bb38429258f88f64c6bed72
+PreviousHash: fc9a7fafc434260749df0df9926db58fd799ca4fff5c9dd567703ab51155807a
 -------------------------------
-Time Stamp for Block: 2019-03-05 12:54:35.656030
-Transactions: sdf stage - Part Number (if applicable): sd
+Time Stamp for Block: 2019-03-05 13:03:23.920482
+Transactions: fghfg stage - Part Number (if applicable): hf
 Serial Number: PRODUCT0
-BlockHash: 5768f43e055325ea05e2c78891f8ef0ac8ac96e7e020079e08284d3870bbb18b
-PreviousHash: c42727d26feb603fd230a27ebce9449912d2e6dcf7979ca5a5331c04ecbab2e1
+BlockHash: 67b4706c115771d08c3f217a9f9eafc9e8d9bef9fe16cf75a7a764acae72ab0b
+PreviousHash: 127b08aa3713043ae3c24a1de5671ec9f04d8c1f3bb38429258f88f64c6bed72
+-------------------------------
+Time Stamp for Block: 2019-03-05 13:03:24.528381
+Transactions: h stage - Part Number (if applicable): fgh
+Serial Number: PRODUCT0
+BlockHash: 363699a3c1fa596e1f39e12e314273bc4d19e2bc666262945507387e920e49da
+PreviousHash: 67b4706c115771d08c3f217a9f9eafc9e8d9bef9fe16cf75a7a764acae72ab0b
 -------------------------------
