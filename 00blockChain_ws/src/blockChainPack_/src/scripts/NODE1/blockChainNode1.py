@@ -27,6 +27,7 @@ Trigger = False
 nodeList = ['NODE1', 'NODE2', 'NODE3']
 nodeONOFF = [1,0,0]
 oldNodeONOFF = [0,0,0]
+node = [['' for _ in range(100)] for _ in range(100)]
 
 nodeName = "NODE1" ############### THIS IS WHERE YOU SPECIFY A NODE'S NAME #######################
 
@@ -195,7 +196,10 @@ def callbackAuth(data):
     global nodeList
     if data.nodeName in nodeList:
         nodeONOFF[nodeList.index(data.nodeName)] = 1 #filling in the online array
-
+    for i in range(10): #10 being a max node amount - can be changed as the array size is 100
+        name = data.nodeName
+        node[int(name[4])][data.productNumber] = data.hash
+        print(node[int(name[4])][data.productNumber])
     #print(nodeONOFF)
 
 def emitter():

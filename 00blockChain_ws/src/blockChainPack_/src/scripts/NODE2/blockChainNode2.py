@@ -1,6 +1,7 @@
 #! /usr/bin/python
 import hashlib, sys, random, rospy, threading, time
 from datetime import datetime
+from collections import Counter
 from blockChainPack_.msg import blockDetail
 from blockChainPack_.msg import lastHash
 
@@ -26,6 +27,7 @@ Trigger = False
 nodeList = ['NODE1', 'NODE2', 'NODE3']
 nodeONOFF = [1,0,0]
 oldNodeONOFF = [0,0,0]
+node = [['' for _ in range(100)] for _ in range(100)]
 
 nodeName = "NODE2" ############### THIS IS WHERE YOU SPECIFY A NODE'S NAME #######################
 
@@ -175,12 +177,12 @@ def callback(data):
         data.timeStamp, data.transactions, data.serialNumber, data.blockHash, data.previousHash)
     # rospy.loginfo(data_to_print)
     if runYet[productNumber1] == '':
-        f = open("/home/ros/blockChainGit/00blockChain_ws/src/blockChain" + str(productNumber) + ".txt", "w")
+        f = open("/home/ros/blockChainGit/00blockChain_ws/blockChain" + str(productNumber1) + ".txt", "w")
         f.close()
         runYet[productNumber1] = "1"
 
     if runYet[productNumber1] == "1":
-        f = open("/home/ros/blockChainGit/00blockChain_ws/src/blockChain" + str(productNumber) + ".txt", "a")
+        f = open("/home/ros/blockChainGit/00blockChain_ws/blockChain" + str(productNumber1) + ".txt", "a")
         f.write(str(data_to_print))
         f.write("\n-------------------------------\n")
         f.close()
@@ -193,7 +195,11 @@ def callbackAuth(data):
     global nodeONOFF
     global nodeList
     if data.nodeName in nodeList:
-        nodeONOFF[nodeList.index(data.nodeName)] = 1
+        nodeONOFF[nodeList.index(data.nodeName)] = 1 #filling in the online array
+    for i in range(10): #10 being a max node amount - can be changed as the array size is 100
+        name = data.nodeName
+        node[int(name[4])][data.productNumber] = data.hash
+
     #print(nodeONOFF)
 
 def emitter():
