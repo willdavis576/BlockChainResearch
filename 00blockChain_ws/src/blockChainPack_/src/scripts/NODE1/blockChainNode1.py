@@ -214,13 +214,11 @@ def emitter():
             for i in range(productNumber + 1):
                 pub = rospy.Publisher('Last_Hash', lastHash, queue_size=1)
                 message2 = lastHash()
-                message2.nodeName = nodeName
+                message2.nodeName = "NODE1"
                 message2.productNumber = i
-                #message2.hash = transactions[transactions.index('') - 1][i]
+                message2.hash = block[i][block[i].index('', 1) - 1].getBlockHash()
                 pub.publish(message2)
-                print(transactions[i].index(''))
                 time.sleep(1)
-
 
     #rospy.spin()
 #

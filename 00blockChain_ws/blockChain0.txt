@@ -1,24 +1,12 @@
-Time Stamp for Block: 2019-03-05 13:03:22.344622
-Transactions: fgh stage - Part Number (if applicable): fgh
+Time Stamp for Block: 2019-03-05 16:34:08.345005
+Transactions: df stage - Part Number (if applicable): df
 Serial Number: PRODUCT0
-BlockHash: fc9a7fafc434260749df0df9926db58fd799ca4fff5c9dd567703ab51155807a
-PreviousHash: ba66c8dd45ebcea5561af2e9df2ae4d010210a3cf43b562bae37244873f14509
+BlockHash: 2612e666ccd16d48e7dda4d75b716542a9c07a46eb4cf144d2177dce77d91281
+PreviousHash: ef902735fc929c3edb06bdb189dfcfa37ef165278eca617ea1e36fce41eb1f3b
 -------------------------------
-Time Stamp for Block: 2019-03-05 13:03:23.255998
-Transactions: fgh stage - Part Number (if applicable): N/A
+Time Stamp for Block: 2019-03-05 16:34:09.365302
+Transactions: df stage - Part Number (if applicable): sdf
 Serial Number: PRODUCT0
-BlockHash: 127b08aa3713043ae3c24a1de5671ec9f04d8c1f3bb38429258f88f64c6bed72
-PreviousHash: fc9a7fafc434260749df0df9926db58fd799ca4fff5c9dd567703ab51155807a
--------------------------------
-Time Stamp for Block: 2019-03-05 13:03:23.920482
-Transactions: fghfg stage - Part Number (if applicable): hf
-Serial Number: PRODUCT0
-BlockHash: 67b4706c115771d08c3f217a9f9eafc9e8d9bef9fe16cf75a7a764acae72ab0b
-PreviousHash: 127b08aa3713043ae3c24a1de5671ec9f04d8c1f3bb38429258f88f64c6bed72
--------------------------------
-Time Stamp for Block: 2019-03-05 13:03:24.528381
-Transactions: h stage - Part Number (if applicable): fgh
-Serial Number: PRODUCT0
-BlockHash: 363699a3c1fa596e1f39e12e314273bc4d19e2bc666262945507387e920e49da
-PreviousHash: 67b4706c115771d08c3f217a9f9eafc9e8d9bef9fe16cf75a7a764acae72ab0b
+BlockHash: 226d8ea04970b501fea6a557f6f3def1e3512d10bbf783601daec262709d0d15
+PreviousHash: 2612e666ccd16d48e7dda4d75b716542a9c07a46eb4cf144d2177dce77d91281
 -------------------------------
