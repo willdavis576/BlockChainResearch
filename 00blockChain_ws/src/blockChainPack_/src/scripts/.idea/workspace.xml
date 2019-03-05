@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d548811d-0aca-477e-bfa2-a5ed9f109e3c" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/../../../../blockChain0.txt" afterPath="$PROJECT_DIR$/../../../../blockChain0.txt" />
-      <change beforePath="$PROJECT_DIR$/../../../../blockChain1.txt" afterPath="" />
       <change beforePath="$PROJECT_DIR$/NODE1/blockChainNode1.py" afterPath="$PROJECT_DIR$/NODE1/blockChainNode1.py" />
-      <change beforePath="$PROJECT_DIR$/NODE2/blockChainNode2.py" afterPath="$PROJECT_DIR$/NODE2/blockChainNode2.py" />
-      <change beforePath="$PROJECT_DIR$/NODE3/blockChainNode3.py" afterPath="$PROJECT_DIR$/NODE3/blockChainNode3.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -38,13 +34,19 @@
       <file leaf-file-name="blockChainNode1.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/NODE1/blockChainNode1.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="722">
-              <caret line="215" column="38" lean-forward="true" selection-start-line="215" selection-start-column="38" selection-end-line="215" selection-end-column="38" />
+            <state relative-caret-position="878">
+              <caret line="218" column="24" lean-forward="true" selection-start-line="218" selection-start-column="24" selection-end-line="218" selection-end-column="24" />
               <folding>
                 <element signature="e#19#70#0" expanded="true" />
-                <element signature="e#2584#2752#0" expanded="false" />
-                <element signature="e#7969#8430#0" expanded="false" />
-                <element signature="e#8433#8482#0" expanded="false" />
+                <element signature="e#928#1690#0" expanded="false" />
+                <element signature="e#1770#2104#0" expanded="false" />
+                <element signature="e#2130#2640#0" expanded="false" />
+                <element signature="e#2659#2827#0" expanded="false" />
+                <element signature="e#2849#5601#0" expanded="false" />
+                <element signature="e#5624#5705#0" expanded="false" />
+                <element signature="e#6663#6733#0" expanded="false" />
+                <element signature="e#8064#8525#0" expanded="false" />
+                <element signature="e#8528#8577#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -53,8 +55,8 @@
       <file leaf-file-name="blockChainNode2.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/NODE2/blockChainNode2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="482">
-              <caret line="31" column="17" lean-forward="false" selection-start-line="31" selection-start-column="17" selection-end-line="31" selection-end-column="17" />
+            <state relative-caret-position="756">
+              <caret line="224" column="67" lean-forward="false" selection-start-line="224" selection-start-column="40" selection-end-line="224" selection-end-column="67" />
               <folding>
                 <element signature="e#19#70#0" expanded="true" />
                 <element signature="e#2584#2752#0" expanded="false" />
@@ -106,8 +108,8 @@
       <find>node</find>
       <find>oldinfo</find>
       <find>[1,1</find>
-      <find>Node1</find>
       <find>Node2</find>
+      <find>Node1</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -344,19 +346,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/NODE2/blockChainNode2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="482">
-          <caret line="31" column="17" lean-forward="false" selection-start-line="31" selection-start-column="17" selection-end-line="31" selection-end-column="17" />
-          <folding>
-            <element signature="e#19#70#0" expanded="true" />
-            <element signature="e#2584#2752#0" expanded="false" />
-            <element signature="e#7916#8377#0" expanded="false" />
-            <element signature="e#8380#8429#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/NODE3/blockChainNode3.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="726">
@@ -377,15 +366,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/NODE1/blockChainNode1.py">
+    <entry file="file://$PROJECT_DIR$/NODE2/blockChainNode2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="722">
-          <caret line="215" column="38" lean-forward="true" selection-start-line="215" selection-start-column="38" selection-end-line="215" selection-end-column="38" />
+        <state relative-caret-position="756">
+          <caret line="224" column="67" lean-forward="false" selection-start-line="224" selection-start-column="40" selection-end-line="224" selection-end-column="67" />
           <folding>
             <element signature="e#19#70#0" expanded="true" />
             <element signature="e#2584#2752#0" expanded="false" />
-            <element signature="e#7969#8430#0" expanded="false" />
-            <element signature="e#8433#8482#0" expanded="false" />
+            <element signature="e#7916#8377#0" expanded="false" />
+            <element signature="e#8380#8429#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/NODE1/blockChainNode1.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="878">
+          <caret line="218" column="24" lean-forward="true" selection-start-line="218" selection-start-column="24" selection-end-line="218" selection-end-column="24" />
+          <folding>
+            <element signature="e#19#70#0" expanded="true" />
+            <element signature="e#928#1690#0" expanded="false" />
+            <element signature="e#1770#2104#0" expanded="false" />
+            <element signature="e#2130#2640#0" expanded="false" />
+            <element signature="e#2659#2827#0" expanded="false" />
+            <element signature="e#2849#5601#0" expanded="false" />
+            <element signature="e#5624#5705#0" expanded="false" />
+            <element signature="e#6663#6733#0" expanded="false" />
+            <element signature="e#8064#8525#0" expanded="false" />
+            <element signature="e#8528#8577#0" expanded="false" />
           </folding>
         </state>
       </provider>

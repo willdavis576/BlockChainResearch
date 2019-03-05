@@ -28,6 +28,8 @@ nodeList = ['NODE1', 'NODE2', 'NODE3']
 nodeONOFF = [1,0,0]
 oldNodeONOFF = [0,0,0]
 node = [['' for _ in range(100)] for _ in range(100)]
+counter1 = 0;
+blockListen = [['' for _ in range(100)] for _ in range(100)]
 
 nodeName = "NODE1" ############### THIS IS WHERE YOU SPECIFY A NODE'S NAME #######################
 
@@ -172,9 +174,13 @@ def listener():
 
 def callback(data):
     global runYet
+    global counter1
+    global blockListen
     productNumber1 = data.productNumber
     data_to_print = "Time Stamp for Block: {0}\nTransactions: {1}\nSerial Number: {2}\nBlockHash: {3}\nPreviousHash: {4}".format(
         data.timeStamp, data.transactions, data.serialNumber, data.blockHash, data.previousHash)
+    blockListen[data.productNumber][counter1] = data.blockHash
+    counter1 = counter1 + 1
     # rospy.loginfo(data_to_print)
     if runYet[productNumber1] == '':
         f = open("/home/ros/blockChainGit/00blockChain_ws/blockChain" + str(productNumber1) + ".txt", "w")
@@ -192,14 +198,21 @@ def authentication():
     rospy.spin()
 
 def callbackAuth(data):
+    global Trigger
     global nodeONOFF
     global nodeList
+    time.sleep(5)
     if data.nodeName in nodeList:
         nodeONOFF[nodeList.index(data.nodeName)] = 1 #filling in the online array
-    for i in range(10): #10 being a max node amount - can be changed as the array size is 100
-        name = data.nodeName
-        node[int(name[4])][data.productNumber] = data.hash
-        print(node[int(name[4])][data.productNumber])
+    # for i in range(10): #10 being a max node amount - can be changed as the array size is 100
+    name = data.nodeName
+    node[data.productNumber][int(name[4]) - 1] = data.hash
+    # print(node[data.productNumber][int(name[4])])
+
+    if Trigger == False :
+        mostCommonHash = Counter(node[data.productNumber])
+        common = mostCommonHash.most_common(2)[1][0]
+        print(common)
     #print(nodeONOFF)
 
 def emitter():
@@ -207,33 +220,27 @@ def emitter():
     global blockNumber
     global Trigger
     global transactions
+    global blockListen
+
 
     while not rospy.is_shutdown():
-        # if Trigger == False:
-        #     nodeUp = rospy.Publisher('Last_Hash', lastHash, queue_size=1)
-        #     message2 = lastHash()
-        #     message2.nodeName = nodeName
-        #     nodeUp.publish(message2)
-        #     time.sleep(1)
-
-        # if Trigger == True:
-            for i in range(productNumber + 1):
-                pub = rospy.Publisher('Last_Hash', lastHash, queue_size=1)
-                message2 = lastHash()
-                message2.nodeName = "NODE1"
-                message2.productNumber = i
-                message2.hash = block[i][block[i].index('', 1) - 1].getBlockHash()
-                pub.publish(message2)
-                time.sleep(1)
+        for i in range(productNumber + 1):
+            pub = rospy.Publisher('Last_Hash', lastHash, queue_size=1)
+            message2 = lastHash()
+            message2.nodeName = "NODE1"
+            message2.productNumber = i
+            message2.hash = blockListen[i][blockListen[i].index('', 1) - 1]
+            pub.publish(message2)
+            time.sleep(1)
 
     #rospy.spin()
-#
-# def authTrigger():
-#     global Trigger
-#     time.sleep(10)
-#     Trigger = True
-#     time.sleep(1)
-#     Trigger = False
+
+def authTrigger():
+    global Trigger
+    time.sleep(10)
+    Trigger = True
+    time.sleep(1)
+    Trigger = False
 
 if __name__ == '__main__':
     rospy.init_node('publishBlock', anonymous="True")
