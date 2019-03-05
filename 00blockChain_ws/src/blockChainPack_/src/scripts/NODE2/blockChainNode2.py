@@ -22,9 +22,9 @@ nodeUp = ''
 init = 0
 noGen = 0
 runYet = [''] * 100
-
+Trigger = False
 nodeList = ['NODE1', 'NODE2', 'NODE3']
-nodeONOFF = [0,1,0]
+nodeONOFF = [1,0,0]
 oldNodeONOFF = [0,0,0]
 
 nodeName = "NODE2" ############### THIS IS WHERE YOU SPECIFY A NODE'S NAME #######################
@@ -60,10 +60,10 @@ class blockChain:
 def blockUpdate(blockNumber, productNumber, transactions, serialNumber):
     for i in range(blockNumber, blockNumber + 1):
         blockNumber = i
-        block[blockNumber][productNumber] = blockChain(
-            previousHash=block[blockNumber - 1][productNumber].getBlockHash(), transactions=transactions,
+        block[productNumber][blockNumber] = blockChain(
+            previousHash=block[productNumber][blockNumber - 1].getBlockHash(), transactions=transactions,
             serialNumber=serialNumber)
-        print(block[blockNumber][productNumber].getBlockHash())
+        print(block[productNumber][blockNumber].getBlockHash())
 
 
 def sendMessage():
@@ -71,11 +71,11 @@ def sendMessage():
     message = blockDetail()
     message.blockNumber = blockNumber
     message.productNumber = productNumber
-    message.timeStamp = str(block[blockNumber][productNumber].getTimeStamp())
-    message.transactions = block[blockNumber][productNumber].getTransactions()
-    message.serialNumber = block[blockNumber][productNumber].getSerialNumber()
-    message.blockHash = block[blockNumber][productNumber].getBlockHash()
-    message.previousHash = block[blockNumber][productNumber].getPreviousHash()
+    message.timeStamp = str(block[productNumber][blockNumber].getTimeStamp())
+    message.transactions = block[productNumber][blockNumber].getTransactions()
+    message.serialNumber = block[productNumber][blockNumber].getSerialNumber()
+    message.blockHash = block[productNumber][blockNumber].getBlockHash()
+    message.previousHash = block[productNumber][blockNumber].getPreviousHash()
 
 
 def main():
@@ -85,7 +85,6 @@ def main():
                 mainProg()
         if rospy.is_shutdown():
             break
-
 
 def mainProg():
     global blockNumber
@@ -101,6 +100,8 @@ def mainProg():
     global nodeName
     global nodeUp
 
+    pub = rospy.Publisher('publishingBlockStream', blockDetail, queue_size=1)
+
     while (newGenesis == 1):
         # Setup for genesis block
         repeat = 0
@@ -108,20 +109,18 @@ def mainProg():
         serialNumber[productNumber] = serialNumberStr + str(serialNumberNum)
 
         # Genesis Block
-        block[blockNumber][productNumber] = blockChain(previousHash='', transactions="Start production",
+        block[productNumber][blockNumber] = blockChain(previousHash='', transactions="Start production",
                                                        serialNumber=serialNumber[productNumber])
         print("genesis: ")
-        print(block[blockNumber][productNumber].getBlockHash())
-        pub = rospy.Publisher('publishingBlockStream', blockDetail, queue_size=1)
-        rospy.init_node('publishBlock', anonymous="True")
+        print(block[productNumber][blockNumber].getBlockHash())
         sendMessage()
         pub.publish(message)
-        blockNumber = blockNumber + 1  # key part, as each station uploads information, this variable is incremented to generate a new block
         newGenesis = 0
+        blockNumber = blockNumber + 1  # key part, as each station uploads information, this variable is incremented to generate a new block
         break
 
     while (True):
-        pub = rospy.Publisher('publishingBlockStream', blockDetail, queue_size=1)
+        #pub = rospy.Publisher('publishingBlockStream', blockDetail, queue_size=1)
 
         rate = rospy.Rate(10)  # 10hz
         var = raw_input("What stage of the production line? ")
@@ -141,10 +140,10 @@ def mainProg():
         info = var + " stage - Part Number (if applicable): " + var2
 
         if oldinfo != info:
-            transactions[blockNumber][productNumber] = info
+            transactions[productNumber][blockNumber] = info
             serialNumberNum = productNumber
             serialNumber[productNumber] = serialNumberStr + str(serialNumberNum)
-            blockUpdate(blockNumber, productNumber, transactions=transactions[blockNumber][productNumber],
+            blockUpdate(blockNumber, productNumber, transactions=transactions[productNumber][blockNumber],
                         serialNumber=serialNumber[productNumber])
             # print(block[blockNumber][productNumber].getTransactions())
             # print(str(blockNumber) + " " + str(productNumber))
@@ -171,7 +170,6 @@ def listener():
 
 def callback(data):
     global runYet
-
     productNumber1 = data.productNumber
     data_to_print = "Time Stamp for Block: {0}\nTransactions: {1}\nSerial Number: {2}\nBlockHash: {3}\nPreviousHash: {4}".format(
         data.timeStamp, data.transactions, data.serialNumber, data.blockHash, data.previousHash)
@@ -199,22 +197,49 @@ def callbackAuth(data):
     #print(nodeONOFF)
 
 def emitter():
-    global nodeName
+    global productNumber
+    global blockNumber
+    global Trigger
+    global transactions
 
     while not rospy.is_shutdown():
-        nodeUp = rospy.Publisher('Last_Hash', lastHash, queue_size=1)
-        message2 = lastHash()
-        message2.nodeName = nodeName
-        nodeUp.publish(message2)
-        time.sleep(1)
+        # if Trigger == False:
+        #     nodeUp = rospy.Publisher('Last_Hash', lastHash, queue_size=1)
+        #     message2 = lastHash()
+        #     message2.nodeName = nodeName
+        #     nodeUp.publish(message2)
+        #     time.sleep(1)
 
+        # if Trigger == True:
+            for i in range(productNumber + 1):
+                pub = rospy.Publisher('Last_Hash', lastHash, queue_size=1)
+                message2 = lastHash()
+                message2.nodeName = "NODE2"
+                message2.productNumber = i
+                message2.hash = block[i][block[i].index('', 1) - 1].getBlockHash()
+                pub.publish(message2)
+                time.sleep(1)
+
+    #rospy.spin()
+#
+# def authTrigger():
+#     global Trigger
+#     time.sleep(10)
+#     Trigger = True
+#     time.sleep(1)
+#     Trigger = False
 
 if __name__ == '__main__':
     rospy.init_node('publishBlock', anonymous="True")
-    p1 = threading.Thread(target=main, args=())
-    p2 = threading.Thread(target=listener, args=())
+    p1 = threading.Thread(target=listener, args=())
+    p2 = threading.Thread(target=main, args=())
     p3 = threading.Thread(target=authentication, args=())
     p4 = threading.Thread(target=emitter, args=())
+
+    p1.daemon = True
+    p2.daemon = True
+    p3.daemon = True
+    p4.daemon = True
 
     p1.start()
     p2.start()
