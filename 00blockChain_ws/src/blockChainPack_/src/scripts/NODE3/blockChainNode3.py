@@ -224,7 +224,7 @@ def emitter():
                 message2.productNumber = i
                 message2.hash = block[i][block[i].index('', 1) - 1].getBlockHash()
                 pub.publish(message2)
-                time.sleep(1)
+                # time.sleep(1)
 
     #rospy.spin()
 #
