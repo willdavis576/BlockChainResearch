@@ -239,6 +239,7 @@ def emitter():
     global transactions
     global blockListen
 
+
     while not rospy.is_shutdown():
         for i in range(productNumber + 1):
             pub = rospy.Publisher('Last_Hash', lastHash, queue_size=100)
@@ -249,7 +250,7 @@ def emitter():
             pub.publish(message2)
             # print("emitter: ")
             # print(blockListen[i][blockListen[i].index('', 1) - 1])
-            # time.sleep(1)
+            time.sleep(1)
 
     # rospy.spin()
 
@@ -257,6 +258,7 @@ def emitter():
 
 if __name__ == '__main__':
     rospy.init_node('publishBlock', anonymous="True")
+    rate = rospy.Rate(10)
     while not rospy.is_shutdown():
         p1 = threading.Thread(target=listener, args=())
         p2 = threading.Thread(target=main, args=())
