@@ -234,14 +234,12 @@ def authTrigger():
             man = "loves an easter egg"
     rospy.spin()
 
-
 def emitter():
     global productNumber
     global blockNumber
     global Trigger
     global transactions
     global blockListen
-
 
     while not rospy.is_shutdown():
         for i in range(productNumber + 1):
