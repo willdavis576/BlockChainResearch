@@ -1,3 +1,7 @@
-int32 left
-int32 right
-string element
+int64 blockNumber
+int64 productNumber
+string timeStamp
+string transactions
+string serialNumber
+string blockHash
+string previousHash

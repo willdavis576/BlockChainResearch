@@ -2,9 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d548811d-0aca-477e-bfa2-a5ed9f109e3c" name="Default" comment="">
+      <change beforePath="" afterPath="$PROJECT_DIR$/../../../../blockChain1.txt" />
+      <change beforePath="$PROJECT_DIR$/../../../../blockChain0.txt" afterPath="$PROJECT_DIR$/../../../../blockChain0.txt" />
+      <change beforePath="$PROJECT_DIR$/../../msg/rewriteNode.msg" afterPath="$PROJECT_DIR$/../../msg/rewriteNode.msg" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/NODE1/blockChainNode1.py" afterPath="$PROJECT_DIR$/NODE1/blockChainNode1.py" />
-      <change beforePath="$PROJECT_DIR$/Testing/blockChainTesting.py" afterPath="$PROJECT_DIR$/Testing/blockChainTesting.py" />
-      <change beforePath="$PROJECT_DIR$/stringArrayToString.py" afterPath="$PROJECT_DIR$/stringArrayToString.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -36,19 +38,21 @@
       <file leaf-file-name="blockChainNode1.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/NODE1/blockChainNode1.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="559">
-              <caret line="290" column="0" lean-forward="true" selection-start-line="290" selection-start-column="0" selection-end-line="290" selection-end-column="0" />
+            <state relative-caret-position="834">
+              <caret line="312" column="0" lean-forward="true" selection-start-line="312" selection-start-column="0" selection-end-line="312" selection-end-column="0" />
               <folding>
                 <element signature="e#19#70#0" expanded="true" />
-                <element signature="e#1550#2312#0" expanded="false" />
-                <element signature="e#2392#2726#0" expanded="false" />
-                <element signature="e#3281#3449#0" expanded="false" />
-                <element signature="e#6272#6353#0" expanded="false" />
-                <element signature="e#7709#7779#0" expanded="false" />
-                <element signature="e#7809#8366#0" expanded="false" />
-                <element signature="e#8392#8832#0" expanded="false" />
-                <element signature="e#9916#10745#0" expanded="false" />
-                <element signature="e#10748#10797#0" expanded="false" />
+                <element signature="e#1692#2454#0" expanded="false" />
+                <element signature="e#2534#2868#0" expanded="false" />
+                <element signature="e#2894#3404#0" expanded="false" />
+                <element signature="e#3423#3591#0" expanded="false" />
+                <element signature="e#3613#6391#0" expanded="false" />
+                <element signature="e#6414#6495#0" expanded="false" />
+                <element signature="e#7954#8024#0" expanded="false" />
+                <element signature="e#8054#8611#0" expanded="false" />
+                <element signature="e#8637#9077#0" expanded="false" />
+                <element signature="e#10802#11631#0" expanded="false" />
+                <element signature="e#11634#11683#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -162,6 +166,7 @@
       <find>blockli</find>
       <find>blocklisten</find>
       <find>blocktrans</find>
+      <find>blocknumber</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -195,11 +200,11 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="4">
-    <option name="x" value="111" />
-    <option name="y" value="33" />
-    <option name="width" value="1313" />
-    <option name="height" value="1791" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="137" />
+    <option name="y" value="-3" />
+    <option name="width" value="926" />
+    <option name="height" value="1755" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -275,12 +280,12 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="111" y="33" width="1313" height="1791" extended-state="4" />
+    <frame x="111" y="-6" width="2625" height="1830" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23655914" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.04539801" sideWeight="0.50133336" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.044323012" sideWeight="0.50133336" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32969034" sideWeight="0.49866667" order="6" side_tool="false" content_ui="tabs" />
@@ -422,26 +427,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/hackedNode.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="18" column="10" lean-forward="true" selection-start-line="18" selection-start-column="10" selection-end-line="18" selection-end-column="10" />
-          <folding>
-            <element signature="e#19#70#0" expanded="true" />
-            <element signature="e#1231#1993#0" expanded="false" />
-            <element signature="e#2073#2407#0" expanded="false" />
-            <element signature="e#2433#2943#0" expanded="false" />
-            <element signature="e#2962#3130#0" expanded="false" />
-            <element signature="e#3152#5908#0" expanded="false" />
-            <element signature="e#5931#6012#0" expanded="false" />
-            <element signature="e#7098#7168#0" expanded="false" />
-            <element signature="e#7198#7755#0" expanded="false" />
-            <element signature="e#8911#9618#0" expanded="false" />
-            <element signature="e#9621#9670#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Testing/blockChainTesting.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-398">
@@ -468,21 +453,43 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/NODE1/blockChainNode1.py">
+    <entry file="file://$PROJECT_DIR$/hackedNode.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="559">
-          <caret line="290" column="0" lean-forward="true" selection-start-line="290" selection-start-column="0" selection-end-line="290" selection-end-column="0" />
+        <state relative-caret-position="0">
+          <caret line="18" column="10" lean-forward="true" selection-start-line="18" selection-start-column="10" selection-end-line="18" selection-end-column="10" />
           <folding>
             <element signature="e#19#70#0" expanded="true" />
-            <element signature="e#1550#2312#0" expanded="false" />
-            <element signature="e#2392#2726#0" expanded="false" />
-            <element signature="e#3281#3449#0" expanded="false" />
-            <element signature="e#6272#6353#0" expanded="false" />
-            <element signature="e#7709#7779#0" expanded="false" />
-            <element signature="e#7809#8366#0" expanded="false" />
-            <element signature="e#8392#8832#0" expanded="false" />
-            <element signature="e#9916#10745#0" expanded="false" />
-            <element signature="e#10748#10797#0" expanded="false" />
+            <element signature="e#1231#1993#0" expanded="false" />
+            <element signature="e#2073#2407#0" expanded="false" />
+            <element signature="e#2433#2943#0" expanded="false" />
+            <element signature="e#2962#3130#0" expanded="false" />
+            <element signature="e#3152#5908#0" expanded="false" />
+            <element signature="e#5931#6012#0" expanded="false" />
+            <element signature="e#7098#7168#0" expanded="false" />
+            <element signature="e#7198#7755#0" expanded="false" />
+            <element signature="e#8911#9618#0" expanded="false" />
+            <element signature="e#9621#9670#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/NODE1/blockChainNode1.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="834">
+          <caret line="312" column="0" lean-forward="true" selection-start-line="312" selection-start-column="0" selection-end-line="312" selection-end-column="0" />
+          <folding>
+            <element signature="e#19#70#0" expanded="true" />
+            <element signature="e#1692#2454#0" expanded="false" />
+            <element signature="e#2534#2868#0" expanded="false" />
+            <element signature="e#2894#3404#0" expanded="false" />
+            <element signature="e#3423#3591#0" expanded="false" />
+            <element signature="e#3613#6391#0" expanded="false" />
+            <element signature="e#6414#6495#0" expanded="false" />
+            <element signature="e#7954#8024#0" expanded="false" />
+            <element signature="e#8054#8611#0" expanded="false" />
+            <element signature="e#8637#9077#0" expanded="false" />
+            <element signature="e#10802#11631#0" expanded="false" />
+            <element signature="e#11634#11683#0" expanded="false" />
           </folding>
         </state>
       </provider>

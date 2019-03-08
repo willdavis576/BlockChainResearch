@@ -31,12 +31,14 @@ oldNodeONOFF = [0,0,0,0] ################# IF INCLUDING MORE NODES, EXTEND THIS 
 node = [['' for _ in range(100)] for _ in range(100)]
 counter1 = 0;
 
-blockTimeStamp = [['' for _ in range(100)] for _ in range(100)]
-blockTrans = [['' for _ in range(100)] for _ in range(100)]
-blockSerialNumber = [['' for _ in range(100)] for _ in range(100)]
-blockHash = [['' for _ in range(100)] for _ in range(100)]
-blockPreviousHash = [['' for _ in range(100)] for _ in range(100)]
-
+SblockTimeStamp = [['' for _ in range(100)] for _ in range(100)]
+SblockTrans = [['' for _ in range(100)] for _ in range(100)]
+SblockSerialNumber = [['' for _ in range(100)] for _ in range(100)]
+SblockHash = [['' for _ in range(100)] for _ in range(100)]
+SblockPreviousHash = [['' for _ in range(100)] for _ in range(100)]
+SblockNumber = [['' for _ in range(100)] for _ in range(100)]
+SproductNumber = [['' for _ in range(100)] for _ in range(100)]
+Sblock = ''
 authProductNumber = 0
 blockString = ''
 nodeName = "NODE1" ############### THIS IS WHERE YOU SPECIFY A NODE'S NAME #######################
@@ -185,11 +187,14 @@ def callback(data):
     global runYet
     global counter1
 
-    global blockTimeStamp
-    global blockTrans
-    global blockSerialNumber
-    global blockHash
-    global blockPreviousHash
+    global SblockTimeStamp
+    global SblockTrans
+    global SblockSerialNumber
+    global SblockHash
+    global SblockPreviousHash
+
+    global SblockNumber
+    global SproductNumber
 
     global node
 
@@ -197,13 +202,13 @@ def callback(data):
     data_to_print = "Time Stamp for Block: {0}\nTransactions: {1}\nSerial Number: {2}\nBlockHash: {3}\nPreviousHash: {4}".format(
         data.timeStamp, data.transactions, data.serialNumber, data.blockHash, data.previousHash)
 
-    blockTimeStamp[data.productNumber][counter1] = data.timeStamp
-    blockTrans[data.productNumber][counter1] = data.transactions
-    blockSerialNumber[data.productNumber][counter1] = data.serialNumber
-    blockHash[data.productNumber][counter1] = data.blockHash
-    blockPreviousHash[data.productNumber][counter1] = data.previousHash
+    SblockTimeStamp[data.productNumber][data.blockNumber] = data.timeStamp
+    SblockTrans[data.productNumber][data.blockNumber] = data.transactions
+    SblockSerialNumber[data.productNumber][data.blockNumber] = data.serialNumber
+    SblockHash[data.productNumber][data.blockNumber] = data.blockHash
+    SblockPreviousHash[data.productNumber][data.blockNumber] = data.previousHash
 
-    counter1 = counter1 + 1
+    # counter1 = counter1 + 1
     # rospy.loginfo(data_to_print)
     if runYet[productNumber1] == '':
         f = open("/home/ros/blockChainGit/00blockChain_ws/blockChain" + str(productNumber1) + ".txt", "w")
@@ -258,7 +263,7 @@ def emitter():
     global blockNumber
     global Trigger
     global transactions
-    global blockHash
+    global SblockHash
 
 
     while not rospy.is_shutdown():
@@ -267,7 +272,7 @@ def emitter():
             message2 = lastHash()
             message2.nodeName = "NODE1"
             message2.productNumber = i
-            message2.hash = blockHash[i][blockHash[i].index('', 1) - 1]
+            message2.hash = SblockHash[i][SblockHash[i].index('', 1) - 1]
             pub.publish(message2)
             # print("emitter: ")
             # print(blockHash[i][blockHash[i].index('', 1) - 1])
@@ -279,25 +284,39 @@ def emitter():
 def rewriteNodes():
     global blockString
 
-    global blockTimeStamp
-    global blockTrans
-    global blockSerialNumber
-    global blockHash
-    global blockPreviousHash
+    global SblockTimeStamp #productNumber,blockNumber
+    global SblockTrans
+    global SblockSerialNumber
+    global SblockHash
+    global SblockPreviousHash
 
-    time.sleep(5)
+    global SblockNumber
+    global SproductNumber
 
+    time.sleep(10)
     message3 = rewriteNode()
 
-    try:
-        for i in range(len(block[0])):
-            blockString = blockString + block[0][i] + ','
+    while not rospy.is_shutdown():
+        try:
+            print(SproductNumber) #.index(',') + ', ' + SblockNumber.index(','))
+            # for i in range (SproductNumber.index(',')):
+            #     for j in range (SblockNumber.index(',')):
+            #         #Sblock = SblockTimeStamp[i][j] + ',' + SblockTrans[i][j] + ',' + SblockSerialNumber[i][j] + ',' + SblockHash[i][j] + ',' + SblockPreviousHash[i][j]
+            #         #print(Sblock)
+            #         print(SblockTimeStamp[SproductNumber][SblockNumber])
+            time.sleep(1)
 
-        print(blockString)
+        except:
+            print("didn'work lol")
+            time.sleep(1)
 
 
-    except:
-        print("nah mate")
+    # try:
+    #     for i in range ()
+    #
+    #
+    # except:
+    #     print("nah mate")
 
 
 
