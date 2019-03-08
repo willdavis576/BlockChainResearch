@@ -24,14 +24,14 @@ init = 0
 noGen = 0
 runYet = [''] * 100
 Trigger = False
-nodeList = ['NODE1', 'NODE2', 'NODE3']
-nodeONOFF = [1,0,0]
-oldNodeONOFF = [0,0,0]
+nodeList = ['NODE1', 'NODE2', 'NODE3','NODE4'] ################# IF INCLUDING MORE NODES, EXTEND THIS ARRAY SIZE #######################
+nodeONOFF = [1,0,0,0] ################# IF INCLUDING MORE NODES, EXTEND THIS ARRAY SIZE #######################
+oldNodeONOFF = [0,0,0,0] ################# IF INCLUDING MORE NODES, EXTEND THIS ARRAY SIZE #######################
 node = [['' for _ in range(100)] for _ in range(100)]
 counter1 = 0;
 blockListen = [['' for _ in range(100)] for _ in range(100)]
 authProductNumber = 0
-nodeName = "NODE3" ############### THIS IS WHERE YOU SPECIFY A NODE'S NAME #######################
+nodeName = "NODE4" ############### THIS IS WHERE YOU SPECIFY A NODE'S NAME #######################
 
 
 class blockChain:
@@ -228,10 +228,10 @@ def authTrigger():
         time.sleep(5)
         mostCommonHash = Counter(node[authProductNumber])
         try:
-            common = mostCommonHash.most_common(3)#[2][0]
-            print(common)
+            common = mostCommonHash.most_common(3)[2][0]
+            print(nodeList[node[authProductNumber].index((mostCommonHash.most_common(3)[2][0]), 1)] + " has been hacked")
         except:
-            print("Nothing out of ordinary")
+            man = "loves an easter egg"
     rospy.spin()
 
 
@@ -247,7 +247,7 @@ def emitter():
         for i in range(productNumber + 1):
             pub = rospy.Publisher('Last_Hash', lastHash, queue_size=100)
             message2 = lastHash()
-            message2.nodeName = "NODE3"
+            message2.nodeName = "NODE4"
             message2.productNumber = i
             message2.hash = blockListen[i][blockListen[i].index('', 1) - 1]
             pub.publish(message2)

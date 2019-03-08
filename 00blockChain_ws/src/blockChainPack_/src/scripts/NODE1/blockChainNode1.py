@@ -24,9 +24,9 @@ init = 0
 noGen = 0
 runYet = [''] * 100
 Trigger = False
-nodeList = ['NODE1', 'NODE2', 'NODE3']
-nodeONOFF = [1,0,0]
-oldNodeONOFF = [0,0,0]
+nodeList = ['NODE1', 'NODE2', 'NODE3','NODE4'] ################# IF INCLUDING MORE NODES, EXTEND THIS ARRAY SIZE #######################
+nodeONOFF = [1,0,0,0] ################# IF INCLUDING MORE NODES, EXTEND THIS ARRAY SIZE #######################
+oldNodeONOFF = [0,0,0,0] ################# IF INCLUDING MORE NODES, EXTEND THIS ARRAY SIZE #######################
 node = [['' for _ in range(100)] for _ in range(100)]
 counter1 = 0;
 blockListen = [['' for _ in range(100)] for _ in range(100)]
@@ -228,10 +228,10 @@ def authTrigger():
         time.sleep(5)
         mostCommonHash = Counter(node[authProductNumber])
         try:
-            common = mostCommonHash.most_common(3)#[2][0]
-            print(common)
+            common = mostCommonHash.most_common(3)[2][0]
+            print(nodeList[node[authProductNumber].index((mostCommonHash.most_common(3)[2][0]), 1)] + " has been hacked")
         except:
-            print("Nothing out of ordinary")
+            man = "loves an easter egg"
     rospy.spin()
 
 
