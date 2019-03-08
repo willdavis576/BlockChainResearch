@@ -31,7 +31,7 @@ node = [['' for _ in range(100)] for _ in range(100)]
 counter1 = 0;
 blockListen = [['' for _ in range(100)] for _ in range(100)]
 authProductNumber = 0
-nodeName = "NODE2" ############### THIS IS WHERE YOU SPECIFY A NODE'S NAME #######################
+nodeName = "NODE3" ############### THIS IS WHERE YOU SPECIFY A NODE'S NAME #######################
 
 
 class blockChain:
@@ -180,7 +180,7 @@ def callback(data):
     productNumber1 = data.productNumber
     data_to_print = "Time Stamp for Block: {0}\nTransactions: {1}\nSerial Number: {2}\nBlockHash: {3}\nPreviousHash: {4}".format(
         data.timeStamp, data.transactions, data.serialNumber, data.blockHash, data.previousHash)
-    blockListen[data.productNumber][counter1] = data.blockHash
+    blockListen[data.productNumber][counter1] = data.blockHash + "Hackery"
     # print("blockListen: ")
     # print(blockListen)
     # print("node array: ")
@@ -247,7 +247,7 @@ def emitter():
         for i in range(productNumber + 1):
             pub = rospy.Publisher('Last_Hash', lastHash, queue_size=100)
             message2 = lastHash()
-            message2.nodeName = "NODE2"
+            message2.nodeName = "NODE3"
             message2.productNumber = i
             message2.hash = blockListen[i][blockListen[i].index('', 1) - 1]
             pub.publish(message2)

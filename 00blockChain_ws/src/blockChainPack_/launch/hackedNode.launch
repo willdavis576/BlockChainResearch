@@ -1,0 +1,4 @@
+<launch>
+	<node pkg="blockChainPack_" type="hackedNode.py" name="Node3" output="screen">
+	</node>
+</launch>

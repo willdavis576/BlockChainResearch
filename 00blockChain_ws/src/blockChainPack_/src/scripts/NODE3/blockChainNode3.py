@@ -227,8 +227,11 @@ def authTrigger():
     while not rospy.is_shutdown():
         time.sleep(5)
         mostCommonHash = Counter(node[authProductNumber])
-        common = mostCommonHash.most_common(2)[1][0]
-        print(common)
+        try:
+            common = mostCommonHash.most_common(3)#[2][0]
+            print(common)
+        except:
+            print("Nothing out of ordinary")
     rospy.spin()
 
 
@@ -250,7 +253,7 @@ def emitter():
             pub.publish(message2)
             # print("emitter: ")
             # print(blockListen[i][blockListen[i].index('', 1) - 1])
-            time.sleep(1)
+            time.sleep(0.1)
 
     # rospy.spin()
 

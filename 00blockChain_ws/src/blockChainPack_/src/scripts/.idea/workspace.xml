@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d548811d-0aca-477e-bfa2-a5ed9f109e3c" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/../../../../blockChain0.txt" afterPath="$PROJECT_DIR$/../../../../blockChain0.txt" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/NODE1/blockChainNode1.py" afterPath="$PROJECT_DIR$/NODE1/blockChainNode1.py" />
       <change beforePath="$PROJECT_DIR$/NODE2/blockChainNode2.py" afterPath="$PROJECT_DIR$/NODE2/blockChainNode2.py" />
       <change beforePath="$PROJECT_DIR$/NODE3/blockChainNode3.py" afterPath="$PROJECT_DIR$/NODE3/blockChainNode3.py" />
@@ -18,7 +20,7 @@
       <file leaf-file-name="blockChainTesting.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Testing/blockChainTesting.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
+            <state relative-caret-position="136">
               <caret line="11" column="19" lean-forward="false" selection-start-line="11" selection-start-column="19" selection-end-line="11" selection-end-column="19" />
               <folding>
                 <element signature="e#19#53#0" expanded="true" />
@@ -36,8 +38,8 @@
       <file leaf-file-name="blockChainNode1.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/NODE1/blockChainNode1.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="540">
-              <caret line="231" column="16" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="323" selection-end-column="0" />
+            <state relative-caret-position="439">
+              <caret line="230" column="51" lean-forward="false" selection-start-line="230" selection-start-column="51" selection-end-line="230" selection-end-column="51" />
               <folding>
                 <element signature="e#19#70#0" expanded="true" />
                 <element signature="e#949#1711#0" expanded="false" />
@@ -48,8 +50,8 @@
                 <element signature="e#5649#5730#0" expanded="false" />
                 <element signature="e#5757#6776#0" expanded="false" />
                 <element signature="e#6804#6874#0" expanded="false" />
-                <element signature="e#8444#9151#0" expanded="false" />
-                <element signature="e#9154#9203#0" expanded="false" />
+                <element signature="e#8529#9236#0" expanded="false" />
+                <element signature="e#9239#9288#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -58,8 +60,8 @@
       <file leaf-file-name="blockChainNode2.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/NODE2/blockChainNode2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="482">
-              <caret line="33" column="17" lean-forward="false" selection-start-line="33" selection-start-column="17" selection-end-line="33" selection-end-column="17" />
+            <state relative-caret-position="359">
+              <caret line="230" column="51" lean-forward="false" selection-start-line="230" selection-start-column="51" selection-end-line="230" selection-end-column="51" />
               <folding>
                 <element signature="e#19#70#0" expanded="true" />
                 <element signature="e#949#1711#0" expanded="false" />
@@ -70,18 +72,18 @@
                 <element signature="e#5649#5730#0" expanded="false" />
                 <element signature="e#5757#6776#0" expanded="false" />
                 <element signature="e#6804#6874#0" expanded="false" />
-                <element signature="e#8444#9151#0" expanded="false" />
-                <element signature="e#9154#9203#0" expanded="false" />
+                <element signature="e#8529#9236#0" expanded="false" />
+                <element signature="e#9239#9288#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="blockChainNode3.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="blockChainNode3.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/NODE3/blockChainNode3.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="692">
-              <caret line="33" column="17" lean-forward="false" selection-start-line="33" selection-start-column="17" selection-end-line="33" selection-end-column="17" />
+            <state relative-caret-position="442">
+              <caret line="230" column="51" lean-forward="false" selection-start-line="230" selection-start-column="51" selection-end-line="230" selection-end-column="51" />
               <folding>
                 <element signature="e#19#70#0" expanded="true" />
                 <element signature="e#949#1711#0" expanded="false" />
@@ -92,8 +94,29 @@
                 <element signature="e#5649#5730#0" expanded="false" />
                 <element signature="e#5757#6776#0" expanded="false" />
                 <element signature="e#6804#6874#0" expanded="false" />
-                <element signature="e#8444#9151#0" expanded="false" />
-                <element signature="e#9154#9203#0" expanded="false" />
+                <element signature="e#8529#9236#0" expanded="false" />
+                <element signature="e#9239#9288#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="hackedNode.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/hackedNode.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="699">
+              <caret line="247" column="72" lean-forward="true" selection-start-line="247" selection-start-column="72" selection-end-line="247" selection-end-column="72" />
+              <folding>
+                <element signature="e#19#70#0" expanded="true" />
+                <element signature="e#949#1711#0" expanded="false" />
+                <element signature="e#1791#2125#0" expanded="false" />
+                <element signature="e#2151#2661#0" expanded="false" />
+                <element signature="e#2680#2848#0" expanded="false" />
+                <element signature="e#2870#5626#0" expanded="false" />
+                <element signature="e#5649#5730#0" expanded="false" />
+                <element signature="e#6816#6886#0" expanded="false" />
+                <element signature="e#8541#9248#0" expanded="false" />
+                <element signature="e#9251#9300#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -119,11 +142,12 @@
       <find>oldinfo</find>
       <find>[1,1</find>
       <find>counter1</find>
-      <find>blockL</find>
       <find>queu</find>
       <find>while</find>
       <find>Node2</find>
       <find>Node1</find>
+      <find>blockL</find>
+      <find>node1</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -149,9 +173,10 @@
         <option value="$PROJECT_DIR$/NODE1/Node1Emitter.py" />
         <option value="$PROJECT_DIR$/blockChain.py" />
         <option value="$PROJECT_DIR$/decrypt.py" />
-        <option value="$PROJECT_DIR$/NODE1/blockChainNode1.py" />
-        <option value="$PROJECT_DIR$/NODE2/blockChainNode2.py" />
+        <option value="$PROJECT_DIR$/hackedNode.py" />
         <option value="$PROJECT_DIR$/NODE3/blockChainNode3.py" />
+        <option value="$PROJECT_DIR$/NODE2/blockChainNode2.py" />
+        <option value="$PROJECT_DIR$/NODE1/blockChainNode1.py" />
       </list>
     </option>
   </component>
@@ -235,19 +260,19 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="137" y="36" width="2627" height="1827" extended-state="6" />
+    <frame x="137" y="36" width="1861" height="1218" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23655914" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.038251366" sideWeight="0.50133336" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.06949458" sideWeight="0.50133336" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32969034" sideWeight="0.49866667" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32969034" sideWeight="0.49866667" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -267,7 +292,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/talker2Test.py" />
     <entry file="file://$PROJECT_DIR$/Node1Emitter.py" />
     <entry file="file://$PROJECT_DIR$/authentication.py" />
     <entry file="file://$PROJECT_DIR$/listener.py" />
@@ -339,7 +363,7 @@
     <entry file="file://$PROJECT_DIR$/blockChain.py" />
     <entry file="file://$PROJECT_DIR$/Testing/blockChainTesting.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
+        <state relative-caret-position="136">
           <caret line="11" column="19" lean-forward="false" selection-start-line="11" selection-start-column="19" selection-end-line="11" selection-end-column="19" />
           <folding>
             <element signature="e#19#53#0" expanded="true" />
@@ -362,8 +386,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/NODE1/blockChainNode1.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="231" column="16" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="323" selection-end-column="0" />
+        <state relative-caret-position="439">
+          <caret line="230" column="51" lean-forward="false" selection-start-line="230" selection-start-column="51" selection-end-line="230" selection-end-column="51" />
           <folding>
             <element signature="e#19#70#0" expanded="true" />
             <element signature="e#949#1711#0" expanded="false" />
@@ -374,16 +398,16 @@
             <element signature="e#5649#5730#0" expanded="false" />
             <element signature="e#5757#6776#0" expanded="false" />
             <element signature="e#6804#6874#0" expanded="false" />
-            <element signature="e#8444#9151#0" expanded="false" />
-            <element signature="e#9154#9203#0" expanded="false" />
+            <element signature="e#8529#9236#0" expanded="false" />
+            <element signature="e#9239#9288#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/NODE2/blockChainNode2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="482">
-          <caret line="33" column="17" lean-forward="false" selection-start-line="33" selection-start-column="17" selection-end-line="33" selection-end-column="17" />
+        <state relative-caret-position="359">
+          <caret line="230" column="51" lean-forward="false" selection-start-line="230" selection-start-column="51" selection-end-line="230" selection-end-column="51" />
           <folding>
             <element signature="e#19#70#0" expanded="true" />
             <element signature="e#949#1711#0" expanded="false" />
@@ -394,16 +418,16 @@
             <element signature="e#5649#5730#0" expanded="false" />
             <element signature="e#5757#6776#0" expanded="false" />
             <element signature="e#6804#6874#0" expanded="false" />
-            <element signature="e#8444#9151#0" expanded="false" />
-            <element signature="e#9154#9203#0" expanded="false" />
+            <element signature="e#8529#9236#0" expanded="false" />
+            <element signature="e#9239#9288#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/NODE3/blockChainNode3.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="692">
-          <caret line="33" column="17" lean-forward="false" selection-start-line="33" selection-start-column="17" selection-end-line="33" selection-end-column="17" />
+        <state relative-caret-position="442">
+          <caret line="230" column="51" lean-forward="false" selection-start-line="230" selection-start-column="51" selection-end-line="230" selection-end-column="51" />
           <folding>
             <element signature="e#19#70#0" expanded="true" />
             <element signature="e#949#1711#0" expanded="false" />
@@ -414,8 +438,27 @@
             <element signature="e#5649#5730#0" expanded="false" />
             <element signature="e#5757#6776#0" expanded="false" />
             <element signature="e#6804#6874#0" expanded="false" />
-            <element signature="e#8444#9151#0" expanded="false" />
-            <element signature="e#9154#9203#0" expanded="false" />
+            <element signature="e#8529#9236#0" expanded="false" />
+            <element signature="e#9239#9288#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hackedNode.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="699">
+          <caret line="247" column="72" lean-forward="true" selection-start-line="247" selection-start-column="72" selection-end-line="247" selection-end-column="72" />
+          <folding>
+            <element signature="e#19#70#0" expanded="true" />
+            <element signature="e#949#1711#0" expanded="false" />
+            <element signature="e#1791#2125#0" expanded="false" />
+            <element signature="e#2151#2661#0" expanded="false" />
+            <element signature="e#2680#2848#0" expanded="false" />
+            <element signature="e#2870#5626#0" expanded="false" />
+            <element signature="e#5649#5730#0" expanded="false" />
+            <element signature="e#6816#6886#0" expanded="false" />
+            <element signature="e#8541#9248#0" expanded="false" />
+            <element signature="e#9251#9300#0" expanded="false" />
           </folding>
         </state>
       </provider>
