@@ -1,36 +1,24 @@
-Time Stamp for Block: 2019-03-08 01:37:10.540678
+Time Stamp for Block: 2019-03-08 19:28:53.230827
+Transactions: Start production
+Serial Number: PRODUCT0
+BlockHash: 11503eb4896d294aa796495048778deab22c7ee0e2ecd9729c2cb85e874ca1b9
+PreviousHash: 
+-------------------------------
+Time Stamp for Block: 2019-03-08 19:28:54.286545
+Transactions: dfg stage - Part Number (if applicable): dfg
+Serial Number: PRODUCT0
+BlockHash: d66d9ee492d8ac3f3a15beb721f639e5ccaf528d0f789a124891dcb105c40760
+PreviousHash: 11503eb4896d294aa796495048778deab22c7ee0e2ecd9729c2cb85e874ca1b9
+-------------------------------
+Time Stamp for Block: 2019-03-08 19:28:54.564357
+Transactions: d stage - Part Number (if applicable): fg
+Serial Number: PRODUCT0
+BlockHash: 3c7fca631174f369a291f9b9973b8ed51cebd3f9d3ff4ef36d8b9efd92f62b98
+PreviousHash: d66d9ee492d8ac3f3a15beb721f639e5ccaf528d0f789a124891dcb105c40760
+-------------------------------
+Time Stamp for Block: 2019-03-08 19:28:54.838505
 Transactions: df stage - Part Number (if applicable): gdf
 Serial Number: PRODUCT0
-BlockHash: 8c15473c9023d4f3dabbddf4b52a8fd965889254d396202550ac63a13fccfee5
-PreviousHash: ca4c37cad163fbcf88b69dff0f88432ad9a4c7b6c8c06ba5654540f840e451eb
--------------------------------
-Time Stamp for Block: 2019-03-08 01:37:10.540678
-Transactions: df stage - Part Number (if applicable): gdf
-Serial Number: PRODUCT0
-BlockHash: 8c15473c9023d4f3dabbddf4b52a8fd965889254d396202550ac63a13fccfee5
-PreviousHash: ca4c37cad163fbcf88b69dff0f88432ad9a4c7b6c8c06ba5654540f840e451eb
--------------------------------
-Time Stamp for Block: 2019-03-08 01:37:10.916221
-Transactions: gdf stage - Part Number (if applicable): g
-Serial Number: PRODUCT0
-BlockHash: a9de7674bbbec59ee698f1241a2e171e44815afdc86250d53bc7889c8729bdd8
-PreviousHash: 8c15473c9023d4f3dabbddf4b52a8fd965889254d396202550ac63a13fccfee5
--------------------------------
-Time Stamp for Block: 2019-03-08 01:37:10.916221
-Transactions: gdf stage - Part Number (if applicable): g
-Serial Number: PRODUCT0
-BlockHash: a9de7674bbbec59ee698f1241a2e171e44815afdc86250d53bc7889c8729bdd8
-PreviousHash: 8c15473c9023d4f3dabbddf4b52a8fd965889254d396202550ac63a13fccfee5
--------------------------------
-Time Stamp for Block: 2019-03-08 01:37:10.916221
-Transactions: gdf stage - Part Number (if applicable): g
-Serial Number: PRODUCT0
-BlockHash: a9de7674bbbec59ee698f1241a2e171e44815afdc86250d53bc7889c8729bdd8
-PreviousHash: 8c15473c9023d4f3dabbddf4b52a8fd965889254d396202550ac63a13fccfee5
--------------------------------
-Time Stamp for Block: 2019-03-08 01:37:10.916221
-Transactions: gdf stage - Part Number (if applicable): g
-Serial Number: PRODUCT0
-BlockHash: a9de7674bbbec59ee698f1241a2e171e44815afdc86250d53bc7889c8729bdd8
-PreviousHash: 8c15473c9023d4f3dabbddf4b52a8fd965889254d396202550ac63a13fccfee5
+BlockHash: 0b6f542d75ba13123a1977b38f66b85114894d9f4fb47b098f66116384a1f457
+PreviousHash: 3c7fca631174f369a291f9b9973b8ed51cebd3f9d3ff4ef36d8b9efd92f62b98
 -------------------------------

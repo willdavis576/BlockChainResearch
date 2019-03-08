@@ -4,6 +4,7 @@ from datetime import datetime
 from collections import Counter
 from blockChainPack_.msg import blockDetail
 from blockChainPack_.msg import lastHash
+from blockChainPack_.msg import rewriteNode
 
 
 transactions = [['' for _ in range(100)] for _ in range(100)]
@@ -29,8 +30,15 @@ nodeONOFF = [1,0,0,0] ################# IF INCLUDING MORE NODES, EXTEND THIS ARR
 oldNodeONOFF = [0,0,0,0] ################# IF INCLUDING MORE NODES, EXTEND THIS ARRAY SIZE #######################
 node = [['' for _ in range(100)] for _ in range(100)]
 counter1 = 0;
-blockListen = [['' for _ in range(100)] for _ in range(100)]
+
+blockTimeStamp = [['' for _ in range(100)] for _ in range(100)]
+blockTrans = [['' for _ in range(100)] for _ in range(100)]
+blockSerialNumber = [['' for _ in range(100)] for _ in range(100)]
+blockHash = [['' for _ in range(100)] for _ in range(100)]
+blockPreviousHash = [['' for _ in range(100)] for _ in range(100)]
+
 authProductNumber = 0
+blockString = ''
 nodeName = "NODE1" ############### THIS IS WHERE YOU SPECIFY A NODE'S NAME #######################
 
 
@@ -117,6 +125,7 @@ def mainProg():
                                                        serialNumber=serialNumber[productNumber])
         print("genesis: ")
         print(block[productNumber][blockNumber].getBlockHash())
+        time.sleep(1)
         sendMessage()
         pub.publish(message)
         newGenesis = 0
@@ -175,16 +184,25 @@ def listener():
 def callback(data):
     global runYet
     global counter1
-    global blockListen
+
+    global blockTimeStamp
+    global blockTrans
+    global blockSerialNumber
+    global blockHash
+    global blockPreviousHash
+
     global node
+
     productNumber1 = data.productNumber
     data_to_print = "Time Stamp for Block: {0}\nTransactions: {1}\nSerial Number: {2}\nBlockHash: {3}\nPreviousHash: {4}".format(
         data.timeStamp, data.transactions, data.serialNumber, data.blockHash, data.previousHash)
-    blockListen[data.productNumber][counter1] = data.blockHash
-    # print("blockListen: ")
-    # print(blockListen)
-    # print("node array: ")
-    # print(node)
+
+    blockTimeStamp[data.productNumber][counter1] = data.timeStamp
+    blockTrans[data.productNumber][counter1] = data.transactions
+    blockSerialNumber[data.productNumber][counter1] = data.serialNumber
+    blockHash[data.productNumber][counter1] = data.blockHash
+    blockPreviousHash[data.productNumber][counter1] = data.previousHash
+
     counter1 = counter1 + 1
     # rospy.loginfo(data_to_print)
     if runYet[productNumber1] == '':
@@ -240,7 +258,7 @@ def emitter():
     global blockNumber
     global Trigger
     global transactions
-    global blockListen
+    global blockHash
 
 
     while not rospy.is_shutdown():
@@ -249,13 +267,42 @@ def emitter():
             message2 = lastHash()
             message2.nodeName = "NODE1"
             message2.productNumber = i
-            message2.hash = blockListen[i][blockListen[i].index('', 1) - 1]
+            message2.hash = blockHash[i][blockHash[i].index('', 1) - 1]
             pub.publish(message2)
             # print("emitter: ")
-            # print(blockListen[i][blockListen[i].index('', 1) - 1])
+            # print(blockHash[i][blockHash[i].index('', 1) - 1])
             time.sleep(0.1)
 
     # rospy.spin()
+
+
+def rewriteNodes():
+    global blockString
+
+    global blockTimeStamp
+    global blockTrans
+    global blockSerialNumber
+    global blockHash
+    global blockPreviousHash
+
+    time.sleep(5)
+
+    message3 = rewriteNode()
+
+    try:
+        for i in range(len(block[0])):
+            blockString = blockString + block[0][i] + ','
+
+        print(blockString)
+
+
+    except:
+        print("nah mate")
+
+
+
+
+
 
 
 
@@ -268,24 +315,28 @@ if __name__ == '__main__':
         p3 = threading.Thread(target=authentication, args=())
         p4 = threading.Thread(target=emitter, args=())
         p5 = threading.Thread(target=authTrigger, args=())
+        p6 = threading.Thread(target=rewriteNodes, args=())
 
         p1.daemon = True
         p2.daemon = True
         p3.daemon = True
         p4.daemon = True
         p5.daemon = True
+        p6.daemon = True
 
         p1.start()
         p2.start()
         p3.start()
         p4.start()
         p5.start()
+        p6.start()
 
         p1.join()
         p2.join()
         p3.join()
         p4.join()
         p5.join()
+        p6.join()
 
 
 # each stage of the production line needs to log:
@@ -323,4 +374,11 @@ if __name__ == '__main__':
 
 
 
+
 # - look up what a UTXO data set is in blockchain
+
+
+
+#   - rewrite node will rewrite the node that's next to it in terms of numbers
+#       - for example, if NODE4 is compromised then NODE3 will rewrite it has there isn't currently a NODE5.
+#       - if NODE2 is infected, try NODE1, if not, NODE3.

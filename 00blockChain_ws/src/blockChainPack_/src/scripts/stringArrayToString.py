@@ -8,9 +8,10 @@ def main():
     string = ''
     newWord = ''
     newName = []
-    name = ['dfgdfg','sdfsdgsdfg','dfgdfgdsfgsgdn','dfgsdfgfsdg','dfgdfg']
-    for i in range (len(name)):
-        string = string + name[i] + ','
+    name = [['' for _ in range(100)] for _ in range(100)]
+    name[0] = ['ertert','ertertert','ertertertter','ertertert']
+    for i in range (len(name[0])):
+        string = string + name[0][i] + ','
     print(string)
 
     print(string.index(','))
@@ -29,6 +30,7 @@ def main():
             print(newName)
     except:
         ye = "great"
+
 
 if __name__ == '__main__':
     main()

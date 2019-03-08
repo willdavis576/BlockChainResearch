@@ -5,5 +5,7 @@
    "BLOCKDETAIL"
    "<LASTHASH>"
    "LASTHASH"
+   "<REWRITENODE>"
+   "REWRITENODE"
   ))
 

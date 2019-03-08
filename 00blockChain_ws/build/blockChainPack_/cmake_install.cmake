@@ -36,6 +36,7 @@ if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspeci
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/blockChainPack_/msg" TYPE FILE FILES
     "/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/blockDetail.msg"
     "/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/lastHash.msg"
+    "/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/rewriteNode.msg"
     )
 endif()
 

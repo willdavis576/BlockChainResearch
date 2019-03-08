@@ -52,6 +52,7 @@ find_package(catkin REQUIRED COMPONENTS
    FILES
    blockDetail.msg
    lastHash.msg
+   rewriteNode.msg
 #   Message2.msg
 )
 

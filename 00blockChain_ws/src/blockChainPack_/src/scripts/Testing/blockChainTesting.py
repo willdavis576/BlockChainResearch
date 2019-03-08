@@ -21,6 +21,7 @@ nodeUp = ''
 init = 0
 noGen = 0
 runYet = [''] * 100
+blockString = ''
 nodeName = "NODE1" ############### THIS IS WHERE YOU SPECIFY A NODE'S NAME #######################
 
 
