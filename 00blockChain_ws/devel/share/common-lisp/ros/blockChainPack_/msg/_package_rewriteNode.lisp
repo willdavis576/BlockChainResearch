@@ -1,8 +1,16 @@
 (cl:in-package blockChainPack_-msg)
-(cl:export '(LEFT-VAL
-          LEFT
-          RIGHT-VAL
-          RIGHT
-          ELEMENT-VAL
-          ELEMENT
+(cl:export '(BLOCKNUMBER-VAL
+          BLOCKNUMBER
+          PRODUCTNUMBER-VAL
+          PRODUCTNUMBER
+          TIMESTAMP-VAL
+          TIMESTAMP
+          TRANSACTIONS-VAL
+          TRANSACTIONS
+          SERIALNUMBER-VAL
+          SERIALNUMBER
+          BLOCKHASH-VAL
+          BLOCKHASH
+          PREVIOUSHASH-VAL
+          PREVIOUSHASH
 ))

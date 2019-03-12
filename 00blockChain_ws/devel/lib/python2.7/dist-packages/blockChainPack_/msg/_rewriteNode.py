@@ -7,15 +7,19 @@ import struct
 
 
 class rewriteNode(genpy.Message):
-  _md5sum = "de7b9a4f559650249dc7ff7249ac243f"
+  _md5sum = "392845d38e7dbd0b3e34f5d6ba02ccf6"
   _type = "blockChainPack_/rewriteNode"
   _has_header = False #flag to mark the presence of a Header object
-  _full_text = """int32 left
-int32 right
-string element
+  _full_text = """int64 blockNumber
+int64 productNumber
+string timeStamp
+string transactions
+string serialNumber
+string blockHash
+string previousHash
 """
-  __slots__ = ['left','right','element']
-  _slot_types = ['int32','int32','string']
+  __slots__ = ['blockNumber','productNumber','timeStamp','transactions','serialNumber','blockHash','previousHash']
+  _slot_types = ['int64','int64','string','string','string','string','string']
 
   def __init__(self, *args, **kwds):
     """
@@ -25,7 +29,7 @@ string element
     changes.  You cannot mix in-order arguments and keyword arguments.
 
     The available fields are:
-       left,right,element
+       blockNumber,productNumber,timeStamp,transactions,serialNumber,blockHash,previousHash
 
     :param args: complete set of field values, in .msg order
     :param kwds: use keyword arguments corresponding to message field names
@@ -34,16 +38,28 @@ string element
     if args or kwds:
       super(rewriteNode, self).__init__(*args, **kwds)
       #message fields cannot be None, assign default values for those that are
-      if self.left is None:
-        self.left = 0
-      if self.right is None:
-        self.right = 0
-      if self.element is None:
-        self.element = ''
+      if self.blockNumber is None:
+        self.blockNumber = 0
+      if self.productNumber is None:
+        self.productNumber = 0
+      if self.timeStamp is None:
+        self.timeStamp = ''
+      if self.transactions is None:
+        self.transactions = ''
+      if self.serialNumber is None:
+        self.serialNumber = ''
+      if self.blockHash is None:
+        self.blockHash = ''
+      if self.previousHash is None:
+        self.previousHash = ''
     else:
-      self.left = 0
-      self.right = 0
-      self.element = ''
+      self.blockNumber = 0
+      self.productNumber = 0
+      self.timeStamp = ''
+      self.transactions = ''
+      self.serialNumber = ''
+      self.blockHash = ''
+      self.previousHash = ''
 
   def _get_types(self):
     """
@@ -58,8 +74,32 @@ string element
     """
     try:
       _x = self
-      buff.write(_get_struct_2i().pack(_x.left, _x.right))
-      _x = self.element
+      buff.write(_get_struct_2q().pack(_x.blockNumber, _x.productNumber))
+      _x = self.timeStamp
+      length = len(_x)
+      if python3 or type(_x) == unicode:
+        _x = _x.encode('utf-8')
+        length = len(_x)
+      buff.write(struct.pack('<I%ss'%length, length, _x))
+      _x = self.transactions
+      length = len(_x)
+      if python3 or type(_x) == unicode:
+        _x = _x.encode('utf-8')
+        length = len(_x)
+      buff.write(struct.pack('<I%ss'%length, length, _x))
+      _x = self.serialNumber
+      length = len(_x)
+      if python3 or type(_x) == unicode:
+        _x = _x.encode('utf-8')
+        length = len(_x)
+      buff.write(struct.pack('<I%ss'%length, length, _x))
+      _x = self.blockHash
+      length = len(_x)
+      if python3 or type(_x) == unicode:
+        _x = _x.encode('utf-8')
+        length = len(_x)
+      buff.write(struct.pack('<I%ss'%length, length, _x))
+      _x = self.previousHash
       length = len(_x)
       if python3 or type(_x) == unicode:
         _x = _x.encode('utf-8')
@@ -77,17 +117,53 @@ string element
       end = 0
       _x = self
       start = end
-      end += 8
-      (_x.left, _x.right,) = _get_struct_2i().unpack(str[start:end])
+      end += 16
+      (_x.blockNumber, _x.productNumber,) = _get_struct_2q().unpack(str[start:end])
       start = end
       end += 4
       (length,) = _struct_I.unpack(str[start:end])
       start = end
       end += length
       if python3:
-        self.element = str[start:end].decode('utf-8')
+        self.timeStamp = str[start:end].decode('utf-8')
       else:
-        self.element = str[start:end]
+        self.timeStamp = str[start:end]
+      start = end
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      start = end
+      end += length
+      if python3:
+        self.transactions = str[start:end].decode('utf-8')
+      else:
+        self.transactions = str[start:end]
+      start = end
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      start = end
+      end += length
+      if python3:
+        self.serialNumber = str[start:end].decode('utf-8')
+      else:
+        self.serialNumber = str[start:end]
+      start = end
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      start = end
+      end += length
+      if python3:
+        self.blockHash = str[start:end].decode('utf-8')
+      else:
+        self.blockHash = str[start:end]
+      start = end
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      start = end
+      end += length
+      if python3:
+        self.previousHash = str[start:end].decode('utf-8')
+      else:
+        self.previousHash = str[start:end]
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
@@ -101,8 +177,32 @@ string element
     """
     try:
       _x = self
-      buff.write(_get_struct_2i().pack(_x.left, _x.right))
-      _x = self.element
+      buff.write(_get_struct_2q().pack(_x.blockNumber, _x.productNumber))
+      _x = self.timeStamp
+      length = len(_x)
+      if python3 or type(_x) == unicode:
+        _x = _x.encode('utf-8')
+        length = len(_x)
+      buff.write(struct.pack('<I%ss'%length, length, _x))
+      _x = self.transactions
+      length = len(_x)
+      if python3 or type(_x) == unicode:
+        _x = _x.encode('utf-8')
+        length = len(_x)
+      buff.write(struct.pack('<I%ss'%length, length, _x))
+      _x = self.serialNumber
+      length = len(_x)
+      if python3 or type(_x) == unicode:
+        _x = _x.encode('utf-8')
+        length = len(_x)
+      buff.write(struct.pack('<I%ss'%length, length, _x))
+      _x = self.blockHash
+      length = len(_x)
+      if python3 or type(_x) == unicode:
+        _x = _x.encode('utf-8')
+        length = len(_x)
+      buff.write(struct.pack('<I%ss'%length, length, _x))
+      _x = self.previousHash
       length = len(_x)
       if python3 or type(_x) == unicode:
         _x = _x.encode('utf-8')
@@ -121,17 +221,53 @@ string element
       end = 0
       _x = self
       start = end
-      end += 8
-      (_x.left, _x.right,) = _get_struct_2i().unpack(str[start:end])
+      end += 16
+      (_x.blockNumber, _x.productNumber,) = _get_struct_2q().unpack(str[start:end])
       start = end
       end += 4
       (length,) = _struct_I.unpack(str[start:end])
       start = end
       end += length
       if python3:
-        self.element = str[start:end].decode('utf-8')
+        self.timeStamp = str[start:end].decode('utf-8')
       else:
-        self.element = str[start:end]
+        self.timeStamp = str[start:end]
+      start = end
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      start = end
+      end += length
+      if python3:
+        self.transactions = str[start:end].decode('utf-8')
+      else:
+        self.transactions = str[start:end]
+      start = end
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      start = end
+      end += length
+      if python3:
+        self.serialNumber = str[start:end].decode('utf-8')
+      else:
+        self.serialNumber = str[start:end]
+      start = end
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      start = end
+      end += length
+      if python3:
+        self.blockHash = str[start:end].decode('utf-8')
+      else:
+        self.blockHash = str[start:end]
+      start = end
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      start = end
+      end += length
+      if python3:
+        self.previousHash = str[start:end].decode('utf-8')
+      else:
+        self.previousHash = str[start:end]
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
@@ -140,9 +276,9 @@ _struct_I = genpy.struct_I
 def _get_struct_I():
     global _struct_I
     return _struct_I
-_struct_2i = None
-def _get_struct_2i():
-    global _struct_2i
-    if _struct_2i is None:
-        _struct_2i = struct.Struct("<2i")
-    return _struct_2i
+_struct_2q = None
+def _get_struct_2q():
+    global _struct_2q
+    if _struct_2q is None:
+        _struct_2q = struct.Struct("<2q")
+    return _struct_2q

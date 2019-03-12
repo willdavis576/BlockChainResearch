@@ -10,4 +10,6 @@
     (:file "_package_lastHash" :depends-on ("_package"))
     (:file "rewriteNode" :depends-on ("_package_rewriteNode"))
     (:file "_package_rewriteNode" :depends-on ("_package"))
+    (:file "stringMultiarray" :depends-on ("_package_stringMultiarray"))
+    (:file "_package_stringMultiarray" :depends-on ("_package"))
   ))

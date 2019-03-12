@@ -7,19 +7,39 @@
 ;//! \htmlinclude rewriteNode.msg.html
 
 (cl:defclass <rewriteNode> (roslisp-msg-protocol:ros-message)
-  ((left
-    :reader left
-    :initarg :left
+  ((blockNumber
+    :reader blockNumber
+    :initarg :blockNumber
     :type cl:integer
     :initform 0)
-   (right
-    :reader right
-    :initarg :right
+   (productNumber
+    :reader productNumber
+    :initarg :productNumber
     :type cl:integer
     :initform 0)
-   (element
-    :reader element
-    :initarg :element
+   (timeStamp
+    :reader timeStamp
+    :initarg :timeStamp
+    :type cl:string
+    :initform "")
+   (transactions
+    :reader transactions
+    :initarg :transactions
+    :type cl:string
+    :initform "")
+   (serialNumber
+    :reader serialNumber
+    :initarg :serialNumber
+    :type cl:string
+    :initform "")
+   (blockHash
+    :reader blockHash
+    :initarg :blockHash
+    :type cl:string
+    :initform "")
+   (previousHash
+    :reader previousHash
+    :initarg :previousHash
     :type cl:string
     :initform ""))
 )
@@ -32,40 +52,92 @@
   (cl:unless (cl:typep m 'rewriteNode)
     (roslisp-msg-protocol:msg-deprecation-warning "using old message class name blockChainPack_-msg:<rewriteNode> is deprecated: use blockChainPack_-msg:rewriteNode instead.")))
 
-(cl:ensure-generic-function 'left-val :lambda-list '(m))
-(cl:defmethod left-val ((m <rewriteNode>))
-  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader blockChainPack_-msg:left-val is deprecated.  Use blockChainPack_-msg:left instead.")
-  (left m))
+(cl:ensure-generic-function 'blockNumber-val :lambda-list '(m))
+(cl:defmethod blockNumber-val ((m <rewriteNode>))
+  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader blockChainPack_-msg:blockNumber-val is deprecated.  Use blockChainPack_-msg:blockNumber instead.")
+  (blockNumber m))
 
-(cl:ensure-generic-function 'right-val :lambda-list '(m))
-(cl:defmethod right-val ((m <rewriteNode>))
-  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader blockChainPack_-msg:right-val is deprecated.  Use blockChainPack_-msg:right instead.")
-  (right m))
+(cl:ensure-generic-function 'productNumber-val :lambda-list '(m))
+(cl:defmethod productNumber-val ((m <rewriteNode>))
+  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader blockChainPack_-msg:productNumber-val is deprecated.  Use blockChainPack_-msg:productNumber instead.")
+  (productNumber m))
 
-(cl:ensure-generic-function 'element-val :lambda-list '(m))
-(cl:defmethod element-val ((m <rewriteNode>))
-  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader blockChainPack_-msg:element-val is deprecated.  Use blockChainPack_-msg:element instead.")
-  (element m))
+(cl:ensure-generic-function 'timeStamp-val :lambda-list '(m))
+(cl:defmethod timeStamp-val ((m <rewriteNode>))
+  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader blockChainPack_-msg:timeStamp-val is deprecated.  Use blockChainPack_-msg:timeStamp instead.")
+  (timeStamp m))
+
+(cl:ensure-generic-function 'transactions-val :lambda-list '(m))
+(cl:defmethod transactions-val ((m <rewriteNode>))
+  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader blockChainPack_-msg:transactions-val is deprecated.  Use blockChainPack_-msg:transactions instead.")
+  (transactions m))
+
+(cl:ensure-generic-function 'serialNumber-val :lambda-list '(m))
+(cl:defmethod serialNumber-val ((m <rewriteNode>))
+  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader blockChainPack_-msg:serialNumber-val is deprecated.  Use blockChainPack_-msg:serialNumber instead.")
+  (serialNumber m))
+
+(cl:ensure-generic-function 'blockHash-val :lambda-list '(m))
+(cl:defmethod blockHash-val ((m <rewriteNode>))
+  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader blockChainPack_-msg:blockHash-val is deprecated.  Use blockChainPack_-msg:blockHash instead.")
+  (blockHash m))
+
+(cl:ensure-generic-function 'previousHash-val :lambda-list '(m))
+(cl:defmethod previousHash-val ((m <rewriteNode>))
+  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader blockChainPack_-msg:previousHash-val is deprecated.  Use blockChainPack_-msg:previousHash instead.")
+  (previousHash m))
 (cl:defmethod roslisp-msg-protocol:serialize ((msg <rewriteNode>) ostream)
   "Serializes a message object of type '<rewriteNode>"
-  (cl:let* ((signed (cl:slot-value msg 'left)) (unsigned (cl:if (cl:< signed 0) (cl:+ signed 4294967296) signed)))
+  (cl:let* ((signed (cl:slot-value msg 'blockNumber)) (unsigned (cl:if (cl:< signed 0) (cl:+ signed 18446744073709551616) signed)))
     (cl:write-byte (cl:ldb (cl:byte 8 0) unsigned) ostream)
     (cl:write-byte (cl:ldb (cl:byte 8 8) unsigned) ostream)
     (cl:write-byte (cl:ldb (cl:byte 8 16) unsigned) ostream)
     (cl:write-byte (cl:ldb (cl:byte 8 24) unsigned) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 32) unsigned) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 40) unsigned) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 48) unsigned) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 56) unsigned) ostream)
     )
-  (cl:let* ((signed (cl:slot-value msg 'right)) (unsigned (cl:if (cl:< signed 0) (cl:+ signed 4294967296) signed)))
+  (cl:let* ((signed (cl:slot-value msg 'productNumber)) (unsigned (cl:if (cl:< signed 0) (cl:+ signed 18446744073709551616) signed)))
     (cl:write-byte (cl:ldb (cl:byte 8 0) unsigned) ostream)
     (cl:write-byte (cl:ldb (cl:byte 8 8) unsigned) ostream)
     (cl:write-byte (cl:ldb (cl:byte 8 16) unsigned) ostream)
     (cl:write-byte (cl:ldb (cl:byte 8 24) unsigned) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 32) unsigned) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 40) unsigned) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 48) unsigned) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 56) unsigned) ostream)
     )
-  (cl:let ((__ros_str_len (cl:length (cl:slot-value msg 'element))))
+  (cl:let ((__ros_str_len (cl:length (cl:slot-value msg 'timeStamp))))
     (cl:write-byte (cl:ldb (cl:byte 8 0) __ros_str_len) ostream)
     (cl:write-byte (cl:ldb (cl:byte 8 8) __ros_str_len) ostream)
     (cl:write-byte (cl:ldb (cl:byte 8 16) __ros_str_len) ostream)
     (cl:write-byte (cl:ldb (cl:byte 8 24) __ros_str_len) ostream))
-  (cl:map cl:nil #'(cl:lambda (c) (cl:write-byte (cl:char-code c) ostream)) (cl:slot-value msg 'element))
+  (cl:map cl:nil #'(cl:lambda (c) (cl:write-byte (cl:char-code c) ostream)) (cl:slot-value msg 'timeStamp))
+  (cl:let ((__ros_str_len (cl:length (cl:slot-value msg 'transactions))))
+    (cl:write-byte (cl:ldb (cl:byte 8 0) __ros_str_len) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 8) __ros_str_len) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 16) __ros_str_len) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 24) __ros_str_len) ostream))
+  (cl:map cl:nil #'(cl:lambda (c) (cl:write-byte (cl:char-code c) ostream)) (cl:slot-value msg 'transactions))
+  (cl:let ((__ros_str_len (cl:length (cl:slot-value msg 'serialNumber))))
+    (cl:write-byte (cl:ldb (cl:byte 8 0) __ros_str_len) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 8) __ros_str_len) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 16) __ros_str_len) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 24) __ros_str_len) ostream))
+  (cl:map cl:nil #'(cl:lambda (c) (cl:write-byte (cl:char-code c) ostream)) (cl:slot-value msg 'serialNumber))
+  (cl:let ((__ros_str_len (cl:length (cl:slot-value msg 'blockHash))))
+    (cl:write-byte (cl:ldb (cl:byte 8 0) __ros_str_len) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 8) __ros_str_len) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 16) __ros_str_len) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 24) __ros_str_len) ostream))
+  (cl:map cl:nil #'(cl:lambda (c) (cl:write-byte (cl:char-code c) ostream)) (cl:slot-value msg 'blockHash))
+  (cl:let ((__ros_str_len (cl:length (cl:slot-value msg 'previousHash))))
+    (cl:write-byte (cl:ldb (cl:byte 8 0) __ros_str_len) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 8) __ros_str_len) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 16) __ros_str_len) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 24) __ros_str_len) ostream))
+  (cl:map cl:nil #'(cl:lambda (c) (cl:write-byte (cl:char-code c) ostream)) (cl:slot-value msg 'previousHash))
 )
 (cl:defmethod roslisp-msg-protocol:deserialize ((msg <rewriteNode>) istream)
   "Deserializes a message object of type '<rewriteNode>"
@@ -74,21 +146,61 @@
       (cl:setf (cl:ldb (cl:byte 8 8) unsigned) (cl:read-byte istream))
       (cl:setf (cl:ldb (cl:byte 8 16) unsigned) (cl:read-byte istream))
       (cl:setf (cl:ldb (cl:byte 8 24) unsigned) (cl:read-byte istream))
-      (cl:setf (cl:slot-value msg 'left) (cl:if (cl:< unsigned 2147483648) unsigned (cl:- unsigned 4294967296))))
+      (cl:setf (cl:ldb (cl:byte 8 32) unsigned) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 40) unsigned) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 48) unsigned) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 56) unsigned) (cl:read-byte istream))
+      (cl:setf (cl:slot-value msg 'blockNumber) (cl:if (cl:< unsigned 9223372036854775808) unsigned (cl:- unsigned 18446744073709551616))))
     (cl:let ((unsigned 0))
       (cl:setf (cl:ldb (cl:byte 8 0) unsigned) (cl:read-byte istream))
       (cl:setf (cl:ldb (cl:byte 8 8) unsigned) (cl:read-byte istream))
       (cl:setf (cl:ldb (cl:byte 8 16) unsigned) (cl:read-byte istream))
       (cl:setf (cl:ldb (cl:byte 8 24) unsigned) (cl:read-byte istream))
-      (cl:setf (cl:slot-value msg 'right) (cl:if (cl:< unsigned 2147483648) unsigned (cl:- unsigned 4294967296))))
+      (cl:setf (cl:ldb (cl:byte 8 32) unsigned) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 40) unsigned) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 48) unsigned) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 56) unsigned) (cl:read-byte istream))
+      (cl:setf (cl:slot-value msg 'productNumber) (cl:if (cl:< unsigned 9223372036854775808) unsigned (cl:- unsigned 18446744073709551616))))
     (cl:let ((__ros_str_len 0))
       (cl:setf (cl:ldb (cl:byte 8 0) __ros_str_len) (cl:read-byte istream))
       (cl:setf (cl:ldb (cl:byte 8 8) __ros_str_len) (cl:read-byte istream))
       (cl:setf (cl:ldb (cl:byte 8 16) __ros_str_len) (cl:read-byte istream))
       (cl:setf (cl:ldb (cl:byte 8 24) __ros_str_len) (cl:read-byte istream))
-      (cl:setf (cl:slot-value msg 'element) (cl:make-string __ros_str_len))
+      (cl:setf (cl:slot-value msg 'timeStamp) (cl:make-string __ros_str_len))
       (cl:dotimes (__ros_str_idx __ros_str_len msg)
-        (cl:setf (cl:char (cl:slot-value msg 'element) __ros_str_idx) (cl:code-char (cl:read-byte istream)))))
+        (cl:setf (cl:char (cl:slot-value msg 'timeStamp) __ros_str_idx) (cl:code-char (cl:read-byte istream)))))
+    (cl:let ((__ros_str_len 0))
+      (cl:setf (cl:ldb (cl:byte 8 0) __ros_str_len) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 8) __ros_str_len) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 16) __ros_str_len) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 24) __ros_str_len) (cl:read-byte istream))
+      (cl:setf (cl:slot-value msg 'transactions) (cl:make-string __ros_str_len))
+      (cl:dotimes (__ros_str_idx __ros_str_len msg)
+        (cl:setf (cl:char (cl:slot-value msg 'transactions) __ros_str_idx) (cl:code-char (cl:read-byte istream)))))
+    (cl:let ((__ros_str_len 0))
+      (cl:setf (cl:ldb (cl:byte 8 0) __ros_str_len) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 8) __ros_str_len) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 16) __ros_str_len) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 24) __ros_str_len) (cl:read-byte istream))
+      (cl:setf (cl:slot-value msg 'serialNumber) (cl:make-string __ros_str_len))
+      (cl:dotimes (__ros_str_idx __ros_str_len msg)
+        (cl:setf (cl:char (cl:slot-value msg 'serialNumber) __ros_str_idx) (cl:code-char (cl:read-byte istream)))))
+    (cl:let ((__ros_str_len 0))
+      (cl:setf (cl:ldb (cl:byte 8 0) __ros_str_len) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 8) __ros_str_len) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 16) __ros_str_len) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 24) __ros_str_len) (cl:read-byte istream))
+      (cl:setf (cl:slot-value msg 'blockHash) (cl:make-string __ros_str_len))
+      (cl:dotimes (__ros_str_idx __ros_str_len msg)
+        (cl:setf (cl:char (cl:slot-value msg 'blockHash) __ros_str_idx) (cl:code-char (cl:read-byte istream)))))
+    (cl:let ((__ros_str_len 0))
+      (cl:setf (cl:ldb (cl:byte 8 0) __ros_str_len) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 8) __ros_str_len) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 16) __ros_str_len) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 24) __ros_str_len) (cl:read-byte istream))
+      (cl:setf (cl:slot-value msg 'previousHash) (cl:make-string __ros_str_len))
+      (cl:dotimes (__ros_str_idx __ros_str_len msg)
+        (cl:setf (cl:char (cl:slot-value msg 'previousHash) __ros_str_idx) (cl:code-char (cl:read-byte istream)))))
   msg
 )
 (cl:defmethod roslisp-msg-protocol:ros-datatype ((msg (cl:eql '<rewriteNode>)))
@@ -99,26 +211,34 @@
   "blockChainPack_/rewriteNode")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql '<rewriteNode>)))
   "Returns md5sum for a message object of type '<rewriteNode>"
-  "de7b9a4f559650249dc7ff7249ac243f")
+  "392845d38e7dbd0b3e34f5d6ba02ccf6")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql 'rewriteNode)))
   "Returns md5sum for a message object of type 'rewriteNode"
-  "de7b9a4f559650249dc7ff7249ac243f")
+  "392845d38e7dbd0b3e34f5d6ba02ccf6")
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql '<rewriteNode>)))
   "Returns full string definition for message of type '<rewriteNode>"
-  (cl:format cl:nil "int32 left~%int32 right~%string element~%~%~%"))
+  (cl:format cl:nil "int64 blockNumber~%int64 productNumber~%string timeStamp~%string transactions~%string serialNumber~%string blockHash~%string previousHash~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql 'rewriteNode)))
   "Returns full string definition for message of type 'rewriteNode"
-  (cl:format cl:nil "int32 left~%int32 right~%string element~%~%~%"))
+  (cl:format cl:nil "int64 blockNumber~%int64 productNumber~%string timeStamp~%string transactions~%string serialNumber~%string blockHash~%string previousHash~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:serialization-length ((msg <rewriteNode>))
   (cl:+ 0
-     4
-     4
-     4 (cl:length (cl:slot-value msg 'element))
+     8
+     8
+     4 (cl:length (cl:slot-value msg 'timeStamp))
+     4 (cl:length (cl:slot-value msg 'transactions))
+     4 (cl:length (cl:slot-value msg 'serialNumber))
+     4 (cl:length (cl:slot-value msg 'blockHash))
+     4 (cl:length (cl:slot-value msg 'previousHash))
 ))
 (cl:defmethod roslisp-msg-protocol:ros-message-to-list ((msg <rewriteNode>))
   "Converts a ROS message object to a list"
   (cl:list 'rewriteNode
-    (cl:cons ':left (left msg))
-    (cl:cons ':right (right msg))
-    (cl:cons ':element (element msg))
+    (cl:cons ':blockNumber (blockNumber msg))
+    (cl:cons ':productNumber (productNumber msg))
+    (cl:cons ':timeStamp (timeStamp msg))
+    (cl:cons ':transactions (transactions msg))
+    (cl:cons ':serialNumber (serialNumber msg))
+    (cl:cons ':blockHash (blockHash msg))
+    (cl:cons ':previousHash (previousHash msg))
 ))
