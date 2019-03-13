@@ -1,48 +1,42 @@
-Time Stamp for Block: 2019-03-12 16:31:54.810289
+Time Stamp for Block: 2019-03-13 10:48:15.149166
 Transactions: Start production
 Serial Number: PRODUCT0
-BlockHash: c32bf5b4aad9e07d434b593e0a43b21ae685d69a4f64053058cd4a15f9e5f1de
+BlockHash: 79874eab5230239a8b7abe1a881bfd6bf5023285e3cf23f3ef005e4b2eba91df
 PreviousHash: 
 -------------------------------
-Time Stamp for Block: 2019-03-12 16:31:57.801421
-Transactions: xc stage - Part Number (if applicable): x
+Time Stamp for Block: 2019-03-13 10:52:13.072308
+Transactions: fgh stage - Part Number (if applicable): fgh
 Serial Number: PRODUCT0
-BlockHash: d503daafff134412714049b33fd76dd7581732888c4f8aba0146bfbd2db08327
-PreviousHash: c32bf5b4aad9e07d434b593e0a43b21ae685d69a4f64053058cd4a15f9e5f1de
+BlockHash: e2c9b393f1b2931c0b51747c78c4481577d9270bf20ec0aadac9c3adfd6d7aa8
+PreviousHash: 79874eab5230239a8b7abe1a881bfd6bf5023285e3cf23f3ef005e4b2eba91df
 -------------------------------
-Time Stamp for Block: 2019-03-12 16:31:58.110683
-Transactions: cx stage - Part Number (if applicable): N/A
+Time Stamp for Block: 2019-03-13 10:52:13.401706
+Transactions: fgh stage - Part Number (if applicable): f
 Serial Number: PRODUCT0
-BlockHash: 4a507c1f2913a447ca6ccea09eac8002fb5f1ca22c9ed3ee084c9619bbebd24f
-PreviousHash: d503daafff134412714049b33fd76dd7581732888c4f8aba0146bfbd2db08327
+BlockHash: 65d09f1471c04a212fc1d1c2968c655b0343f13c99709cb2bdda97c52c58a24e
+PreviousHash: e2c9b393f1b2931c0b51747c78c4481577d9270bf20ec0aadac9c3adfd6d7aa8
 -------------------------------
-Time Stamp for Block: 2019-03-12 16:31:58.421562
-Transactions: xcv stage - Part Number (if applicable): xc
+Time Stamp for Block: 2019-03-13 10:52:13.895774
+Transactions: ghfg stage - Part Number (if applicable): hfg
 Serial Number: PRODUCT0
-BlockHash: a3fe8fb6ec15c6433213390b248faff2a4c9d6067a0dd019c62d0072f8910405
-PreviousHash: 4a507c1f2913a447ca6ccea09eac8002fb5f1ca22c9ed3ee084c9619bbebd24f
+BlockHash: 516f4bc02498d76b089ed15f98b96a1b00000b34f265d0524ea07a4334568691
+PreviousHash: 65d09f1471c04a212fc1d1c2968c655b0343f13c99709cb2bdda97c52c58a24e
 -------------------------------
-Time Stamp for Block: 2019-03-12 16:31:58.741250
-Transactions: v stage - Part Number (if applicable): xc
+Time Stamp for Block: 2019-03-13 10:52:14.241390
+Transactions: h stage - Part Number (if applicable): fgh
 Serial Number: PRODUCT0
-BlockHash: f41d7113ce68a00d0d3a03e3ebb33fb08a95c83b2e79a3b04623e2966121727d
-PreviousHash: a3fe8fb6ec15c6433213390b248faff2a4c9d6067a0dd019c62d0072f8910405
+BlockHash: 6634c5e80484042eb20d08131f98e767bc98169cb30894721104be6b9848c888
+PreviousHash: 516f4bc02498d76b089ed15f98b96a1b00000b34f265d0524ea07a4334568691
 -------------------------------
-Time Stamp for Block: 2019-03-12 16:31:59.075282
-Transactions: x stage - Part Number (if applicable): vxc
+Time Stamp for Block: 2019-03-13 10:52:14.662994
+Transactions: fgh stage - Part Number (if applicable): fgh
 Serial Number: PRODUCT0
-BlockHash: d22e0eeae24d480083444aedc4996f3cd2e17b78f13a864f021435efd53ee118
-PreviousHash: f41d7113ce68a00d0d3a03e3ebb33fb08a95c83b2e79a3b04623e2966121727d
+BlockHash: 0ad53da207f1109d495955d83538d06cfd022378ea2df090154ac8dec39739ee
+PreviousHash: 6634c5e80484042eb20d08131f98e767bc98169cb30894721104be6b9848c888
 -------------------------------
-Time Stamp for Block: 2019-03-12 16:31:59.411371
-Transactions: v stage - Part Number (if applicable): xcv
+Time Stamp for Block: 2019-03-13 11:24:54.951992
+Transactions:  stage - Part Number (if applicable): N/A
 Serial Number: PRODUCT0
-BlockHash: 54680166b0d1d3de6618f832c96f0a602b1a4c24b0857067642fea20eb3c7789
-PreviousHash: d22e0eeae24d480083444aedc4996f3cd2e17b78f13a864f021435efd53ee118
--------------------------------
-Time Stamp for Block: 2019-03-12 16:31:59.720481
-Transactions: x stage - Part Number (if applicable): cv
-Serial Number: PRODUCT0
-BlockHash: 6375408f7b14755ea600c1c5d90132aba0c50ad9f396a0b2cfe727bc1fc527fd
-PreviousHash: 54680166b0d1d3de6618f832c96f0a602b1a4c24b0857067642fea20eb3c7789
+BlockHash: bb15f9e1326595259b76a1b394df9a988d008a346304bdc5e93c67751416f8bd
+PreviousHash: 0ad53da207f1109d495955d83538d06cfd022378ea2df090154ac8dec39739ee
 -------------------------------

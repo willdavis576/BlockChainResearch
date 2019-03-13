@@ -299,7 +299,7 @@ def rewriteNodes():
 
     while not rospy.is_shutdown():
         try:
-            print(SproductNumber) #.index(',') + ', ' + SblockNumber.index(','))
+            #print(SproductNumber) #.index(',') + ', ' + SblockNumber.index(','))
             # for i in range (SproductNumber.index(',')):
             #     for j in range (SblockNumber.index(',')):
             #         #Sblock = SblockTimeStamp[i][j] + ',' + SblockTrans[i][j] + ',' + SblockSerialNumber[i][j] + ',' + SblockHash[i][j] + ',' + SblockPreviousHash[i][j]
