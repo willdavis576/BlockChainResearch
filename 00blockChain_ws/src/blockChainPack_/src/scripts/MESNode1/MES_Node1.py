@@ -334,7 +334,8 @@ def rewriteNodes():
 
 ############################### TCP Server ###############################
 
-def TCPServer():
+
+def lowerCasing():
     # Create a TCP/IP socket
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     # Then bind() is used to associate the socket with the server address. In this case, the address is localhost, referring to the current server, and the port number is 10000.
@@ -344,6 +345,7 @@ def TCPServer():
     print sys.stderr, 'starting up on %s port %s' % server_address
     sock.bind(server_address)
     # Calling listen() puts the socket into server mode, and accept() waits for an incoming connection.
+
     # Listen for incoming connections
     sock.listen(1)
 
@@ -352,22 +354,106 @@ def TCPServer():
         print >> sys.stderr, 'waiting for a connection'
         connection, client_address = sock.accept()
         # accept() returns an open connection between the server and client, along with the address of the client. The connection is actually a different socket on another port (assigned by the kernel). Data is read from the connection with recv() and transmitted with sendall().
+
         try:
+
             print >> sys.stderr, 'connection from', client_address
 
+            # Receive the data in small chunks and retransmit it
             while True:
-                data = connection.recv(1024)
+                data = connection.recv(26)
 
                 if data:
-                    #Data should be coming in in the form:
-                        # "STATION NAME", "ORDER NUMBER", "CARRIER NUMBER", "PRODUC0T NUMBER", "SECONDS", "MINUTES", "HOURS", "DAYS", "MONTHS", "YEARS"
-
-
-                    print data
+                    if data != '                          ':
+                        print data
                     # time.sleep(1)
                 else:
                     print >> sys.stderr, 'no more data from', client_address
                     break
+
+
+        finally:
+            # Clean up the connection
+            connection.close()
+
+def manual():
+
+    # Create a TCP/IP socket
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    # Then bind() is used to associate the socket with the server address. In this case, the address is localhost, referring to the current server, and the port number is 10000.
+
+    # Bind the socket to the port
+    server_address = ('172.21.4.152', 4501)
+    print sys.stderr, 'starting up on %s port %s' % server_address
+    sock.bind(server_address)
+    # Calling listen() puts the socket into server mode, and accept() waits for an incoming connection.
+
+    # Listen for incoming connections
+    sock.listen(1)
+
+    while True:
+        # Wait for a connection
+        print >> sys.stderr, 'waiting for a connection'
+        connection, client_address = sock.accept()
+        # accept() returns an open connection between the server and client, along with the address of the client. The connection is actually a different socket on another port (assigned by the kernel). Data is read from the connection with recv() and transmitted with sendall().
+
+        try:
+
+            print >> sys.stderr, 'connection from', client_address
+
+            # Receive the data in small chunks and retransmit it
+            while True:
+                data = connection.recv(26)
+
+                if data:
+                    if data != '                          ':
+                        print data
+                    # time.sleep(1)
+                else:
+                    print >> sys.stderr, 'no more data from', client_address
+                    break
+
+
+        finally:
+            # Clean up the connection
+            connection.close()
+
+def cameraInspection():
+    # Create a TCP/IP socket
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    # Then bind() is used to associate the socket with the server address. In this case, the address is localhost, referring to the current server, and the port number is 10000.
+
+    # Bind the socket to the port
+    server_address = ('172.21.4.152', 4502)
+    print sys.stderr, 'starting up on %s port %s' % server_address
+    sock.bind(server_address)
+    # Calling listen() puts the socket into server mode, and accept() waits for an incoming connection.
+
+    # Listen for incoming connections
+    sock.listen(1)
+
+    while True:
+        # Wait for a connection
+        print >> sys.stderr, 'waiting for a connection'
+        connection, client_address = sock.accept()
+        # accept() returns an open connection between the server and client, along with the address of the client. The connection is actually a different socket on another port (assigned by the kernel). Data is read from the connection with recv() and transmitted with sendall().
+
+        try:
+
+            print >> sys.stderr, 'connection from', client_address
+
+            # Receive the data in small chunks and retransmit it
+            while True:
+                data = connection.recv(26)
+
+                if data:
+                    if data != '                          ':
+                        print data
+                    # time.sleep(1)
+                else:
+                    print >> sys.stderr, 'no more data from', client_address
+                    break
+
 
         finally:
             # Clean up the connection
@@ -384,7 +470,9 @@ if __name__ == '__main__':
         p4 = threading.Thread(target=emitter, args=())
         p5 = threading.Thread(target=authTrigger, args=())
         p6 = threading.Thread(target=rewriteNodes, args=())
-        p7 = threading.Thread(target=TCPServer, args=())
+        p7 = threading.Thread(target=manual, args=())
+        p8 = threading.Thread(target=lowerCasing, args=())
+        p9 = threading.Thread(target=cameraInspection, args=())
 
         p1.daemon = True
         p2.daemon = True
@@ -393,6 +481,8 @@ if __name__ == '__main__':
         p5.daemon = True
         p6.daemon = True
         p7.daemon = True
+        p8.daemon = True
+        p9.daemon = True
 
         p1.start()
         p2.start()
@@ -401,6 +491,8 @@ if __name__ == '__main__':
         p5.start()
         p6.start()
         p7.start()
+        p8.start()
+        p9.start()
 
         p1.join()
         p2.join()
@@ -409,6 +501,8 @@ if __name__ == '__main__':
         p5.join()
         p6.join()
         p7.join()
+        p8.join()
+        p9.join()
 
 
 # each stage of the production line needs to log:

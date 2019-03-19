@@ -1,36 +1,6 @@
-Time Stamp for Block: 2019-03-14 14:12:55.740099
-Transactions: ds stage - Part Number (if applicable): fdf
+Time Stamp for Block: 2019-03-19 17:34:35.945979
+Transactions: Start production
 Serial Number: PRODUCT0
-BlockHash: ffbc30fd21b3e47d1a5244e7a4dafc6e10dd3f199e133f35096d1187f7941d50
-PreviousHash: ca9b6bee05a231f99c275cd6ccc3e35bea85f70585e391d56e3dfac89b413cfa
--------------------------------
-Time Stamp for Block: 2019-03-14 14:12:55.740099
-Transactions: ds stage - Part Number (if applicable): fdf
-Serial Number: PRODUCT0
-BlockHash: ffbc30fd21b3e47d1a5244e7a4dafc6e10dd3f199e133f35096d1187f7941d50
-PreviousHash: ca9b6bee05a231f99c275cd6ccc3e35bea85f70585e391d56e3dfac89b413cfa
--------------------------------
-Time Stamp for Block: 2019-03-14 14:12:55.740099
-Transactions: ds stage - Part Number (if applicable): fdf
-Serial Number: PRODUCT0
-BlockHash: ffbc30fd21b3e47d1a5244e7a4dafc6e10dd3f199e133f35096d1187f7941d50
-PreviousHash: ca9b6bee05a231f99c275cd6ccc3e35bea85f70585e391d56e3dfac89b413cfa
--------------------------------
-Time Stamp for Block: 2019-03-14 14:12:55.985349
-Transactions: sgf stage - Part Number (if applicable): dfb
-Serial Number: PRODUCT0
-BlockHash: 53fadfda7b8d0667455e087653a81f928f819c8b07f228efa57fe226f44b841d
-PreviousHash: ffbc30fd21b3e47d1a5244e7a4dafc6e10dd3f199e133f35096d1187f7941d50
--------------------------------
-Time Stamp for Block: 2019-03-14 14:12:55.985349
-Transactions: sgf stage - Part Number (if applicable): dfb
-Serial Number: PRODUCT0
-BlockHash: 53fadfda7b8d0667455e087653a81f928f819c8b07f228efa57fe226f44b841d
-PreviousHash: ffbc30fd21b3e47d1a5244e7a4dafc6e10dd3f199e133f35096d1187f7941d50
--------------------------------
-Time Stamp for Block: 2019-03-14 14:12:55.985349
-Transactions: sgf stage - Part Number (if applicable): dfb
-Serial Number: PRODUCT0
-BlockHash: 53fadfda7b8d0667455e087653a81f928f819c8b07f228efa57fe226f44b841d
-PreviousHash: ffbc30fd21b3e47d1a5244e7a4dafc6e10dd3f199e133f35096d1187f7941d50
+BlockHash: 9aa27a3870060c5d42d5c4e7995aee62c40fccf941d56641d36551df8af35afc
+PreviousHash: 
 -------------------------------
