@@ -21,7 +21,7 @@ class blockDetail {
       this.blockNumber = null;
       this.productNumber = null;
       this.timeStamp = null;
-      this.transactions = null;
+      this.station = null;
       this.serialNumber = null;
       this.blockHash = null;
       this.previousHash = null;
@@ -45,11 +45,11 @@ class blockDetail {
       else {
         this.timeStamp = '';
       }
-      if (initObj.hasOwnProperty('transactions')) {
-        this.transactions = initObj.transactions
+      if (initObj.hasOwnProperty('station')) {
+        this.station = initObj.station
       }
       else {
-        this.transactions = '';
+        this.station = '';
       }
       if (initObj.hasOwnProperty('serialNumber')) {
         this.serialNumber = initObj.serialNumber
@@ -80,8 +80,8 @@ class blockDetail {
     bufferOffset = _serializer.int64(obj.productNumber, buffer, bufferOffset);
     // Serialize message field [timeStamp]
     bufferOffset = _serializer.string(obj.timeStamp, buffer, bufferOffset);
-    // Serialize message field [transactions]
-    bufferOffset = _serializer.string(obj.transactions, buffer, bufferOffset);
+    // Serialize message field [station]
+    bufferOffset = _serializer.string(obj.station, buffer, bufferOffset);
     // Serialize message field [serialNumber]
     bufferOffset = _serializer.string(obj.serialNumber, buffer, bufferOffset);
     // Serialize message field [blockHash]
@@ -101,8 +101,8 @@ class blockDetail {
     data.productNumber = _deserializer.int64(buffer, bufferOffset);
     // Deserialize message field [timeStamp]
     data.timeStamp = _deserializer.string(buffer, bufferOffset);
-    // Deserialize message field [transactions]
-    data.transactions = _deserializer.string(buffer, bufferOffset);
+    // Deserialize message field [station]
+    data.station = _deserializer.string(buffer, bufferOffset);
     // Deserialize message field [serialNumber]
     data.serialNumber = _deserializer.string(buffer, bufferOffset);
     // Deserialize message field [blockHash]
@@ -115,7 +115,7 @@ class blockDetail {
   static getMessageSize(object) {
     let length = 0;
     length += object.timeStamp.length;
-    length += object.transactions.length;
+    length += object.station.length;
     length += object.serialNumber.length;
     length += object.blockHash.length;
     length += object.previousHash.length;
@@ -129,7 +129,7 @@ class blockDetail {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return '392845d38e7dbd0b3e34f5d6ba02ccf6';
+    return '091c883f51da1788c7811b429bd9b8be';
   }
 
   static messageDefinition() {
@@ -138,7 +138,7 @@ class blockDetail {
     int64 blockNumber
     int64 productNumber
     string timeStamp
-    string transactions
+    string station
     string serialNumber
     string blockHash
     string previousHash
@@ -173,11 +173,11 @@ class blockDetail {
       resolved.timeStamp = ''
     }
 
-    if (msg.transactions !== undefined) {
-      resolved.transactions = msg.transactions;
+    if (msg.station !== undefined) {
+      resolved.station = msg.station;
     }
     else {
-      resolved.transactions = ''
+      resolved.station = ''
     }
 
     if (msg.serialNumber !== undefined) {

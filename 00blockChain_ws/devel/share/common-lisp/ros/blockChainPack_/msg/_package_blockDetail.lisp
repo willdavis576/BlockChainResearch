@@ -5,8 +5,8 @@
           PRODUCTNUMBER
           TIMESTAMP-VAL
           TIMESTAMP
-          TRANSACTIONS-VAL
-          TRANSACTIONS
+          STATION-VAL
+          STATION
           SERIALNUMBER-VAL
           SERIALNUMBER
           BLOCKHASH-VAL

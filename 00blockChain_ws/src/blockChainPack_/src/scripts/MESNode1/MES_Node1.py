@@ -6,12 +6,17 @@ from blockChainPack_.msg import blockDetail
 from blockChainPack_.msg import lastHash
 from blockChainPack_.msg import rewriteNode
 
+# station, orderNumber, productCode, seconds, minutes, hours, days, months, years
+#productNubmer should now orderNumber
 
-transactions = [['' for _ in range(100)] for _ in range(100)]
-serialNumber = [''] * 100
-block = [['' for _ in range(100)] for _ in range(100)]
+itemNumber = 0
+dataFollowing = 0
+orderNumber = 0
+station = [['' for _ in range(100)] for _ in range(100)]
+productCode = [''] * 100
+block = [['' for _ in range(2000)] for _ in range(2000)]
 blockNumber = 0
-productNumber = 0
+
 serialNumberNum = 0
 serialNumberStr = 'PRODUCT'
 oldinfo = ''
@@ -25,30 +30,31 @@ init = 0
 noGen = 0
 runYet = [''] * 100
 Trigger = False
-nodeList = ['NODE1', 'NODE2', 'NODE3','NODE4'] ################# IF INCLUDING MORE NODES, EXTEND THIS ARRAY SIZE #######################
-nodeONOFF = [1,0,0,0] ################# IF INCLUDING MORE NODES, EXTEND THIS ARRAY SIZE #######################
-oldNodeONOFF = [0,0,0,0] ################# IF INCLUDING MORE NODES, EXTEND THIS ARRAY SIZE #######################
+nodeList = ['NODE1', 'NODE2', 'NODE3',
+            'NODE4']  ################# IF INCLUDING MORE NODES, EXTEND THIS ARRAY SIZE #######################
+nodeONOFF = [1, 0, 0, 0]  ################# IF INCLUDING MORE NODES, EXTEND THIS ARRAY SIZE #######################
+oldNodeONOFF = [0, 0, 0, 0]  ################# IF INCLUDING MORE NODES, EXTEND THIS ARRAY SIZE #######################
 node = [['' for _ in range(100)] for _ in range(100)]
 counter1 = 0;
 
 Range = 10
 SblockTimeStamp = [['' for _ in range(Range)] for _ in range(Range)]
 SblockTrans = [['' for _ in range(Range)] for _ in range(Range)]
-SblockSerialNumber = [['' for _ in range(Range)] for _ in range(Range)]
+SblockProductCode = [['' for _ in range(Range)] for _ in range(Range)]
 SblockHash = [['' for _ in range(Range)] for _ in range(Range)]
 SblockPreviousHash = [['' for _ in range(Range)] for _ in range(Range)]
 SblockNumber = [['' for _ in range(Range)] for _ in range(Range)]
-SproductNumber = [['' for _ in range(Range)] for _ in range(Range)]
+SOrderNumber = [['' for _ in range(Range)] for _ in range(Range)]
 Sblock = ''
-authProductNumber = 0
+authOrderNumber = 0
 blockString = ''
-nodeName = "NODE1" ############### THIS IS WHERE YOU SPECIFY A NODE'S NAME #######################
+nodeName = "NODE1"  ############### THIS IS WHERE YOU SPECIFY A NODE'S NAME #######################
 
-#TCP SERVER STUFF
+# TCP SERVER STUFF
 tcpStationName = 0
 tcpOrderNumber = 0
 tcpCarrierNumber = 0
-tcpProductNumber = 0
+tcpProductCode = 0
 tcpSeconds = 0
 tcpMinutes = 0
 tcpHours = 0
@@ -56,16 +62,25 @@ tcpDays = 0
 tcpMonths = 0
 tcpYears = 0
 
+# Class
+seconds = 0
+minutes = 0
+hours = 0
+days = 0
+months = 0
+years = 0
+
 
 class blockChain:
 
-    def __init__(self, previousHash, transactions, serialNumber):
-        self.timeStamp = datetime.now()
-        self.serialNumber = serialNumber
+    def __init__(self, previousHash, station, productCode, orderNumber, seconds, minutes, hours, days, months, years):
+        self.timeStamp = hours + ':' + minutes + ':' + seconds + ' - ' + days + '/' + months + '/' + years
+        self.productCode = productCode
+        self.orderNumber = orderNumber
         self.previousHash = previousHash
-        self.transactions = transactions
-        self.contains = hashlib.sha256(self.transactions.encode()).hexdigest() + previousHash + str(
-            self.timeStamp) + self.serialNumber
+        self.station = station
+        self.contains = hashlib.sha256(self.station.encode()).hexdigest() + previousHash + str(
+            self.timeStamp) + str(self.productCode) + str(self.orderNumber)
         self.blockHash = hashlib.sha256(self.contains.encode()).hexdigest()
 
     def getTimeStamp(self):
@@ -77,32 +92,37 @@ class blockChain:
     def getPreviousHash(self):
         return self.previousHash
 
-    def getTransactions(self):
-        return self.transactions
+    def getStation(self):
+        return self.station
 
-    def getSerialNumber(self):
-        return self.serialNumber
+    def getProductCode(self):
+        return self.productCode
+
+    def getOrderNumber(self):
+        return self.orderNumber
 
 
-def blockUpdate(blockNumber, productNumber, transactions, serialNumber):
+def blockUpdate(blockNumber, orderNumber, station, productCode,seconds, minutes, hours, days, months, years):
     for i in range(blockNumber, blockNumber + 1):
         blockNumber = i
-        block[productNumber][blockNumber] = blockChain(
-            previousHash=block[productNumber][blockNumber - 1].getBlockHash(), transactions=transactions,
-            serialNumber=serialNumber)
-        print(block[productNumber][blockNumber].getBlockHash())
+        block[orderNumber][blockNumber] = blockChain(
+            previousHash=block[orderNumber][blockNumber - 1].getBlockHash(), station=station,
+            productCode=productCode, orderNumber=orderNumber, seconds=seconds, minutes=minutes,
+            hours=hours, days= days, months=months, years=years)
+        print(block[orderNumber][blockNumber].getBlockHash())
 
 
 def sendMessage():
     global message
     message = blockDetail()
     message.blockNumber = blockNumber
-    message.productNumber = productNumber
-    message.timeStamp = str(block[productNumber][blockNumber].getTimeStamp())
-    message.transactions = block[productNumber][blockNumber].getTransactions()
-    message.serialNumber = block[productNumber][blockNumber].getSerialNumber()
-    message.blockHash = block[productNumber][blockNumber].getBlockHash()
-    message.previousHash = block[productNumber][blockNumber].getPreviousHash()
+
+    message.timeStamp = str(block[orderNumber][blockNumber].getTimeStamp())
+    message.station = str(block[orderNumber][blockNumber].getStation())
+    message.orderNumber = str(block[orderNumber][blockNumber].getOrderNumber())
+    message.productCode = block[orderNumber][blockNumber].getproductCode()
+    message.blockHash = block[orderNumber][blockNumber].getBlockHash()
+    message.previousHash = block[orderNumber][blockNumber].getPreviousHash()
 
 
 def main():
@@ -113,11 +133,12 @@ def main():
         if rospy.is_shutdown():
             break
 
+
 def mainProg():
     global blockNumber
-    global productNumber
-    global serialNumberNum
-    global serialNumberStr
+    global orderNumber
+    global productCodeNum
+    global productCodeStr
     global oldinfo
     global counter
     global newGenesis
@@ -126,20 +147,23 @@ def mainProg():
     global message
     global nodeName
     global nodeUp
+    global itemNumber
 
     pub = rospy.Publisher('publishingBlockStream', blockDetail, queue_size=100)
 
     while (newGenesis == 1):
         # Setup for genesis block
         repeat = 0
-        serialNumberNum = productNumber
-        serialNumber[productNumber] = serialNumberStr + str(serialNumberNum)
 
         # Genesis Block
-        block[productNumber][blockNumber] = blockChain(previousHash='', transactions="Start production",
-                                                       serialNumber=serialNumber[productNumber])
+        block[orderNumber][blockNumber] = blockChain(previousHash='', station="Start production",
+                                          productCode='N/A',
+                                                       seconds=str(datetime.now())[17:19],
+                                                       minutes=str(datetime.now())[14:16],
+                                                       hours=str(datetime.now())[11:13], days=str(datetime.now())[8:10],
+                                                       months=str(datetime.now())[5:7], years=str(datetime.now())[0:4])
         print("genesis: ")
-        print(block[productNumber][blockNumber].getBlockHash())
+        print(block[orderNumber][blockNumber].getBlockHash())
         time.sleep(1)
         sendMessage()
         pub.publish(message)
@@ -148,47 +172,13 @@ def mainProg():
         break
 
     while (True):
-        #pub = rospy.Publisher('publishingBlockStream', blockDetail, queue_size=1)
-
-        # rate = rospy.Rate(10)  # 10hz
-        var = raw_input("What stage of the production line? ")
-        if var == "finish":
-            newProduct = raw_input("New product? y/n ")
-            if newProduct == "y":
-                blockNumber = 0
-                newGenesis = 1
-                repeat = 1
-            if newProduct == "n":
-                break
-            else:
-                break
-        var2 = raw_input("part number (if applies)? ")
-        if var2 == "":
-            var2 = "N/A"
-        info = var + " stage - Part Number (if applicable): " + var2
-
-        if oldinfo != info:
-            transactions[productNumber][blockNumber] = info
-            serialNumberNum = productNumber
-            serialNumber[productNumber] = serialNumberStr + str(serialNumberNum)
-            blockUpdate(blockNumber, productNumber, transactions=transactions[productNumber][blockNumber],
-                        serialNumber=serialNumber[productNumber])
-            # print(block[blockNumber][productNumber].getTransactions())
-            # print(str(blockNumber) + " " + str(productNumber))
-            sendMessage()
-            pub.publish(message)
-            blockNumber = blockNumber + 1
-            counter = counter + 1
-            oldinfo = info
+            if dataFollowing == 1:
+                block[orderNumber][blockNumber]
 
 
-    for i in range(0, productNumber + 1):
-        for j in range(0, blockNumber):
-            print(str(j) + " " + block[j][i].getTransactions() + " at time: " + str(block[j][i].getTimeStamp()))
-        print(block[0][i].getSerialNumber())
 
     if repeat == 1:
-        productNumber = productNumber + 1
+        orderNumber = orderNumber + 1
 
 
 def listener():
@@ -202,89 +192,91 @@ def callback(data):
 
     global SblockTimeStamp
     global SblockTrans
-    global SblockSerialNumber
+    global SblockProductCode
     global SblockHash
     global SblockPreviousHash
 
     global SblockNumber
-    global SproductNumber
+    global SOrderNumber
 
     global node
 
-    productNumber1 = data.productNumber
-    data_to_print = "Time Stamp for Block: {0}\nTransactions: {1}\nSerial Number: {2}\nBlockHash: {3}\nPreviousHash: {4}".format(
-        data.timeStamp, data.transactions, data.serialNumber, data.blockHash, data.previousHash)
+    orderNumber1 = data.orderNumber
+    data_to_print = "Time Stamp for Block: {0}\nStation: {1}\nSerial Number: {2}\nBlockHash: {3}\nPreviousHash: {4}".format(
+        data.timeStamp, data.station, data.productCode, data.blockHash, data.previousHash)
 
-    SblockTimeStamp[data.productNumber][data.blockNumber] = data.timeStamp
-    SblockTrans[data.productNumber][data.blockNumber] = data.transactions
-    SblockSerialNumber[data.productNumber][data.blockNumber] = data.serialNumber
-    SblockHash[data.productNumber][data.blockNumber] = data.blockHash
-    SblockPreviousHash[data.productNumber][data.blockNumber] = data.previousHash
+    SblockTimeStamp[data.orderNumber][data.blockNumber] = data.timeStamp
+    SblockTrans[data.orderNumber][data.blockNumber] = data.station
+    SblockProductCode[data.orderNumber][data.blockNumber] = data.productCode
+    SblockHash[data.orderNumber][data.blockNumber] = data.blockHash
+    SblockPreviousHash[data.orderNumber][data.blockNumber] = data.previousHash
 
     # counter1 = counter1 + 1
     # rospy.loginfo(data_to_print)
-    if runYet[productNumber1] == '':
-        f = open("/home/ros/blockChainGit/00blockChain_ws/blockChain" + str(productNumber1) + ".txt", "w")
+    if runYet[orderNumber1] == '':
+        f = open("/home/ros/blockChainGit/00blockChain_ws/blockChain" + str(orderNumber1) + ".txt", "w")
         f.close()
-        runYet[productNumber1] = "1"
+        runYet[orderNumber1] = "1"
 
-    if runYet[productNumber1] == "1":
-        f = open("/home/ros/blockChainGit/00blockChain_ws/blockChain" + str(productNumber1) + ".txt", "a")
+    if runYet[orderNumber1] == "1":
+        f = open("/home/ros/blockChainGit/00blockChain_ws/blockChain" + str(orderNumber1) + ".txt", "a")
         f.write(str(data_to_print))
         f.write("\n-------------------------------\n")
         f.close()
+
 
 def authentication():
     rospy.Subscriber('Last_Hash', lastHash, callbackAuth)
     rospy.spin()
 
+
 def callbackAuth(data):
     global Trigger
     global nodeONOFF
     global nodeList
-    global authProductNumber
+    global authOrderNumber
     if data.nodeName in nodeList:
-        nodeONOFF[nodeList.index(data.nodeName)] = 1 #filling in the online array
+        nodeONOFF[nodeList.index(data.nodeName)] = 1  # filling in the online array
     # for i in range(10): #10 being a max node amount - can be changed as the array size is 100
 
     name = data.nodeName
-    authProductNumber = data.productNumber
+    authOrderNumber = data.orderNumber
     # print("I heard: ")
-    # print(node[data.productNumber][int(name[4]) - 1])
-    node[data.productNumber][int(name[4]) - 1] = data.hash
-    # print(node[data.productNumber][int(name[4])])
+    # print(node[data.orderNumber][int(name[4]) - 1])
+    node[data.orderNumber][int(name[4]) - 1] = data.hash
+    # print(node[data.orderNumber][int(name[4])])
 
 
 def authTrigger():
     global Trigger
-    global authProductNumber
+    global authOrderNumber
     global node
 
     while not rospy.is_shutdown():
         time.sleep(5)
-        mostCommonHash = Counter(node[authProductNumber])
+        mostCommonHash = Counter(node[authOrderNumber])
         try:
             common = mostCommonHash.most_common(3)[2][0]
-            print(nodeList[node[authProductNumber].index((mostCommonHash.most_common(3)[2][0]), 1)] + " has been hacked")
+            print(nodeList[
+                      node[authOrderNumber].index((mostCommonHash.most_common(3)[2][0]), 1)] + " has been hacked")
         except:
             man = "loves an easter egg"
     rospy.spin()
 
 
 def emitter():
-    global productNumber
+    global orderNumber
     global blockNumber
     global Trigger
-    global transactions
+    global station
     global SblockHash
 
-
     while not rospy.is_shutdown():
-        for i in range(productNumber + 1):
+        for i in range(orderNumber + 1):
             pub = rospy.Publisher('Last_Hash', lastHash, queue_size=100)
             message2 = lastHash()
             message2.nodeName = "NODE1"
-            message2.productNumber = i
+            message2.orderNumber = i
             message2.hash = SblockHash[i][SblockHash[i].index('', 1) - 1]
             pub.publish(message2)
             # print("emitter: ")
@@ -297,32 +289,26 @@ def emitter():
 def rewriteNodes():
     global blockString
 
-    global SblockTimeStamp #productNumber,blockNumber
+    global SblockTimeStamp  # orderNumber,blockNumber
     global SblockTrans
-    global SblockSerialNumber
+    global SblockProductCode
     global SblockHash
     global SblockPreviousHash
 
     global SblockNumber
-    global SproductNumber
+    global SOrderNumber
 
     time.sleep(10)
     message3 = rewriteNode()
 
     while not rospy.is_shutdown():
         try:
-            #print(SproductNumber) #.index(',') + ', ' + SblockNumber.index(','))
-            # for i in range (SproductNumber.index(',')):
-            #     for j in range (SblockNumber.index(',')):
-            #         #Sblock = SblockTimeStamp[i][j] + ',' + SblockTrans[i][j] + ',' + SblockSerialNumber[i][j] + ',' + SblockHash[i][j] + ',' + SblockPreviousHash[i][j]
-            #         #print(Sblock)
-            #         print(SblockTimeStamp[SproductNumber][SblockNumber])
+
             time.sleep(1)
 
         except:
             print("didn'work lol")
             time.sleep(1)
-
 
     # try:
     #     for i in range ()
@@ -336,6 +322,17 @@ def rewriteNodes():
 
 
 def lowerCasing():
+    global tcpStationName
+    global tcpOrderNumber
+    global tcpCarrierNumber
+    global tcpProductCode
+    global tcpSeconds
+    global tcpMinutes
+    global tcpHours
+    global tcpDays
+    global tcpMonths
+    global tcpYears
+
     # Create a TCP/IP socket
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     # Then bind() is used to associate the socket with the server address. In this case, the address is localhost, referring to the current server, and the port number is 10000.
@@ -361,14 +358,33 @@ def lowerCasing():
 
             # Receive the data in small chunks and retransmit it
             while True:
-                data = connection.recv(26)
+                data = connection.recv(30)
 
                 if data:
-                    if data != '                          ':
-                        print data
+                    if data != '                              ':
+                        dataFollowing = 1
+                        # example: 1,1226,211,01,54,18,19,03,2019
+                        # print data
+                        try:
+                            tcpStationName = data[0]
+                            tcpOrderNumber = data[2] + data[3] + data[4] + data[5]
+                            tcpCarrierNumber = 0
+                            tcpProductCode = data[7] + data[8] + data[9]
+                            tcpSeconds = data[11] + data[12]
+                            tcpMinutes = data[14] + data[15]
+                            tcpHours = data[17] + data[18]
+                            tcpDays = data[20] + data[21]
+                            tcpMonths = data[23] + data[24]
+                            tcpYears = data[26] + data[27] + data[28] + data[29]
+
+                            # print data
+                            # print tcpStationName + ',' + tcpOrderNumber
+                        except:
+                            print "lower casting fail"
                     # time.sleep(1)
                 else:
                     print >> sys.stderr, 'no more data from', client_address
+                    dataFollowing = 0
                     break
 
 
@@ -376,89 +392,146 @@ def lowerCasing():
             # Clean up the connection
             connection.close()
 
-def manual():
 
-    # Create a TCP/IP socket
-    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    # Then bind() is used to associate the socket with the server address. In this case, the address is localhost, referring to the current server, and the port number is 10000.
+# def manual():
+#
+#     global tcpStationName
+#     global tcpOrderNumber
+#     global tcpCarrierNumber
+#     global tcpProductCode
+#     global tcpSeconds
+#     global tcpMinutes
+#     global tcpHours
+#     global tcpDays
+#     global tcpMonths
+#     global tcpYears
+#
+#     # Create a TCP/IP socket
+#     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+#     # Then bind() is used to associate the socket with the server address. In this case, the address is localhost, referring to the current server, and the port number is 10000.
+#
+#     # Bind the socket to the port
+#     server_address = ('172.21.4.152', 4501)
+#     print sys.stderr, 'starting up on %s port %s' % server_address
+#     sock.bind(server_address)
+#     # Calling listen() puts the socket into server mode, and accept() waits for an incoming connection.
+#
+#     # Listen for incoming connections
+#     sock.listen(1)
+#
+#     while True:
+#         # Wait for a connection
+#         print >> sys.stderr, 'waiting for a connection'
+#         connection, client_address = sock.accept()
+#         # accept() returns an open connection between the server and client, along with the address of the client. The connection is actually a different socket on another port (assigned by the kernel). Data is read from the connection with recv() and transmitted with sendall().
+#
+#         try:
+#
+#             print >> sys.stderr, 'connection from', client_address
+#
+#             # Receive the data in small chunks and retransmit it
+#             while True:
+#                 data = connection.recv(30)
+#
+#                 if data:
+#                     if data != '                              ':
+#                         # example: 1,1226,211,01,54,18,19,03,2019
+#                         # print data
+#                         try:
+#                             tcpStationName = data[0]
+#                             tcpOrderNumber = data[2] + data[3] + data[4] + data[5]
+#                             tcpCarrierNumber = 0
+#                             tcpSerialNumber = data[7] + data[8] + data[9]
+#                             tcpSeconds = data[11] + data[12]
+#                             tcpMinutes = data[14] + data[15]
+#                             tcpHours = data[17] + data[18]
+#                             tcpDays = data[20] + data[21]
+#                             tcpMonths = data[23] + data[24]
+#                             tcpYears = data[26] + data[27] + data[28] + data[29]
+#
+#                             # print data
+#                             # print tcpStationName + ',' + tcpOrderNumber
+#                         except:
+#                             print "manual fail"
+#                     # time.sleep(1)
+#                 else:
+#                     print >> sys.stderr, 'no more data from', client_address
+#                     break
+#
+#
+#         finally:
+#             # Clean up the connection
+#             connection.close()
 
-    # Bind the socket to the port
-    server_address = ('172.21.4.152', 4501)
-    print sys.stderr, 'starting up on %s port %s' % server_address
-    sock.bind(server_address)
-    # Calling listen() puts the socket into server mode, and accept() waits for an incoming connection.
-
-    # Listen for incoming connections
-    sock.listen(1)
-
-    while True:
-        # Wait for a connection
-        print >> sys.stderr, 'waiting for a connection'
-        connection, client_address = sock.accept()
-        # accept() returns an open connection between the server and client, along with the address of the client. The connection is actually a different socket on another port (assigned by the kernel). Data is read from the connection with recv() and transmitted with sendall().
-
-        try:
-
-            print >> sys.stderr, 'connection from', client_address
-
-            # Receive the data in small chunks and retransmit it
-            while True:
-                data = connection.recv(26)
-
-                if data:
-                    if data != '                          ':
-                        print data
-                    # time.sleep(1)
-                else:
-                    print >> sys.stderr, 'no more data from', client_address
-                    break
-
-
-        finally:
-            # Clean up the connection
-            connection.close()
-
-def cameraInspection():
-    # Create a TCP/IP socket
-    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    # Then bind() is used to associate the socket with the server address. In this case, the address is localhost, referring to the current server, and the port number is 10000.
-
-    # Bind the socket to the port
-    server_address = ('172.21.4.152', 4502)
-    print sys.stderr, 'starting up on %s port %s' % server_address
-    sock.bind(server_address)
-    # Calling listen() puts the socket into server mode, and accept() waits for an incoming connection.
-
-    # Listen for incoming connections
-    sock.listen(1)
-
-    while True:
-        # Wait for a connection
-        print >> sys.stderr, 'waiting for a connection'
-        connection, client_address = sock.accept()
-        # accept() returns an open connection between the server and client, along with the address of the client. The connection is actually a different socket on another port (assigned by the kernel). Data is read from the connection with recv() and transmitted with sendall().
-
-        try:
-
-            print >> sys.stderr, 'connection from', client_address
-
-            # Receive the data in small chunks and retransmit it
-            while True:
-                data = connection.recv(26)
-
-                if data:
-                    if data != '                          ':
-                        print data
-                    # time.sleep(1)
-                else:
-                    print >> sys.stderr, 'no more data from', client_address
-                    break
-
-
-        finally:
-            # Clean up the connection
-            connection.close()
-
+# def cameraInspection():
+#
+#     global tcpStationName
+#     global tcpOrderNumber
+#     global tcpCarrierNumber
+#     global tcpSerialNumber
+#     global tcpSeconds
+#     global tcpMinutes
+#     global tcpHours
+#     global tcpDays
+#     global tcpMonths
+#     global tcpYears
+#
+#     # Create a TCP/IP socket
+#     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+#     # Then bind() is used to associate the socket with the server address. In this case, the address is localhost, referring to the current server, and the port number is 10000.
+#
+#     # Bind the socket to the port
+#     server_address = ('172.21.4.152', 4502)
+#     print sys.stderr, 'starting up on %s port %s' % server_address
+#     sock.bind(server_address)
+#     # Calling listen() puts the socket into server mode, and accept() waits for an incoming connection.
+#
+#     # Listen for incoming connections
+#     sock.listen(1)
+#
+#     while True:
+#         # Wait for a connection
+#         print >> sys.stderr, 'waiting for a connection'
+#         connection, client_address = sock.accept()
+#         # accept() returns an open connection between the server and client, along with the address of the client. The connection is actually a different socket on another port (assigned by the kernel). Data is read from the connection with recv() and transmitted with sendall().
+#
+#         try:
+#
+#             print >> sys.stderr, 'connection from', client_address
+#
+#             # Receive the data in small chunks and retransmit it
+#             while True:
+#                 data = connection.recv(30)
+#
+#                 if data:
+#                     if data != '                              ':
+#                         # example: 1,1226,211,01,54,18,19,03,2019
+#                         # print data
+#                         try:
+#                             tcpStationName = data[0]
+#                             tcpOrderNumber = data[2] + data[3] + data[4] + data[5]
+#                             tcpCarrierNumber = 0
+#                             tcpSerialNumber = data[7] + data[8] + data[9]
+#                             tcpSeconds = data[11] + data[12]
+#                             tcpMinutes = data[14] + data[15]
+#                             tcpHours = data[17] + data[18]
+#                             tcpDays = data[20] + data[21]
+#                             tcpMonths = data[23] + data[24]
+#                             tcpYears = data[26] + data[27] + data[28] + data[29]
+#
+#                             # print data
+#                             # print tcpStationName + ',' + tcpOrderNumber
+#                         except:
+#                             print "camera fail"
+#                     # time.sleep(1)
+#                 else:
+#                     print >> sys.stderr, 'no more data from', client_address
+#                     break
+#
+#
+#         finally:
+#             # Clean up the connection
+#             connection.close()
 
 if __name__ == '__main__':
     rospy.init_node('publishBlock', anonymous="True")
@@ -504,7 +577,6 @@ if __name__ == '__main__':
         p8.join()
         p9.join()
 
-
 # each stage of the production line needs to log:
 
 #	- time => DONE!
@@ -539,10 +611,7 @@ if __name__ == '__main__':
 # 	- if any of the hashes are different are different, that node will be deactivated.
 
 
-
-
 # - look up what a UTXO data set is in blockchain
-
 
 
 #   - rewrite node will rewrite the node that's next to it in terms of numbers

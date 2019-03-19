@@ -1,6 +1,6 @@
-Time Stamp for Block: 2019-03-19 17:34:35.945979
-Transactions: Start production
+Time Stamp for Block: 2019-03-19 20:06:49.631301
+Station: Start production
 Serial Number: PRODUCT0
-BlockHash: 9aa27a3870060c5d42d5c4e7995aee62c40fccf941d56641d36551df8af35afc
+BlockHash: 57ce398b1d80fb06cbe4a1ffd4aa4767d383196a150f5057d1aaeabd6b703172
 PreviousHash: 
 -------------------------------

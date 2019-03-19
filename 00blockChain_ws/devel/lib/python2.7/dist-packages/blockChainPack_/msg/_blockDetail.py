@@ -7,18 +7,18 @@ import struct
 
 
 class blockDetail(genpy.Message):
-  _md5sum = "392845d38e7dbd0b3e34f5d6ba02ccf6"
+  _md5sum = "091c883f51da1788c7811b429bd9b8be"
   _type = "blockChainPack_/blockDetail"
   _has_header = False #flag to mark the presence of a Header object
   _full_text = """int64 blockNumber
 int64 productNumber
 string timeStamp
-string transactions
+string station
 string serialNumber
 string blockHash
 string previousHash
 """
-  __slots__ = ['blockNumber','productNumber','timeStamp','transactions','serialNumber','blockHash','previousHash']
+  __slots__ = ['blockNumber','productNumber','timeStamp','station','serialNumber','blockHash','previousHash']
   _slot_types = ['int64','int64','string','string','string','string','string']
 
   def __init__(self, *args, **kwds):
@@ -29,7 +29,7 @@ string previousHash
     changes.  You cannot mix in-order arguments and keyword arguments.
 
     The available fields are:
-       blockNumber,productNumber,timeStamp,transactions,serialNumber,blockHash,previousHash
+       blockNumber,productNumber,timeStamp,station,serialNumber,blockHash,previousHash
 
     :param args: complete set of field values, in .msg order
     :param kwds: use keyword arguments corresponding to message field names
@@ -44,8 +44,8 @@ string previousHash
         self.productNumber = 0
       if self.timeStamp is None:
         self.timeStamp = ''
-      if self.transactions is None:
-        self.transactions = ''
+      if self.station is None:
+        self.station = ''
       if self.serialNumber is None:
         self.serialNumber = ''
       if self.blockHash is None:
@@ -56,7 +56,7 @@ string previousHash
       self.blockNumber = 0
       self.productNumber = 0
       self.timeStamp = ''
-      self.transactions = ''
+      self.station = ''
       self.serialNumber = ''
       self.blockHash = ''
       self.previousHash = ''
@@ -81,7 +81,7 @@ string previousHash
         _x = _x.encode('utf-8')
         length = len(_x)
       buff.write(struct.pack('<I%ss'%length, length, _x))
-      _x = self.transactions
+      _x = self.station
       length = len(_x)
       if python3 or type(_x) == unicode:
         _x = _x.encode('utf-8')
@@ -134,9 +134,9 @@ string previousHash
       start = end
       end += length
       if python3:
-        self.transactions = str[start:end].decode('utf-8')
+        self.station = str[start:end].decode('utf-8')
       else:
-        self.transactions = str[start:end]
+        self.station = str[start:end]
       start = end
       end += 4
       (length,) = _struct_I.unpack(str[start:end])
@@ -184,7 +184,7 @@ string previousHash
         _x = _x.encode('utf-8')
         length = len(_x)
       buff.write(struct.pack('<I%ss'%length, length, _x))
-      _x = self.transactions
+      _x = self.station
       length = len(_x)
       if python3 or type(_x) == unicode:
         _x = _x.encode('utf-8')
@@ -238,9 +238,9 @@ string previousHash
       start = end
       end += length
       if python3:
-        self.transactions = str[start:end].decode('utf-8')
+        self.station = str[start:end].decode('utf-8')
       else:
-        self.transactions = str[start:end]
+        self.station = str[start:end]
       start = end
       end += 4
       (length,) = _struct_I.unpack(str[start:end])

@@ -22,9 +22,9 @@
     :initarg :timeStamp
     :type cl:string
     :initform "")
-   (transactions
-    :reader transactions
-    :initarg :transactions
+   (station
+    :reader station
+    :initarg :station
     :type cl:string
     :initform "")
    (serialNumber
@@ -67,10 +67,10 @@
   (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader blockChainPack_-msg:timeStamp-val is deprecated.  Use blockChainPack_-msg:timeStamp instead.")
   (timeStamp m))
 
-(cl:ensure-generic-function 'transactions-val :lambda-list '(m))
-(cl:defmethod transactions-val ((m <blockDetail>))
-  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader blockChainPack_-msg:transactions-val is deprecated.  Use blockChainPack_-msg:transactions instead.")
-  (transactions m))
+(cl:ensure-generic-function 'station-val :lambda-list '(m))
+(cl:defmethod station-val ((m <blockDetail>))
+  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader blockChainPack_-msg:station-val is deprecated.  Use blockChainPack_-msg:station instead.")
+  (station m))
 
 (cl:ensure-generic-function 'serialNumber-val :lambda-list '(m))
 (cl:defmethod serialNumber-val ((m <blockDetail>))
@@ -114,12 +114,12 @@
     (cl:write-byte (cl:ldb (cl:byte 8 16) __ros_str_len) ostream)
     (cl:write-byte (cl:ldb (cl:byte 8 24) __ros_str_len) ostream))
   (cl:map cl:nil #'(cl:lambda (c) (cl:write-byte (cl:char-code c) ostream)) (cl:slot-value msg 'timeStamp))
-  (cl:let ((__ros_str_len (cl:length (cl:slot-value msg 'transactions))))
+  (cl:let ((__ros_str_len (cl:length (cl:slot-value msg 'station))))
     (cl:write-byte (cl:ldb (cl:byte 8 0) __ros_str_len) ostream)
     (cl:write-byte (cl:ldb (cl:byte 8 8) __ros_str_len) ostream)
     (cl:write-byte (cl:ldb (cl:byte 8 16) __ros_str_len) ostream)
     (cl:write-byte (cl:ldb (cl:byte 8 24) __ros_str_len) ostream))
-  (cl:map cl:nil #'(cl:lambda (c) (cl:write-byte (cl:char-code c) ostream)) (cl:slot-value msg 'transactions))
+  (cl:map cl:nil #'(cl:lambda (c) (cl:write-byte (cl:char-code c) ostream)) (cl:slot-value msg 'station))
   (cl:let ((__ros_str_len (cl:length (cl:slot-value msg 'serialNumber))))
     (cl:write-byte (cl:ldb (cl:byte 8 0) __ros_str_len) ostream)
     (cl:write-byte (cl:ldb (cl:byte 8 8) __ros_str_len) ostream)
@@ -174,9 +174,9 @@
       (cl:setf (cl:ldb (cl:byte 8 8) __ros_str_len) (cl:read-byte istream))
       (cl:setf (cl:ldb (cl:byte 8 16) __ros_str_len) (cl:read-byte istream))
       (cl:setf (cl:ldb (cl:byte 8 24) __ros_str_len) (cl:read-byte istream))
-      (cl:setf (cl:slot-value msg 'transactions) (cl:make-string __ros_str_len))
+      (cl:setf (cl:slot-value msg 'station) (cl:make-string __ros_str_len))
       (cl:dotimes (__ros_str_idx __ros_str_len msg)
-        (cl:setf (cl:char (cl:slot-value msg 'transactions) __ros_str_idx) (cl:code-char (cl:read-byte istream)))))
+        (cl:setf (cl:char (cl:slot-value msg 'station) __ros_str_idx) (cl:code-char (cl:read-byte istream)))))
     (cl:let ((__ros_str_len 0))
       (cl:setf (cl:ldb (cl:byte 8 0) __ros_str_len) (cl:read-byte istream))
       (cl:setf (cl:ldb (cl:byte 8 8) __ros_str_len) (cl:read-byte istream))
@@ -211,22 +211,22 @@
   "blockChainPack_/blockDetail")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql '<blockDetail>)))
   "Returns md5sum for a message object of type '<blockDetail>"
-  "392845d38e7dbd0b3e34f5d6ba02ccf6")
+  "091c883f51da1788c7811b429bd9b8be")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql 'blockDetail)))
   "Returns md5sum for a message object of type 'blockDetail"
-  "392845d38e7dbd0b3e34f5d6ba02ccf6")
+  "091c883f51da1788c7811b429bd9b8be")
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql '<blockDetail>)))
   "Returns full string definition for message of type '<blockDetail>"
-  (cl:format cl:nil "int64 blockNumber~%int64 productNumber~%string timeStamp~%string transactions~%string serialNumber~%string blockHash~%string previousHash~%~%~%"))
+  (cl:format cl:nil "int64 blockNumber~%int64 productNumber~%string timeStamp~%string station~%string serialNumber~%string blockHash~%string previousHash~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql 'blockDetail)))
   "Returns full string definition for message of type 'blockDetail"
-  (cl:format cl:nil "int64 blockNumber~%int64 productNumber~%string timeStamp~%string transactions~%string serialNumber~%string blockHash~%string previousHash~%~%~%"))
+  (cl:format cl:nil "int64 blockNumber~%int64 productNumber~%string timeStamp~%string station~%string serialNumber~%string blockHash~%string previousHash~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:serialization-length ((msg <blockDetail>))
   (cl:+ 0
      8
      8
      4 (cl:length (cl:slot-value msg 'timeStamp))
-     4 (cl:length (cl:slot-value msg 'transactions))
+     4 (cl:length (cl:slot-value msg 'station))
      4 (cl:length (cl:slot-value msg 'serialNumber))
      4 (cl:length (cl:slot-value msg 'blockHash))
      4 (cl:length (cl:slot-value msg 'previousHash))
@@ -237,7 +237,7 @@
     (cl:cons ':blockNumber (blockNumber msg))
     (cl:cons ':productNumber (productNumber msg))
     (cl:cons ':timeStamp (timeStamp msg))
-    (cl:cons ':transactions (transactions msg))
+    (cl:cons ':station (station msg))
     (cl:cons ':serialNumber (serialNumber msg))
     (cl:cons ':blockHash (blockHash msg))
     (cl:cons ':previousHash (previousHash msg))

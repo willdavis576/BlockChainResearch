@@ -27,7 +27,7 @@ struct blockDetail_
     : blockNumber(0)
     , productNumber(0)
     , timeStamp()
-    , transactions()
+    , station()
     , serialNumber()
     , blockHash()
     , previousHash()  {
@@ -36,7 +36,7 @@ struct blockDetail_
     : blockNumber(0)
     , productNumber(0)
     , timeStamp(_alloc)
-    , transactions(_alloc)
+    , station(_alloc)
     , serialNumber(_alloc)
     , blockHash(_alloc)
     , previousHash(_alloc)  {
@@ -54,8 +54,8 @@ struct blockDetail_
    typedef std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other >  _timeStamp_type;
   _timeStamp_type timeStamp;
 
-   typedef std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other >  _transactions_type;
-  _transactions_type transactions;
+   typedef std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other >  _station_type;
+  _station_type station;
 
    typedef std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other >  _serialNumber_type;
   _serialNumber_type serialNumber;
@@ -144,12 +144,12 @@ struct MD5Sum< ::blockChainPack_::blockDetail_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "392845d38e7dbd0b3e34f5d6ba02ccf6";
+    return "091c883f51da1788c7811b429bd9b8be";
   }
 
   static const char* value(const ::blockChainPack_::blockDetail_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0x392845d38e7dbd0bULL;
-  static const uint64_t static_value2 = 0x3e34f5d6ba02ccf6ULL;
+  static const uint64_t static_value1 = 0x091c883f51da1788ULL;
+  static const uint64_t static_value2 = 0xc7811b429bd9b8beULL;
 };
 
 template<class ContainerAllocator>
@@ -171,7 +171,7 @@ struct Definition< ::blockChainPack_::blockDetail_<ContainerAllocator> >
     return "int64 blockNumber\n\
 int64 productNumber\n\
 string timeStamp\n\
-string transactions\n\
+string station\n\
 string serialNumber\n\
 string blockHash\n\
 string previousHash\n\
@@ -196,7 +196,7 @@ namespace serialization
       stream.next(m.blockNumber);
       stream.next(m.productNumber);
       stream.next(m.timeStamp);
-      stream.next(m.transactions);
+      stream.next(m.station);
       stream.next(m.serialNumber);
       stream.next(m.blockHash);
       stream.next(m.previousHash);
@@ -224,8 +224,8 @@ struct Printer< ::blockChainPack_::blockDetail_<ContainerAllocator> >
     Printer<int64_t>::stream(s, indent + "  ", v.productNumber);
     s << indent << "timeStamp: ";
     Printer<std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other > >::stream(s, indent + "  ", v.timeStamp);
-    s << indent << "transactions: ";
-    Printer<std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other > >::stream(s, indent + "  ", v.transactions);
+    s << indent << "station: ";
+    Printer<std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other > >::stream(s, indent + "  ", v.station);
     s << indent << "serialNumber: ";
     Printer<std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other > >::stream(s, indent + "  ", v.serialNumber);
     s << indent << "blockHash: ";
