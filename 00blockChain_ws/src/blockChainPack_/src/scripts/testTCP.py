@@ -9,14 +9,11 @@ def main():
     s.connect(('172.21.4.152', 4500))
     #s.sendall('444;#RequestID=0;MClass=101;MNo=2;ErrorState=0;#PNo=212;#Aux1Int=1\r')
     s.sendall('small\r')
-    data = s.recv(1024)
+
     s.close()
-    print(data)
-    m
 
-def main2():
 
-    print("hello")
+
 
 
 if __name__ == '__main__':
