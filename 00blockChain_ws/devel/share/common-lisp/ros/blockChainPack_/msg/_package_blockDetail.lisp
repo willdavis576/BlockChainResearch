@@ -1,14 +1,14 @@
 (cl:in-package blockChainPack_-msg)
 (cl:export '(BLOCKNUMBER-VAL
           BLOCKNUMBER
-          PRODUCTNUMBER-VAL
-          PRODUCTNUMBER
+          ORDERNUMBER-VAL
+          ORDERNUMBER
           TIMESTAMP-VAL
           TIMESTAMP
           STATION-VAL
           STATION
-          SERIALNUMBER-VAL
-          SERIALNUMBER
+          PRODUCTCODE-VAL
+          PRODUCTCODE
           BLOCKHASH-VAL
           BLOCKHASH
           PREVIOUSHASH-VAL

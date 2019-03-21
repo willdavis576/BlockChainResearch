@@ -1,3 +1,3 @@
 string nodeName
-int64 productNumber
+int64 orderNumber
 string hash

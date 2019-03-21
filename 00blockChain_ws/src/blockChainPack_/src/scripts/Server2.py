@@ -29,11 +29,11 @@ def lowerCasing():
 
             # Receive the data in small chunks and retransmit it
             while True:
-                data = connection.recv(26)
+                data = connection.recv(30)
 
 
                 if data:
-                    if data != '                          ':
+                    if data != '                              ':
                         print data
                     # time.sleep(1)
                 else:
@@ -72,10 +72,10 @@ def manual():
 
             # Receive the data in small chunks and retransmit it
             while True:
-                data = connection.recv(26)
+                data = connection.recv(30)
 
                 if data:
-                    if data != '                          ':
+                    if data != '                              ':
                         print data
                     # time.sleep(1)
                 else:
@@ -113,10 +113,10 @@ def cameraInspection():
 
             # Receive the data in small chunks and retransmit it
             while True:
-                data = connection.recv(26)
+                data = connection.recv(30)
 
                 if data:
-                    if data != '                          ':
+                    if data != '                              ':
                         print data
                     # time.sleep(1)
                 else:

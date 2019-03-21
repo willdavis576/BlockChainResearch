@@ -7,19 +7,19 @@ import struct
 
 
 class blockDetail(genpy.Message):
-  _md5sum = "091c883f51da1788c7811b429bd9b8be"
+  _md5sum = "f78d193a3443341bccb41389748c5d9e"
   _type = "blockChainPack_/blockDetail"
   _has_header = False #flag to mark the presence of a Header object
   _full_text = """int64 blockNumber
-int64 productNumber
+int64 orderNumber
 string timeStamp
 string station
-string serialNumber
+int64 productCode
 string blockHash
 string previousHash
 """
-  __slots__ = ['blockNumber','productNumber','timeStamp','station','serialNumber','blockHash','previousHash']
-  _slot_types = ['int64','int64','string','string','string','string','string']
+  __slots__ = ['blockNumber','orderNumber','timeStamp','station','productCode','blockHash','previousHash']
+  _slot_types = ['int64','int64','string','string','int64','string','string']
 
   def __init__(self, *args, **kwds):
     """
@@ -29,7 +29,7 @@ string previousHash
     changes.  You cannot mix in-order arguments and keyword arguments.
 
     The available fields are:
-       blockNumber,productNumber,timeStamp,station,serialNumber,blockHash,previousHash
+       blockNumber,orderNumber,timeStamp,station,productCode,blockHash,previousHash
 
     :param args: complete set of field values, in .msg order
     :param kwds: use keyword arguments corresponding to message field names
@@ -40,24 +40,24 @@ string previousHash
       #message fields cannot be None, assign default values for those that are
       if self.blockNumber is None:
         self.blockNumber = 0
-      if self.productNumber is None:
-        self.productNumber = 0
+      if self.orderNumber is None:
+        self.orderNumber = 0
       if self.timeStamp is None:
         self.timeStamp = ''
       if self.station is None:
         self.station = ''
-      if self.serialNumber is None:
-        self.serialNumber = ''
+      if self.productCode is None:
+        self.productCode = 0
       if self.blockHash is None:
         self.blockHash = ''
       if self.previousHash is None:
         self.previousHash = ''
     else:
       self.blockNumber = 0
-      self.productNumber = 0
+      self.orderNumber = 0
       self.timeStamp = ''
       self.station = ''
-      self.serialNumber = ''
+      self.productCode = 0
       self.blockHash = ''
       self.previousHash = ''
 
@@ -74,7 +74,7 @@ string previousHash
     """
     try:
       _x = self
-      buff.write(_get_struct_2q().pack(_x.blockNumber, _x.productNumber))
+      buff.write(_get_struct_2q().pack(_x.blockNumber, _x.orderNumber))
       _x = self.timeStamp
       length = len(_x)
       if python3 or type(_x) == unicode:
@@ -87,12 +87,7 @@ string previousHash
         _x = _x.encode('utf-8')
         length = len(_x)
       buff.write(struct.pack('<I%ss'%length, length, _x))
-      _x = self.serialNumber
-      length = len(_x)
-      if python3 or type(_x) == unicode:
-        _x = _x.encode('utf-8')
-        length = len(_x)
-      buff.write(struct.pack('<I%ss'%length, length, _x))
+      buff.write(_get_struct_q().pack(self.productCode))
       _x = self.blockHash
       length = len(_x)
       if python3 or type(_x) == unicode:
@@ -118,7 +113,7 @@ string previousHash
       _x = self
       start = end
       end += 16
-      (_x.blockNumber, _x.productNumber,) = _get_struct_2q().unpack(str[start:end])
+      (_x.blockNumber, _x.orderNumber,) = _get_struct_2q().unpack(str[start:end])
       start = end
       end += 4
       (length,) = _struct_I.unpack(str[start:end])
@@ -138,14 +133,8 @@ string previousHash
       else:
         self.station = str[start:end]
       start = end
-      end += 4
-      (length,) = _struct_I.unpack(str[start:end])
-      start = end
-      end += length
-      if python3:
-        self.serialNumber = str[start:end].decode('utf-8')
-      else:
-        self.serialNumber = str[start:end]
+      end += 8
+      (self.productCode,) = _get_struct_q().unpack(str[start:end])
       start = end
       end += 4
       (length,) = _struct_I.unpack(str[start:end])
@@ -177,7 +166,7 @@ string previousHash
     """
     try:
       _x = self
-      buff.write(_get_struct_2q().pack(_x.blockNumber, _x.productNumber))
+      buff.write(_get_struct_2q().pack(_x.blockNumber, _x.orderNumber))
       _x = self.timeStamp
       length = len(_x)
       if python3 or type(_x) == unicode:
@@ -190,12 +179,7 @@ string previousHash
         _x = _x.encode('utf-8')
         length = len(_x)
       buff.write(struct.pack('<I%ss'%length, length, _x))
-      _x = self.serialNumber
-      length = len(_x)
-      if python3 or type(_x) == unicode:
-        _x = _x.encode('utf-8')
-        length = len(_x)
-      buff.write(struct.pack('<I%ss'%length, length, _x))
+      buff.write(_get_struct_q().pack(self.productCode))
       _x = self.blockHash
       length = len(_x)
       if python3 or type(_x) == unicode:
@@ -222,7 +206,7 @@ string previousHash
       _x = self
       start = end
       end += 16
-      (_x.blockNumber, _x.productNumber,) = _get_struct_2q().unpack(str[start:end])
+      (_x.blockNumber, _x.orderNumber,) = _get_struct_2q().unpack(str[start:end])
       start = end
       end += 4
       (length,) = _struct_I.unpack(str[start:end])
@@ -242,14 +226,8 @@ string previousHash
       else:
         self.station = str[start:end]
       start = end
-      end += 4
-      (length,) = _struct_I.unpack(str[start:end])
-      start = end
-      end += length
-      if python3:
-        self.serialNumber = str[start:end].decode('utf-8')
-      else:
-        self.serialNumber = str[start:end]
+      end += 8
+      (self.productCode,) = _get_struct_q().unpack(str[start:end])
       start = end
       end += 4
       (length,) = _struct_I.unpack(str[start:end])
@@ -276,6 +254,12 @@ _struct_I = genpy.struct_I
 def _get_struct_I():
     global _struct_I
     return _struct_I
+_struct_q = None
+def _get_struct_q():
+    global _struct_q
+    if _struct_q is None:
+        _struct_q = struct.Struct("<q")
+    return _struct_q
 _struct_2q = None
 def _get_struct_2q():
     global _struct_2q

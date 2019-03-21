@@ -7,7 +7,7 @@ from blockChainPack_.msg import lastHash
 from blockChainPack_.msg import rewriteNode
 
 # station, orderNumber, productCode, seconds, minutes, hours, days, months, years
-#productNubmer should now orderNumber
+# productNubmer should now orderNumber
 
 itemNumber = 0
 dataFollowing = 0
@@ -16,6 +16,8 @@ station = [['' for _ in range(100)] for _ in range(100)]
 productCode = [''] * 100
 block = [['' for _ in range(2000)] for _ in range(2000)]
 blockNumber = 0
+orderNumberList = [''] * 100
+buildBlock = 0
 
 serialNumberNum = 0
 serialNumberStr = 'PRODUCT'
@@ -28,7 +30,7 @@ message = ''
 nodeUp = ''
 init = 0
 noGen = 0
-runYet = [''] * 100
+runYet = [''] * 2000
 Trigger = False
 nodeList = ['NODE1', 'NODE2', 'NODE3',
             'NODE4']  ################# IF INCLUDING MORE NODES, EXTEND THIS ARRAY SIZE #######################
@@ -37,7 +39,7 @@ oldNodeONOFF = [0, 0, 0, 0]  ################# IF INCLUDING MORE NODES, EXTEND T
 node = [['' for _ in range(100)] for _ in range(100)]
 counter1 = 0;
 
-Range = 10
+Range = 2000
 SblockTimeStamp = [['' for _ in range(Range)] for _ in range(Range)]
 SblockTrans = [['' for _ in range(Range)] for _ in range(Range)]
 SblockProductCode = [['' for _ in range(Range)] for _ in range(Range)]
@@ -102,13 +104,13 @@ class blockChain:
         return self.orderNumber
 
 
-def blockUpdate(blockNumber, orderNumber, station, productCode,seconds, minutes, hours, days, months, years):
+def blockUpdate(blockNumber, orderNumber, station, productCode, seconds, minutes, hours, days, months, years):
     for i in range(blockNumber, blockNumber + 1):
         blockNumber = i
         block[orderNumber][blockNumber] = blockChain(
             previousHash=block[orderNumber][blockNumber - 1].getBlockHash(), station=station,
             productCode=productCode, orderNumber=orderNumber, seconds=seconds, minutes=minutes,
-            hours=hours, days= days, months=months, years=years)
+            hours=hours, days=days, months=months, years=years)
         print(block[orderNumber][blockNumber].getBlockHash())
 
 
@@ -119,19 +121,17 @@ def sendMessage():
 
     message.timeStamp = str(block[orderNumber][blockNumber].getTimeStamp())
     message.station = str(block[orderNumber][blockNumber].getStation())
-    message.orderNumber = str(block[orderNumber][blockNumber].getOrderNumber())
-    message.productCode = block[orderNumber][blockNumber].getproductCode()
+    message.orderNumber = block[orderNumber][blockNumber].getOrderNumber()
+    message.productCode = block[orderNumber][blockNumber].getProductCode()
     message.blockHash = block[orderNumber][blockNumber].getBlockHash()
     message.previousHash = block[orderNumber][blockNumber].getPreviousHash()
 
 
 def main():
-    while (True):
         while not rospy.is_shutdown():
-            while (newProduct != "n"):
                 mainProg()
-        if rospy.is_shutdown():
-            break
+                if rospy.is_shutdown():
+                    break
 
 
 def mainProg():
@@ -148,37 +148,52 @@ def mainProg():
     global nodeName
     global nodeUp
     global itemNumber
+    global orderNumberList
 
     pub = rospy.Publisher('publishingBlockStream', blockDetail, queue_size=100)
-
-    while (newGenesis == 1):
+    buildBlock = dataFollowing
+    while (buildBlock == 1):
         # Setup for genesis block
-        repeat = 0
-
+        orderNumber = tcpOrderNumber
+        print("trying to build")
+        try:
+            print("Trying to create block")
+            if orderNumberList.index(tcpOrderNumber) > -1:
+                newGenesis == 0
+        except:
+            newGenesis == 1
+            print("order Number already a thing, adding to an already created blockchain")
         # Genesis Block
-        block[orderNumber][blockNumber] = blockChain(previousHash='', station="Start production",
-                                          productCode='N/A',
-                                                       seconds=str(datetime.now())[17:19],
-                                                       minutes=str(datetime.now())[14:16],
-                                                       hours=str(datetime.now())[11:13], days=str(datetime.now())[8:10],
-                                                       months=str(datetime.now())[5:7], years=str(datetime.now())[0:4])
-        print("genesis: ")
-        print(block[orderNumber][blockNumber].getBlockHash())
-        time.sleep(1)
-        sendMessage()
-        pub.publish(message)
-        newGenesis = 0
-        blockNumber = blockNumber + 1  # key part, as each station uploads information, this variable is incremented to generate a new block
-        break
-
-    while (True):
-            if dataFollowing == 1:
-                block[orderNumber][blockNumber]
+        if newGenesis == 1:
+            block[orderNumber][blockNumber] = blockChain(previousHash='', station="Start production",
+                                                         productCode=tcpProductCode, orderNumber= tcpOrderNumber,
+                                                         seconds=str(datetime.now())[17:19],
+                                                         minutes=str(datetime.now())[14:16],
+                                                         hours=str(datetime.now())[11:13], days=str(datetime.now())[8:10],
+                                                         months=str(datetime.now())[5:7], years=str(datetime.now())[0:4])
+            print("genesis: ")
+            print(block[orderNumber][blockNumber].getBlockHash())
+            time.sleep(1)
+            sendMessage()
+            pub.publish(message)
+            blockNumber = blockNumber + 1  # key part, as each station uploads information, this variable is incremented to generate a new block
+            print(orderNumber, blockNumber)
+            print(block[orderNumber][blockNumber - 1].getBlockHash())
+            newGenesis = 0
 
 
+        if newGenesis == 0:
+            blockUpdate(blockNumber, orderNumber=tcpOrderNumber, station=tcpStationName, productCode=tcpProductCode,
+                        seconds=tcpSeconds, minutes=tcpMinutes, hours=tcpHours, days=tcpDays, months=tcpMonths,
+                        years=tcpYears)
+            print("constant updating")
+            sendMessage()
+            pub.publish(message)
+            blockNumber = blockNumber + 1
+            time.sleep(0.1)
 
-    if repeat == 1:
-        orderNumber = orderNumber + 1
+        #if the order number doesn't exist in the array then create genesis block. If it does, then continue where the system left off.
+
 
 
 def listener():
@@ -332,13 +347,14 @@ def lowerCasing():
     global tcpDays
     global tcpMonths
     global tcpYears
+    global dataFollowing
 
     # Create a TCP/IP socket
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     # Then bind() is used to associate the socket with the server address. In this case, the address is localhost, referring to the current server, and the port number is 10000.
 
     # Bind the socket to the port
-    server_address = ('172.21.4.152', 4500)
+    server_address = ('192.168.79.128', 4500)
     print sys.stderr, 'starting up on %s port %s' % server_address
     sock.bind(server_address)
     # Calling listen() puts the socket into server mode, and accept() waits for an incoming connection.
@@ -361,15 +377,19 @@ def lowerCasing():
                 data = connection.recv(30)
 
                 if data:
+
+                    if data == '                              ':
+                        dataFollowing = 0
                     if data != '                              ':
                         dataFollowing = 1
                         # example: 1,1226,211,01,54,18,19,03,2019
                         # print data
                         try:
+                            print(data)
                             tcpStationName = data[0]
-                            tcpOrderNumber = data[2] + data[3] + data[4] + data[5]
+                            tcpOrderNumber = int(data[2] + data[3] + data[4] + data[5])
                             tcpCarrierNumber = 0
-                            tcpProductCode = data[7] + data[8] + data[9]
+                            tcpProductCode = int(data[7] + data[8] + data[9])
                             tcpSeconds = data[11] + data[12]
                             tcpMinutes = data[14] + data[15]
                             tcpHours = data[17] + data[18]
@@ -380,7 +400,7 @@ def lowerCasing():
                             # print data
                             # print tcpStationName + ',' + tcpOrderNumber
                         except:
-                            print "lower casting fail"
+                                print "lower casting fail"
                     # time.sleep(1)
                 else:
                     print >> sys.stderr, 'no more data from', client_address
@@ -543,9 +563,9 @@ if __name__ == '__main__':
         p4 = threading.Thread(target=emitter, args=())
         p5 = threading.Thread(target=authTrigger, args=())
         p6 = threading.Thread(target=rewriteNodes, args=())
-        p7 = threading.Thread(target=manual, args=())
+        # p7 = threading.Thread(target=manual, args=())
         p8 = threading.Thread(target=lowerCasing, args=())
-        p9 = threading.Thread(target=cameraInspection, args=())
+        # p9 = threading.Thread(target=cameraInspection, args=())
 
         p1.daemon = True
         p2.daemon = True
@@ -553,9 +573,9 @@ if __name__ == '__main__':
         p4.daemon = True
         p5.daemon = True
         p6.daemon = True
-        p7.daemon = True
+        # p7.daemon = True
         p8.daemon = True
-        p9.daemon = True
+        # p9.daemon = True
 
         p1.start()
         p2.start()
@@ -563,9 +583,9 @@ if __name__ == '__main__':
         p4.start()
         p5.start()
         p6.start()
-        p7.start()
+        # p7.start()
         p8.start()
-        p9.start()
+        # p9.start()
 
         p1.join()
         p2.join()
@@ -573,9 +593,9 @@ if __name__ == '__main__':
         p4.join()
         p5.join()
         p6.join()
-        p7.join()
+        # p7.join()
         p8.join()
-        p9.join()
+        # p9.join()
 
 # each stage of the production line needs to log:
 

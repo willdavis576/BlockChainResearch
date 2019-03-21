@@ -1,7 +1,7 @@
 int64 blockNumber
-int64 productNumber
+int64 orderNumber
 string timeStamp
 string station
-string serialNumber
+int64 productCode
 string blockHash
 string previousHash

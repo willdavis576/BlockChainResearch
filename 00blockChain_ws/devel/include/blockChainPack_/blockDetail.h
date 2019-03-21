@@ -25,19 +25,19 @@ struct blockDetail_
 
   blockDetail_()
     : blockNumber(0)
-    , productNumber(0)
+    , orderNumber(0)
     , timeStamp()
     , station()
-    , serialNumber()
+    , productCode(0)
     , blockHash()
     , previousHash()  {
     }
   blockDetail_(const ContainerAllocator& _alloc)
     : blockNumber(0)
-    , productNumber(0)
+    , orderNumber(0)
     , timeStamp(_alloc)
     , station(_alloc)
-    , serialNumber(_alloc)
+    , productCode(0)
     , blockHash(_alloc)
     , previousHash(_alloc)  {
   (void)_alloc;
@@ -48,8 +48,8 @@ struct blockDetail_
    typedef int64_t _blockNumber_type;
   _blockNumber_type blockNumber;
 
-   typedef int64_t _productNumber_type;
-  _productNumber_type productNumber;
+   typedef int64_t _orderNumber_type;
+  _orderNumber_type orderNumber;
 
    typedef std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other >  _timeStamp_type;
   _timeStamp_type timeStamp;
@@ -57,8 +57,8 @@ struct blockDetail_
    typedef std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other >  _station_type;
   _station_type station;
 
-   typedef std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other >  _serialNumber_type;
-  _serialNumber_type serialNumber;
+   typedef int64_t _productCode_type;
+  _productCode_type productCode;
 
    typedef std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other >  _blockHash_type;
   _blockHash_type blockHash;
@@ -144,12 +144,12 @@ struct MD5Sum< ::blockChainPack_::blockDetail_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "091c883f51da1788c7811b429bd9b8be";
+    return "f78d193a3443341bccb41389748c5d9e";
   }
 
   static const char* value(const ::blockChainPack_::blockDetail_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0x091c883f51da1788ULL;
-  static const uint64_t static_value2 = 0xc7811b429bd9b8beULL;
+  static const uint64_t static_value1 = 0xf78d193a3443341bULL;
+  static const uint64_t static_value2 = 0xccb41389748c5d9eULL;
 };
 
 template<class ContainerAllocator>
@@ -169,10 +169,10 @@ struct Definition< ::blockChainPack_::blockDetail_<ContainerAllocator> >
   static const char* value()
   {
     return "int64 blockNumber\n\
-int64 productNumber\n\
+int64 orderNumber\n\
 string timeStamp\n\
 string station\n\
-string serialNumber\n\
+int64 productCode\n\
 string blockHash\n\
 string previousHash\n\
 ";
@@ -194,10 +194,10 @@ namespace serialization
     template<typename Stream, typename T> inline static void allInOne(Stream& stream, T m)
     {
       stream.next(m.blockNumber);
-      stream.next(m.productNumber);
+      stream.next(m.orderNumber);
       stream.next(m.timeStamp);
       stream.next(m.station);
-      stream.next(m.serialNumber);
+      stream.next(m.productCode);
       stream.next(m.blockHash);
       stream.next(m.previousHash);
     }
@@ -220,14 +220,14 @@ struct Printer< ::blockChainPack_::blockDetail_<ContainerAllocator> >
   {
     s << indent << "blockNumber: ";
     Printer<int64_t>::stream(s, indent + "  ", v.blockNumber);
-    s << indent << "productNumber: ";
-    Printer<int64_t>::stream(s, indent + "  ", v.productNumber);
+    s << indent << "orderNumber: ";
+    Printer<int64_t>::stream(s, indent + "  ", v.orderNumber);
     s << indent << "timeStamp: ";
     Printer<std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other > >::stream(s, indent + "  ", v.timeStamp);
     s << indent << "station: ";
     Printer<std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other > >::stream(s, indent + "  ", v.station);
-    s << indent << "serialNumber: ";
-    Printer<std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other > >::stream(s, indent + "  ", v.serialNumber);
+    s << indent << "productCode: ";
+    Printer<int64_t>::stream(s, indent + "  ", v.productCode);
     s << indent << "blockHash: ";
     Printer<std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other > >::stream(s, indent + "  ", v.blockHash);
     s << indent << "previousHash: ";

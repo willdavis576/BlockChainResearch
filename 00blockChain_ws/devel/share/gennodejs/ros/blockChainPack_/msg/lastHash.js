@@ -19,7 +19,7 @@ class lastHash {
     if (initObj === null) {
       // initObj === null is a special case for deserialization where we don't initialize fields
       this.nodeName = null;
-      this.productNumber = null;
+      this.orderNumber = null;
       this.hash = null;
     }
     else {
@@ -29,11 +29,11 @@ class lastHash {
       else {
         this.nodeName = '';
       }
-      if (initObj.hasOwnProperty('productNumber')) {
-        this.productNumber = initObj.productNumber
+      if (initObj.hasOwnProperty('orderNumber')) {
+        this.orderNumber = initObj.orderNumber
       }
       else {
-        this.productNumber = 0;
+        this.orderNumber = 0;
       }
       if (initObj.hasOwnProperty('hash')) {
         this.hash = initObj.hash
@@ -48,8 +48,8 @@ class lastHash {
     // Serializes a message object of type lastHash
     // Serialize message field [nodeName]
     bufferOffset = _serializer.string(obj.nodeName, buffer, bufferOffset);
-    // Serialize message field [productNumber]
-    bufferOffset = _serializer.int64(obj.productNumber, buffer, bufferOffset);
+    // Serialize message field [orderNumber]
+    bufferOffset = _serializer.int64(obj.orderNumber, buffer, bufferOffset);
     // Serialize message field [hash]
     bufferOffset = _serializer.string(obj.hash, buffer, bufferOffset);
     return bufferOffset;
@@ -61,8 +61,8 @@ class lastHash {
     let data = new lastHash(null);
     // Deserialize message field [nodeName]
     data.nodeName = _deserializer.string(buffer, bufferOffset);
-    // Deserialize message field [productNumber]
-    data.productNumber = _deserializer.int64(buffer, bufferOffset);
+    // Deserialize message field [orderNumber]
+    data.orderNumber = _deserializer.int64(buffer, bufferOffset);
     // Deserialize message field [hash]
     data.hash = _deserializer.string(buffer, bufferOffset);
     return data;
@@ -82,14 +82,14 @@ class lastHash {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return '8083626d8f7b25c3a89f2539b4ea325f';
+    return 'a423675095f4fe8b93a12842c59e1429';
   }
 
   static messageDefinition() {
     // Returns full string definition for message
     return `
     string nodeName
-    int64 productNumber
+    int64 orderNumber
     string hash
     
     `;
@@ -108,11 +108,11 @@ class lastHash {
       resolved.nodeName = ''
     }
 
-    if (msg.productNumber !== undefined) {
-      resolved.productNumber = msg.productNumber;
+    if (msg.orderNumber !== undefined) {
+      resolved.orderNumber = msg.orderNumber;
     }
     else {
-      resolved.productNumber = 0
+      resolved.orderNumber = 0
     }
 
     if (msg.hash !== undefined) {

@@ -19,10 +19,10 @@ class blockDetail {
     if (initObj === null) {
       // initObj === null is a special case for deserialization where we don't initialize fields
       this.blockNumber = null;
-      this.productNumber = null;
+      this.orderNumber = null;
       this.timeStamp = null;
       this.station = null;
-      this.serialNumber = null;
+      this.productCode = null;
       this.blockHash = null;
       this.previousHash = null;
     }
@@ -33,11 +33,11 @@ class blockDetail {
       else {
         this.blockNumber = 0;
       }
-      if (initObj.hasOwnProperty('productNumber')) {
-        this.productNumber = initObj.productNumber
+      if (initObj.hasOwnProperty('orderNumber')) {
+        this.orderNumber = initObj.orderNumber
       }
       else {
-        this.productNumber = 0;
+        this.orderNumber = 0;
       }
       if (initObj.hasOwnProperty('timeStamp')) {
         this.timeStamp = initObj.timeStamp
@@ -51,11 +51,11 @@ class blockDetail {
       else {
         this.station = '';
       }
-      if (initObj.hasOwnProperty('serialNumber')) {
-        this.serialNumber = initObj.serialNumber
+      if (initObj.hasOwnProperty('productCode')) {
+        this.productCode = initObj.productCode
       }
       else {
-        this.serialNumber = '';
+        this.productCode = 0;
       }
       if (initObj.hasOwnProperty('blockHash')) {
         this.blockHash = initObj.blockHash
@@ -76,14 +76,14 @@ class blockDetail {
     // Serializes a message object of type blockDetail
     // Serialize message field [blockNumber]
     bufferOffset = _serializer.int64(obj.blockNumber, buffer, bufferOffset);
-    // Serialize message field [productNumber]
-    bufferOffset = _serializer.int64(obj.productNumber, buffer, bufferOffset);
+    // Serialize message field [orderNumber]
+    bufferOffset = _serializer.int64(obj.orderNumber, buffer, bufferOffset);
     // Serialize message field [timeStamp]
     bufferOffset = _serializer.string(obj.timeStamp, buffer, bufferOffset);
     // Serialize message field [station]
     bufferOffset = _serializer.string(obj.station, buffer, bufferOffset);
-    // Serialize message field [serialNumber]
-    bufferOffset = _serializer.string(obj.serialNumber, buffer, bufferOffset);
+    // Serialize message field [productCode]
+    bufferOffset = _serializer.int64(obj.productCode, buffer, bufferOffset);
     // Serialize message field [blockHash]
     bufferOffset = _serializer.string(obj.blockHash, buffer, bufferOffset);
     // Serialize message field [previousHash]
@@ -97,14 +97,14 @@ class blockDetail {
     let data = new blockDetail(null);
     // Deserialize message field [blockNumber]
     data.blockNumber = _deserializer.int64(buffer, bufferOffset);
-    // Deserialize message field [productNumber]
-    data.productNumber = _deserializer.int64(buffer, bufferOffset);
+    // Deserialize message field [orderNumber]
+    data.orderNumber = _deserializer.int64(buffer, bufferOffset);
     // Deserialize message field [timeStamp]
     data.timeStamp = _deserializer.string(buffer, bufferOffset);
     // Deserialize message field [station]
     data.station = _deserializer.string(buffer, bufferOffset);
-    // Deserialize message field [serialNumber]
-    data.serialNumber = _deserializer.string(buffer, bufferOffset);
+    // Deserialize message field [productCode]
+    data.productCode = _deserializer.int64(buffer, bufferOffset);
     // Deserialize message field [blockHash]
     data.blockHash = _deserializer.string(buffer, bufferOffset);
     // Deserialize message field [previousHash]
@@ -116,10 +116,9 @@ class blockDetail {
     let length = 0;
     length += object.timeStamp.length;
     length += object.station.length;
-    length += object.serialNumber.length;
     length += object.blockHash.length;
     length += object.previousHash.length;
-    return length + 36;
+    return length + 40;
   }
 
   static datatype() {
@@ -129,17 +128,17 @@ class blockDetail {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return '091c883f51da1788c7811b429bd9b8be';
+    return 'f78d193a3443341bccb41389748c5d9e';
   }
 
   static messageDefinition() {
     // Returns full string definition for message
     return `
     int64 blockNumber
-    int64 productNumber
+    int64 orderNumber
     string timeStamp
     string station
-    string serialNumber
+    int64 productCode
     string blockHash
     string previousHash
     
@@ -159,11 +158,11 @@ class blockDetail {
       resolved.blockNumber = 0
     }
 
-    if (msg.productNumber !== undefined) {
-      resolved.productNumber = msg.productNumber;
+    if (msg.orderNumber !== undefined) {
+      resolved.orderNumber = msg.orderNumber;
     }
     else {
-      resolved.productNumber = 0
+      resolved.orderNumber = 0
     }
 
     if (msg.timeStamp !== undefined) {
@@ -180,11 +179,11 @@ class blockDetail {
       resolved.station = ''
     }
 
-    if (msg.serialNumber !== undefined) {
-      resolved.serialNumber = msg.serialNumber;
+    if (msg.productCode !== undefined) {
+      resolved.productCode = msg.productCode;
     }
     else {
-      resolved.serialNumber = ''
+      resolved.productCode = 0
     }
 
     if (msg.blockHash !== undefined) {
