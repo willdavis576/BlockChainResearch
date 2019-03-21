@@ -109,7 +109,7 @@ def blockUpdate(blockNumber, orderNumber, station, productCode, seconds, minutes
     for i in range(blockNumber, blockNumber + 1):
         blockNumber = i
         block[orderNumber][blockNumber] = blockChain(
-            previousHash=block[tcpOrderNumber][blockNumber - 1].getBlockHash(), station=station,
+            previousHash=SblockPreviousHash[tcpOrderNumber][blockNumber], station=station,
             productCode=productCode, orderNumber=orderNumber, seconds=seconds, minutes=minutes,
             hours=hours, days=days, months=months, years=years)
         print(block[orderNumber][blockNumber].getBlockHash())
@@ -153,7 +153,7 @@ def mainProg():
     pub = rospy.Publisher('publishingBlockStream', blockDetail, queue_size=100)
     while not rospy.is_shutdown():
         if dataFollowing == 1:
-            print("I'm in here now")
+
             # Setup for genesis block
             orderNumber = tcpOrderNumber
             print(orderNumber)
@@ -163,9 +163,13 @@ def mainProg():
                 if orderNumberList.index(tcpOrderNumber) > -1:
                     newGenesis = 0
             except:
-                newGenesis = 1
+                if SblockHash[orderNumber].index('') == 0:
+                    newGenesis = 1
+                else:
+                    newGenesis = 0
                 print("Order number not a thing, creating a new blockchain")
             # Genesis Block
+            print(SblockHash[orderNumber].index('') == 0)
             if newGenesis == 1:
                 block[orderNumber][block[orderNumber].index('')] = blockChain(previousHash='', station="Start production",
                                                              productCode=tcpProductCode, orderNumber= tcpOrderNumber,
@@ -187,7 +191,7 @@ def mainProg():
 
 
             if newGenesis == 0:
-                blockUpdate(blockNumber= block[orderNumber].index(''), orderNumber=tcpOrderNumber, station=tcpStationName, productCode=tcpProductCode,
+                blockUpdate(blockNumber=block[tcpOrderNumber].index(''), orderNumber=tcpOrderNumber, station=tcpStationName, productCode=tcpProductCode,
                             seconds=tcpSeconds, minutes=tcpMinutes, hours=tcpHours, days=tcpDays, months=tcpMonths,
                             years=tcpYears)
                 print("constant updating")
@@ -224,9 +228,9 @@ def callback(data):
     global node
 
     orderNumber1 = data.orderNumber
-    data_to_print = "Time Stamp for Block: {0}\nStation: {1}\nSerial Number: {2}\nBlockHash: {3}\nPreviousHash: {4}".format(
-        data.timeStamp, data.station, data.productCode, data.blockHash, data.previousHash)
-
+    data_to_print = "Time Stamp for Block: {0}\nStation: {1}\nOrder Number: {2}\nProduct Code: {3}\nBlock Hash: {4}\nPrevious Hash: {5}".format(
+        data.timeStamp, data.station, data.orderNumber, data.productCode, data.blockHash, data.previousHash)
+    # print(SblockHash[orderNumber][0] == '')
     SblockTimeStamp[data.orderNumber][data.blockNumber] = data.timeStamp
     SblockTrans[data.orderNumber][data.blockNumber] = data.station
     SblockProductCode[data.orderNumber][data.blockNumber] = data.productCode
@@ -236,12 +240,12 @@ def callback(data):
     # counter1 = counter1 + 1
     # rospy.loginfo(data_to_print)
     if runYet[orderNumber1] == '':
-        f = open("/home/ros/blockChainGit/00blockChain_ws/blockChain" + str(orderNumber1) + ".txt", "w")
+        f = open("/home/ros/blockChainGit/00blockChain_ws/src/blockChain" + str(orderNumber1) + ".txt", "w")
         f.close()
         runYet[orderNumber1] = "1"
 
     if runYet[orderNumber1] == "1":
-        f = open("/home/ros/blockChainGit/00blockChain_ws/blockChain" + str(orderNumber1) + ".txt", "a")
+        f = open("/home/ros/blockChainGit/00blockChain_ws/src/blockChain" + str(orderNumber1) + ".txt", "a")
         f.write(str(data_to_print))
         f.write("\n-------------------------------\n")
         f.close()
