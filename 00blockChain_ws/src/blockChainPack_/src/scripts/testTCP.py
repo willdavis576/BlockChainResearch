@@ -7,16 +7,17 @@ send = ''
 def main():
     global send
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    s.connect(('192.168.79.128', 4500))
+    s.connect(('172.21.4.152', 4505))
     while(True):
 
         s.sendall(send)
+        time.sleep(1)
 
 
 def timer():
     global send
-    send = '1,1226,211,01,54,18,19,03,2019\r'
-    time.sleep(0.001)
+    send = '1,1226,0211,01,54,18,19,03,2019'
+    time.sleep(1)
     send = '                              '
     time.sleep(1)
 

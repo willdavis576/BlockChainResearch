@@ -85,7 +85,7 @@ def sendMessage():
     global message
     message = blockDetail()
     message.blockNumber = blockNumber
-    message.productNumber = productNumber
+    message.orderNumber = productNumber
     message.timeStamp = str(block[productNumber][blockNumber].getTimeStamp())
     message.transactions = block[productNumber][blockNumber].getTransactions()
     message.serialNumber = block[productNumber][blockNumber].getSerialNumber()

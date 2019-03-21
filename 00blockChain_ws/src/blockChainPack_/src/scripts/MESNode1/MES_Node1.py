@@ -9,15 +9,17 @@ from blockChainPack_.msg import rewriteNode
 # station, orderNumber, productCode, seconds, minutes, hours, days, months, years
 # productNubmer should now orderNumber
 
+Range = 2000
 itemNumber = 0
 dataFollowing = 0
 orderNumber = 0
-station = [['' for _ in range(100)] for _ in range(100)]
-productCode = [''] * 100
-block = [['' for _ in range(2000)] for _ in range(2000)]
+station = [['' for _ in range(Range)] for _ in range(Range)]
+productCode = [''] * Range
+block = [['' for _ in range(Range)] for _ in range(Range)]
 blockNumber = 0
-orderNumberList = [''] * 100
+orderNumberList = [''] * Range
 buildBlock = 0
+oldData = ''
 
 serialNumberNum = 0
 serialNumberStr = 'PRODUCT'
@@ -30,16 +32,15 @@ message = ''
 nodeUp = ''
 init = 0
 noGen = 0
-runYet = [''] * 2000
+runYet = [''] * Range
 Trigger = False
 nodeList = ['NODE1', 'NODE2', 'NODE3',
             'NODE4']  ################# IF INCLUDING MORE NODES, EXTEND THIS ARRAY SIZE #######################
 nodeONOFF = [1, 0, 0, 0]  ################# IF INCLUDING MORE NODES, EXTEND THIS ARRAY SIZE #######################
 oldNodeONOFF = [0, 0, 0, 0]  ################# IF INCLUDING MORE NODES, EXTEND THIS ARRAY SIZE #######################
-node = [['' for _ in range(100)] for _ in range(100)]
+node = [['' for _ in range(Range)] for _ in range(Range)]
 counter1 = 0;
 
-Range = 2000
 SblockTimeStamp = [['' for _ in range(Range)] for _ in range(Range)]
 SblockTrans = [['' for _ in range(Range)] for _ in range(Range)]
 SblockProductCode = [['' for _ in range(Range)] for _ in range(Range)]
@@ -76,7 +77,7 @@ years = 0
 class blockChain:
 
     def __init__(self, previousHash, station, productCode, orderNumber, seconds, minutes, hours, days, months, years):
-        self.timeStamp = hours + ':' + minutes + ':' + seconds + ' - ' + days + '/' + months + '/' + years
+        self.timeStamp = str(hours + ':' + minutes + ':' + seconds + ' - ' + days + '/' + months + '/' + years)
         self.productCode = productCode
         self.orderNumber = orderNumber
         self.previousHash = previousHash
@@ -108,7 +109,7 @@ def blockUpdate(blockNumber, orderNumber, station, productCode, seconds, minutes
     for i in range(blockNumber, blockNumber + 1):
         blockNumber = i
         block[orderNumber][blockNumber] = blockChain(
-            previousHash=block[orderNumber][blockNumber - 1].getBlockHash(), station=station,
+            previousHash=block[tcpOrderNumber][blockNumber - 1].getBlockHash(), station=station,
             productCode=productCode, orderNumber=orderNumber, seconds=seconds, minutes=minutes,
             hours=hours, days=days, months=months, years=years)
         print(block[orderNumber][blockNumber].getBlockHash())
@@ -116,22 +117,18 @@ def blockUpdate(blockNumber, orderNumber, station, productCode, seconds, minutes
 
 def sendMessage():
     global message
+    global orderNumber
+    global block
     message = blockDetail()
-    message.blockNumber = blockNumber
+    message.blockNumber = block[orderNumber].index('') - 1
 
-    message.timeStamp = str(block[orderNumber][blockNumber].getTimeStamp())
-    message.station = str(block[orderNumber][blockNumber].getStation())
-    message.orderNumber = block[orderNumber][blockNumber].getOrderNumber()
-    message.productCode = block[orderNumber][blockNumber].getProductCode()
-    message.blockHash = block[orderNumber][blockNumber].getBlockHash()
-    message.previousHash = block[orderNumber][blockNumber].getPreviousHash()
+    message.timeStamp = block[orderNumber][block[orderNumber].index('') - 1].getTimeStamp()
+    message.station = str(block[orderNumber][block[orderNumber].index('') - 1].getStation())
+    message.orderNumber = block[orderNumber][block[orderNumber].index('') - 1].getOrderNumber()
+    message.productCode = block[orderNumber][block[orderNumber].index('') - 1].getProductCode()
+    message.blockHash = block[orderNumber][block[orderNumber].index('') - 1].getBlockHash()
+    message.previousHash = block[orderNumber][block[orderNumber].index('') - 1].getPreviousHash()
 
-
-def main():
-        while not rospy.is_shutdown():
-                mainProg()
-                if rospy.is_shutdown():
-                    break
 
 
 def mainProg():
@@ -149,48 +146,58 @@ def mainProg():
     global nodeUp
     global itemNumber
     global orderNumberList
+    global dataFollowing
+
+
 
     pub = rospy.Publisher('publishingBlockStream', blockDetail, queue_size=100)
-    buildBlock = dataFollowing
-    while (buildBlock == 1):
-        # Setup for genesis block
-        orderNumber = tcpOrderNumber
-        print("trying to build")
-        try:
-            print("Trying to create block")
-            if orderNumberList.index(tcpOrderNumber) > -1:
-                newGenesis == 0
-        except:
-            newGenesis == 1
-            print("order Number already a thing, adding to an already created blockchain")
-        # Genesis Block
-        if newGenesis == 1:
-            block[orderNumber][blockNumber] = blockChain(previousHash='', station="Start production",
-                                                         productCode=tcpProductCode, orderNumber= tcpOrderNumber,
-                                                         seconds=str(datetime.now())[17:19],
-                                                         minutes=str(datetime.now())[14:16],
-                                                         hours=str(datetime.now())[11:13], days=str(datetime.now())[8:10],
-                                                         months=str(datetime.now())[5:7], years=str(datetime.now())[0:4])
-            print("genesis: ")
-            print(block[orderNumber][blockNumber].getBlockHash())
-            time.sleep(1)
-            sendMessage()
-            pub.publish(message)
-            blockNumber = blockNumber + 1  # key part, as each station uploads information, this variable is incremented to generate a new block
-            print(orderNumber, blockNumber)
-            print(block[orderNumber][blockNumber - 1].getBlockHash())
-            newGenesis = 0
+    while not rospy.is_shutdown():
+        if dataFollowing == 1:
+            print("I'm in here now")
+            # Setup for genesis block
+            orderNumber = tcpOrderNumber
+            print(orderNumber)
+            print("trying to build")
+            try:
+                print("Trying to create block")
+                if orderNumberList.index(tcpOrderNumber) > -1:
+                    newGenesis = 0
+            except:
+                newGenesis = 1
+                print("Order number not a thing, creating a new blockchain")
+            # Genesis Block
+            if newGenesis == 1:
+                block[orderNumber][block[orderNumber].index('')] = blockChain(previousHash='', station="Start production",
+                                                             productCode=tcpProductCode, orderNumber= tcpOrderNumber,
+                                                             seconds=str(datetime.now())[17:19],
+                                                             minutes=str(datetime.now())[14:16],
+                                                             hours=str(datetime.now())[11:13], days=str(datetime.now())[8:10],
+                                                             months=str(datetime.now())[5:7], years=str(datetime.now())[0:4])
+                orderNumberList.append(orderNumber)
+                print("genesis: ")
+                print(block[orderNumber][block[orderNumber].index('')-1].getBlockHash())
+                time.sleep(1)
+                sendMessage()
+                pub.publish(message)
+                print(block[orderNumber].index(('')))
+                blockNumber = block[orderNumber].index('')  # key part, as each station uploads information, this variable is incremented to generate a new block
+                print(orderNumber, blockNumber)
+                print(block[orderNumber][blockNumber - 1].getBlockHash())
+                newGenesis = 0
 
 
-        if newGenesis == 0:
-            blockUpdate(blockNumber, orderNumber=tcpOrderNumber, station=tcpStationName, productCode=tcpProductCode,
-                        seconds=tcpSeconds, minutes=tcpMinutes, hours=tcpHours, days=tcpDays, months=tcpMonths,
-                        years=tcpYears)
-            print("constant updating")
-            sendMessage()
-            pub.publish(message)
-            blockNumber = blockNumber + 1
-            time.sleep(0.1)
+            if newGenesis == 0:
+                blockUpdate(blockNumber= block[orderNumber].index(''), orderNumber=tcpOrderNumber, station=tcpStationName, productCode=tcpProductCode,
+                            seconds=tcpSeconds, minutes=tcpMinutes, hours=tcpHours, days=tcpDays, months=tcpMonths,
+                            years=tcpYears)
+                print("constant updating")
+                sendMessage()
+                pub.publish(message)
+                blockNumber = block[orderNumber].index('')
+                newGenesis = 3
+                dataFollowing = 0
+
+
 
         #if the order number doesn't exist in the array then create genesis block. If it does, then continue where the system left off.
 
@@ -348,13 +355,14 @@ def lowerCasing():
     global tcpMonths
     global tcpYears
     global dataFollowing
+    global oldData
 
     # Create a TCP/IP socket
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     # Then bind() is used to associate the socket with the server address. In this case, the address is localhost, referring to the current server, and the port number is 10000.
 
     # Bind the socket to the port
-    server_address = ('192.168.79.128', 4500)
+    server_address = ('172.21.4.152', 4500)
     print sys.stderr, 'starting up on %s port %s' % server_address
     sock.bind(server_address)
     # Calling listen() puts the socket into server mode, and accept() waits for an incoming connection.
@@ -374,33 +382,42 @@ def lowerCasing():
 
             # Receive the data in small chunks and retransmit it
             while True:
-                data = connection.recv(30)
+                data = connection.recv(31)
 
                 if data:
 
-                    if data == '                              ':
-                        dataFollowing = 0
-                    if data != '                              ':
-                        dataFollowing = 1
-                        # example: 1,1226,211,01,54,18,19,03,2019
+                    # if data == '                              ':
+                    #     dataFollowing = 0
+                    if data != '                               ':
+
+                        # example: 1,1230, 211,48, 6,18,21, 3,2019
                         # print data
                         try:
                             print(data)
-                            tcpStationName = data[0]
-                            tcpOrderNumber = int(data[2] + data[3] + data[4] + data[5])
-                            tcpCarrierNumber = 0
-                            tcpProductCode = int(data[7] + data[8] + data[9])
-                            tcpSeconds = data[11] + data[12]
-                            tcpMinutes = data[14] + data[15]
-                            tcpHours = data[17] + data[18]
-                            tcpDays = data[20] + data[21]
-                            tcpMonths = data[23] + data[24]
-                            tcpYears = data[26] + data[27] + data[28] + data[29]
+                            if oldData != data:
+                                tcpStationName = data[0]
+                                tcpOrderNumber = int(data[2] + data[3] + data[4] + data[5])
+                                tcpCarrierNumber = 0
+                                tcpProductCode = int(data[8] + data[9] + data[10])
+                                tcpSeconds = data[12] + data[13]
+                                tcpMinutes = data[15] + data[16]
+                                tcpHours = data[18] + data[19]
+                                tcpDays = data[21] + data[22]
+                                tcpMonths = data[24] + data[25]
+                                tcpYears = data[27] + data[28] + data[29] + data[30]
+                                dataFollowing = 1
+                                oldData = data
+                                print(dataFollowing)
+
+
+
 
                             # print data
                             # print tcpStationName + ',' + tcpOrderNumber
                         except:
-                                print "lower casting fail"
+                                print "lower casing fail"
+                                print(data)
+                                dataFollowing = 0
                     # time.sleep(1)
                 else:
                     print >> sys.stderr, 'no more data from', client_address
@@ -413,152 +430,13 @@ def lowerCasing():
             connection.close()
 
 
-# def manual():
-#
-#     global tcpStationName
-#     global tcpOrderNumber
-#     global tcpCarrierNumber
-#     global tcpProductCode
-#     global tcpSeconds
-#     global tcpMinutes
-#     global tcpHours
-#     global tcpDays
-#     global tcpMonths
-#     global tcpYears
-#
-#     # Create a TCP/IP socket
-#     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-#     # Then bind() is used to associate the socket with the server address. In this case, the address is localhost, referring to the current server, and the port number is 10000.
-#
-#     # Bind the socket to the port
-#     server_address = ('172.21.4.152', 4501)
-#     print sys.stderr, 'starting up on %s port %s' % server_address
-#     sock.bind(server_address)
-#     # Calling listen() puts the socket into server mode, and accept() waits for an incoming connection.
-#
-#     # Listen for incoming connections
-#     sock.listen(1)
-#
-#     while True:
-#         # Wait for a connection
-#         print >> sys.stderr, 'waiting for a connection'
-#         connection, client_address = sock.accept()
-#         # accept() returns an open connection between the server and client, along with the address of the client. The connection is actually a different socket on another port (assigned by the kernel). Data is read from the connection with recv() and transmitted with sendall().
-#
-#         try:
-#
-#             print >> sys.stderr, 'connection from', client_address
-#
-#             # Receive the data in small chunks and retransmit it
-#             while True:
-#                 data = connection.recv(30)
-#
-#                 if data:
-#                     if data != '                              ':
-#                         # example: 1,1226,211,01,54,18,19,03,2019
-#                         # print data
-#                         try:
-#                             tcpStationName = data[0]
-#                             tcpOrderNumber = data[2] + data[3] + data[4] + data[5]
-#                             tcpCarrierNumber = 0
-#                             tcpSerialNumber = data[7] + data[8] + data[9]
-#                             tcpSeconds = data[11] + data[12]
-#                             tcpMinutes = data[14] + data[15]
-#                             tcpHours = data[17] + data[18]
-#                             tcpDays = data[20] + data[21]
-#                             tcpMonths = data[23] + data[24]
-#                             tcpYears = data[26] + data[27] + data[28] + data[29]
-#
-#                             # print data
-#                             # print tcpStationName + ',' + tcpOrderNumber
-#                         except:
-#                             print "manual fail"
-#                     # time.sleep(1)
-#                 else:
-#                     print >> sys.stderr, 'no more data from', client_address
-#                     break
-#
-#
-#         finally:
-#             # Clean up the connection
-#             connection.close()
-
-# def cameraInspection():
-#
-#     global tcpStationName
-#     global tcpOrderNumber
-#     global tcpCarrierNumber
-#     global tcpSerialNumber
-#     global tcpSeconds
-#     global tcpMinutes
-#     global tcpHours
-#     global tcpDays
-#     global tcpMonths
-#     global tcpYears
-#
-#     # Create a TCP/IP socket
-#     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-#     # Then bind() is used to associate the socket with the server address. In this case, the address is localhost, referring to the current server, and the port number is 10000.
-#
-#     # Bind the socket to the port
-#     server_address = ('172.21.4.152', 4502)
-#     print sys.stderr, 'starting up on %s port %s' % server_address
-#     sock.bind(server_address)
-#     # Calling listen() puts the socket into server mode, and accept() waits for an incoming connection.
-#
-#     # Listen for incoming connections
-#     sock.listen(1)
-#
-#     while True:
-#         # Wait for a connection
-#         print >> sys.stderr, 'waiting for a connection'
-#         connection, client_address = sock.accept()
-#         # accept() returns an open connection between the server and client, along with the address of the client. The connection is actually a different socket on another port (assigned by the kernel). Data is read from the connection with recv() and transmitted with sendall().
-#
-#         try:
-#
-#             print >> sys.stderr, 'connection from', client_address
-#
-#             # Receive the data in small chunks and retransmit it
-#             while True:
-#                 data = connection.recv(30)
-#
-#                 if data:
-#                     if data != '                              ':
-#                         # example: 1,1226,211,01,54,18,19,03,2019
-#                         # print data
-#                         try:
-#                             tcpStationName = data[0]
-#                             tcpOrderNumber = data[2] + data[3] + data[4] + data[5]
-#                             tcpCarrierNumber = 0
-#                             tcpSerialNumber = data[7] + data[8] + data[9]
-#                             tcpSeconds = data[11] + data[12]
-#                             tcpMinutes = data[14] + data[15]
-#                             tcpHours = data[17] + data[18]
-#                             tcpDays = data[20] + data[21]
-#                             tcpMonths = data[23] + data[24]
-#                             tcpYears = data[26] + data[27] + data[28] + data[29]
-#
-#                             # print data
-#                             # print tcpStationName + ',' + tcpOrderNumber
-#                         except:
-#                             print "camera fail"
-#                     # time.sleep(1)
-#                 else:
-#                     print >> sys.stderr, 'no more data from', client_address
-#                     break
-#
-#
-#         finally:
-#             # Clean up the connection
-#             connection.close()
 
 if __name__ == '__main__':
     rospy.init_node('publishBlock', anonymous="True")
     rate = rospy.Rate(10)
     while not rospy.is_shutdown():
         p1 = threading.Thread(target=listener, args=())
-        p2 = threading.Thread(target=main, args=())
+        p2 = threading.Thread(target=mainProg, args=())
         p3 = threading.Thread(target=authentication, args=())
         p4 = threading.Thread(target=emitter, args=())
         p5 = threading.Thread(target=authTrigger, args=())
