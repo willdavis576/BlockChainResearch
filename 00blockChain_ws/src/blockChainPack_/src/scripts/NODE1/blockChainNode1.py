@@ -209,6 +209,8 @@ def callback(data):
     SblockHash[data.productNumber][data.blockNumber] = data.blockHash
     SblockPreviousHash[data.productNumber][data.blockNumber] = data.previousHash
 
+
+
     # counter1 = counter1 + 1
     # rospy.loginfo(data_to_print)
     if runYet[productNumber1] == '':
