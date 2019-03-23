@@ -9,7 +9,7 @@ from blockChainPack_.msg import rewriteNode
 # station, orderNumber, productCode, seconds, minutes, hours, days, months, years
 # productNubmer should now orderNumber
 
-Range = 2000
+Range = 1000
 itemNumber = 0
 dataFollowing = 0
 orderNumber = 0
@@ -255,7 +255,7 @@ def callback(data):
 
     orderNumber1 = data.orderNumber
     data_to_print = "Time Stamp for Block: {0}\nStation: {1}\nOrder Number: {2}\nProduct Code: {3}\nBlock Hash: {4}\nPrevious Hash: {5}".format(
-        data.timeStamp, data.station, data.orderNumber, data.productCode, data.blockHash, data.previousHash)
+        data.timeStamp, data.station, data.orderNumber + 1000, data.productCode, data.blockHash, data.previousHash)
     # print(SblockHash[orderNumber][0] == '')
     SblockTimeStamp[data.orderNumber][data.blockNumber] = data.timeStamp
     SblockTrans[data.orderNumber][data.blockNumber] = data.station
@@ -306,12 +306,12 @@ def callback(data):
     # counter1 = counter1 + 1
     # rospy.loginfo(data_to_print)
     if runYet[orderNumber1] == '':
-        f = open("/home/ros/blockChainGit/00blockChain_ws/blockChain" + str(orderNumber1) + ".txt", "w")
+        f = open("/home/ros/blockChainGit/00blockChain_ws/blockChain" + str(orderNumber1 + 1000) + ".txt", "w")
         f.close()
         runYet[orderNumber1] = "1"
 
     if runYet[orderNumber1] == "1":
-        f = open("/home/ros/blockChainGit/00blockChain_ws/blockChain" + str(orderNumber1) + ".txt", "a")
+        f = open("/home/ros/blockChainGit/00blockChain_ws/blockChain" + str(orderNumber1 + 1000) + ".txt", "a")
         f.write(str(data_to_print))
         f.write("\n-------------------------------\n")
         f.close()
@@ -466,7 +466,7 @@ def manual():
                             # print(data)
                             if oldData != data:
                                 tcpStationName = data[0]
-                                tcpOrderNumber = int(data[2] + data[3] + data[4] + data[5])
+                                tcpOrderNumber = int(data[2] + data[3] + data[4] + data[5]) - 1000
                                 tcpCarrierNumber = int(data[7])
                                 tcpProductCode = int(data[9] + data[10] + data[11])
                                 tcpSeconds = data[13] + data[14]

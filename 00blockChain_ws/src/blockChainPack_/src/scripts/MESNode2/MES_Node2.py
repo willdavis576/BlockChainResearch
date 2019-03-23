@@ -9,7 +9,7 @@ from blockChainPack_.msg import rewriteNode
 # station, orderNumber, productCode, seconds, minutes, hours, days, months, years
 # productNubmer should now orderNumber
 
-Range = 2000
+Range = 1000
 cRange = 4
 itemNumber = 0
 dataFollowing = 0
@@ -149,13 +149,13 @@ def sendMessage():
         message = blockDetail()
         message.blockNumber = block[orderNumber].index('') - 1
 
-        message.timeStamp = block[orderNumber][tcpCarrierNumber][block[orderNumber].index('') - 1].getTimeStamp()
-        message.station = str(block[orderNumber][tcpCarrierNumber][block[orderNumber].index('') - 1].getStation())
-        message.orderNumber = block[orderNumber][tcpCarrierNumber][block[orderNumber].index('') - 1].getOrderNumber()
-        message.carrierID = block[orderNumber][tcpCarrierNumber][block[orderNumber].index('') - 1].getCarrierID()
-        message.productCode = block[orderNumber][tcpCarrierNumber][block[orderNumber].index('') - 1].getProductCode()
-        message.blockHash = block[orderNumber][tcpCarrierNumber][block[orderNumber].index('') - 1].getBlockHash()
-        message.previousHash = block[orderNumber][tcpCarrierNumber][block[orderNumber].index('') - 1].getPreviousHash()
+        message.timeStamp = block[orderNumber][tcpCarrierNumber][block[tcpOrderNumber][tcpCarrierNumber].index('') - 1].getTimeStamp()
+        message.station = str(block[orderNumber][tcpCarrierNumber][block[tcpOrderNumber][tcpCarrierNumber].index('') - 1].getStation())
+        message.orderNumber = block[orderNumber][tcpCarrierNumber][block[tcpOrderNumber][tcpCarrierNumber].index('') - 1].getOrderNumber()
+        message.carrierID = block[orderNumber][tcpCarrierNumber][block[tcpOrderNumber][tcpCarrierNumber].index('') - 1].getCarrierID()
+        message.productCode = block[orderNumber][tcpCarrierNumber][block[tcpOrderNumber][tcpCarrierNumber].index('') - 1].getProductCode()
+        message.blockHash = block[orderNumber][tcpCarrierNumber][block[tcpOrderNumber][tcpCarrierNumber].index('') - 1].getBlockHash()
+        message.previousHash = block[orderNumber][tcpCarrierNumber][block[tcpOrderNumber][tcpCarrierNumber].index('') - 1].getPreviousHash()
         # print(block[orderNumber][block[orderNumber].index('') - 1].getPreviousHash())
 
     except:
@@ -187,19 +187,20 @@ def mainProg():
             # Setup for genesis block
             orderNumber = tcpOrderNumber
             # print(orderNumber)
-            # print("trying to build")
+            print("trying to build")
             try:
-                # print("Trying to create block")
-                if orderNcarrierNumberList[tcpOrderNumber][tcpCarrierNumber].index('') > -1:
+                print("Trying to create block")
+                if orderNcarrierNumberList[tcpOrderNumber][tcpCarrierNumber].index(1) > -1:
                     newGenesis = 0
             except:
+                print("exception")
                 if SCarrierNumber[tcpOrderNumber][tcpCarrierNumber] != 1:
                     newGenesis = 1
 
                 else:  # this node has already published information
                     newGenesis = 0
 
-                # print("Order number not a thing, creating a new blockchain")
+                print("Order number not a thing, creating a new blockchain")
             # Genesis Block
             # print(SblockHash[orderNumber].index('') == 0)
             if newGenesis == 1:
@@ -220,7 +221,7 @@ def mainProg():
                     block[tcpOrderNumber][tcpCarrierNumber].index('') - 1].getBlockHash())
 
                 time.sleep(1)
-                # print("sending message in gen1")
+                print("sending message in gen1")
                 sendMessage()
                 pub.publish(message)
                 # print(orderNumber, blockNumber)
@@ -237,8 +238,8 @@ def mainProg():
                             station=tcpStationName, carrierID=tcpCarrierNumber, productCode=tcpProductCode,
                             seconds=tcpSeconds, minutes=tcpMinutes, hours=tcpHours, days=tcpDays, months=tcpMonths,
                             years=tcpYears)
-                # print("sending message in gen0")
-
+                print("sending message in gen0")
+                print(block[orderNumber][tcpCarrierNumber][block[tcpOrderNumber][tcpCarrierNumber].index('') - 1])
                 sendMessage()
                 time.sleep(1)
                 pub.publish(message)
@@ -273,7 +274,7 @@ def callback(data):
 
     orderNumber1 = data.orderNumber
     data_to_print = "Time Stamp for Block: {0}\nStation: {1}\nOrder Number: {2}\nCarrierID: {3}\nProduct Code: {4}\nBlock Hash: {5}\nPrevious Hash: {6}".format(
-        data.timeStamp, data.station, data.orderNumber, data.carrierID, data.productCode, data.blockHash,
+        data.timeStamp, data.station, data.orderNumber + 1000, data.carrierID, data.productCode, data.blockHash,
         data.previousHash)
     # print(SblockHash[orderNumber][0] == '')
     SblockTimeStamp[data.orderNumber][data.carrierID][data.blockNumber] = data.timeStamp
@@ -293,7 +294,8 @@ def callback(data):
     # hours + ':' + minutes + ':' + seconds + ' - ' + days + '/' + months + '/' + years
 
     # 18:54:01 - 19 / 03 / 2019
-
+    print(block[data.orderNumber][data.carrierID][data.blockNumber])
+    print(data.timeStamp)
     print(data.timeStamp[6] + data.timeStamp[7])
     print(data.timeStamp[3] + data.timeStamp[4])
     print(data.timeStamp[0] + data.timeStamp[1])
@@ -324,13 +326,13 @@ def callback(data):
     # counter1 = counter1 + 1
     # rospy.loginfo(data_to_print)
     if runYet[data.orderNumber][data.carrierID] == '':
-        f = open("/home/ros/blockChainGit/00blockChain_ws/src/Product" + str(data.orderNumber) + "C:" + str(
+        f = open("/home/ros/blockChainGit/00blockChain_ws/src/Product" + str(data.orderNumber + 1000) + "C:" + str(
             data.carrierID) + ".txt", "w")
         f.close()
         runYet[data.orderNumber][data.carrierID] = "1"
 
     if runYet[data.orderNumber][data.carrierID] == "1":
-        f = open("/home/ros/blockChainGit/00blockChain_ws/src/Product" + str(data.orderNumber) + "C:" + str(
+        f = open("/home/ros/blockChainGit/00blockChain_ws/src/Product" + str(data.orderNumber + 1000) + "C:" + str(
             data.carrierID) + ".txt", "a")
         f.write(str(data_to_print))
         f.write("\n-------------------------------\n")
@@ -487,7 +489,7 @@ def manual():
                             if oldData != data:
                                 print(data)
                                 tcpStationName = data[0]
-                                tcpOrderNumber = int(data[2] + data[3] + data[4] + data[5])
+                                tcpOrderNumber = int(data[2] + data[3] + data[4] + data[5]) - 1000
                                 tcpCarrierNumber = int(data[7])
                                 tcpProductCode = int(data[9] + data[10] + data[11])
                                 tcpSeconds = data[13] + data[14]
