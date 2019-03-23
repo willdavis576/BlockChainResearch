@@ -51,7 +51,7 @@ SOrderNumber = [['' for _ in range(Range)] for _ in range(Range)]
 Sblock = ''
 authOrderNumber = 0
 blockString = ''
-nodeName = "NODE2"  ############### THIS IS WHERE YOU SPECIFY A NODE'S NAME #######################
+nodeName = "NODE3"  ############### THIS IS WHERE YOU SPECIFY A NODE'S NAME #######################
 
 # TCP SERVER STUFF
 tcpStationName = 0
@@ -298,12 +298,12 @@ def callback(data):
     # counter1 = counter1 + 1
     # rospy.loginfo(data_to_print)
     if runYet[orderNumber1] == '':
-        f = open("/home/ros/blockChainGit/00blockChain_ws/src/blockChain" + str(orderNumber1) + ".txt", "w")
+        f = open("/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/blockChain" + str(orderNumber1) + ".txt", "w")
         f.close()
         runYet[orderNumber1] = "1"
 
     if runYet[orderNumber1] == "1":
-        f = open("/home/ros/blockChainGit/00blockChain_ws/src/blockChain" + str(orderNumber1) + ".txt", "a")
+        f = open("/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/blockChain" + str(orderNumber1) + ".txt", "a")
         f.write(str(data_to_print))
         f.write("\n-------------------------------\n")
         f.close()
@@ -359,7 +359,7 @@ def emitter():
         for i in range(orderNumber + 1):
             pub = rospy.Publisher('Last_Hash', lastHash, queue_size=100)
             message2 = lastHash()
-            message2.nodeName = "NODE2"
+            message2.nodeName = "NODE3"
             message2.orderNumber = i
             message2.hash = SblockHash[i][SblockHash[i].index('', 1) - 1]
             pub.publish(message2)
@@ -424,7 +424,7 @@ def manual():
     # Then bind() is used to associate the socket with the server address. In this case, the address is localhost, referring to the current server, and the port number is 10000.
 
     # Bind the socket to the port
-    server_address = ('172.21.4.152', 4501)
+    server_address = ('172.21.4.152', 4502)
     print sys.stderr, 'starting up on %s port %s' % server_address
     sock.bind(server_address)
     # Calling listen() puts the socket into server mode, and accept() waits for an incoming connection.
