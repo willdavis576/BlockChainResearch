@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d548811d-0aca-477e-bfa2-a5ed9f109e3c" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/../../../blockChain1243.txt" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/MESNode1/MES_Node1.py" afterPath="$PROJECT_DIR$/MESNode1/MES_Node1.py" />
       <change beforePath="$PROJECT_DIR$/MESNode2/MES_Node2.py" afterPath="$PROJECT_DIR$/MESNode2/MES_Node2.py" />
-      <change beforePath="$PROJECT_DIR$/MESNode3/MES_Node3.py" afterPath="$PROJECT_DIR$/MESNode3/MES_Node3.py" />
-      <change beforePath="$PROJECT_DIR$/Server2.py" afterPath="$PROJECT_DIR$/Server2.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -34,8 +30,8 @@
       <file leaf-file-name="MES_Node1.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MESNode1/MES_Node1.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1421">
-              <caret line="308" column="58" lean-forward="false" selection-start-line="308" selection-start-column="58" selection-end-line="308" selection-end-column="58" />
+            <state relative-caret-position="611">
+              <caret line="290" column="79" lean-forward="true" selection-start-line="290" selection-start-column="79" selection-end-line="290" selection-end-column="79" />
               <folding>
                 <element signature="e#2302#3417#0" expanded="false" />
                 <element signature="e#9250#9331#0" expanded="false" />
@@ -53,18 +49,9 @@
       <file leaf-file-name="MES_Node2.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MESNode2/MES_Node2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1290">
-              <caret line="484" column="41" lean-forward="false" selection-start-line="484" selection-start-column="41" selection-end-line="484" selection-end-column="41" />
-              <folding>
-                <element signature="e#2302#3417#0" expanded="false" />
-                <element signature="e#9250#9331#0" expanded="false" />
-                <element signature="e#13247#13317#0" expanded="false" />
-                <element signature="e#13348#13895#0" expanded="false" />
-                <element signature="e#13921#14378#0" expanded="false" />
-                <element signature="e#14400#15016#0" expanded="false" />
-                <element signature="e#15043#15566#0" expanded="false" />
-                <element signature="e#19077#20284#0" expanded="false" />
-              </folding>
+            <state relative-caret-position="671">
+              <caret line="490" column="47" lean-forward="false" selection-start-line="490" selection-start-column="47" selection-end-line="490" selection-end-column="47" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -135,10 +122,7 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>repea</find>
-      <find>anonymous</find>
       <find>anon</find>
-      <find>node</find>
       <find>oldinfo</find>
       <find>[1,1</find>
       <find>counter1</find>
@@ -158,12 +142,15 @@
       <find>data</find>
       <find>Counter</find>
       <find>blockNumber</find>
-      <find>Node1</find>
       <find>print</find>
       <find>node1</find>
       <find>SblockHash[</find>
       <find>node2</find>
       <find>orderNumberList</find>
+      <find>runY</find>
+      <find>Node1</find>
+      <find>authOrderNumber</find>
+      <find>node</find>
       <find>Node2</find>
     </findStrings>
   </component>
@@ -236,6 +223,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../../raspberryPiFiles/listener.py" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -585,8 +573,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/MESNode1/MES_Node1.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1421">
-          <caret line="308" column="58" lean-forward="false" selection-start-line="308" selection-start-column="58" selection-end-line="308" selection-end-column="58" />
+        <state relative-caret-position="611">
+          <caret line="290" column="79" lean-forward="true" selection-start-line="290" selection-start-column="79" selection-end-line="290" selection-end-column="79" />
           <folding>
             <element signature="e#2302#3417#0" expanded="false" />
             <element signature="e#9250#9331#0" expanded="false" />
@@ -602,20 +590,26 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/MESNode2/MES_Node2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1290">
-          <caret line="484" column="41" lean-forward="false" selection-start-line="484" selection-start-column="41" selection-end-line="484" selection-end-column="41" />
-          <folding>
-            <element signature="e#2302#3417#0" expanded="false" />
-            <element signature="e#9250#9331#0" expanded="false" />
-            <element signature="e#13247#13317#0" expanded="false" />
-            <element signature="e#13348#13895#0" expanded="false" />
-            <element signature="e#13921#14378#0" expanded="false" />
-            <element signature="e#14400#15016#0" expanded="false" />
-            <element signature="e#15043#15566#0" expanded="false" />
-            <element signature="e#19077#20284#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="671">
+          <caret line="490" column="47" lean-forward="false" selection-start-line="490" selection-start-column="47" selection-end-line="490" selection-end-column="47" />
+          <folding />
         </state>
       </provider>
     </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ScopeChooserConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
   </component>
 </project>
