@@ -20,6 +20,7 @@ class blockDetail {
       // initObj === null is a special case for deserialization where we don't initialize fields
       this.blockNumber = null;
       this.orderNumber = null;
+      this.carrierID = null;
       this.timeStamp = null;
       this.station = null;
       this.productCode = null;
@@ -38,6 +39,12 @@ class blockDetail {
       }
       else {
         this.orderNumber = 0;
+      }
+      if (initObj.hasOwnProperty('carrierID')) {
+        this.carrierID = initObj.carrierID
+      }
+      else {
+        this.carrierID = 0;
       }
       if (initObj.hasOwnProperty('timeStamp')) {
         this.timeStamp = initObj.timeStamp
@@ -78,6 +85,8 @@ class blockDetail {
     bufferOffset = _serializer.int64(obj.blockNumber, buffer, bufferOffset);
     // Serialize message field [orderNumber]
     bufferOffset = _serializer.int64(obj.orderNumber, buffer, bufferOffset);
+    // Serialize message field [carrierID]
+    bufferOffset = _serializer.int64(obj.carrierID, buffer, bufferOffset);
     // Serialize message field [timeStamp]
     bufferOffset = _serializer.string(obj.timeStamp, buffer, bufferOffset);
     // Serialize message field [station]
@@ -99,6 +108,8 @@ class blockDetail {
     data.blockNumber = _deserializer.int64(buffer, bufferOffset);
     // Deserialize message field [orderNumber]
     data.orderNumber = _deserializer.int64(buffer, bufferOffset);
+    // Deserialize message field [carrierID]
+    data.carrierID = _deserializer.int64(buffer, bufferOffset);
     // Deserialize message field [timeStamp]
     data.timeStamp = _deserializer.string(buffer, bufferOffset);
     // Deserialize message field [station]
@@ -118,7 +129,7 @@ class blockDetail {
     length += object.station.length;
     length += object.blockHash.length;
     length += object.previousHash.length;
-    return length + 40;
+    return length + 48;
   }
 
   static datatype() {
@@ -128,7 +139,7 @@ class blockDetail {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return 'f78d193a3443341bccb41389748c5d9e';
+    return '5091a84f3e39f87dbd6a52f50fce01bf';
   }
 
   static messageDefinition() {
@@ -136,6 +147,7 @@ class blockDetail {
     return `
     int64 blockNumber
     int64 orderNumber
+    int64 carrierID
     string timeStamp
     string station
     int64 productCode
@@ -163,6 +175,13 @@ class blockDetail {
     }
     else {
       resolved.orderNumber = 0
+    }
+
+    if (msg.carrierID !== undefined) {
+      resolved.carrierID = msg.carrierID;
+    }
+    else {
+      resolved.carrierID = 0
     }
 
     if (msg.timeStamp !== undefined) {

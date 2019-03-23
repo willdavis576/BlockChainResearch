@@ -3,6 +3,8 @@
           BLOCKNUMBER
           ORDERNUMBER-VAL
           ORDERNUMBER
+          CARRIERID-VAL
+          CARRIERID
           TIMESTAMP-VAL
           TIMESTAMP
           STATION-VAL

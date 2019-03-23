@@ -48,6 +48,7 @@ SblockHash = [['' for _ in range(Range)] for _ in range(Range)]
 SblockPreviousHash = [['' for _ in range(Range)] for _ in range(Range)]
 SblockNumber = [['' for _ in range(Range)] for _ in range(Range)]
 SOrderNumber = [['' for _ in range(Range)] for _ in range(Range)]
+SCarrierNumber = [['' for _ in range(Range)] for _ in range(Range)]
 Sblock = ''
 authOrderNumber = 0
 blockString = ''
@@ -76,14 +77,15 @@ years = 0
 
 class blockChain:
 
-    def __init__(self, previousHash, station, productCode, orderNumber, seconds, minutes, hours, days, months, years):
+    def __init__(self, previousHash, station, productCode, orderNumber, carrierID, seconds, minutes, hours, days, months, years):
         self.timeStamp = str(hours + ':' + minutes + ':' + seconds + ' - ' + days + '/' + months + '/' + years)
         self.productCode = productCode
         self.orderNumber = orderNumber
+        self.carrierID = carrierID
         self.previousHash = previousHash
         self.station = station
         self.contains = hashlib.sha256(self.station.encode()).hexdigest() + previousHash + str(
-            self.timeStamp) + str(self.productCode) + str(self.orderNumber)
+            self.timeStamp) + str(self.productCode) + str(self.orderNumber) + str(self.carrierID)
         self.blockHash = hashlib.sha256(self.contains.encode()).hexdigest()
 
     def getTimeStamp(self):
@@ -104,15 +106,18 @@ class blockChain:
     def getOrderNumber(self):
         return self.orderNumber
 
+    def getCarrierID(self):
+        return self.carrierID
 
-def blockUpdate(blockNumber, orderNumber, station, productCode, seconds, minutes, hours, days, months, years):
+
+def blockUpdate(blockNumber, orderNumber, carrierID, station, productCode, seconds, minutes, hours, days, months, years):
     global SblockHash
 
     for i in range(blockNumber, blockNumber + 1):
         blockNumber = i
         block[orderNumber][blockNumber] = blockChain(
             previousHash=SblockHash[tcpOrderNumber][block[orderNumber].index('') - 1], station=station,
-            productCode=productCode, orderNumber=orderNumber, seconds=seconds, minutes=minutes,
+            productCode=productCode, orderNumber=orderNumber, carrierID= carrierID, seconds=seconds, minutes=minutes,
             hours=hours, days=days, months=months, years=years)
         # print("blockUpdate")
         # print(SblockHash[1243][0])
@@ -131,6 +136,7 @@ def sendMessage():
         message.timeStamp = block[orderNumber][block[orderNumber].index('') - 1].getTimeStamp()
         message.station = str(block[orderNumber][block[orderNumber].index('') - 1].getStation())
         message.orderNumber = block[orderNumber][block[orderNumber].index('') - 1].getOrderNumber()
+        message.carrierID = block[orderNumber][block[orderNumber].index('') - 1].getCarrierID()
         message.productCode = block[orderNumber][block[orderNumber].index('') - 1].getProductCode()
         message.blockHash = block[orderNumber][block[orderNumber].index('') - 1].getBlockHash()
         message.previousHash = block[orderNumber][block[orderNumber].index('') - 1].getPreviousHash()
@@ -154,7 +160,7 @@ def mainProg():
     global nodeName
     global nodeUp
     global itemNumber
-    global orderNumberList
+    global orderNcarrierNumberList
     global dataFollowing
     global SblockNumber
 
@@ -184,7 +190,7 @@ def mainProg():
                 block[orderNumber][block[orderNumber].index('')] = blockChain(previousHash='',
                                                                               station="Start production",
                                                                               productCode=tcpProductCode,
-                                                                              orderNumber=tcpOrderNumber,
+                                                                              orderNumber=tcpOrderNumber, carrierID=tcpCarrierNumber,
                                                                               seconds=str(datetime.now())[17:19],
                                                                               minutes=str(datetime.now())[14:16],
                                                                               hours=str(datetime.now())[11:13],
@@ -210,7 +216,7 @@ def mainProg():
             if newGenesis == 0:
                 time.sleep(1)
                 blockUpdate(blockNumber=block[tcpOrderNumber].index(''), orderNumber=tcpOrderNumber,
-                            station=tcpStationName, productCode=tcpProductCode,
+                            station=tcpStationName, carrierID=tcpCarrierNumber, productCode=tcpProductCode,
                             seconds=tcpSeconds, minutes=tcpMinutes, hours=tcpHours, days=tcpDays, months=tcpMonths,
                             years=tcpYears)
                 # print("sending message in gen0")
@@ -240,6 +246,7 @@ def callback(data):
     global SblockProductCode
     global SblockHash
     global SblockPreviousHash
+    global SCarrierNumber
 
     global SblockNumber
     global SOrderNumber
@@ -255,6 +262,7 @@ def callback(data):
     SblockProductCode[data.orderNumber][data.blockNumber] = data.productCode
     SblockHash[data.orderNumber][data.blockNumber] = data.blockHash
     SblockPreviousHash[data.orderNumber][data.blockNumber] = data.previousHash
+    SCarrierNumber[data.orderNumber][data.carrierID] = 1
 
     SblockNumber = data.blockNumber
 
@@ -279,7 +287,7 @@ def callback(data):
     if block[data.orderNumber][data.blockNumber] == '':
         block[data.orderNumber][data.blockNumber] = blockChain(previousHash=data.previousHash, station=data.station,
                                                                productCode=data.productCode,
-                                                               orderNumber=data.orderNumber,
+                                                               orderNumber=data.orderNumber, carrierID= data.carrierID,
                                                                seconds=data.timeStamp[6] + data.timeStamp[7],
                                                                minutes=
                                                                    data.timeStamp[3] + data.timeStamp[4],
@@ -444,13 +452,13 @@ def manual():
 
             # Receive the data in small chunks and retransmit it
             while True:
-                data = connection.recv(31)
+                data = connection.recv(32)
 
                 if data:
 
-                    # if data == '                              ':
+                    # if data == '                               ':
                     #     dataFollowing = 0
-                    if data != '                               ':
+                    if data != '                                ':
 
                         # example: 1,1230, 211,48, 6,18,21, 3,2019
                         # print data
@@ -459,14 +467,14 @@ def manual():
                             if oldData != data:
                                 tcpStationName = data[0]
                                 tcpOrderNumber = int(data[2] + data[3] + data[4] + data[5])
-                                tcpCarrierNumber = 0
-                                tcpProductCode = int(data[8] + data[9] + data[10])
-                                tcpSeconds = data[12] + data[13]
-                                tcpMinutes = data[15] + data[16]
-                                tcpHours = data[18] + data[19]
-                                tcpDays = data[21] + data[22]
-                                tcpMonths = data[24] + data[25]
-                                tcpYears = data[27] + data[28] + data[29] + data[30]
+                                tcpCarrierNumber = int(data[7])
+                                tcpProductCode = int(data[9] + data[10] + data[11])
+                                tcpSeconds = data[13] + data[14]
+                                tcpMinutes = data[16] + data[17]
+                                tcpHours = data[19] + data[20]
+                                tcpDays = data[22] + data[23]
+                                tcpMonths = data[25] + data[26]
+                                tcpYears = data[28] + data[29] + data[30] + data[31]
                                 dataFollowing = 1
                                 oldData = data
                                 # print(dataFollowing)
@@ -474,7 +482,7 @@ def manual():
                             # print data
                             # print tcpStationName + ',' + tcpOrderNumber
                         except:
-                            print "lower casing fail"
+                            print "manual fail"
                             print(data)
                             dataFollowing = 0
                     # time.sleep(1)

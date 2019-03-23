@@ -29,7 +29,7 @@ def lowerCasing():
 
             # Receive the data in small chunks and retransmit it
             while True:
-                data = connection.recv(30)
+                data = connection.recv(32)
 
 
                 if data:

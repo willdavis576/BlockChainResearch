@@ -26,6 +26,7 @@ struct blockDetail_
   blockDetail_()
     : blockNumber(0)
     , orderNumber(0)
+    , carrierID(0)
     , timeStamp()
     , station()
     , productCode(0)
@@ -35,6 +36,7 @@ struct blockDetail_
   blockDetail_(const ContainerAllocator& _alloc)
     : blockNumber(0)
     , orderNumber(0)
+    , carrierID(0)
     , timeStamp(_alloc)
     , station(_alloc)
     , productCode(0)
@@ -50,6 +52,9 @@ struct blockDetail_
 
    typedef int64_t _orderNumber_type;
   _orderNumber_type orderNumber;
+
+   typedef int64_t _carrierID_type;
+  _carrierID_type carrierID;
 
    typedef std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other >  _timeStamp_type;
   _timeStamp_type timeStamp;
@@ -144,12 +149,12 @@ struct MD5Sum< ::blockChainPack_::blockDetail_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "f78d193a3443341bccb41389748c5d9e";
+    return "5091a84f3e39f87dbd6a52f50fce01bf";
   }
 
   static const char* value(const ::blockChainPack_::blockDetail_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0xf78d193a3443341bULL;
-  static const uint64_t static_value2 = 0xccb41389748c5d9eULL;
+  static const uint64_t static_value1 = 0x5091a84f3e39f87dULL;
+  static const uint64_t static_value2 = 0xbd6a52f50fce01bfULL;
 };
 
 template<class ContainerAllocator>
@@ -170,6 +175,7 @@ struct Definition< ::blockChainPack_::blockDetail_<ContainerAllocator> >
   {
     return "int64 blockNumber\n\
 int64 orderNumber\n\
+int64 carrierID\n\
 string timeStamp\n\
 string station\n\
 int64 productCode\n\
@@ -195,6 +201,7 @@ namespace serialization
     {
       stream.next(m.blockNumber);
       stream.next(m.orderNumber);
+      stream.next(m.carrierID);
       stream.next(m.timeStamp);
       stream.next(m.station);
       stream.next(m.productCode);
@@ -222,6 +229,8 @@ struct Printer< ::blockChainPack_::blockDetail_<ContainerAllocator> >
     Printer<int64_t>::stream(s, indent + "  ", v.blockNumber);
     s << indent << "orderNumber: ";
     Printer<int64_t>::stream(s, indent + "  ", v.orderNumber);
+    s << indent << "carrierID: ";
+    Printer<int64_t>::stream(s, indent + "  ", v.carrierID);
     s << indent << "timeStamp: ";
     Printer<std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other > >::stream(s, indent + "  ", v.timeStamp);
     s << indent << "station: ";

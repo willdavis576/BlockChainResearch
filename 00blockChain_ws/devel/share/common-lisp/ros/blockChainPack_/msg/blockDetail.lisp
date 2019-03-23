@@ -17,6 +17,11 @@
     :initarg :orderNumber
     :type cl:integer
     :initform 0)
+   (carrierID
+    :reader carrierID
+    :initarg :carrierID
+    :type cl:integer
+    :initform 0)
    (timeStamp
     :reader timeStamp
     :initarg :timeStamp
@@ -62,6 +67,11 @@
   (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader blockChainPack_-msg:orderNumber-val is deprecated.  Use blockChainPack_-msg:orderNumber instead.")
   (orderNumber m))
 
+(cl:ensure-generic-function 'carrierID-val :lambda-list '(m))
+(cl:defmethod carrierID-val ((m <blockDetail>))
+  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader blockChainPack_-msg:carrierID-val is deprecated.  Use blockChainPack_-msg:carrierID instead.")
+  (carrierID m))
+
 (cl:ensure-generic-function 'timeStamp-val :lambda-list '(m))
 (cl:defmethod timeStamp-val ((m <blockDetail>))
   (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader blockChainPack_-msg:timeStamp-val is deprecated.  Use blockChainPack_-msg:timeStamp instead.")
@@ -99,6 +109,16 @@
     (cl:write-byte (cl:ldb (cl:byte 8 56) unsigned) ostream)
     )
   (cl:let* ((signed (cl:slot-value msg 'orderNumber)) (unsigned (cl:if (cl:< signed 0) (cl:+ signed 18446744073709551616) signed)))
+    (cl:write-byte (cl:ldb (cl:byte 8 0) unsigned) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 8) unsigned) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 16) unsigned) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 24) unsigned) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 32) unsigned) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 40) unsigned) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 48) unsigned) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 56) unsigned) ostream)
+    )
+  (cl:let* ((signed (cl:slot-value msg 'carrierID)) (unsigned (cl:if (cl:< signed 0) (cl:+ signed 18446744073709551616) signed)))
     (cl:write-byte (cl:ldb (cl:byte 8 0) unsigned) ostream)
     (cl:write-byte (cl:ldb (cl:byte 8 8) unsigned) ostream)
     (cl:write-byte (cl:ldb (cl:byte 8 16) unsigned) ostream)
@@ -165,6 +185,16 @@
       (cl:setf (cl:ldb (cl:byte 8 48) unsigned) (cl:read-byte istream))
       (cl:setf (cl:ldb (cl:byte 8 56) unsigned) (cl:read-byte istream))
       (cl:setf (cl:slot-value msg 'orderNumber) (cl:if (cl:< unsigned 9223372036854775808) unsigned (cl:- unsigned 18446744073709551616))))
+    (cl:let ((unsigned 0))
+      (cl:setf (cl:ldb (cl:byte 8 0) unsigned) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 8) unsigned) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 16) unsigned) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 24) unsigned) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 32) unsigned) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 40) unsigned) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 48) unsigned) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 56) unsigned) (cl:read-byte istream))
+      (cl:setf (cl:slot-value msg 'carrierID) (cl:if (cl:< unsigned 9223372036854775808) unsigned (cl:- unsigned 18446744073709551616))))
     (cl:let ((__ros_str_len 0))
       (cl:setf (cl:ldb (cl:byte 8 0) __ros_str_len) (cl:read-byte istream))
       (cl:setf (cl:ldb (cl:byte 8 8) __ros_str_len) (cl:read-byte istream))
@@ -217,18 +247,19 @@
   "blockChainPack_/blockDetail")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql '<blockDetail>)))
   "Returns md5sum for a message object of type '<blockDetail>"
-  "f78d193a3443341bccb41389748c5d9e")
+  "5091a84f3e39f87dbd6a52f50fce01bf")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql 'blockDetail)))
   "Returns md5sum for a message object of type 'blockDetail"
-  "f78d193a3443341bccb41389748c5d9e")
+  "5091a84f3e39f87dbd6a52f50fce01bf")
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql '<blockDetail>)))
   "Returns full string definition for message of type '<blockDetail>"
-  (cl:format cl:nil "int64 blockNumber~%int64 orderNumber~%string timeStamp~%string station~%int64 productCode~%string blockHash~%string previousHash~%~%~%"))
+  (cl:format cl:nil "int64 blockNumber~%int64 orderNumber~%int64 carrierID~%string timeStamp~%string station~%int64 productCode~%string blockHash~%string previousHash~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql 'blockDetail)))
   "Returns full string definition for message of type 'blockDetail"
-  (cl:format cl:nil "int64 blockNumber~%int64 orderNumber~%string timeStamp~%string station~%int64 productCode~%string blockHash~%string previousHash~%~%~%"))
+  (cl:format cl:nil "int64 blockNumber~%int64 orderNumber~%int64 carrierID~%string timeStamp~%string station~%int64 productCode~%string blockHash~%string previousHash~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:serialization-length ((msg <blockDetail>))
   (cl:+ 0
+     8
      8
      8
      4 (cl:length (cl:slot-value msg 'timeStamp))
@@ -242,6 +273,7 @@
   (cl:list 'blockDetail
     (cl:cons ':blockNumber (blockNumber msg))
     (cl:cons ':orderNumber (orderNumber msg))
+    (cl:cons ':carrierID (carrierID msg))
     (cl:cons ':timeStamp (timeStamp msg))
     (cl:cons ':station (station msg))
     (cl:cons ':productCode (productCode msg))

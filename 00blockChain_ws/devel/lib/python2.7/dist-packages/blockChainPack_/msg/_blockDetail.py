@@ -7,19 +7,20 @@ import struct
 
 
 class blockDetail(genpy.Message):
-  _md5sum = "f78d193a3443341bccb41389748c5d9e"
+  _md5sum = "5091a84f3e39f87dbd6a52f50fce01bf"
   _type = "blockChainPack_/blockDetail"
   _has_header = False #flag to mark the presence of a Header object
   _full_text = """int64 blockNumber
 int64 orderNumber
+int64 carrierID
 string timeStamp
 string station
 int64 productCode
 string blockHash
 string previousHash
 """
-  __slots__ = ['blockNumber','orderNumber','timeStamp','station','productCode','blockHash','previousHash']
-  _slot_types = ['int64','int64','string','string','int64','string','string']
+  __slots__ = ['blockNumber','orderNumber','carrierID','timeStamp','station','productCode','blockHash','previousHash']
+  _slot_types = ['int64','int64','int64','string','string','int64','string','string']
 
   def __init__(self, *args, **kwds):
     """
@@ -29,7 +30,7 @@ string previousHash
     changes.  You cannot mix in-order arguments and keyword arguments.
 
     The available fields are:
-       blockNumber,orderNumber,timeStamp,station,productCode,blockHash,previousHash
+       blockNumber,orderNumber,carrierID,timeStamp,station,productCode,blockHash,previousHash
 
     :param args: complete set of field values, in .msg order
     :param kwds: use keyword arguments corresponding to message field names
@@ -42,6 +43,8 @@ string previousHash
         self.blockNumber = 0
       if self.orderNumber is None:
         self.orderNumber = 0
+      if self.carrierID is None:
+        self.carrierID = 0
       if self.timeStamp is None:
         self.timeStamp = ''
       if self.station is None:
@@ -55,6 +58,7 @@ string previousHash
     else:
       self.blockNumber = 0
       self.orderNumber = 0
+      self.carrierID = 0
       self.timeStamp = ''
       self.station = ''
       self.productCode = 0
@@ -74,7 +78,7 @@ string previousHash
     """
     try:
       _x = self
-      buff.write(_get_struct_2q().pack(_x.blockNumber, _x.orderNumber))
+      buff.write(_get_struct_3q().pack(_x.blockNumber, _x.orderNumber, _x.carrierID))
       _x = self.timeStamp
       length = len(_x)
       if python3 or type(_x) == unicode:
@@ -112,8 +116,8 @@ string previousHash
       end = 0
       _x = self
       start = end
-      end += 16
-      (_x.blockNumber, _x.orderNumber,) = _get_struct_2q().unpack(str[start:end])
+      end += 24
+      (_x.blockNumber, _x.orderNumber, _x.carrierID,) = _get_struct_3q().unpack(str[start:end])
       start = end
       end += 4
       (length,) = _struct_I.unpack(str[start:end])
@@ -166,7 +170,7 @@ string previousHash
     """
     try:
       _x = self
-      buff.write(_get_struct_2q().pack(_x.blockNumber, _x.orderNumber))
+      buff.write(_get_struct_3q().pack(_x.blockNumber, _x.orderNumber, _x.carrierID))
       _x = self.timeStamp
       length = len(_x)
       if python3 or type(_x) == unicode:
@@ -205,8 +209,8 @@ string previousHash
       end = 0
       _x = self
       start = end
-      end += 16
-      (_x.blockNumber, _x.orderNumber,) = _get_struct_2q().unpack(str[start:end])
+      end += 24
+      (_x.blockNumber, _x.orderNumber, _x.carrierID,) = _get_struct_3q().unpack(str[start:end])
       start = end
       end += 4
       (length,) = _struct_I.unpack(str[start:end])
@@ -260,9 +264,9 @@ def _get_struct_q():
     if _struct_q is None:
         _struct_q = struct.Struct("<q")
     return _struct_q
-_struct_2q = None
-def _get_struct_2q():
-    global _struct_2q
-    if _struct_2q is None:
-        _struct_2q = struct.Struct("<2q")
-    return _struct_2q
+_struct_3q = None
+def _get_struct_3q():
+    global _struct_3q
+    if _struct_3q is None:
+        _struct_3q = struct.Struct("<3q")
+    return _struct_3q

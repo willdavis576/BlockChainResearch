@@ -2,8 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d548811d-0aca-477e-bfa2-a5ed9f109e3c" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/../../../blockChain1243.txt" afterPath="" />
       <change beforePath="$PROJECT_DIR$/MESNode1/MES_Node1.py" afterPath="$PROJECT_DIR$/MESNode1/MES_Node1.py" />
       <change beforePath="$PROJECT_DIR$/MESNode2/MES_Node2.py" afterPath="$PROJECT_DIR$/MESNode2/MES_Node2.py" />
+      <change beforePath="$PROJECT_DIR$/MESNode3/MES_Node3.py" afterPath="$PROJECT_DIR$/MESNode3/MES_Node3.py" />
+      <change beforePath="$PROJECT_DIR$/Server2.py" afterPath="$PROJECT_DIR$/Server2.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -31,43 +34,46 @@
       <file leaf-file-name="MES_Node1.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MESNode1/MES_Node1.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4118">
-              <caret line="404" column="35" lean-forward="false" selection-start-line="404" selection-start-column="35" selection-end-line="404" selection-end-column="35" />
+            <state relative-caret-position="1421">
+              <caret line="308" column="58" lean-forward="false" selection-start-line="308" selection-start-column="58" selection-end-line="308" selection-end-column="58" />
               <folding>
-                <element signature="e#8347#8428#0" expanded="false" />
-                <element signature="e#11274#11344#0" expanded="false" />
-                <element signature="e#11375#11922#0" expanded="false" />
-                <element signature="e#11948#12405#0" expanded="false" />
-                <element signature="e#12427#13043#0" expanded="false" />
-                <element signature="e#13070#13593#0" expanded="false" />
+                <element signature="e#2302#3417#0" expanded="false" />
+                <element signature="e#9250#9331#0" expanded="false" />
+                <element signature="e#13239#13309#0" expanded="false" />
+                <element signature="e#13340#13887#0" expanded="false" />
+                <element signature="e#13913#14370#0" expanded="false" />
+                <element signature="e#14392#15008#0" expanded="false" />
+                <element signature="e#15035#15558#0" expanded="false" />
+                <element signature="e#19075#20282#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MES_Node2.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="MES_Node2.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MESNode2/MES_Node2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="909">
-              <caret line="223" column="33" lean-forward="false" selection-start-line="223" selection-start-column="33" selection-end-line="223" selection-end-column="33" />
+            <state relative-caret-position="1290">
+              <caret line="484" column="41" lean-forward="false" selection-start-line="484" selection-start-column="41" selection-end-line="484" selection-end-column="41" />
               <folding>
-                <element signature="e#8862#8943#0" expanded="false" />
-                <element signature="e#12749#12819#0" expanded="false" />
-                <element signature="e#12850#13397#0" expanded="false" />
-                <element signature="e#13423#13880#0" expanded="false" />
-                <element signature="e#13902#14518#0" expanded="false" />
-                <element signature="e#14545#15068#0" expanded="false" />
-                <element signature="e#18571#19778#0" expanded="false" />
+                <element signature="e#2302#3417#0" expanded="false" />
+                <element signature="e#9250#9331#0" expanded="false" />
+                <element signature="e#13247#13317#0" expanded="false" />
+                <element signature="e#13348#13895#0" expanded="false" />
+                <element signature="e#13921#14378#0" expanded="false" />
+                <element signature="e#14400#15016#0" expanded="false" />
+                <element signature="e#15043#15566#0" expanded="false" />
+                <element signature="e#19077#20284#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MES_Node3.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="MES_Node3.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MESNode3/MES_Node3.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="731">
-              <caret line="310" column="0" lean-forward="true" selection-start-line="310" selection-start-column="0" selection-end-line="310" selection-end-column="0" />
+            <state relative-caret-position="420">
+              <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="30" />
               <folding />
             </state>
           </provider>
@@ -96,8 +102,8 @@
       <file leaf-file-name="Server2.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Server2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="2" selection-end-column="27" />
+            <state relative-caret-position="930">
+              <caret line="31" column="41" lean-forward="false" selection-start-line="31" selection-start-column="41" selection-end-line="31" selection-end-column="41" />
               <folding>
                 <element signature="e#19#32#0" expanded="true" />
               </folding>
@@ -138,7 +144,6 @@
       <find>counter1</find>
       <find>queu</find>
       <find>while</find>
-      <find>Node2</find>
       <find>blockL</find>
       <find>blockli</find>
       <find>blocklisten</find>
@@ -154,10 +159,12 @@
       <find>Counter</find>
       <find>blockNumber</find>
       <find>Node1</find>
-      <find>node2</find>
       <find>print</find>
-      <find>SblockHash[</find>
       <find>node1</find>
+      <find>SblockHash[</find>
+      <find>node2</find>
+      <find>orderNumberList</find>
+      <find>Node2</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -192,15 +199,15 @@
         <option value="$PROJECT_DIR$/calumServer.py" />
         <option value="$PROJECT_DIR$/MESNode1/blockChainNode1.py" />
         <option value="$PROJECT_DIR$/RaspberryPi_MES/RP_MES_Node1.py" />
-        <option value="$PROJECT_DIR$/Server2.py" />
         <option value="$PROJECT_DIR$/testTCP.py" />
         <option value="$PROJECT_DIR$/3Server.py" />
         <option value="$PROJECT_DIR$/NODE1/blockChainNode1.py" />
         <option value="$PROJECT_DIR$/PLC Sim/SimNode2.py" />
         <option value="$PROJECT_DIR$/PLC Sim/SimNode1.py" />
+        <option value="$PROJECT_DIR$/Server2.py" />
+        <option value="$PROJECT_DIR$/MESNode3/MES_Node3.py" />
         <option value="$PROJECT_DIR$/MESNode1/MES_Node1.py" />
         <option value="$PROJECT_DIR$/MESNode2/MES_Node2.py" />
-        <option value="$PROJECT_DIR$/MESNode3/MES_Node3.py" />
       </list>
     </option>
   </component>
@@ -512,16 +519,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Server2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="2" selection-end-column="27" />
-          <folding>
-            <element signature="e#19#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/3Server.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1200">
@@ -568,42 +565,55 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MESNode1/MES_Node1.py">
+    <entry file="file://$PROJECT_DIR$/Server2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4118">
-          <caret line="404" column="35" lean-forward="false" selection-start-line="404" selection-start-column="35" selection-end-line="404" selection-end-column="35" />
+        <state relative-caret-position="930">
+          <caret line="31" column="41" lean-forward="false" selection-start-line="31" selection-start-column="41" selection-end-line="31" selection-end-column="41" />
           <folding>
-            <element signature="e#8347#8428#0" expanded="false" />
-            <element signature="e#11274#11344#0" expanded="false" />
-            <element signature="e#11375#11922#0" expanded="false" />
-            <element signature="e#11948#12405#0" expanded="false" />
-            <element signature="e#12427#13043#0" expanded="false" />
-            <element signature="e#13070#13593#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MESNode2/MES_Node2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="909">
-          <caret line="223" column="33" lean-forward="false" selection-start-line="223" selection-start-column="33" selection-end-line="223" selection-end-column="33" />
-          <folding>
-            <element signature="e#8862#8943#0" expanded="false" />
-            <element signature="e#12749#12819#0" expanded="false" />
-            <element signature="e#12850#13397#0" expanded="false" />
-            <element signature="e#13423#13880#0" expanded="false" />
-            <element signature="e#13902#14518#0" expanded="false" />
-            <element signature="e#14545#15068#0" expanded="false" />
-            <element signature="e#18571#19778#0" expanded="false" />
+            <element signature="e#19#32#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/MESNode3/MES_Node3.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="731">
-          <caret line="310" column="0" lean-forward="true" selection-start-line="310" selection-start-column="0" selection-end-line="310" selection-end-column="0" />
+        <state relative-caret-position="420">
+          <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="30" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MESNode1/MES_Node1.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1421">
+          <caret line="308" column="58" lean-forward="false" selection-start-line="308" selection-start-column="58" selection-end-line="308" selection-end-column="58" />
+          <folding>
+            <element signature="e#2302#3417#0" expanded="false" />
+            <element signature="e#9250#9331#0" expanded="false" />
+            <element signature="e#13239#13309#0" expanded="false" />
+            <element signature="e#13340#13887#0" expanded="false" />
+            <element signature="e#13913#14370#0" expanded="false" />
+            <element signature="e#14392#15008#0" expanded="false" />
+            <element signature="e#15035#15558#0" expanded="false" />
+            <element signature="e#19075#20282#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MESNode2/MES_Node2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1290">
+          <caret line="484" column="41" lean-forward="false" selection-start-line="484" selection-start-column="41" selection-end-line="484" selection-end-column="41" />
+          <folding>
+            <element signature="e#2302#3417#0" expanded="false" />
+            <element signature="e#9250#9331#0" expanded="false" />
+            <element signature="e#13247#13317#0" expanded="false" />
+            <element signature="e#13348#13895#0" expanded="false" />
+            <element signature="e#13921#14378#0" expanded="false" />
+            <element signature="e#14400#15016#0" expanded="false" />
+            <element signature="e#15043#15566#0" expanded="false" />
+            <element signature="e#19077#20284#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

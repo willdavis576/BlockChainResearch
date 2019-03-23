@@ -48,6 +48,7 @@ SblockHash = [['' for _ in range(Range)] for _ in range(Range)]
 SblockPreviousHash = [['' for _ in range(Range)] for _ in range(Range)]
 SblockNumber = [['' for _ in range(Range)] for _ in range(Range)]
 SOrderNumber = [['' for _ in range(Range)] for _ in range(Range)]
+SCarrierNumber = [['' for _ in range(Range)] for _ in range(Range)]
 Sblock = ''
 authOrderNumber = 0
 blockString = ''
@@ -76,14 +77,15 @@ years = 0
 
 class blockChain:
 
-    def __init__(self, previousHash, station, productCode, orderNumber, seconds, minutes, hours, days, months, years):
+    def __init__(self, previousHash, station, productCode, orderNumber, carrierID, seconds, minutes, hours, days, months, years):
         self.timeStamp = str(hours + ':' + minutes + ':' + seconds + ' - ' + days + '/' + months + '/' + years)
         self.productCode = productCode
         self.orderNumber = orderNumber
+        self.carrierID = carrierID
         self.previousHash = previousHash
         self.station = station
         self.contains = hashlib.sha256(self.station.encode()).hexdigest() + previousHash + str(
-            self.timeStamp) + str(self.productCode) + str(self.orderNumber)
+            self.timeStamp) + str(self.productCode) + str(self.orderNumber) + str(self.carrierID)
         self.blockHash = hashlib.sha256(self.contains.encode()).hexdigest()
 
     def getTimeStamp(self):
@@ -104,15 +106,18 @@ class blockChain:
     def getOrderNumber(self):
         return self.orderNumber
 
+    def getCarrierID(self):
+        return self.carrierID
 
-def blockUpdate(blockNumber, orderNumber, station, productCode, seconds, minutes, hours, days, months, years):
+
+def blockUpdate(blockNumber, orderNumber, carrierID, station, productCode, seconds, minutes, hours, days, months, years):
     global SblockHash
 
     for i in range(blockNumber, blockNumber + 1):
         blockNumber = i
         block[orderNumber][blockNumber] = blockChain(
             previousHash=SblockHash[tcpOrderNumber][block[orderNumber].index('') - 1], station=station,
-            productCode=productCode, orderNumber=orderNumber, seconds=seconds, minutes=minutes,
+            productCode=productCode, orderNumber=orderNumber, carrierID= carrierID, seconds=seconds, minutes=minutes,
             hours=hours, days=days, months=months, years=years)
         # print("blockUpdate")
         # print(SblockHash[1243][0])
@@ -131,6 +136,7 @@ def sendMessage():
         message.timeStamp = block[orderNumber][block[orderNumber].index('') - 1].getTimeStamp()
         message.station = str(block[orderNumber][block[orderNumber].index('') - 1].getStation())
         message.orderNumber = block[orderNumber][block[orderNumber].index('') - 1].getOrderNumber()
+        message.carrierID = block[orderNumber][block[orderNumber].index('') - 1].getCarrierID()
         message.productCode = block[orderNumber][block[orderNumber].index('') - 1].getProductCode()
         message.blockHash = block[orderNumber][block[orderNumber].index('') - 1].getBlockHash()
         message.previousHash = block[orderNumber][block[orderNumber].index('') - 1].getPreviousHash()
@@ -138,7 +144,6 @@ def sendMessage():
 
     except:
         ye = "man"
-
 
 
 def mainProg():
@@ -155,10 +160,9 @@ def mainProg():
     global nodeName
     global nodeUp
     global itemNumber
-    global orderNumberList
+    global orderNcarrierNumberList
     global dataFollowing
-
-
+    global SblockNumber
 
     pub = rospy.Publisher('publishingBlockStream', blockDetail, queue_size=100)
     while not rospy.is_shutdown():
@@ -175,36 +179,44 @@ def mainProg():
             except:
                 if SblockHash[orderNumber].index('') == 0:
                     newGenesis = 1
-                else:
+
+                else:  # this node has already published information
                     newGenesis = 0
+
                 # print("Order number not a thing, creating a new blockchain")
             # Genesis Block
             # print(SblockHash[orderNumber].index('') == 0)
             if newGenesis == 1:
-                block[orderNumber][block[orderNumber].index('')] = blockChain(previousHash='', station="Start production",
-                                                             productCode=tcpProductCode, orderNumber= tcpOrderNumber,
-                                                             seconds=str(datetime.now())[17:19],
-                                                             minutes=str(datetime.now())[14:16],
-                                                             hours=str(datetime.now())[11:13], days=str(datetime.now())[8:10],
-                                                             months=str(datetime.now())[5:7], years=str(datetime.now())[0:4])
+                block[orderNumber][block[orderNumber].index('')] = blockChain(previousHash='',
+                                                                              station="Start production",
+                                                                              productCode=tcpProductCode,
+                                                                              orderNumber=tcpOrderNumber, carrierID=tcpCarrierNumber,
+                                                                              seconds=str(datetime.now())[17:19],
+                                                                              minutes=str(datetime.now())[14:16],
+                                                                              hours=str(datetime.now())[11:13],
+                                                                              days=str(datetime.now())[8:10],
+                                                                              months=str(datetime.now())[5:7],
+                                                                              years=str(datetime.now())[0:4])
                 orderNumberList.append(orderNumber)
                 print("genesis: ")
-                print(block[orderNumber][block[orderNumber].index('')-1].getBlockHash())
+                print(block[orderNumber][block[orderNumber].index('') - 1].getBlockHash())
+
                 time.sleep(1)
                 # print("sending message in gen1")
                 sendMessage()
                 pub.publish(message)
                 # print(orderNumber, blockNumber)
                 # print(block[orderNumber].index(('')))
-                blockNumber = block[orderNumber].index('')  # key part, as each station uploads information, this variable is incremented to generate a new block
+                blockNumber = block[orderNumber].index(
+                    '')  # key part, as each station uploads information, this variable is incremented to generate a new block
                 # print(orderNumber, blockNumber)
                 # print(block[orderNumber][blockNumber - 1].getBlockHash())
                 newGenesis = 0
 
-
             if newGenesis == 0:
                 time.sleep(1)
-                blockUpdate(blockNumber=block[tcpOrderNumber].index(''), orderNumber=tcpOrderNumber, station=tcpStationName, productCode=tcpProductCode,
+                blockUpdate(blockNumber=block[tcpOrderNumber].index(''), orderNumber=tcpOrderNumber,
+                            station=tcpStationName, carrierID=tcpCarrierNumber, productCode=tcpProductCode,
                             seconds=tcpSeconds, minutes=tcpMinutes, hours=tcpHours, days=tcpDays, months=tcpMonths,
                             years=tcpYears)
                 # print("sending message in gen0")
@@ -217,10 +229,7 @@ def mainProg():
                 newGenesis = 3
                 dataFollowing = 0
 
-
-
-        #if the order number doesn't exist in the array then create genesis block. If it does, then continue where the system left off.
-
+        # if the order number doesn't exist in the array then create genesis block. If it does, then continue where the system left off.
 
 
 def listener():
@@ -237,6 +246,7 @@ def callback(data):
     global SblockProductCode
     global SblockHash
     global SblockPreviousHash
+    global SCarrierNumber
 
     global SblockNumber
     global SOrderNumber
@@ -252,14 +262,32 @@ def callback(data):
     SblockProductCode[data.orderNumber][data.blockNumber] = data.productCode
     SblockHash[data.orderNumber][data.blockNumber] = data.blockHash
     SblockPreviousHash[data.orderNumber][data.blockNumber] = data.previousHash
+    SCarrierNumber[data.orderNumber][data.carrierID] = 1
 
+    SblockNumber = data.blockNumber
+
+    # block[orderNumber][blockNumber] = blockChain(
+    #     previousHash=SblockHash[tcpOrderNumber][block[orderNumber].index('') - 1], station=station,
+    #     productCode=productCode, orderNumber=orderNumber, seconds=seconds, minutes=minutes,
+    #     hours=hours, days=days, months=months, years=years)
+
+    # hours + ':' + minutes + ':' + seconds + ' - ' + days + '/' + months + '/' + years
 
     # 18:54:01 - 19 / 03 / 2019
+    # print(data.timeStamp)
+    # print(data.timeStamp[6] + data.timeStamp[7])
+    # print(data.timeStamp[3] + data.timeStamp[4])
+    # print(data.timeStamp[0] + data.timeStamp[1])
+    # print(data.timeStamp[11] + data.timeStamp[12])
+    # print(data.timeStamp[14] + data.timeStamp[15])
+    # print(data.timeStamp[17] + data.timeStamp[18] + data.timeStamp[19] + data.timeStamp[20])
+
+
 
     if block[data.orderNumber][data.blockNumber] == '':
         block[data.orderNumber][data.blockNumber] = blockChain(previousHash=data.previousHash, station=data.station,
                                                                productCode=data.productCode,
-                                                               orderNumber=data.orderNumber,
+                                                               orderNumber=data.orderNumber, carrierID= data.carrierID,
                                                                seconds=data.timeStamp[6] + data.timeStamp[7],
                                                                minutes=
                                                                    data.timeStamp[3] + data.timeStamp[4],
@@ -268,6 +296,8 @@ def callback(data):
                                                                months=data.timeStamp[14] + data.timeStamp[15],
                                                                years=data.timeStamp[17] + data.timeStamp[18] +
                                                                          data.timeStamp[19] + data.timeStamp[20])
+
+    # check if there is block information for the block recieved already (hence a local creation), if there isn't, create a block.
 
     # print("I'm in callback")
     # print(SblockHash[1243][0])
@@ -383,7 +413,7 @@ def rewriteNodes():
 ############################### TCP Server ###############################
 
 
-def lowerCasing():
+def manual():
     global tcpStationName
     global tcpOrderNumber
     global tcpCarrierNumber
@@ -422,13 +452,13 @@ def lowerCasing():
 
             # Receive the data in small chunks and retransmit it
             while True:
-                data = connection.recv(31)
+                data = connection.recv(32)
 
                 if data:
 
-                    # if data == '                              ':
+                    # if data == '                               ':
                     #     dataFollowing = 0
-                    if data != '                               ':
+                    if data != '                                ':
 
                         # example: 1,1230, 211,48, 6,18,21, 3,2019
                         # print data
@@ -437,27 +467,24 @@ def lowerCasing():
                             if oldData != data:
                                 tcpStationName = data[0]
                                 tcpOrderNumber = int(data[2] + data[3] + data[4] + data[5])
-                                tcpCarrierNumber = 0
-                                tcpProductCode = int(data[8] + data[9] + data[10])
-                                tcpSeconds = data[12] + data[13]
-                                tcpMinutes = data[15] + data[16]
-                                tcpHours = data[18] + data[19]
-                                tcpDays = data[21] + data[22]
-                                tcpMonths = data[24] + data[25]
-                                tcpYears = data[27] + data[28] + data[29] + data[30]
+                                tcpCarrierNumber = int(data[7])
+                                tcpProductCode = int(data[9] + data[10] + data[11])
+                                tcpSeconds = data[13] + data[14]
+                                tcpMinutes = data[16] + data[17]
+                                tcpHours = data[19] + data[20]
+                                tcpDays = data[22] + data[23]
+                                tcpMonths = data[25] + data[26]
+                                tcpYears = data[28] + data[29] + data[30] + data[31]
                                 dataFollowing = 1
                                 oldData = data
                                 # print(dataFollowing)
 
-
-
-
                             # print data
                             # print tcpStationName + ',' + tcpOrderNumber
                         except:
-                                print "lower casing fail"
-                                print(data)
-                                dataFollowing = 0
+                            print "lower casing fail"
+                            print(data)
+                            dataFollowing = 0
                     # time.sleep(1)
                 else:
                     print >> sys.stderr, 'no more data from', client_address
@@ -468,7 +495,6 @@ def lowerCasing():
         finally:
             # Clean up the connection
             connection.close()
-
 
 
 if __name__ == '__main__':
@@ -482,7 +508,7 @@ if __name__ == '__main__':
         p5 = threading.Thread(target=authTrigger, args=())
         p6 = threading.Thread(target=rewriteNodes, args=())
         # p7 = threading.Thread(target=sendMessage, args=())
-        p8 = threading.Thread(target=lowerCasing, args=())
+        p8 = threading.Thread(target=manual, args=())
         # p9 = threading.Thread(target=blockUpdate, args=())
 
         p1.daemon = True
@@ -555,3 +581,10 @@ if __name__ == '__main__':
 #   - rewrite node will rewrite the node that's next to it in terms of numbers
 #       - for example, if NODE4 is compromised then NODE3 will rewrite it has there isn't currently a NODE5.
 #       - if NODE2 is infected, try NODE1, if not, NODE3.
+
+
+# carriage numbers:
+# - 4 reads 3
+# - 2 reads 4
+# - 1 reads 3
+# - 3 reads 3

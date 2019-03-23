@@ -444,13 +444,13 @@ def manual():
 
             # Receive the data in small chunks and retransmit it
             while True:
-                data = connection.recv(31)
+                data = connection.recv(32)
 
                 if data:
 
-                    # if data == '                              ':
+                    # if data == '                               ':
                     #     dataFollowing = 0
-                    if data != '                               ':
+                    if data != '                                ':
 
                         # example: 1,1230, 211,48, 6,18,21, 3,2019
                         # print data
@@ -459,14 +459,14 @@ def manual():
                             if oldData != data:
                                 tcpStationName = data[0]
                                 tcpOrderNumber = int(data[2] + data[3] + data[4] + data[5])
-                                tcpCarrierNumber = 0
-                                tcpProductCode = int(data[8] + data[9] + data[10])
-                                tcpSeconds = data[12] + data[13]
-                                tcpMinutes = data[15] + data[16]
-                                tcpHours = data[18] + data[19]
-                                tcpDays = data[21] + data[22]
-                                tcpMonths = data[24] + data[25]
-                                tcpYears = data[27] + data[28] + data[29] + data[30]
+                                tcpCarrierNumber = int(data[7])
+                                tcpProductCode = int(data[9] + data[10] + data[11])
+                                tcpSeconds = data[13] + data[14]
+                                tcpMinutes = data[16] + data[17]
+                                tcpHours = data[19] + data[20]
+                                tcpDays = data[22] + data[23]
+                                tcpMonths = data[25] + data[26]
+                                tcpYears = data[28] + data[29] + data[30] + data[31]
                                 dataFollowing = 1
                                 oldData = data
                                 # print(dataFollowing)
