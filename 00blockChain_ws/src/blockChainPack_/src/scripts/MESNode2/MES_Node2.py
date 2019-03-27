@@ -147,21 +147,13 @@ def sendMessage():
     global block
     try:
         message = blockDetail()
-        print("1")
-        message.blockNumber = block[orderNumber][tcpCarrierNumber].index('')
-        print("2")
+        message.blockNumber = block[orderNumber][tcpCarrierNumber].index('') - 1
         message.timeStamp = block[orderNumber][tcpCarrierNumber][block[tcpOrderNumber][tcpCarrierNumber].index('') - 1].getTimeStamp()
-        print("3")
         message.station = str(block[orderNumber][tcpCarrierNumber][block[tcpOrderNumber][tcpCarrierNumber].index('') - 1].getStation())
-        print("4")
         message.orderNumber = block[orderNumber][tcpCarrierNumber][block[tcpOrderNumber][tcpCarrierNumber].index('') - 1].getOrderNumber()
-        print("5")
         message.carrierID = block[orderNumber][tcpCarrierNumber][block[tcpOrderNumber][tcpCarrierNumber].index('') - 1].getCarrierID()
-        print("6")
         message.productCode = block[orderNumber][tcpCarrierNumber][block[tcpOrderNumber][tcpCarrierNumber].index('') - 1].getProductCode()
-        print("7")
         message.blockHash = block[orderNumber][tcpCarrierNumber][block[tcpOrderNumber][tcpCarrierNumber].index('') - 1].getBlockHash()
-        print("8")
         message.previousHash = block[orderNumber][tcpCarrierNumber][block[tcpOrderNumber][tcpCarrierNumber].index('') - 1].getPreviousHash()
         # print(block[orderNumber][block[orderNumber].index('') - 1].getPreviousHash())
 
@@ -194,16 +186,16 @@ def mainProg():
             # Setup for genesis block
             orderNumber = tcpOrderNumber
             # print(orderNumber)
-            print("trying to build")
+            # print("trying to build")
             try:
-                print("Trying to create block")
+                # print("Trying to create block")
                 if orderNcarrierNumberList[tcpOrderNumber][tcpCarrierNumber].index(1) > -1:
                     newGenesis = 0
             except:
-                print("exception")
+                # print("exception")
                 if SCarrierNumber[tcpOrderNumber][tcpCarrierNumber] != 1:
                     newGenesis = 1
-                    print("Order number not a thing, creating a new blockchain")
+                    # print("Order number not a thing, creating a new blockchain")
 
                 else:  # this node has already published information
                     newGenesis = 0
@@ -229,7 +221,7 @@ def mainProg():
                     block[tcpOrderNumber][tcpCarrierNumber].index('') - 1].getBlockHash())
 
                 time.sleep(1)
-                print("sending message in gen1")
+                # print("sending message in gen1")
                 sendMessage()
                 pub.publish(message)
                 # print(orderNumber, blockNumber)
@@ -245,8 +237,9 @@ def mainProg():
                             station=tcpStationName, carrierID=tcpCarrierNumber, productCode=tcpProductCode,
                             seconds=tcpSeconds, minutes=tcpMinutes, hours=tcpHours, days=tcpDays, months=tcpMonths,
                             years=tcpYears)
-                print("sending message in gen0")
+                # print("sending message in gen0")
                 # print(block[orderNumber][tcpCarrierNumber][block[tcpOrderNumber][tcpCarrierNumber].index('') - 1])
+
                 sendMessage()
                 time.sleep(1)
                 pub.publish(message)
@@ -301,15 +294,18 @@ def callback(data):
     # hours + ':' + minutes + ':' + seconds + ' - ' + days + '/' + months + '/' + years
 
     # 18:54:01 - 19 / 03 / 2019
+    # print(block[data.orderNumber][data.carrierID][data.blockNumber])
+    # print(data.timeStamp)
+    # print(data.timeStamp[6] + data.timeStamp[7])
+    # print(data.timeStamp[3] + data.timeStamp[4])
+    # print(data.timeStamp[0] + data.timeStamp[1])
+    # print(data.timeStamp[11] + data.timeStamp[12])
+    # print(data.timeStamp[14] + data.timeStamp[15])
+    # print(data.timeStamp[17] + data.timeStamp[18] + data.timeStamp[19] + data.timeStamp[20])
+    print(data_to_print)
+    print("blockNumber: {0}".format(data.blockNumber))
+    print("callback")
     print(block[data.orderNumber][data.carrierID][data.blockNumber])
-    print(data.timeStamp)
-    print(data.timeStamp[6] + data.timeStamp[7])
-    print(data.timeStamp[3] + data.timeStamp[4])
-    print(data.timeStamp[0] + data.timeStamp[1])
-    print(data.timeStamp[11] + data.timeStamp[12])
-    print(data.timeStamp[14] + data.timeStamp[15])
-    print(data.timeStamp[17] + data.timeStamp[18] + data.timeStamp[19] + data.timeStamp[20])
-
     if block[data.orderNumber][data.carrierID][data.blockNumber] == '':
         block[data.orderNumber][data.carrierID][data.blockNumber] = blockChain(previousHash=data.previousHash,
                                                                                station=data.station,
@@ -323,6 +319,8 @@ def callback(data):
                                                                                months=data.timeStamp[14] + data.timeStamp[15],
                                                                                years=data.timeStamp[17] + data.timeStamp[18] + data.timeStamp[19] +
                                                                                      data.timeStamp[20])
+    print("after write")
+    print(block[data.orderNumber][data.carrierID][data.blockNumber])
 
     # check if there is block information for the block recieved already (hence a local creation), if there isn't, create a block.
 
@@ -485,8 +483,8 @@ def manual():
 
                 if data:
 
-                    # if data == '                               ':
-                    #     dataFollowing = 0
+                    if data == '                               ':
+                        dataFollowing = 0
                     if data != '                                ':
 
                         # example: 1,1230, 211,48, 6,18,21, 3,2019
