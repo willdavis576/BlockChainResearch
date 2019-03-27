@@ -20,6 +20,7 @@ class lastHash {
       // initObj === null is a special case for deserialization where we don't initialize fields
       this.nodeName = null;
       this.orderNumber = null;
+      this.carrierNumber = null;
       this.hash = null;
     }
     else {
@@ -34,6 +35,12 @@ class lastHash {
       }
       else {
         this.orderNumber = 0;
+      }
+      if (initObj.hasOwnProperty('carrierNumber')) {
+        this.carrierNumber = initObj.carrierNumber
+      }
+      else {
+        this.carrierNumber = 0;
       }
       if (initObj.hasOwnProperty('hash')) {
         this.hash = initObj.hash
@@ -50,6 +57,8 @@ class lastHash {
     bufferOffset = _serializer.string(obj.nodeName, buffer, bufferOffset);
     // Serialize message field [orderNumber]
     bufferOffset = _serializer.int64(obj.orderNumber, buffer, bufferOffset);
+    // Serialize message field [carrierNumber]
+    bufferOffset = _serializer.int64(obj.carrierNumber, buffer, bufferOffset);
     // Serialize message field [hash]
     bufferOffset = _serializer.string(obj.hash, buffer, bufferOffset);
     return bufferOffset;
@@ -63,6 +72,8 @@ class lastHash {
     data.nodeName = _deserializer.string(buffer, bufferOffset);
     // Deserialize message field [orderNumber]
     data.orderNumber = _deserializer.int64(buffer, bufferOffset);
+    // Deserialize message field [carrierNumber]
+    data.carrierNumber = _deserializer.int64(buffer, bufferOffset);
     // Deserialize message field [hash]
     data.hash = _deserializer.string(buffer, bufferOffset);
     return data;
@@ -72,7 +83,7 @@ class lastHash {
     let length = 0;
     length += object.nodeName.length;
     length += object.hash.length;
-    return length + 16;
+    return length + 24;
   }
 
   static datatype() {
@@ -82,7 +93,7 @@ class lastHash {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return 'a423675095f4fe8b93a12842c59e1429';
+    return 'b1a4cb81ebb0c8d7c4108803c6e0dff2';
   }
 
   static messageDefinition() {
@@ -90,6 +101,7 @@ class lastHash {
     return `
     string nodeName
     int64 orderNumber
+    int64 carrierNumber
     string hash
     
     `;
@@ -113,6 +125,13 @@ class lastHash {
     }
     else {
       resolved.orderNumber = 0
+    }
+
+    if (msg.carrierNumber !== undefined) {
+      resolved.carrierNumber = msg.carrierNumber;
+    }
+    else {
+      resolved.carrierNumber = 0
     }
 
     if (msg.hash !== undefined) {

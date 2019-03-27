@@ -88,6 +88,9 @@ days = 0
 months = 0
 years = 0
 
+# Emitter
+hashingArray = ''
+
 
 class blockChain:
 
@@ -379,22 +382,26 @@ def emitter():
     global Trigger
     global station
     global SblockHash
+    global hashingArray
 
     pub = rospy.Publisher('Last_Hash', lastHash, queue_size=100)
 
     while not rospy.is_shutdown():
-        for i in range(orderNumber + 1):
 
-            message2 = lastHash()
-            message2.nodeName = "NODE2"
-            message2.orderNumber = i
-            message2.hash = SblockHash[i][SblockHash[i].index('', 1) - 1]
-            pub.publish(message2)
-            # print("emitter: ")
-            # print(blockHash[i][blockHash[i].index('', 1) - 1])
-            time.sleep(0.1)
+        for i in range(len(SblockHash)):
+            for j in range(len(SblockHash[i])):
+                for z in range(len(SblockHash[i][j])):
+                    hashingArray = hashlib.sha256(hashingArray + SblockHash[i][j][z]).hexdigest()
 
-    # rospy.spin()
+
+        message2 = lastHash()
+        message2.hash = hashingArray
+        message2.nodeName = 'NODE2'
+        pub.publish(message2)
+        hashingArray = ''
+        time.sleep(1)
+
+
 
 
 def rewriteNodes():
@@ -524,7 +531,7 @@ if __name__ == '__main__':
         p1 = threading.Thread(target=listener, args=())
         p2 = threading.Thread(target=mainProg, args=())
         # p3 = threading.Thread(target=authentication, args=())
-        # p4 = threading.Thread(target=emitter, args=())
+        p4 = threading.Thread(target=emitter, args=())
         # p5 = threading.Thread(target=authTrigger, args=())
         # p6 = threading.Thread(target=rewriteNodes, args=())
         # p7 = threading.Thread(target=sendMessage, args=())
@@ -534,7 +541,7 @@ if __name__ == '__main__':
         p1.daemon = True
         p2.daemon = True
         # p3.daemon = True
-        # p4.daemon = True
+        p4.daemon = True
         # p5.daemon = True
         # p6.daemon = True
         # p7.daemon = True
@@ -544,7 +551,7 @@ if __name__ == '__main__':
         p1.start()
         p2.start()
         # p3.start()
-        # p4.start()
+        p4.start()
         # p5.start()
         # p6.start()
         # p7.start()
@@ -554,7 +561,7 @@ if __name__ == '__main__':
         p1.join()
         p2.join()
         # p3.join()
-        # p4.join()
+        p4.join()
         # p5.join()
         # p6.join()
         # p7.join()

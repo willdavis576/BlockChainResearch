@@ -3,6 +3,8 @@
           NODENAME
           ORDERNUMBER-VAL
           ORDERNUMBER
+          CARRIERNUMBER-VAL
+          CARRIERNUMBER
           HASH-VAL
           HASH
 ))
