@@ -9,7 +9,7 @@ from blockChainPack_.msg import rewriteNode
 # station, orderNumber, productCode, seconds, minutes, hours, days, months, years
 # productNubmer should now orderNumber
 
-Range = 1000
+Range = 200
 cRange = 4
 itemNumber = 0
 dataFollowing = 0
@@ -200,7 +200,6 @@ def mainProg():
                 else:  # this node has already published information
                     newGenesis = 0
 
-
             # Genesis Block
             # print(SblockHash[orderNumber].index('') == 0)
             if newGenesis == 1:
@@ -226,7 +225,8 @@ def mainProg():
                 pub.publish(message)
                 # print(orderNumber, blockNumber)
                 # print(block[orderNumber].index(('')))
-                blockNumber = block[tcpOrderNumber][tcpCarrierNumber].index('')  # key part, as each station uploads information, this variable is incremented to generate a new block
+                blockNumber = block[tcpOrderNumber][tcpCarrierNumber].index(
+                    '')  # key part, as each station uploads information, this variable is incremented to generate a new block
                 # print(orderNumber, blockNumber)
                 # print(block[orderNumber][blockNumber - 1].getBlockHash())
                 newGenesis = 0
@@ -274,7 +274,7 @@ def callback(data):
 
     orderNumber1 = data.orderNumber
     data_to_print = "Time Stamp for Block: {0}\nStation: {1}\nOrder Number: {2}\nCarrierID: {3}\nProduct Code: {4}\nBlock Hash: {5}\nPrevious Hash: {6}".format(
-        data.timeStamp, data.station, data.orderNumber + 1000, data.carrierID, data.productCode, data.blockHash,
+        data.timeStamp, data.station, data.orderNumber + 1264, data.carrierID, data.productCode, data.blockHash,
         data.previousHash)
     # print(SblockHash[orderNumber][0] == '')
     SblockTimeStamp[data.orderNumber][data.carrierID][data.blockNumber] = data.timeStamp
@@ -321,13 +321,13 @@ def callback(data):
                                                                                      data.timeStamp[20])
 
     if runYet[data.orderNumber][data.carrierID] == '':
-        f = open("/home/ros/blockChainGit/00blockChain_ws/src/Product" + str(data.orderNumber + 1000) + "C:" + str(
+        f = open("/home/ros/blockChainGit/00blockChain_ws/src/Product" + str(data.orderNumber + 1264) + "C:" + str(
             data.carrierID) + ".txt", "w")
         f.close()
         runYet[data.orderNumber][data.carrierID] = "1"
 
     if runYet[data.orderNumber][data.carrierID] == "1":
-        f = open("/home/ros/blockChainGit/00blockChain_ws/src/Product" + str(data.orderNumber + 1000) + "C:" + str(
+        f = open("/home/ros/blockChainGit/00blockChain_ws/src/Product" + str(data.orderNumber + 1264) + "C:" + str(
             data.carrierID) + ".txt", "a")
         f.write(str(data_to_print))
         f.write("\n-------------------------------\n")
@@ -380,9 +380,11 @@ def emitter():
     global station
     global SblockHash
 
+    pub = rospy.Publisher('Last_Hash', lastHash, queue_size=100)
+
     while not rospy.is_shutdown():
         for i in range(orderNumber + 1):
-            pub = rospy.Publisher('Last_Hash', lastHash, queue_size=100)
+
             message2 = lastHash()
             message2.nodeName = "NODE2"
             message2.orderNumber = i
@@ -484,7 +486,7 @@ def manual():
                             if oldData != data:
                                 # print(data)
                                 tcpStationName = data[0]
-                                tcpOrderNumber = int(data[2] + data[3] + data[4] + data[5]) - 1000
+                                tcpOrderNumber = int(data[2] + data[3] + data[4] + data[5]) - 1264
                                 tcpCarrierNumber = int(data[7])
                                 tcpProductCode = int(data[9] + data[10] + data[11])
                                 tcpSeconds = data[13] + data[14]
