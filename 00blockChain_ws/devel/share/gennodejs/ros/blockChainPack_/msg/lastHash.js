@@ -19,8 +19,6 @@ class lastHash {
     if (initObj === null) {
       // initObj === null is a special case for deserialization where we don't initialize fields
       this.nodeName = null;
-      this.orderNumber = null;
-      this.carrierNumber = null;
       this.hash = null;
     }
     else {
@@ -29,18 +27,6 @@ class lastHash {
       }
       else {
         this.nodeName = '';
-      }
-      if (initObj.hasOwnProperty('orderNumber')) {
-        this.orderNumber = initObj.orderNumber
-      }
-      else {
-        this.orderNumber = 0;
-      }
-      if (initObj.hasOwnProperty('carrierNumber')) {
-        this.carrierNumber = initObj.carrierNumber
-      }
-      else {
-        this.carrierNumber = 0;
       }
       if (initObj.hasOwnProperty('hash')) {
         this.hash = initObj.hash
@@ -55,10 +41,6 @@ class lastHash {
     // Serializes a message object of type lastHash
     // Serialize message field [nodeName]
     bufferOffset = _serializer.string(obj.nodeName, buffer, bufferOffset);
-    // Serialize message field [orderNumber]
-    bufferOffset = _serializer.int64(obj.orderNumber, buffer, bufferOffset);
-    // Serialize message field [carrierNumber]
-    bufferOffset = _serializer.int64(obj.carrierNumber, buffer, bufferOffset);
     // Serialize message field [hash]
     bufferOffset = _serializer.string(obj.hash, buffer, bufferOffset);
     return bufferOffset;
@@ -70,10 +52,6 @@ class lastHash {
     let data = new lastHash(null);
     // Deserialize message field [nodeName]
     data.nodeName = _deserializer.string(buffer, bufferOffset);
-    // Deserialize message field [orderNumber]
-    data.orderNumber = _deserializer.int64(buffer, bufferOffset);
-    // Deserialize message field [carrierNumber]
-    data.carrierNumber = _deserializer.int64(buffer, bufferOffset);
     // Deserialize message field [hash]
     data.hash = _deserializer.string(buffer, bufferOffset);
     return data;
@@ -83,7 +61,7 @@ class lastHash {
     let length = 0;
     length += object.nodeName.length;
     length += object.hash.length;
-    return length + 24;
+    return length + 8;
   }
 
   static datatype() {
@@ -93,15 +71,13 @@ class lastHash {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return 'b1a4cb81ebb0c8d7c4108803c6e0dff2';
+    return '66f1a569f696850dc0629c7d1fb0b6b9';
   }
 
   static messageDefinition() {
     // Returns full string definition for message
     return `
     string nodeName
-    int64 orderNumber
-    int64 carrierNumber
     string hash
     
     `;
@@ -118,20 +94,6 @@ class lastHash {
     }
     else {
       resolved.nodeName = ''
-    }
-
-    if (msg.orderNumber !== undefined) {
-      resolved.orderNumber = msg.orderNumber;
-    }
-    else {
-      resolved.orderNumber = 0
-    }
-
-    if (msg.carrierNumber !== undefined) {
-      resolved.carrierNumber = msg.carrierNumber;
-    }
-    else {
-      resolved.carrierNumber = 0
     }
 
     if (msg.hash !== undefined) {

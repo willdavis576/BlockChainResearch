@@ -25,14 +25,10 @@ struct lastHash_
 
   lastHash_()
     : nodeName()
-    , orderNumber(0)
-    , carrierNumber(0)
     , hash()  {
     }
   lastHash_(const ContainerAllocator& _alloc)
     : nodeName(_alloc)
-    , orderNumber(0)
-    , carrierNumber(0)
     , hash(_alloc)  {
   (void)_alloc;
     }
@@ -41,12 +37,6 @@ struct lastHash_
 
    typedef std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other >  _nodeName_type;
   _nodeName_type nodeName;
-
-   typedef int64_t _orderNumber_type;
-  _orderNumber_type orderNumber;
-
-   typedef int64_t _carrierNumber_type;
-  _carrierNumber_type carrierNumber;
 
    typedef std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other >  _hash_type;
   _hash_type hash;
@@ -129,12 +119,12 @@ struct MD5Sum< ::blockChainPack_::lastHash_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "b1a4cb81ebb0c8d7c4108803c6e0dff2";
+    return "66f1a569f696850dc0629c7d1fb0b6b9";
   }
 
   static const char* value(const ::blockChainPack_::lastHash_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0xb1a4cb81ebb0c8d7ULL;
-  static const uint64_t static_value2 = 0xc4108803c6e0dff2ULL;
+  static const uint64_t static_value1 = 0x66f1a569f696850dULL;
+  static const uint64_t static_value2 = 0xc0629c7d1fb0b6b9ULL;
 };
 
 template<class ContainerAllocator>
@@ -154,8 +144,6 @@ struct Definition< ::blockChainPack_::lastHash_<ContainerAllocator> >
   static const char* value()
   {
     return "string nodeName\n\
-int64 orderNumber\n\
-int64 carrierNumber\n\
 string hash\n\
 ";
   }
@@ -176,8 +164,6 @@ namespace serialization
     template<typename Stream, typename T> inline static void allInOne(Stream& stream, T m)
     {
       stream.next(m.nodeName);
-      stream.next(m.orderNumber);
-      stream.next(m.carrierNumber);
       stream.next(m.hash);
     }
 
@@ -199,10 +185,6 @@ struct Printer< ::blockChainPack_::lastHash_<ContainerAllocator> >
   {
     s << indent << "nodeName: ";
     Printer<std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other > >::stream(s, indent + "  ", v.nodeName);
-    s << indent << "orderNumber: ";
-    Printer<int64_t>::stream(s, indent + "  ", v.orderNumber);
-    s << indent << "carrierNumber: ";
-    Printer<int64_t>::stream(s, indent + "  ", v.carrierNumber);
     s << indent << "hash: ";
     Printer<std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other > >::stream(s, indent + "  ", v.hash);
   }

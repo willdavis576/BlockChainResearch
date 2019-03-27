@@ -42,7 +42,7 @@ nodeList = ['NODE1', 'NODE2', 'NODE3',
             'NODE4']  ################# IF INCLUDING MORE NODES, EXTEND THIS ARRAY SIZE #######################
 nodeONOFF = [1, 0, 0, 0]  ################# IF INCLUDING MORE NODES, EXTEND THIS ARRAY SIZE #######################
 oldNodeONOFF = [0, 0, 0, 0]  ################# IF INCLUDING MORE NODES, EXTEND THIS ARRAY SIZE #######################
-node = ['' for _ in range(20)]
+node = [['' for _ in range(Range)] for _ in range(cRange)]
 print("29%")
 counter1 = 0;
 
@@ -66,7 +66,7 @@ print("Loading network..")
 Sblock = ''
 authOrderNumber = 0
 blockString = ''
-nodeName = "NODE1"  ############### THIS IS WHERE YOU SPECIFY A NODE'S NAME #######################
+nodeName = "NODE4"  ############### THIS IS WHERE YOU SPECIFY A NODE'S NAME #######################
 
 # TCP SERVER STUFF
 tcpStationName = 0
@@ -352,10 +352,12 @@ def callbackAuth(data):
     # for i in range(10): #10 being a max node amount - can be changed as the array size is 100
 
     name = data.nodeName
+    authOrderNumber = data.orderNumber
+    # print("I heard: ")
+    # print(node[data.orderNumber][int(name[4]) - 1])
+    node[data.orderNumber][int(name[4]) - 1] = data.hash
+    # print(node[data.orderNumber][int(name[4])])
 
-    node[int(name[4]) - 1] = data.hash
-    # print("finding node 4")
-    # print(node)
 
 def authTrigger():
     global Trigger
@@ -364,14 +366,13 @@ def authTrigger():
 
     while not rospy.is_shutdown():
         time.sleep(5)
-        mostCommonHash = Counter(node)
-
-        # print(mostCommonHash.most_common(3))
+        mostCommonHash = Counter(node[authOrderNumber])
         try:
-            print(nodeList[(node.index(str(mostCommonHash.most_common(3)[2][0])))] + " has been hacked")
+            common = mostCommonHash.most_common(3)[2][0]
+            print(nodeList[
+                      node[authOrderNumber].index((mostCommonHash.most_common(3)[2][0]), 1)] + " has been hacked")
         except:
-            print("all fine")
-
+            man = "loves an easter egg"
     rospy.spin()
 
 
@@ -390,12 +391,12 @@ def emitter():
         for i in range(len(SblockHash)):
             for j in range(len(SblockHash[i])):
                 for z in range(len(SblockHash[i][j])):
-                    hashingArray = hashlib.sha256(hashingArray + SblockHash[i][j][z]).hexdigest()
+                    hashingArray = hashlib.sha256(hashingArray + "hello" + SblockHash[i][j][z]).hexdigest()
 
 
         message2 = lastHash()
         message2.hash = hashingArray
-        message2.nodeName = 'NODE1'
+        message2.nodeName = 'NODE4'
         pub.publish(message2)
         hashingArray = ''
         time.sleep(1)
@@ -457,7 +458,7 @@ def manual():
     # Then bind() is used to associate the socket with the server address. In this case, the address is localhost, referring to the current server, and the port number is 10000.
 
     # Bind the socket to the port
-    server_address = ('172.21.4.152', 4500)
+    server_address = ('172.21.4.152', 4502)
     print sys.stderr, 'starting up on %s port %s' % server_address
     sock.bind(server_address)
     # Calling listen() puts the socket into server mode, and accept() waits for an incoming connection.
@@ -529,9 +530,9 @@ if __name__ == '__main__':
     while not rospy.is_shutdown():
         p1 = threading.Thread(target=listener, args=())
         p2 = threading.Thread(target=mainProg, args=())
-        p3 = threading.Thread(target=authentication, args=())
+        # p3 = threading.Thread(target=authentication, args=())
         p4 = threading.Thread(target=emitter, args=())
-        p5 = threading.Thread(target=authTrigger, args=())
+        # p5 = threading.Thread(target=authTrigger, args=())
         # p6 = threading.Thread(target=rewriteNodes, args=())
         # p7 = threading.Thread(target=sendMessage, args=())
         p8 = threading.Thread(target=manual, args=())
@@ -539,9 +540,9 @@ if __name__ == '__main__':
 
         p1.daemon = True
         p2.daemon = True
-        p3.daemon = True
+        # p3.daemon = True
         p4.daemon = True
-        p5.daemon = True
+        # p5.daemon = True
         # p6.daemon = True
         # p7.daemon = True
         p8.daemon = True
@@ -549,9 +550,9 @@ if __name__ == '__main__':
 
         p1.start()
         p2.start()
-        p3.start()
+        # p3.start()
         p4.start()
-        p5.start()
+        # p5.start()
         # p6.start()
         # p7.start()
         p8.start()
@@ -559,9 +560,9 @@ if __name__ == '__main__':
 
         p1.join()
         p2.join()
-        p3.join()
+        # p3.join()
         p4.join()
-        p5.join()
+        # p5.join()
         # p6.join()
         # p7.join()
         p8.join()

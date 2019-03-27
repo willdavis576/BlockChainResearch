@@ -7,16 +7,14 @@ import struct
 
 
 class lastHash(genpy.Message):
-  _md5sum = "b1a4cb81ebb0c8d7c4108803c6e0dff2"
+  _md5sum = "66f1a569f696850dc0629c7d1fb0b6b9"
   _type = "blockChainPack_/lastHash"
   _has_header = False #flag to mark the presence of a Header object
   _full_text = """string nodeName
-int64 orderNumber
-int64 carrierNumber
 string hash
 """
-  __slots__ = ['nodeName','orderNumber','carrierNumber','hash']
-  _slot_types = ['string','int64','int64','string']
+  __slots__ = ['nodeName','hash']
+  _slot_types = ['string','string']
 
   def __init__(self, *args, **kwds):
     """
@@ -26,7 +24,7 @@ string hash
     changes.  You cannot mix in-order arguments and keyword arguments.
 
     The available fields are:
-       nodeName,orderNumber,carrierNumber,hash
+       nodeName,hash
 
     :param args: complete set of field values, in .msg order
     :param kwds: use keyword arguments corresponding to message field names
@@ -37,16 +35,10 @@ string hash
       #message fields cannot be None, assign default values for those that are
       if self.nodeName is None:
         self.nodeName = ''
-      if self.orderNumber is None:
-        self.orderNumber = 0
-      if self.carrierNumber is None:
-        self.carrierNumber = 0
       if self.hash is None:
         self.hash = ''
     else:
       self.nodeName = ''
-      self.orderNumber = 0
-      self.carrierNumber = 0
       self.hash = ''
 
   def _get_types(self):
@@ -67,8 +59,6 @@ string hash
         _x = _x.encode('utf-8')
         length = len(_x)
       buff.write(struct.pack('<I%ss'%length, length, _x))
-      _x = self
-      buff.write(_get_struct_2q().pack(_x.orderNumber, _x.carrierNumber))
       _x = self.hash
       length = len(_x)
       if python3 or type(_x) == unicode:
@@ -94,10 +84,6 @@ string hash
         self.nodeName = str[start:end].decode('utf-8')
       else:
         self.nodeName = str[start:end]
-      _x = self
-      start = end
-      end += 16
-      (_x.orderNumber, _x.carrierNumber,) = _get_struct_2q().unpack(str[start:end])
       start = end
       end += 4
       (length,) = _struct_I.unpack(str[start:end])
@@ -125,8 +111,6 @@ string hash
         _x = _x.encode('utf-8')
         length = len(_x)
       buff.write(struct.pack('<I%ss'%length, length, _x))
-      _x = self
-      buff.write(_get_struct_2q().pack(_x.orderNumber, _x.carrierNumber))
       _x = self.hash
       length = len(_x)
       if python3 or type(_x) == unicode:
@@ -153,10 +137,6 @@ string hash
         self.nodeName = str[start:end].decode('utf-8')
       else:
         self.nodeName = str[start:end]
-      _x = self
-      start = end
-      end += 16
-      (_x.orderNumber, _x.carrierNumber,) = _get_struct_2q().unpack(str[start:end])
       start = end
       end += 4
       (length,) = _struct_I.unpack(str[start:end])
@@ -174,9 +154,3 @@ _struct_I = genpy.struct_I
 def _get_struct_I():
     global _struct_I
     return _struct_I
-_struct_2q = None
-def _get_struct_2q():
-    global _struct_2q
-    if _struct_2q is None:
-        _struct_2q = struct.Struct("<2q")
-    return _struct_2q
