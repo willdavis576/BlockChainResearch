@@ -147,19 +147,26 @@ def sendMessage():
     global block
     try:
         message = blockDetail()
-        message.blockNumber = block[orderNumber].index('') - 1
-
+        print("1")
+        message.blockNumber = block[orderNumber][tcpCarrierNumber].index('')
+        print("2")
         message.timeStamp = block[orderNumber][tcpCarrierNumber][block[tcpOrderNumber][tcpCarrierNumber].index('') - 1].getTimeStamp()
+        print("3")
         message.station = str(block[orderNumber][tcpCarrierNumber][block[tcpOrderNumber][tcpCarrierNumber].index('') - 1].getStation())
+        print("4")
         message.orderNumber = block[orderNumber][tcpCarrierNumber][block[tcpOrderNumber][tcpCarrierNumber].index('') - 1].getOrderNumber()
+        print("5")
         message.carrierID = block[orderNumber][tcpCarrierNumber][block[tcpOrderNumber][tcpCarrierNumber].index('') - 1].getCarrierID()
+        print("6")
         message.productCode = block[orderNumber][tcpCarrierNumber][block[tcpOrderNumber][tcpCarrierNumber].index('') - 1].getProductCode()
+        print("7")
         message.blockHash = block[orderNumber][tcpCarrierNumber][block[tcpOrderNumber][tcpCarrierNumber].index('') - 1].getBlockHash()
+        print("8")
         message.previousHash = block[orderNumber][tcpCarrierNumber][block[tcpOrderNumber][tcpCarrierNumber].index('') - 1].getPreviousHash()
         # print(block[orderNumber][block[orderNumber].index('') - 1].getPreviousHash())
 
     except:
-        ye = "man"
+        print("send message error")
 
 
 def mainProg():
@@ -196,11 +203,12 @@ def mainProg():
                 print("exception")
                 if SCarrierNumber[tcpOrderNumber][tcpCarrierNumber] != 1:
                     newGenesis = 1
+                    print("Order number not a thing, creating a new blockchain")
 
                 else:  # this node has already published information
                     newGenesis = 0
 
-                print("Order number not a thing, creating a new blockchain")
+
             # Genesis Block
             # print(SblockHash[orderNumber].index('') == 0)
             if newGenesis == 1:
@@ -226,8 +234,7 @@ def mainProg():
                 pub.publish(message)
                 # print(orderNumber, blockNumber)
                 # print(block[orderNumber].index(('')))
-                blockNumber = block[tcpOrderNumber][tcpCarrierNumber].index(
-                    '')  # key part, as each station uploads information, this variable is incremented to generate a new block
+                blockNumber = block[tcpOrderNumber][tcpCarrierNumber].index('')  # key part, as each station uploads information, this variable is incremented to generate a new block
                 # print(orderNumber, blockNumber)
                 # print(block[orderNumber][blockNumber - 1].getBlockHash())
                 newGenesis = 0
@@ -239,7 +246,7 @@ def mainProg():
                             seconds=tcpSeconds, minutes=tcpMinutes, hours=tcpHours, days=tcpDays, months=tcpMonths,
                             years=tcpYears)
                 print("sending message in gen0")
-                print(block[orderNumber][tcpCarrierNumber][block[tcpOrderNumber][tcpCarrierNumber].index('') - 1])
+                # print(block[orderNumber][tcpCarrierNumber][block[tcpOrderNumber][tcpCarrierNumber].index('') - 1])
                 sendMessage()
                 time.sleep(1)
                 pub.publish(message)
