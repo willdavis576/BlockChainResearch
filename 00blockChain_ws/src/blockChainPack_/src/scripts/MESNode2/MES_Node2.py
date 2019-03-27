@@ -302,10 +302,10 @@ def callback(data):
     # print(data.timeStamp[11] + data.timeStamp[12])
     # print(data.timeStamp[14] + data.timeStamp[15])
     # print(data.timeStamp[17] + data.timeStamp[18] + data.timeStamp[19] + data.timeStamp[20])
-    print(data_to_print)
-    print("blockNumber: {0}".format(data.blockNumber))
-    print("callback")
-    print(block[data.orderNumber][data.carrierID][data.blockNumber])
+    # print(data_to_print)
+    # print("blockNumber: {0}".format(data.blockNumber))
+    # print("callback")
+    # print(block[data.orderNumber][data.carrierID][data.blockNumber])
     if block[data.orderNumber][data.carrierID][data.blockNumber] == '':
         block[data.orderNumber][data.carrierID][data.blockNumber] = blockChain(previousHash=data.previousHash,
                                                                                station=data.station,
@@ -319,17 +319,7 @@ def callback(data):
                                                                                months=data.timeStamp[14] + data.timeStamp[15],
                                                                                years=data.timeStamp[17] + data.timeStamp[18] + data.timeStamp[19] +
                                                                                      data.timeStamp[20])
-    print("after write")
-    print(block[data.orderNumber][data.carrierID][data.blockNumber])
 
-    # check if there is block information for the block recieved already (hence a local creation), if there isn't, create a block.
-
-    # print("I'm in callback")
-    # print(SblockHash[1243][0])
-    # print(data.orderNumber, data.blockNumber)
-
-    # counter1 = counter1 + 1
-    # rospy.loginfo(data_to_print)
     if runYet[data.orderNumber][data.carrierID] == '':
         f = open("/home/ros/blockChainGit/00blockChain_ws/src/Product" + str(data.orderNumber + 1000) + "C:" + str(
             data.carrierID) + ".txt", "w")
@@ -492,7 +482,7 @@ def manual():
                         try:
                             # print(data)
                             if oldData != data:
-                                print(data)
+                                # print(data)
                                 tcpStationName = data[0]
                                 tcpOrderNumber = int(data[2] + data[3] + data[4] + data[5]) - 1000
                                 tcpCarrierNumber = int(data[7])
