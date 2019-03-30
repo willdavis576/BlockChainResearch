@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="d548811d-0aca-477e-bfa2-a5ed9f109e3c" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/MESNode1/MES_Node1.py" afterPath="$PROJECT_DIR$/MESNode1/MES_Node1.py" />
+      <change beforePath="$PROJECT_DIR$/PLC Sim/SimNode1.py" afterPath="$PROJECT_DIR$/PLC Sim/SimNode1.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -45,19 +46,38 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MES_Node1.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="MES_Node1.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MESNode1/MES_Node1.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1055">
-              <caret line="378" column="22" lean-forward="true" selection-start-line="378" selection-start-column="22" selection-end-line="378" selection-end-column="22" />
+            <state relative-caret-position="-587">
+              <caret line="459" column="32" lean-forward="false" selection-start-line="459" selection-start-column="32" selection-end-line="459" selection-end-column="32" />
               <folding>
                 <element signature="e#19#78#0" expanded="true" />
                 <element signature="e#2832#3964#0" expanded="false" />
                 <element signature="e#10080#10161#0" expanded="false" />
                 <element signature="e#16186#16709#0" expanded="false" />
-                <element signature="e#16807#20247#0" expanded="false" />
-                <element signature="e#21498#21547#0" expanded="false" />
+                <element signature="e#21495#21544#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SimNode1.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/PLC Sim/SimNode1.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="18" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="bitcoinMiningExample.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/bitcoinMiningExample.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="627">
+              <caret line="19" column="10" lean-forward="true" selection-start-line="19" selection-start-column="10" selection-end-line="19" selection-end-column="10" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -182,7 +202,6 @@
         <option value="$PROJECT_DIR$/testTCP.py" />
         <option value="$PROJECT_DIR$/3Server.py" />
         <option value="$PROJECT_DIR$/NODE1/blockChainNode1.py" />
-        <option value="$PROJECT_DIR$/PLC Sim/SimNode1.py" />
         <option value="$PROJECT_DIR$/Server2.py" />
         <option value="$PROJECT_DIR$/PLC Sim/SimNode2.py" />
         <option value="$PROJECT_DIR$/MESNode3/MES_Node3.py" />
@@ -190,6 +209,8 @@
         <option value="$PROJECT_DIR$/MESNode2/MES_Node2.py" />
         <option value="$PROJECT_DIR$/MES_Node_hacked.py" />
         <option value="$PROJECT_DIR$/MESNode1/MES_Node1.py" />
+        <option value="$PROJECT_DIR$/PLC Sim/SimNode1.py" />
+        <option value="$PROJECT_DIR$/bitcoinMiningExample.py" />
       </list>
     </option>
   </component>
@@ -329,7 +350,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/decentralBlockChain.py" />
     <entry file="file://$PROJECT_DIR$/blockChain.py" />
     <entry file="file://$PROJECT_DIR$/listener.py" />
     <entry file="file://$PROJECT_DIR$/decentralBlockChain.py" />
@@ -443,13 +463,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/PLC Sim/SimNode1.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="18" lean-forward="false" selection-start-line="0" selection-start-column="18" selection-end-line="0" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Server2.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="881">
@@ -520,16 +533,31 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/MESNode1/MES_Node1.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1055">
-          <caret line="378" column="22" lean-forward="true" selection-start-line="378" selection-start-column="22" selection-end-line="378" selection-end-column="22" />
+        <state relative-caret-position="-587">
+          <caret line="459" column="32" lean-forward="false" selection-start-line="459" selection-start-column="32" selection-end-line="459" selection-end-column="32" />
           <folding>
             <element signature="e#19#78#0" expanded="true" />
             <element signature="e#2832#3964#0" expanded="false" />
             <element signature="e#10080#10161#0" expanded="false" />
             <element signature="e#16186#16709#0" expanded="false" />
-            <element signature="e#16807#20247#0" expanded="false" />
-            <element signature="e#21498#21547#0" expanded="false" />
+            <element signature="e#21495#21544#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/PLC Sim/SimNode1.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bitcoinMiningExample.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="627">
+          <caret line="19" column="10" lean-forward="true" selection-start-line="19" selection-start-column="10" selection-end-line="19" selection-end-column="10" />
+          <folding />
         </state>
       </provider>
     </entry>
