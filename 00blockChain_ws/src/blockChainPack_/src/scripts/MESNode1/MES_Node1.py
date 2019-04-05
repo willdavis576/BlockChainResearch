@@ -92,6 +92,9 @@ years = 0
 # Emitter
 hashingArray = ''
 
+#Rewrite
+nodeToRewrite = 10
+
 
 class blockChain:
 
@@ -366,6 +369,7 @@ def authTrigger():
     global Trigger
     global authOrderNumber
     global node
+    global nodeToRewrite
 
     while not rospy.is_shutdown():
         time.sleep(5)
@@ -374,7 +378,8 @@ def authTrigger():
         # print(mostCommonHash.most_common(3))
         try:
             print(nodeList[(node.index(str(mostCommonHash.most_common(3)[2][0])))] + " has been hacked")
-            rewriteNodes(nodeNumber= nodeList[(node.index(str(mostCommonHash.most_common(3)[2][0])))])
+            nodeToRewrite = nodeList[(node.index(str(mostCommonHash.most_common(3)[2][0])))]
+            rewriteNodes()
         except:
             print("all fine")
 
@@ -421,22 +426,29 @@ def rewriteNodes():
     global SOrderNumber
     global Range
     global cRange
+    global nodeToRewrite
 
     # rewrite NODE(nodeNumber)
     pub = rospy.Publisher('Rewrite', rewriteNode, queue_size=100)
 
     # if nodeNumber == int(nodeName[4]) + 1 :
-        # this node will rewrite the hacked node
-    while(True):
-        for i in range(Range):
-            for j in range(cRange):
-                for z in range(Range):
-                    message3 = rewriteNode()
-                    message3.firstIndex = i
-                    message3.secondIndex = j
-                    message3.thirdIndex = z
-                    message3.SblockTimeStamp = SblockTimeStamp[i][j][z]
-                    pub.publish(message3)
+    # this node will rewrite the hacked node
+
+    strTimeStamp = ''
+    oldTimeStamp = ''
+
+
+    for i in range(Range):
+        for j in range(cRange):
+            for z in range(Range):
+                if SblockTimeStamp[i][j][z] != '':
+                    if SblockTimeStamp[i][j][z] != oldTimeStamp:
+                        strTimeStamp = strTimeStamp + '#' + str(i) + str(j) + str(z) + '?' + SblockTimeStamp[i][j][z] + ','
+                        oldTimeStamp = SblockTimeStamp[i][j][z]
+
+    message3 = rewriteNode()
+    message3.SblockTimeStamp = strTimeStamp
+    pub.publish(message3)
 
 
 
@@ -554,7 +566,7 @@ if __name__ == '__main__':
         p3 = threading.Thread(target=authentication, args=())
         p4 = threading.Thread(target=emitter, args=())
         p5 = threading.Thread(target=authTrigger, args=())
-        p6 = threading.Thread(target=rewriteNodes, args=())
+        # p6 = threading.Thread(target=rewriteNodes, args=())
         # p7 = threading.Thread(target=sendMessage, args=())
         p8 = threading.Thread(target=manual, args=())
         # p9 = threading.Thread(target=blockUpdate, args=())
@@ -564,7 +576,7 @@ if __name__ == '__main__':
         p3.daemon = True
         p4.daemon = True
         p5.daemon = True
-        p6.daemon = True
+        # p6.daemon = True
         # p7.daemon = True
         p8.daemon = True
         # p9.daemon = True
@@ -574,7 +586,7 @@ if __name__ == '__main__':
         p3.start()
         p4.start()
         p5.start()
-        p6.start()
+        # p6.start()
         # p7.start()
         p8.start()
         # p9.start()
@@ -584,7 +596,7 @@ if __name__ == '__main__':
         p3.join()
         p4.join()
         p5.join()
-        p6.join()
+        # p6.join()
         # p7.join()
         p8.join()
         # p9.join()
