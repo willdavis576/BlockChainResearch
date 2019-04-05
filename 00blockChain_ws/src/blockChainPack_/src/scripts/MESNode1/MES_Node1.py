@@ -24,6 +24,7 @@ orderNcarrierNumberList = [['' for _ in range(cRange)] for _ in range(Range)]
 print("24%")
 buildBlock = 0
 oldData = ''
+emit = False
 
 serialNumberNum = 0
 serialNumberStr = 'PRODUCT'
@@ -274,6 +275,9 @@ def callback(data):
     global SOrderNumber
 
     global node
+    global emit
+
+    emit = True
 
     orderNumber1 = data.orderNumber
     data_to_print = "Time Stamp for Block: {0}\nStation: {1}\nOrder Number: {2}\nCarrierID: {3}\nProduct Code: {4}\nBlock Hash: {5}\nPrevious Hash: {6}".format(
@@ -382,23 +386,24 @@ def emitter():
     global station
     global SblockHash
     global hashingArray
+    global emit
 
     pub = rospy.Publisher('Last_Hash', lastHash, queue_size=100)
 
     while not rospy.is_shutdown():
+        if emit == True:
+            for i in range(len(SblockHash)):
+                for j in range(len(SblockHash[i])):
+                    for z in range(len(SblockHash[i][j])):
+                        hashingArray = hashlib.sha256(hashingArray + SblockHash[i][j][z]).hexdigest()
 
-        for i in range(len(SblockHash)):
-            for j in range(len(SblockHash[i])):
-                for z in range(len(SblockHash[i][j])):
-                    hashingArray = hashlib.sha256(hashingArray + SblockHash[i][j][z]).hexdigest()
 
-
-        message2 = lastHash()
-        message2.hash = hashingArray
-        message2.nodeName = 'NODE1'
-        pub.publish(message2)
-        hashingArray = ''
-        time.sleep(1)
+            message2 = lastHash()
+            message2.hash = hashingArray
+            message2.nodeName = 'NODE1'
+            pub.publish(message2)
+            hashingArray = ''
+            time.sleep(1)
 
 
 
