@@ -459,6 +459,7 @@ def rewriteNodes():
     for i in range(Range):
         for j in range(cRange):
             for z in range(Range):
+
                 if SblockTimeStamp[i][j][z] != '':
                     if SblockTimeStamp[i][j][z] != oldTimeStamp: #TimeStamp
                         strTimeStamp = strTimeStamp + '#' + str(i) + str(j) + str(z) + '?' + SblockTimeStamp[i][j][z] + ','
@@ -472,18 +473,18 @@ def rewriteNodes():
                         strProductCode = strProductCode + '#' + str(i) + str(j) + str(z) + '?' + str(SblockProductCode[i][j][z]) + ','
                         oldProductCode = str(SblockProductCode[i][j][z])
 
-                    if SblockHash[i][j][z] != oldBlockHash: #BlockHash
-                        strBlockHash = strBlockHash + '#' + str(i) + str(j) + str(z) + '?' + SblockHash[i][j][z] + ','
-                        oldBlockHash = SblockHash[i][j][z]
+                    if str(SCarrierNumber[i][j]) != oldCarrierNumber: #CarrierNumber
+                        strCarrierNumber = strCarrierNumber + '#' + str(i) + str(j) + str(z) + '?' + str(SCarrierNumber[i][j]) + ','
+                        oldCarrierNumber = str(SCarrierNumber[i][j])
 
-                    if SblockPreviousHash[i][j][z] != oldBlockPreviousHash: #BlockPreviousHash
-                        strBlockPreviousHash = strBlockPreviousHash + '#' + str(i) + str(j) + str(z) + '?' + SblockPreviousHash[i][j][z] + ','
-                        oldBlockPreviousHash = SblockPreviousHash[i][j][z]
 
-                if str(SCarrierNumber[i][j]) != oldCarrierNumber: #CarrierNumber
-                    strCarrierNumber = strCarrierNumber + '#' + str(i) + str(j) + str(z) + '?' + str(SCarrierNumber[i][j]) + ','
-                    oldCarrierNumber = str(SCarrierNumber[i][j])
-
+                    # if SblockHash[i][j][z] != oldBlockHash: #BlockHash
+                    #     strBlockHash = strBlockHash + '#' + str(i) + str(j) + str(z) + '?' + SblockHash[i][j][z] + ','
+                    #     oldBlockHash = SblockHash[i][j][z]
+                    #
+                    # if SblockPreviousHash[i][j][z] != oldBlockPreviousHash: #BlockPreviousHash
+                    #     strBlockPreviousHash = strBlockPreviousHash + '#' + str(i) + str(j) + str(z) + '?' + SblockPreviousHash[i][j][z] + ','
+                    #     oldBlockPreviousHash = SblockPreviousHash[i][j][z]
 
 
 
@@ -492,8 +493,8 @@ def rewriteNodes():
     message3.SblockTimeStamp = strTimeStamp
     message3.SblockTrans = strTrans
     message3.SblockProductCode = strProductCode
-    message3.SblockHash = strBlockHash
-    message3.SblockPreviousHash = strBlockPreviousHash
+    # message3.SblockHash = strBlockHash
+    # message3.SblockPreviousHash = strBlockPreviousHash
     message3.SCarrierNumber = strCarrierNumber
     pub.publish(message3)
 
