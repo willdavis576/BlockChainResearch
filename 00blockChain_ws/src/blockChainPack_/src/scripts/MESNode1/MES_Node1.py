@@ -437,6 +437,9 @@ def rewriteNodes():
     strTimeStamp = ''
     oldTimeStamp = ''
 
+    strTrans = ''
+    oldTrans = ''
+
 
     for i in range(Range):
         for j in range(cRange):
@@ -446,11 +449,32 @@ def rewriteNodes():
                         strTimeStamp = strTimeStamp + '#' + str(i) + str(j) + str(z) + '?' + SblockTimeStamp[i][j][z] + ','
                         oldTimeStamp = SblockTimeStamp[i][j][z]
 
+
+    for i in range(Range):
+        for j in range(cRange):
+            for z in range(Range):
+                if SblockTrans[i][j][z] != '':
+                    if SblockTrans[i][j][z] != oldTrans:
+                        strTrans = strTrans + '#' + str(i) + str(j) + str(z) + '?' + SblockTrans[i][j][z] + ','
+                        oldTrans = SblockTrans[i][j][z]
+
+
+
+
+
+
+
     message3 = rewriteNode()
     message3.SblockTimeStamp = strTimeStamp
+    message3.SblockTrans = strTrans
     pub.publish(message3)
 
-
+# SblockTimeStamp[][][]
+# SblockTrans[][][]
+# SblockProductCode[][][]
+# SblockHash[][][]
+# SblockPreviousHash[][][]
+# SCarrierNumber[][][]
 
 # station[][][] not needed
 # block[][][] not needed
@@ -460,12 +484,6 @@ def rewriteNodes():
 # nodeONOFF[]
 # oldNodeONOFF[]
 # node[]
-# SblockTimeStamp[][][]
-# SblockTrans[][][]
-# SblockProductCode[][][]
-# SblockHash[][][]
-# SblockPreviousHash[][][]
-# SCarrierNumber[][][]
 
 
 
