@@ -1,9 +1,9 @@
 string SblockTimeStamp
 string SblockTrans
-int64 SblockProductCode
+string SblockProductCode
 string SblockHash
 string SblockPreviousHash
-int64 SCarrierNumber
+string SCarrierNumber
 
 int64 firstIndex
 int64 secondIndex

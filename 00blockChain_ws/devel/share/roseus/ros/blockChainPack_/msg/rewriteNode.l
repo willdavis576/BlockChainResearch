@@ -21,10 +21,10 @@
    (&key
     ((:SblockTimeStamp __SblockTimeStamp) "")
     ((:SblockTrans __SblockTrans) "")
-    ((:SblockProductCode __SblockProductCode) 0)
+    ((:SblockProductCode __SblockProductCode) "")
     ((:SblockHash __SblockHash) "")
     ((:SblockPreviousHash __SblockPreviousHash) "")
-    ((:SCarrierNumber __SCarrierNumber) 0)
+    ((:SCarrierNumber __SCarrierNumber) "")
     ((:firstIndex __firstIndex) 0)
     ((:secondIndex __secondIndex) 0)
     ((:thirdIndex __thirdIndex) 0)
@@ -32,10 +32,10 @@
    (send-super :init)
    (setq _SblockTimeStamp (string __SblockTimeStamp))
    (setq _SblockTrans (string __SblockTrans))
-   (setq _SblockProductCode (round __SblockProductCode))
+   (setq _SblockProductCode (string __SblockProductCode))
    (setq _SblockHash (string __SblockHash))
    (setq _SblockPreviousHash (string __SblockPreviousHash))
-   (setq _SCarrierNumber (round __SCarrierNumber))
+   (setq _SCarrierNumber (string __SCarrierNumber))
    (setq _firstIndex (round __firstIndex))
    (setq _secondIndex (round __secondIndex))
    (setq _thirdIndex (round __thirdIndex))
@@ -74,14 +74,14 @@
     4 (length _SblockTimeStamp)
     ;; string _SblockTrans
     4 (length _SblockTrans)
-    ;; int64 _SblockProductCode
-    8
+    ;; string _SblockProductCode
+    4 (length _SblockProductCode)
     ;; string _SblockHash
     4 (length _SblockHash)
     ;; string _SblockPreviousHash
     4 (length _SblockPreviousHash)
-    ;; int64 _SCarrierNumber
-    8
+    ;; string _SCarrierNumber
+    4 (length _SCarrierNumber)
     ;; int64 _firstIndex
     8
     ;; int64 _secondIndex
@@ -97,34 +97,14 @@
        (write-long (length _SblockTimeStamp) s) (princ _SblockTimeStamp s)
      ;; string _SblockTrans
        (write-long (length _SblockTrans) s) (princ _SblockTrans s)
-     ;; int64 _SblockProductCode
-#+(or :alpha :irix6 :x86_64)
-       (progn (sys::poke _SblockProductCode (send s :buffer) (send s :count) :long) (incf (stream-count s) 8))
-#-(or :alpha :irix6 :x86_64)
-       (cond ((and (class _SblockProductCode) (= (length (_SblockProductCode . bv)) 2)) ;; bignum
-              (write-long (ash (elt (_SblockProductCode . bv) 0) 0) s)
-              (write-long (ash (elt (_SblockProductCode . bv) 1) -1) s))
-             ((and (class _SblockProductCode) (= (length (_SblockProductCode . bv)) 1)) ;; big1
-              (write-long (elt (_SblockProductCode . bv) 0) s)
-              (write-long (if (>= _SblockProductCode 0) 0 #xffffffff) s))
-             (t                                         ;; integer
-              (write-long _SblockProductCode s)(write-long (if (>= _SblockProductCode 0) 0 #xffffffff) s)))
+     ;; string _SblockProductCode
+       (write-long (length _SblockProductCode) s) (princ _SblockProductCode s)
      ;; string _SblockHash
        (write-long (length _SblockHash) s) (princ _SblockHash s)
      ;; string _SblockPreviousHash
        (write-long (length _SblockPreviousHash) s) (princ _SblockPreviousHash s)
-     ;; int64 _SCarrierNumber
-#+(or :alpha :irix6 :x86_64)
-       (progn (sys::poke _SCarrierNumber (send s :buffer) (send s :count) :long) (incf (stream-count s) 8))
-#-(or :alpha :irix6 :x86_64)
-       (cond ((and (class _SCarrierNumber) (= (length (_SCarrierNumber . bv)) 2)) ;; bignum
-              (write-long (ash (elt (_SCarrierNumber . bv) 0) 0) s)
-              (write-long (ash (elt (_SCarrierNumber . bv) 1) -1) s))
-             ((and (class _SCarrierNumber) (= (length (_SCarrierNumber . bv)) 1)) ;; big1
-              (write-long (elt (_SCarrierNumber . bv) 0) s)
-              (write-long (if (>= _SCarrierNumber 0) 0 #xffffffff) s))
-             (t                                         ;; integer
-              (write-long _SCarrierNumber s)(write-long (if (>= _SCarrierNumber 0) 0 #xffffffff) s)))
+     ;; string _SCarrierNumber
+       (write-long (length _SCarrierNumber) s) (princ _SCarrierNumber s)
      ;; int64 _firstIndex
 #+(or :alpha :irix6 :x86_64)
        (progn (sys::poke _firstIndex (send s :buffer) (send s :count) :long) (incf (stream-count s) 8))
@@ -169,34 +149,14 @@
      (let (n) (setq n (sys::peek buf ptr- :integer)) (incf ptr- 4) (setq _SblockTimeStamp (subseq buf ptr- (+ ptr- n))) (incf ptr- n))
    ;; string _SblockTrans
      (let (n) (setq n (sys::peek buf ptr- :integer)) (incf ptr- 4) (setq _SblockTrans (subseq buf ptr- (+ ptr- n))) (incf ptr- n))
-   ;; int64 _SblockProductCode
-#+(or :alpha :irix6 :x86_64)
-      (setf _SblockProductCode (prog1 (sys::peek buf ptr- :long) (incf ptr- 8)))
-#-(or :alpha :irix6 :x86_64)
-      (setf _SblockProductCode (let ((b0 (prog1 (sys::peek buf ptr- :integer) (incf ptr- 4)))
-                  (b1 (prog1 (sys::peek buf ptr- :integer) (incf ptr- 4))))
-              (cond ((= b1 -1) b0)
-                     ((and (= b1  0)
-                           (<= lisp::most-negative-fixnum b0 lisp::most-positive-fixnum))
-                      b0)
-                    ((= b1  0) (make-instance bignum :size 1 :bv (integer-vector b0)))
-                    (t (make-instance bignum :size 2 :bv (integer-vector b0 (ash b1 1)))))))
+   ;; string _SblockProductCode
+     (let (n) (setq n (sys::peek buf ptr- :integer)) (incf ptr- 4) (setq _SblockProductCode (subseq buf ptr- (+ ptr- n))) (incf ptr- n))
    ;; string _SblockHash
      (let (n) (setq n (sys::peek buf ptr- :integer)) (incf ptr- 4) (setq _SblockHash (subseq buf ptr- (+ ptr- n))) (incf ptr- n))
    ;; string _SblockPreviousHash
      (let (n) (setq n (sys::peek buf ptr- :integer)) (incf ptr- 4) (setq _SblockPreviousHash (subseq buf ptr- (+ ptr- n))) (incf ptr- n))
-   ;; int64 _SCarrierNumber
-#+(or :alpha :irix6 :x86_64)
-      (setf _SCarrierNumber (prog1 (sys::peek buf ptr- :long) (incf ptr- 8)))
-#-(or :alpha :irix6 :x86_64)
-      (setf _SCarrierNumber (let ((b0 (prog1 (sys::peek buf ptr- :integer) (incf ptr- 4)))
-                  (b1 (prog1 (sys::peek buf ptr- :integer) (incf ptr- 4))))
-              (cond ((= b1 -1) b0)
-                     ((and (= b1  0)
-                           (<= lisp::most-negative-fixnum b0 lisp::most-positive-fixnum))
-                      b0)
-                    ((= b1  0) (make-instance bignum :size 1 :bv (integer-vector b0)))
-                    (t (make-instance bignum :size 2 :bv (integer-vector b0 (ash b1 1)))))))
+   ;; string _SCarrierNumber
+     (let (n) (setq n (sys::peek buf ptr- :integer)) (incf ptr- 4) (setq _SCarrierNumber (subseq buf ptr- (+ ptr- n))) (incf ptr- n))
    ;; int64 _firstIndex
 #+(or :alpha :irix6 :x86_64)
       (setf _firstIndex (prog1 (sys::peek buf ptr- :long) (incf ptr- 8)))
@@ -237,15 +197,15 @@
    self)
   )
 
-(setf (get blockChainPack_::rewriteNode :md5sum-) "b722726d77ee12b8172165f1aabcd67c")
+(setf (get blockChainPack_::rewriteNode :md5sum-) "91768e2469f9ae2ab2c7ec958edadd76")
 (setf (get blockChainPack_::rewriteNode :datatype-) "blockChainPack_/rewriteNode")
 (setf (get blockChainPack_::rewriteNode :definition-)
       "string SblockTimeStamp
 string SblockTrans
-int64 SblockProductCode
+string SblockProductCode
 string SblockHash
 string SblockPreviousHash
-int64 SCarrierNumber
+string SCarrierNumber
 
 int64 firstIndex
 int64 secondIndex
@@ -255,6 +215,6 @@ int64 thirdIndex
 
 
 
-(provide :blockChainPack_/rewriteNode "b722726d77ee12b8172165f1aabcd67c")
+(provide :blockChainPack_/rewriteNode "91768e2469f9ae2ab2c7ec958edadd76")
 
 

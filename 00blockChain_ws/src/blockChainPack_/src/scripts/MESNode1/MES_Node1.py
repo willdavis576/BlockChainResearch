@@ -354,9 +354,10 @@ def callbackAuth(data):
     global nodeONOFF
     global nodeList
     global authOrderNumber
+
     if data.nodeName in nodeList:
         nodeONOFF[nodeList.index(data.nodeName)] = 1  # filling in the online array
-        print(data.nodeName + " is online!")
+        #print(data.nodeName + " is online!")
     # for i in range(10): #10 being a max node amount - can be changed as the array size is 100
 
     name = data.nodeName
@@ -440,33 +441,37 @@ def rewriteNodes():
     strTrans = ''
     oldTrans = ''
 
+    strProductCode = ''
+    oldProductCode = ''
 
+    print("rewrite commence")
+
+    #TimeStamp
     for i in range(Range):
         for j in range(cRange):
             for z in range(Range):
                 if SblockTimeStamp[i][j][z] != '':
-                    if SblockTimeStamp[i][j][z] != oldTimeStamp:
+                    if SblockTimeStamp[i][j][z] != oldTimeStamp: #TimeStamp
                         strTimeStamp = strTimeStamp + '#' + str(i) + str(j) + str(z) + '?' + SblockTimeStamp[i][j][z] + ','
                         oldTimeStamp = SblockTimeStamp[i][j][z]
 
+                    if str(SblockTrans[i][j][z]) != oldTrans: #Station
+                        strTrans = strTrans + '#' + str(i) + str(j) + str(z) + '?' + str(SblockTrans[i][j][z]) + ','
+                        oldTrans = str(SblockTrans[i][j][z])
 
-    for i in range(Range):
-        for j in range(cRange):
-            for z in range(Range):
-                if SblockTrans[i][j][z] != '':
-                    if SblockTrans[i][j][z] != oldTrans:
-                        strTrans = strTrans + '#' + str(i) + str(j) + str(z) + '?' + SblockTrans[i][j][z] + ','
-                        oldTrans = SblockTrans[i][j][z]
-
+                    if str(SblockProductCode[i][j][z]) != oldProductCode: #ProductCode
+                        strProductCode = strProductCode + '#' + str(i) + str(j) + str(z) + '?' + str(SblockProductCode[i][j][z]) + ','
+                        oldProductCode = str(SblockProductCode[i][j][z])
 
 
 
 
 
-
+    print("finished")
     message3 = rewriteNode()
     message3.SblockTimeStamp = strTimeStamp
     message3.SblockTrans = strTrans
+    message3.SblockProductCode = strProductCode
     pub.publish(message3)
 
 # SblockTimeStamp[][][]

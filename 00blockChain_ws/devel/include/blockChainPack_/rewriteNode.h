@@ -26,10 +26,10 @@ struct rewriteNode_
   rewriteNode_()
     : SblockTimeStamp()
     , SblockTrans()
-    , SblockProductCode(0)
+    , SblockProductCode()
     , SblockHash()
     , SblockPreviousHash()
-    , SCarrierNumber(0)
+    , SCarrierNumber()
     , firstIndex(0)
     , secondIndex(0)
     , thirdIndex(0)  {
@@ -37,10 +37,10 @@ struct rewriteNode_
   rewriteNode_(const ContainerAllocator& _alloc)
     : SblockTimeStamp(_alloc)
     , SblockTrans(_alloc)
-    , SblockProductCode(0)
+    , SblockProductCode(_alloc)
     , SblockHash(_alloc)
     , SblockPreviousHash(_alloc)
-    , SCarrierNumber(0)
+    , SCarrierNumber(_alloc)
     , firstIndex(0)
     , secondIndex(0)
     , thirdIndex(0)  {
@@ -55,7 +55,7 @@ struct rewriteNode_
    typedef std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other >  _SblockTrans_type;
   _SblockTrans_type SblockTrans;
 
-   typedef int64_t _SblockProductCode_type;
+   typedef std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other >  _SblockProductCode_type;
   _SblockProductCode_type SblockProductCode;
 
    typedef std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other >  _SblockHash_type;
@@ -64,7 +64,7 @@ struct rewriteNode_
    typedef std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other >  _SblockPreviousHash_type;
   _SblockPreviousHash_type SblockPreviousHash;
 
-   typedef int64_t _SCarrierNumber_type;
+   typedef std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other >  _SCarrierNumber_type;
   _SCarrierNumber_type SCarrierNumber;
 
    typedef int64_t _firstIndex_type;
@@ -154,12 +154,12 @@ struct MD5Sum< ::blockChainPack_::rewriteNode_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "b722726d77ee12b8172165f1aabcd67c";
+    return "91768e2469f9ae2ab2c7ec958edadd76";
   }
 
   static const char* value(const ::blockChainPack_::rewriteNode_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0xb722726d77ee12b8ULL;
-  static const uint64_t static_value2 = 0x172165f1aabcd67cULL;
+  static const uint64_t static_value1 = 0x91768e2469f9ae2aULL;
+  static const uint64_t static_value2 = 0xb2c7ec958edadd76ULL;
 };
 
 template<class ContainerAllocator>
@@ -180,10 +180,10 @@ struct Definition< ::blockChainPack_::rewriteNode_<ContainerAllocator> >
   {
     return "string SblockTimeStamp\n\
 string SblockTrans\n\
-int64 SblockProductCode\n\
+string SblockProductCode\n\
 string SblockHash\n\
 string SblockPreviousHash\n\
-int64 SCarrierNumber\n\
+string SCarrierNumber\n\
 \n\
 int64 firstIndex\n\
 int64 secondIndex\n\
@@ -238,13 +238,13 @@ struct Printer< ::blockChainPack_::rewriteNode_<ContainerAllocator> >
     s << indent << "SblockTrans: ";
     Printer<std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other > >::stream(s, indent + "  ", v.SblockTrans);
     s << indent << "SblockProductCode: ";
-    Printer<int64_t>::stream(s, indent + "  ", v.SblockProductCode);
+    Printer<std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other > >::stream(s, indent + "  ", v.SblockProductCode);
     s << indent << "SblockHash: ";
     Printer<std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other > >::stream(s, indent + "  ", v.SblockHash);
     s << indent << "SblockPreviousHash: ";
     Printer<std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other > >::stream(s, indent + "  ", v.SblockPreviousHash);
     s << indent << "SCarrierNumber: ";
-    Printer<int64_t>::stream(s, indent + "  ", v.SCarrierNumber);
+    Printer<std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other > >::stream(s, indent + "  ", v.SCarrierNumber);
     s << indent << "firstIndex: ";
     Printer<int64_t>::stream(s, indent + "  ", v.firstIndex);
     s << indent << "secondIndex: ";

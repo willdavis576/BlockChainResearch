@@ -45,7 +45,7 @@ class rewriteNode {
         this.SblockProductCode = initObj.SblockProductCode
       }
       else {
-        this.SblockProductCode = 0;
+        this.SblockProductCode = '';
       }
       if (initObj.hasOwnProperty('SblockHash')) {
         this.SblockHash = initObj.SblockHash
@@ -63,7 +63,7 @@ class rewriteNode {
         this.SCarrierNumber = initObj.SCarrierNumber
       }
       else {
-        this.SCarrierNumber = 0;
+        this.SCarrierNumber = '';
       }
       if (initObj.hasOwnProperty('firstIndex')) {
         this.firstIndex = initObj.firstIndex
@@ -93,13 +93,13 @@ class rewriteNode {
     // Serialize message field [SblockTrans]
     bufferOffset = _serializer.string(obj.SblockTrans, buffer, bufferOffset);
     // Serialize message field [SblockProductCode]
-    bufferOffset = _serializer.int64(obj.SblockProductCode, buffer, bufferOffset);
+    bufferOffset = _serializer.string(obj.SblockProductCode, buffer, bufferOffset);
     // Serialize message field [SblockHash]
     bufferOffset = _serializer.string(obj.SblockHash, buffer, bufferOffset);
     // Serialize message field [SblockPreviousHash]
     bufferOffset = _serializer.string(obj.SblockPreviousHash, buffer, bufferOffset);
     // Serialize message field [SCarrierNumber]
-    bufferOffset = _serializer.int64(obj.SCarrierNumber, buffer, bufferOffset);
+    bufferOffset = _serializer.string(obj.SCarrierNumber, buffer, bufferOffset);
     // Serialize message field [firstIndex]
     bufferOffset = _serializer.int64(obj.firstIndex, buffer, bufferOffset);
     // Serialize message field [secondIndex]
@@ -118,13 +118,13 @@ class rewriteNode {
     // Deserialize message field [SblockTrans]
     data.SblockTrans = _deserializer.string(buffer, bufferOffset);
     // Deserialize message field [SblockProductCode]
-    data.SblockProductCode = _deserializer.int64(buffer, bufferOffset);
+    data.SblockProductCode = _deserializer.string(buffer, bufferOffset);
     // Deserialize message field [SblockHash]
     data.SblockHash = _deserializer.string(buffer, bufferOffset);
     // Deserialize message field [SblockPreviousHash]
     data.SblockPreviousHash = _deserializer.string(buffer, bufferOffset);
     // Deserialize message field [SCarrierNumber]
-    data.SCarrierNumber = _deserializer.int64(buffer, bufferOffset);
+    data.SCarrierNumber = _deserializer.string(buffer, bufferOffset);
     // Deserialize message field [firstIndex]
     data.firstIndex = _deserializer.int64(buffer, bufferOffset);
     // Deserialize message field [secondIndex]
@@ -138,9 +138,11 @@ class rewriteNode {
     let length = 0;
     length += object.SblockTimeStamp.length;
     length += object.SblockTrans.length;
+    length += object.SblockProductCode.length;
     length += object.SblockHash.length;
     length += object.SblockPreviousHash.length;
-    return length + 56;
+    length += object.SCarrierNumber.length;
+    return length + 48;
   }
 
   static datatype() {
@@ -150,7 +152,7 @@ class rewriteNode {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return 'b722726d77ee12b8172165f1aabcd67c';
+    return '91768e2469f9ae2ab2c7ec958edadd76';
   }
 
   static messageDefinition() {
@@ -158,10 +160,10 @@ class rewriteNode {
     return `
     string SblockTimeStamp
     string SblockTrans
-    int64 SblockProductCode
+    string SblockProductCode
     string SblockHash
     string SblockPreviousHash
-    int64 SCarrierNumber
+    string SCarrierNumber
     
     int64 firstIndex
     int64 secondIndex
@@ -194,7 +196,7 @@ class rewriteNode {
       resolved.SblockProductCode = msg.SblockProductCode;
     }
     else {
-      resolved.SblockProductCode = 0
+      resolved.SblockProductCode = ''
     }
 
     if (msg.SblockHash !== undefined) {
@@ -215,7 +217,7 @@ class rewriteNode {
       resolved.SCarrierNumber = msg.SCarrierNumber;
     }
     else {
-      resolved.SCarrierNumber = 0
+      resolved.SCarrierNumber = ''
     }
 
     if (msg.firstIndex !== undefined) {
