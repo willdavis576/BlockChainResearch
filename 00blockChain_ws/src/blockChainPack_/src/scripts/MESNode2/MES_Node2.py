@@ -41,7 +41,7 @@ runYet = [['' for _ in range(Range)] for _ in range(Range)]
 Trigger = False
 nodeList = ['NODE1', 'NODE2', 'NODE3',
             'NODE4']  ################# IF INCLUDING MORE NODES, EXTEND THIS ARRAY SIZE #######################
-nodeONOFF = [1, 0, 0, 0]  ################# IF INCLUDING MORE NODES, EXTEND THIS ARRAY SIZE #######################
+nodeONOFF = [0, 1, 0, 0]  ################# IF INCLUDING MORE NODES, EXTEND THIS ARRAY SIZE #######################
 oldNodeONOFF = [0, 0, 0, 0]  ################# IF INCLUDING MORE NODES, EXTEND THIS ARRAY SIZE #######################
 node = ['' for _ in range(20)]
 print("29%")
@@ -343,6 +343,7 @@ def callback(data):
 
 def authentication():
     rospy.Subscriber('Last_Hash', lastHash, callbackAuth)
+
     rospy.spin()
 
 
@@ -353,6 +354,7 @@ def callbackAuth(data):
     global authOrderNumber
     if data.nodeName in nodeList:
         nodeONOFF[nodeList.index(data.nodeName)] = 1  # filling in the online array
+        print(data.nodeName + " is online!")
     # for i in range(10): #10 being a max node amount - can be changed as the array size is 100
 
     name = data.nodeName
@@ -597,7 +599,7 @@ if __name__ == '__main__':
 #                   - Using just a list instead because it's easier
 #                           - Need to create a catchUpListner.py program so it can receive an updated blockchain file after authentication.
 #                                   - For the authentication program, possibley need it seperate as a authenticate.py program.
-#   - use blockchain authentiation to validate data.
+#   - use blockchain authentication to validate data.
 
 # Authentication ideas:
 #	- new script and stream for ask all nodes to do an authentication check
@@ -619,3 +621,8 @@ if __name__ == '__main__':
 # - 2 reads 4
 # - 1 reads 3
 # - 3 reads 3
+
+
+# Once a node has been found to have been compromised, the node will be rebooted. Once a new node is on the network, the node needs
+# to be updated with all the current data.
+

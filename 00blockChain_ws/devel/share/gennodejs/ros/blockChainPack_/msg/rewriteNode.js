@@ -18,76 +18,94 @@ class rewriteNode {
   constructor(initObj={}) {
     if (initObj === null) {
       // initObj === null is a special case for deserialization where we don't initialize fields
-      this.blockNumber = null;
-      this.productNumber = null;
-      this.timeStamp = null;
-      this.transactions = null;
-      this.serialNumber = null;
-      this.blockHash = null;
-      this.previousHash = null;
+      this.SblockTimeStamp = null;
+      this.SblockTrans = null;
+      this.SblockProductCode = null;
+      this.SblockHash = null;
+      this.SblockPreviousHash = null;
+      this.SCarrierNumber = null;
+      this.firstIndex = null;
+      this.secondIndex = null;
+      this.thirdIndex = null;
     }
     else {
-      if (initObj.hasOwnProperty('blockNumber')) {
-        this.blockNumber = initObj.blockNumber
+      if (initObj.hasOwnProperty('SblockTimeStamp')) {
+        this.SblockTimeStamp = initObj.SblockTimeStamp
       }
       else {
-        this.blockNumber = 0;
+        this.SblockTimeStamp = '';
       }
-      if (initObj.hasOwnProperty('productNumber')) {
-        this.productNumber = initObj.productNumber
-      }
-      else {
-        this.productNumber = 0;
-      }
-      if (initObj.hasOwnProperty('timeStamp')) {
-        this.timeStamp = initObj.timeStamp
+      if (initObj.hasOwnProperty('SblockTrans')) {
+        this.SblockTrans = initObj.SblockTrans
       }
       else {
-        this.timeStamp = '';
+        this.SblockTrans = '';
       }
-      if (initObj.hasOwnProperty('transactions')) {
-        this.transactions = initObj.transactions
-      }
-      else {
-        this.transactions = '';
-      }
-      if (initObj.hasOwnProperty('serialNumber')) {
-        this.serialNumber = initObj.serialNumber
+      if (initObj.hasOwnProperty('SblockProductCode')) {
+        this.SblockProductCode = initObj.SblockProductCode
       }
       else {
-        this.serialNumber = '';
+        this.SblockProductCode = 0;
       }
-      if (initObj.hasOwnProperty('blockHash')) {
-        this.blockHash = initObj.blockHash
-      }
-      else {
-        this.blockHash = '';
-      }
-      if (initObj.hasOwnProperty('previousHash')) {
-        this.previousHash = initObj.previousHash
+      if (initObj.hasOwnProperty('SblockHash')) {
+        this.SblockHash = initObj.SblockHash
       }
       else {
-        this.previousHash = '';
+        this.SblockHash = '';
+      }
+      if (initObj.hasOwnProperty('SblockPreviousHash')) {
+        this.SblockPreviousHash = initObj.SblockPreviousHash
+      }
+      else {
+        this.SblockPreviousHash = '';
+      }
+      if (initObj.hasOwnProperty('SCarrierNumber')) {
+        this.SCarrierNumber = initObj.SCarrierNumber
+      }
+      else {
+        this.SCarrierNumber = 0;
+      }
+      if (initObj.hasOwnProperty('firstIndex')) {
+        this.firstIndex = initObj.firstIndex
+      }
+      else {
+        this.firstIndex = 0;
+      }
+      if (initObj.hasOwnProperty('secondIndex')) {
+        this.secondIndex = initObj.secondIndex
+      }
+      else {
+        this.secondIndex = 0;
+      }
+      if (initObj.hasOwnProperty('thirdIndex')) {
+        this.thirdIndex = initObj.thirdIndex
+      }
+      else {
+        this.thirdIndex = 0;
       }
     }
   }
 
   static serialize(obj, buffer, bufferOffset) {
     // Serializes a message object of type rewriteNode
-    // Serialize message field [blockNumber]
-    bufferOffset = _serializer.int64(obj.blockNumber, buffer, bufferOffset);
-    // Serialize message field [productNumber]
-    bufferOffset = _serializer.int64(obj.productNumber, buffer, bufferOffset);
-    // Serialize message field [timeStamp]
-    bufferOffset = _serializer.string(obj.timeStamp, buffer, bufferOffset);
-    // Serialize message field [transactions]
-    bufferOffset = _serializer.string(obj.transactions, buffer, bufferOffset);
-    // Serialize message field [serialNumber]
-    bufferOffset = _serializer.string(obj.serialNumber, buffer, bufferOffset);
-    // Serialize message field [blockHash]
-    bufferOffset = _serializer.string(obj.blockHash, buffer, bufferOffset);
-    // Serialize message field [previousHash]
-    bufferOffset = _serializer.string(obj.previousHash, buffer, bufferOffset);
+    // Serialize message field [SblockTimeStamp]
+    bufferOffset = _serializer.string(obj.SblockTimeStamp, buffer, bufferOffset);
+    // Serialize message field [SblockTrans]
+    bufferOffset = _serializer.string(obj.SblockTrans, buffer, bufferOffset);
+    // Serialize message field [SblockProductCode]
+    bufferOffset = _serializer.int64(obj.SblockProductCode, buffer, bufferOffset);
+    // Serialize message field [SblockHash]
+    bufferOffset = _serializer.string(obj.SblockHash, buffer, bufferOffset);
+    // Serialize message field [SblockPreviousHash]
+    bufferOffset = _serializer.string(obj.SblockPreviousHash, buffer, bufferOffset);
+    // Serialize message field [SCarrierNumber]
+    bufferOffset = _serializer.int64(obj.SCarrierNumber, buffer, bufferOffset);
+    // Serialize message field [firstIndex]
+    bufferOffset = _serializer.int64(obj.firstIndex, buffer, bufferOffset);
+    // Serialize message field [secondIndex]
+    bufferOffset = _serializer.int64(obj.secondIndex, buffer, bufferOffset);
+    // Serialize message field [thirdIndex]
+    bufferOffset = _serializer.int64(obj.thirdIndex, buffer, bufferOffset);
     return bufferOffset;
   }
 
@@ -95,31 +113,34 @@ class rewriteNode {
     //deserializes a message object of type rewriteNode
     let len;
     let data = new rewriteNode(null);
-    // Deserialize message field [blockNumber]
-    data.blockNumber = _deserializer.int64(buffer, bufferOffset);
-    // Deserialize message field [productNumber]
-    data.productNumber = _deserializer.int64(buffer, bufferOffset);
-    // Deserialize message field [timeStamp]
-    data.timeStamp = _deserializer.string(buffer, bufferOffset);
-    // Deserialize message field [transactions]
-    data.transactions = _deserializer.string(buffer, bufferOffset);
-    // Deserialize message field [serialNumber]
-    data.serialNumber = _deserializer.string(buffer, bufferOffset);
-    // Deserialize message field [blockHash]
-    data.blockHash = _deserializer.string(buffer, bufferOffset);
-    // Deserialize message field [previousHash]
-    data.previousHash = _deserializer.string(buffer, bufferOffset);
+    // Deserialize message field [SblockTimeStamp]
+    data.SblockTimeStamp = _deserializer.string(buffer, bufferOffset);
+    // Deserialize message field [SblockTrans]
+    data.SblockTrans = _deserializer.string(buffer, bufferOffset);
+    // Deserialize message field [SblockProductCode]
+    data.SblockProductCode = _deserializer.int64(buffer, bufferOffset);
+    // Deserialize message field [SblockHash]
+    data.SblockHash = _deserializer.string(buffer, bufferOffset);
+    // Deserialize message field [SblockPreviousHash]
+    data.SblockPreviousHash = _deserializer.string(buffer, bufferOffset);
+    // Deserialize message field [SCarrierNumber]
+    data.SCarrierNumber = _deserializer.int64(buffer, bufferOffset);
+    // Deserialize message field [firstIndex]
+    data.firstIndex = _deserializer.int64(buffer, bufferOffset);
+    // Deserialize message field [secondIndex]
+    data.secondIndex = _deserializer.int64(buffer, bufferOffset);
+    // Deserialize message field [thirdIndex]
+    data.thirdIndex = _deserializer.int64(buffer, bufferOffset);
     return data;
   }
 
   static getMessageSize(object) {
     let length = 0;
-    length += object.timeStamp.length;
-    length += object.transactions.length;
-    length += object.serialNumber.length;
-    length += object.blockHash.length;
-    length += object.previousHash.length;
-    return length + 36;
+    length += object.SblockTimeStamp.length;
+    length += object.SblockTrans.length;
+    length += object.SblockHash.length;
+    length += object.SblockPreviousHash.length;
+    return length + 56;
   }
 
   static datatype() {
@@ -129,19 +150,22 @@ class rewriteNode {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return '392845d38e7dbd0b3e34f5d6ba02ccf6';
+    return 'b722726d77ee12b8172165f1aabcd67c';
   }
 
   static messageDefinition() {
     // Returns full string definition for message
     return `
-    int64 blockNumber
-    int64 productNumber
-    string timeStamp
-    string transactions
-    string serialNumber
-    string blockHash
-    string previousHash
+    string SblockTimeStamp
+    string SblockTrans
+    int64 SblockProductCode
+    string SblockHash
+    string SblockPreviousHash
+    int64 SCarrierNumber
+    
+    int64 firstIndex
+    int64 secondIndex
+    int64 thirdIndex
     
     `;
   }
@@ -152,53 +176,67 @@ class rewriteNode {
       msg = {};
     }
     const resolved = new rewriteNode(null);
-    if (msg.blockNumber !== undefined) {
-      resolved.blockNumber = msg.blockNumber;
+    if (msg.SblockTimeStamp !== undefined) {
+      resolved.SblockTimeStamp = msg.SblockTimeStamp;
     }
     else {
-      resolved.blockNumber = 0
+      resolved.SblockTimeStamp = ''
     }
 
-    if (msg.productNumber !== undefined) {
-      resolved.productNumber = msg.productNumber;
+    if (msg.SblockTrans !== undefined) {
+      resolved.SblockTrans = msg.SblockTrans;
     }
     else {
-      resolved.productNumber = 0
+      resolved.SblockTrans = ''
     }
 
-    if (msg.timeStamp !== undefined) {
-      resolved.timeStamp = msg.timeStamp;
+    if (msg.SblockProductCode !== undefined) {
+      resolved.SblockProductCode = msg.SblockProductCode;
     }
     else {
-      resolved.timeStamp = ''
+      resolved.SblockProductCode = 0
     }
 
-    if (msg.transactions !== undefined) {
-      resolved.transactions = msg.transactions;
+    if (msg.SblockHash !== undefined) {
+      resolved.SblockHash = msg.SblockHash;
     }
     else {
-      resolved.transactions = ''
+      resolved.SblockHash = ''
     }
 
-    if (msg.serialNumber !== undefined) {
-      resolved.serialNumber = msg.serialNumber;
+    if (msg.SblockPreviousHash !== undefined) {
+      resolved.SblockPreviousHash = msg.SblockPreviousHash;
     }
     else {
-      resolved.serialNumber = ''
+      resolved.SblockPreviousHash = ''
     }
 
-    if (msg.blockHash !== undefined) {
-      resolved.blockHash = msg.blockHash;
+    if (msg.SCarrierNumber !== undefined) {
+      resolved.SCarrierNumber = msg.SCarrierNumber;
     }
     else {
-      resolved.blockHash = ''
+      resolved.SCarrierNumber = 0
     }
 
-    if (msg.previousHash !== undefined) {
-      resolved.previousHash = msg.previousHash;
+    if (msg.firstIndex !== undefined) {
+      resolved.firstIndex = msg.firstIndex;
     }
     else {
-      resolved.previousHash = ''
+      resolved.firstIndex = 0
+    }
+
+    if (msg.secondIndex !== undefined) {
+      resolved.secondIndex = msg.secondIndex;
+    }
+    else {
+      resolved.secondIndex = 0
+    }
+
+    if (msg.thirdIndex !== undefined) {
+      resolved.thirdIndex = msg.thirdIndex;
+    }
+    else {
+      resolved.thirdIndex = 0
     }
 
     return resolved;

@@ -353,6 +353,7 @@ def callbackAuth(data):
     global authOrderNumber
     if data.nodeName in nodeList:
         nodeONOFF[nodeList.index(data.nodeName)] = 1  # filling in the online array
+        print(data.nodeName + " is online!")
     # for i in range(10): #10 being a max node amount - can be changed as the array size is 100
 
     name = data.nodeName
@@ -373,6 +374,7 @@ def authTrigger():
         # print(mostCommonHash.most_common(3))
         try:
             print(nodeList[(node.index(str(mostCommonHash.most_common(3)[2][0])))] + " has been hacked")
+            rewriteNodes(nodeNumber= nodeList[(node.index(str(mostCommonHash.most_common(3)[2][0])))])
         except:
             print("all fine")
 
@@ -410,34 +412,49 @@ def emitter():
 
 def rewriteNodes():
     global blockString
-
     global SblockTimeStamp  # orderNumber,blockNumber
     global SblockTrans
     global SblockProductCode
     global SblockHash
     global SblockPreviousHash
-
     global SblockNumber
     global SOrderNumber
+    global Range
+    global cRange
 
-    time.sleep(10)
-    message3 = rewriteNode()
+    # rewrite NODE(nodeNumber)
+    pub = rospy.Publisher('Rewrite', rewriteNode, queue_size=100)
 
-    while not rospy.is_shutdown():
-        try:
+    # if nodeNumber == int(nodeName[4]) + 1 :
+        # this node will rewrite the hacked node
+    while(True):
+        for i in range(Range):
+            for j in range(cRange):
+                for z in range(Range):
+                    message3 = rewriteNode()
+                    message3.firstIndex = i
+                    message3.secondIndex = j
+                    message3.thirdIndex = z
+                    message3.SblockTimeStamp = SblockTimeStamp[i][j][z]
+                    pub.publish(message3)
 
-            time.sleep(1)
 
-        except:
-            print("didn'work lol")
-            time.sleep(1)
 
-    # try:
-    #     for i in range ()
-    #
-    #
-    # except:
-    #     print("nah mate")
+# station[][][] not needed
+# block[][][] not needed
+# orderNcarrierNumberList[][]
+# runYet[][]
+# nodeList[]
+# nodeONOFF[]
+# oldNodeONOFF[]
+# node[]
+# SblockTimeStamp[][][]
+# SblockTrans[][][]
+# SblockProductCode[][][]
+# SblockHash[][][]
+# SblockPreviousHash[][][]
+# SCarrierNumber[][][]
+
 
 
 ############################### TCP Server ###############################
@@ -537,7 +554,7 @@ if __name__ == '__main__':
         p3 = threading.Thread(target=authentication, args=())
         p4 = threading.Thread(target=emitter, args=())
         p5 = threading.Thread(target=authTrigger, args=())
-        # p6 = threading.Thread(target=rewriteNodes, args=())
+        p6 = threading.Thread(target=rewriteNodes, args=())
         # p7 = threading.Thread(target=sendMessage, args=())
         p8 = threading.Thread(target=manual, args=())
         # p9 = threading.Thread(target=blockUpdate, args=())
@@ -547,7 +564,7 @@ if __name__ == '__main__':
         p3.daemon = True
         p4.daemon = True
         p5.daemon = True
-        # p6.daemon = True
+        p6.daemon = True
         # p7.daemon = True
         p8.daemon = True
         # p9.daemon = True
@@ -557,7 +574,7 @@ if __name__ == '__main__':
         p3.start()
         p4.start()
         p5.start()
-        # p6.start()
+        p6.start()
         # p7.start()
         p8.start()
         # p9.start()
@@ -567,7 +584,7 @@ if __name__ == '__main__':
         p3.join()
         p4.join()
         p5.join()
-        # p6.join()
+        p6.join()
         # p7.join()
         p8.join()
         # p9.join()
@@ -619,3 +636,21 @@ if __name__ == '__main__':
 # - 2 reads 4
 # - 1 reads 3
 # - 3 reads 3
+
+# Once a node has been found to have been compromised, the node will be rebooted. Once a new node is on the network, the node needs
+# to be updated with all the current data.
+
+# station[][][]
+# block[][][]
+# orderNcarrierNumberList[][]
+# runYet[][]
+# nodeList[]
+# nodeONOFF[]
+# oldNodeONOFF[]
+# node[]
+# SblockTimeStamp[][][]
+# SblockTrans[][][]
+# SblockProductCode[][][]
+# SblockHash[][][]
+# SblockPreviousHash[][][]
+# SCarrierNumber[][][]
