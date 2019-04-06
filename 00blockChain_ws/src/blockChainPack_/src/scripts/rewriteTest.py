@@ -3,14 +3,12 @@ import hashlib, sys, random, rospy, threading, time, socket
 from datetime import datetime
 from collections import Counter
 from blockChainPack_.msg import rewriteNode
+
 Range = 200
 cRange = 4
 timestamp = [[['a' for _ in range(Range)] for _ in range(cRange)] for _ in range(Range)]
-
-
-
-
-
+block = [[['' for _ in range(Range)] for _ in range(cRange)] for _ in range(Range)]
+SblockHash = [[['' for _ in range(Range)] for _ in range(cRange)] for _ in range(Range)]
 
 class blockChain:
 
@@ -52,32 +50,74 @@ def main():
     rospy.Subscriber('Rewrite', rewriteNode, callback)
     rospy.spin()
 
+
 def callback(data):
     global timestamp
+    global block
+    global SblockHash
 
-    timeStampDetails = ['']*200
-    timeStampOrder = [''] * 200
-    timeStampCarrier = [''] * 200
-    timeStampBlock = [''] * 200
+    # 32,3,1,18:54:01 - 19/03/2019,1,211
+    # 32,3,0,09:57:40 - 06/04/2019,Start production,211
 
-    timeStampSplit = data.SblockTimeStamp.split("#")
-    timeStampSplit.pop(0)
+    dataSplit = data.SblockTimeStamp.split(",")
 
-    for i in range(len(timeStampSplit)):
-        timeStampDetails[i] = timeStampSplit[i].split('?')
-        timeStampOrder[i] = str(timeStampDetails[i][0])[0] + str(timeStampDetails[i][0])[1]
-        timeStampCarrier[i] = str(timeStampDetails[i][0])[2]
-        timeStampBlock[i] = (timeStampDetails[i][0])[3]
+    dOrder = int(dataSplit[0])
+    dCarrier = int(dataSplit[1])
+    dBlock = int(dataSplit[2])
+    dHour = str((dataSplit[3])[0] + (dataSplit[3])[1])
+    dMinute = str((dataSplit[3])[3] + (dataSplit[3])[4])
+    dSecond = str((dataSplit[3])[6] + (dataSplit[3])[7])
+    dDay = str((dataSplit[3])[11] + (dataSplit[3])[12])
+    dMonth = str((dataSplit[3])[14] + (dataSplit[3])[15])
+    dYear = str((dataSplit[3])[17] + (dataSplit[3])[18] + (dataSplit[3])[19] + (dataSplit[3])[20])
+    dStation = dataSplit[4]
+    dProductCode = int(dataSplit[5])
+
+    if dStation == "Start production":
+        # print("1")
+        # print(data.SblockTimeStamp)
+        block[int(dOrder)][int(dCarrier)][int(dBlock)] = blockChain(previousHash='',
+                                                     station=dStation,
+                                                     productCode=dProductCode,
+                                                     orderNumber=dOrder,
+                                                     carrierID=dCarrier,
+                                                     seconds=dSecond,
+                                                     minutes=dMinute,
+                                                     hours=dHour,
+                                                     days=dDay,
+                                                     months=dMonth,
+                                                     years=dYear)
+
+        SblockHash[dOrder][dCarrier][dBlock] = block[dOrder][dCarrier][dBlock].getBlockHash()
+        # print(block[dOrder][dCarrier][dBlock].getBlockHash())
 
 
+    if dStation != "Start production":
+        # print("2")
+        # print(data.SblockTimeStamp)
+        block[int(dOrder)][int(dCarrier)][int(dBlock)] = blockChain(previousHash=block[int(dOrder)][int(dCarrier)][int(dBlock)-1].getBlockHash(),
+                                                     station=dStation,
+                                                     productCode=dProductCode,
+                                                     orderNumber=dOrder,
+                                                     carrierID=dCarrier,
+                                                     seconds=dSecond,
+                                                     minutes=dMinute,
+                                                     hours=dHour,
+                                                     days=dDay,
+                                                     months=dMonth,
+                                                     years=dYear)
 
+        SblockHash[dOrder][dCarrier][dBlock] = block[dOrder][dCarrier][dBlock].getBlockHash()
+        # print(block[dOrder][dCarrier][dBlock].getBlockHash())
 
-    #print(timeStampDetails[3][0]) #odd numbers are order details and even are data
+        hashingArray = ''
 
-    # timeStampOrder = timeStampSplit[2]
-    # timeStampBlock = timeStampSplit[3]
+        for i in range(len(SblockHash)):
+            for j in range(len(SblockHash[i])):
+                for z in range(len(SblockHash[i][j])):
+                    hashingArray = hashlib.sha256(hashingArray + SblockHash[i][j][z]).hexdigest()
 
-
+        print(hashingArray)
 
 
 if __name__ == '__main__':
@@ -91,5 +131,3 @@ if __name__ == '__main__':
     # SblockProductCode: "#3230?211,"
     # SCarrierNumber: "#3230?1,"
     # ---
-
-

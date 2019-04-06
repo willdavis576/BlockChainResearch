@@ -435,84 +435,25 @@ def rewriteNodes():
     # if nodeNumber == int(nodeName[4]) + 1 :
     # this node will rewrite the hacked node
 
-    strTimeStamp = ''
-    oldTimeStamp = ''
 
-    strTrans = ''
-    oldTrans = ''
 
-    strProductCode = ''
-    oldProductCode = ''
-
-    strBlockHash = ''
-    oldBlockHash = ''
-
-    strBlockPreviousHash = ''
-    oldBlockPreviousHash = ''
-
-    strCarrierNumber = ''
-    oldCarrierNumber = ''
+    strData = ''
 
     print("rewrite commence")
+    message3 = rewriteNode()
 
     #TimeStamp
     for i in range(Range):
         for j in range(cRange):
             for z in range(Range):
-
                 if SblockTimeStamp[i][j][z] != '':
-                    if SblockTimeStamp[i][j][z] != oldTimeStamp: #TimeStamp
-                        strTimeStamp = strTimeStamp + '#' + str(i) + str(j) + str(z) + '?' + SblockTimeStamp[i][j][z] + ','
-                        oldTimeStamp = SblockTimeStamp[i][j][z]
-
-                    if str(SblockTrans[i][j][z]) != oldTrans: #Station
-                        strTrans = strTrans + '#' + str(i) + str(j) + str(z) + '?' + str(SblockTrans[i][j][z]) + ','
-                        oldTrans = str(SblockTrans[i][j][z])
-
-                    if str(SblockProductCode[i][j][z]) != oldProductCode: #ProductCode
-                        strProductCode = strProductCode + '#' + str(i) + str(j) + str(z) + '?' + str(SblockProductCode[i][j][z]) + ','
-                        oldProductCode = str(SblockProductCode[i][j][z])
-
-                    if str(SCarrierNumber[i][j]) != oldCarrierNumber: #CarrierNumber
-                        strCarrierNumber = strCarrierNumber + '#' + str(i) + str(j) + str(z) + '?' + str(SCarrierNumber[i][j]) + ','
-                        oldCarrierNumber = str(SCarrierNumber[i][j])
-
-
-                    # if SblockHash[i][j][z] != oldBlockHash: #BlockHash
-                    #     strBlockHash = strBlockHash + '#' + str(i) + str(j) + str(z) + '?' + SblockHash[i][j][z] + ','
-                    #     oldBlockHash = SblockHash[i][j][z]
-                    #
-                    # if SblockPreviousHash[i][j][z] != oldBlockPreviousHash: #BlockPreviousHash
-                    #     strBlockPreviousHash = strBlockPreviousHash + '#' + str(i) + str(j) + str(z) + '?' + SblockPreviousHash[i][j][z] + ','
-                    #     oldBlockPreviousHash = SblockPreviousHash[i][j][z]
-
+                        strData = str(i) + ',' + str(j) + ',' + str(z) + ',' + SblockTimeStamp[i][j][z] + ',' + str(SblockTrans[i][j][z]) + ',' + str(SblockProductCode[i][j][z])
+                        message3.SblockTimeStamp = strData
+                        pub.publish(message3)
 
 
     print("finished")
-    message3 = rewriteNode()
-    message3.SblockTimeStamp = strTimeStamp
-    message3.SblockTrans = strTrans
-    message3.SblockProductCode = strProductCode
-    # message3.SblockHash = strBlockHash
-    # message3.SblockPreviousHash = strBlockPreviousHash
-    message3.SCarrierNumber = strCarrierNumber
-    pub.publish(message3)
 
-# SblockTimeStamp[][][]
-# SblockTrans[][][]
-# SblockProductCode[][][]
-# SblockHash[][][]
-# SblockPreviousHash[][][]
-# SCarrierNumber[][][]
-
-# station[][][] not needed
-# block[][][] not needed
-# orderNcarrierNumberList[][]
-# runYet[][]
-# nodeList[]
-# nodeONOFF[]
-# oldNodeONOFF[]
-# node[]
 
 
 
