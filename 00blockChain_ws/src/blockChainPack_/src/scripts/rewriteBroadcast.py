@@ -49,33 +49,18 @@ class blockChain:
 
 
 def main():
-    rospy.Subscriber('Rewrite', rewriteNode, callback)
-    rospy.spin()
+    pub = rospy.Publisher('Rewrite', rewriteNode, queue_size=100)
 
-def callback(data):
-    global timestamp
-
-    timeStampDetails = ['']*200
-    timeStampOrder = [''] * 200
-    timeStampCarrier = [''] * 200
-    timeStampBlock = [''] * 200
-
-    timeStampSplit = data.SblockTimeStamp.split("#")
-    timeStampSplit.pop(0)
-
-    for i in range(len(timeStampSplit)):
-        timeStampDetails[i] = timeStampSplit[i].split('?')
-        timeStampOrder[i] = str(timeStampDetails[i][0])[0] + str(timeStampDetails[i][0])[1]
-        timeStampCarrier[i] = str(timeStampDetails[i][0])[2]
-        timeStampBlock[i] = (timeStampDetails[i][0])[3]
-
-
-
-
-    #print(timeStampDetails[3][0]) #odd numbers are order details and even are data
-
-    # timeStampOrder = timeStampSplit[2]
-    # timeStampBlock = timeStampSplit[3]
+    while not rospy.is_shutdown():
+        message3 = rewriteNode()
+        message3.SblockTimeStamp = "#3230?22:53:53 - 05/04/2019,#3231?18:54:01 - 19/03/2019,#3231?22:53:53 - 05/04/2019,#3231?18:54:01 - 19/03/2019,#3232?22:53:53 - 05/04/2019,#3231?18:54:01 - 19/03/2019,"
+        message3.SblockTrans = "#3230?Start production,#3231?1,#3231?2,#3231?3,"
+        message3.SblockProductCode = "#3230?211,#3231?211,#3232?211,"
+        # message3.SblockHash = strBlockHash
+        # message3.SblockPreviousHash = strBlockPreviousHash
+        message3.SCarrierNumber = "#3230?1,#3230?2,#3230?3,"
+        pub.publish(message3)
+        time.sleep(1)
 
 
 
@@ -91,5 +76,3 @@ if __name__ == '__main__':
     # SblockProductCode: "#3230?211,"
     # SCarrierNumber: "#3230?1,"
     # ---
-
-
