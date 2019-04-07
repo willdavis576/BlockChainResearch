@@ -335,13 +335,13 @@ def callback(data):
                                                                                      data.timeStamp[20])
 
     if runYet[data.orderNumber][data.carrierID] == '':
-        f = open("/home/ros/blockChainGit/00blockChain_ws/Product" + str(data.orderNumber + 1264) + "C:" + str(
+        f = open("/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_NODE3/Product" + str(data.orderNumber + 1264) + "C:" + str(
             data.carrierID) + ".txt", "w")
         f.close()
         runYet[data.orderNumber][data.carrierID] = "1"
 
     if runYet[data.orderNumber][data.carrierID] == "1":
-        f = open("/home/ros/blockChainGit/00blockChain_ws/Product" + str(data.orderNumber + 1264) + "C:" + str(
+        f = open("/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_NODE3/Product" + str(data.orderNumber + 1264) + "C:" + str(
             data.carrierID) + ".txt", "a")
         f.write(str(data_to_print))
         f.write("\n-------------------------------\n")
