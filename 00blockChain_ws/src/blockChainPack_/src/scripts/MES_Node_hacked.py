@@ -679,7 +679,7 @@ if __name__ == '__main__':
         p4 = threading.Thread(target=emitter, args=())
         p5 = threading.Thread(target=authTrigger, args=())
         p6 = threading.Thread(target=recNewData, args=())
-        p7 = threading.Thread(target=hackedOneTime, args=())
+        # p7 = threading.Thread(target=hackedOneTime, args=())
         p8 = threading.Thread(target=manual, args=())
         # p9 = threading.Thread(target=blockUpdate, args=())
 
@@ -689,7 +689,7 @@ if __name__ == '__main__':
         p4.daemon = True
         p5.daemon = True
         p6.daemon = True
-        p7.daemon = True
+        # p7.daemon = True
         p8.daemon = True
         # p9.daemon = True
 
@@ -699,7 +699,7 @@ if __name__ == '__main__':
         p4.start()
         p5.start()
         p6.start()
-        p7.start()
+        # p7.start()
         p8.start()
         # p9.start()
 
@@ -709,7 +709,7 @@ if __name__ == '__main__':
         p4.join()
         p5.join()
         p6.join()
-        p7.join()
+        # p7.join()
         p8.join()
         # p9.join()
 

@@ -95,6 +95,9 @@ hashingArray = ''
 #Rewrite
 nodeToRewrite = 10
 
+#authTrigger
+mostCommonHash = ''
+
 
 class blockChain:
 
@@ -371,6 +374,8 @@ def authTrigger():
     global authOrderNumber
     global node
     global nodeToRewrite
+    global mostCommonHash
+    global nodeName
 
     while not rospy.is_shutdown():
         time.sleep(5)
@@ -380,7 +385,10 @@ def authTrigger():
         try:
             print(nodeList[(node.index(str(mostCommonHash.most_common(3)[2][0])))] + " has been hacked")
             nodeToRewrite = nodeList[(node.index(str(mostCommonHash.most_common(3)[2][0])))]
-            # rewriteNodes()
+
+            if nodeList[(node.index(str(mostCommonHash.most_common(3)[2][0])))] != nodeName:
+                rewriteNodes()
+
         except:
             print("all fine")
 
@@ -414,6 +422,112 @@ def emitter():
             time.sleep(1)
 
 
+def recNewData():
+    global nodeName
+    global node
+    global nodeList
+    global mostCommonHash
+
+    try:
+        if nodeList[(node.index(str(mostCommonHash.most_common(3)[2][0])))] == nodeName:
+            rospy.Subscriber('Rewrite', rewriteNode, callbackRecData)
+    except:
+        ye = "man"
+
+    rospy.spin()
+
+
+def callbackRecData(data):
+    global timestamp
+    global block
+    global SblockHash
+    global Range
+    global cRange
+    global Rdone
+    # 32,3,1,18:54:01 - 19/03/2019,1,211
+    # 32,3,0,09:57:40 - 06/04/2019,Start production,211
+    print("rewriting")
+    dataSplit = data.SblockTimeStamp.split(",")
+
+    dOrder = int(dataSplit[0])
+    dCarrier = int(dataSplit[1])
+    dBlock = int(dataSplit[2])
+    dHour = str((dataSplit[3])[0] + (dataSplit[3])[1])
+    dMinute = str((dataSplit[3])[3] + (dataSplit[3])[4])
+    dSecond = str((dataSplit[3])[6] + (dataSplit[3])[7])
+    dDay = str((dataSplit[3])[11] + (dataSplit[3])[12])
+    dMonth = str((dataSplit[3])[14] + (dataSplit[3])[15])
+    dYear = str((dataSplit[3])[17] + (dataSplit[3])[18] + (dataSplit[3])[19] + (dataSplit[3])[20])
+    dStation = dataSplit[4]
+    dProductCode = int(dataSplit[5])
+
+    try:
+        if data.done == 1 and Rdone == 0 and nodeList[(node.index(str(mostCommonHash.most_common(3)[2][0])))] == nodeName:
+            SblockHash = [[['' for _ in range(Range)] for _ in range(cRange)] for _ in range(Range)]
+            block = [[['' for _ in range(Range)] for _ in range(cRange)] for _ in range(Range)]
+            Rdone = 1
+
+    except:
+        print("init wipe didn't work")
+
+    try:
+        if nodeList[(node.index(str(mostCommonHash.most_common(3)[2][0])))] == nodeName:
+
+            if dStation == "Start production":
+                print("1")
+                # print(data.SblockTimeStamp)
+                block[int(dOrder)][int(dCarrier)][int(dBlock)] = blockChain(previousHash='',
+                                                                            station=dStation,
+                                                                            productCode=dProductCode,
+                                                                            orderNumber=dOrder,
+                                                                            carrierID=dCarrier,
+                                                                            seconds=dSecond,
+                                                                            minutes=dMinute,
+                                                                            hours=dHour,
+                                                                            days=dDay,
+                                                                            months=dMonth,
+                                                                            years=dYear)
+
+                SblockHash[dOrder][dCarrier][dBlock] = block[dOrder][dCarrier][dBlock].getBlockHash()
+                # print(block[dOrder][dCarrier][dBlock].getBlockHash())
+
+            if dStation != "Start production":
+                print("2")
+                # print(data.SblockTimeStamp)
+                block[int(dOrder)][int(dCarrier)][int(dBlock)] = blockChain(
+                    previousHash=block[int(dOrder)][int(dCarrier)][int(dBlock) - 1].getBlockHash(),
+                    station=dStation,
+                    productCode=dProductCode,
+                    orderNumber=dOrder,
+                    carrierID=dCarrier,
+                    seconds=dSecond,
+                    minutes=dMinute,
+                    hours=dHour,
+                    days=dDay,
+                    months=dMonth,
+                    years=dYear)
+                print("2.1")
+
+                SblockHash[dOrder][dCarrier][dBlock] = block[dOrder][dCarrier][dBlock].getBlockHash()
+                # print(block[dOrder][dCarrier][dBlock].getBlockHash())
+
+                print("2.2")
+
+            if data.done == 0:
+                hashingArray = ''
+                Rdone = 0
+                for i in range(len(SblockHash)):
+                    for j in range(len(SblockHash[i])):
+                        for z in range(len(SblockHash[i][j])):
+                            hashingArray = hashlib.sha256(hashingArray + SblockHash[i][j][z]).hexdigest()
+
+                print("2.3")
+
+                print(hashingArray)
+                print("got rewritten")
+
+    except:
+        print("couldn't rewrite")
 
 
 def rewriteNodes():
@@ -443,15 +557,20 @@ def rewriteNodes():
     message3 = rewriteNode()
 
     #TimeStamp
+
+
     for i in range(Range):
         for j in range(cRange):
             for z in range(Range):
                 if SblockTimeStamp[i][j][z] != '':
                         strData = str(i) + ',' + str(j) + ',' + str(z) + ',' + SblockTimeStamp[i][j][z] + ',' + str(SblockTrans[i][j][z]) + ',' + str(SblockProductCode[i][j][z])
                         message3.SblockTimeStamp = strData
+                        message3.done = 1
                         pub.publish(message3)
 
 
+    message3.done = 0
+    pub.publish(message3)
     print("finished")
 
 
@@ -554,7 +673,7 @@ if __name__ == '__main__':
         p3 = threading.Thread(target=authentication, args=())
         p4 = threading.Thread(target=emitter, args=())
         p5 = threading.Thread(target=authTrigger, args=())
-        # p6 = threading.Thread(target=rewriteNodes, args=())
+        p6 = threading.Thread(target=recNewData, args=())
         # p7 = threading.Thread(target=sendMessage, args=())
         p8 = threading.Thread(target=manual, args=())
         # p9 = threading.Thread(target=blockUpdate, args=())
@@ -564,7 +683,7 @@ if __name__ == '__main__':
         p3.daemon = True
         p4.daemon = True
         p5.daemon = True
-        # p6.daemon = True
+        p6.daemon = True
         # p7.daemon = True
         p8.daemon = True
         # p9.daemon = True
@@ -574,7 +693,7 @@ if __name__ == '__main__':
         p3.start()
         p4.start()
         p5.start()
-        # p6.start()
+        p6.start()
         # p7.start()
         p8.start()
         # p9.start()
@@ -584,7 +703,7 @@ if __name__ == '__main__':
         p3.join()
         p4.join()
         p5.join()
-        # p6.join()
+        p6.join()
         # p7.join()
         p8.join()
         # p9.join()
