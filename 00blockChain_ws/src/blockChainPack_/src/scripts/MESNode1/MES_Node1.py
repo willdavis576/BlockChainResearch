@@ -805,3 +805,16 @@ if __name__ == '__main__':
 # SblockHash[][][]
 # SblockPreviousHash[][][]
 # SCarrierNumber[][][]
+
+
+# All main blockchain code is now finished!!!! Today's date is 07/04/2019
+#
+# Next objectives:
+#       - Make it so you can have more than products in an order.
+#           - Make it so the carriages can only be recorded once at each station, so if it goes through again it won't be
+#             recorded a second time.
+#           - Find out what the last station is in the production line and then wipe the blockchain for that specific
+#             carrier. Extend the log file's name to have completed at the end of it. Set the next product going.
+#       - QR Codes on casings
+#           - update blockchain size
+#       - Create RFID tags that can be written to when the product is completed.
