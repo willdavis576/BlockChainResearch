@@ -1,5 +1,5 @@
 #! /usr/bin/python
-import hashlib, sys, random, rospy, threading, time, socket
+import hashlib, sys, random, rospy, threading, time, socket, os
 from datetime import datetime
 from collections import Counter
 from blockChainPack_.msg import blockDetail
@@ -10,7 +10,7 @@ from blockChainPack_.msg import rewriteNode
 # productNubmer should now orderNumber
 
 Range = 200
-cRange = 4
+cRange = 5
 itemNumber = 0
 dataFollowing = 0
 orderNumber = 0
@@ -70,6 +70,7 @@ blockString = ''
 nodeName = "NODE1"  ############### THIS IS WHERE YOU SPECIFY A NODE'S NAME #######################
 nodeHacked = ''
 stationHistory = [['' for _ in range(7)] for _ in range(5)]
+REcounter = 0
 
 # TCP SERVER STUFF
 tcpStationName = 0
@@ -200,6 +201,7 @@ def mainProg():
     global dataFollowing
     global SblockNumber
     global Range
+    global REcounter
 
     pub = rospy.Publisher('publishingBlockStream', blockDetail, queue_size=100)
     while not rospy.is_shutdown():
@@ -254,7 +256,7 @@ def mainProg():
 
             if newGenesis == 0:
                 time.sleep(1)
-                if stationHistory[int(tcpCarrierNumber)] != ['','1','2','3','4','5','6']:
+                if stationHistory[int(tcpCarrierNumber)] != ['', '1', '2', '3', '4', '5', '6']:
 
                     if tcpStationName not in stationHistory[int(tcpCarrierNumber)]:
                         print("1")
@@ -277,15 +279,22 @@ def mainProg():
                 if stationHistory[int(tcpCarrierNumber)] == ['', '1', '2', '3', '4', '5', '6']:
                     print("2")
                     print(tcpStationName)
-                    if tcpStationName == '2': #means the product is finished
+                    if tcpStationName == '2':  # means the product is finished
                         block[tcpOrderNumber][tcpCarrierNumber] = [''] * Range
                         SCarrierNumber[tcpOrderNumber][tcpCarrierNumber] = [''] * Range
                         stationHistory[int(tcpCarrierNumber)] = [''] * 7
+
+                        os.rename(
+                            "/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_NODE1/Product" + str(tcpOrderNumber + 1264) + "C:" + str(
+                            tcpCarrierNumber) + ".txt", "/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_NODE1/Product" + str(tcpOrderNumber + 1264) + "C:" + str(
+                        tcpCarrierNumber) + "Comp" + str(REcounter) + ".txt")
                         print("Carrier ready for next product")
 
-        rate.sleep()
+                        REcounter = REcounter + 1
 
-        # if the order number doesn't exist in the array then create genesis block. If it does, then continue where the system left off.
+                        rate.sleep()
+
+                        # if the order number doesn't exist in the array then create genesis block. If it does, then continue where the system left off.
 
 
 def listener():
@@ -413,7 +422,6 @@ def authTrigger():
 
     while not rospy.is_shutdown():
         time.sleep(10)
-
 
         # print(mostCommonHash.most_common(3))
         try:
@@ -629,7 +637,6 @@ def rewriteNodes():
     message3.done = 0
     pub.publish(message3)
     print("finished")
-
 
 
 ############################### TCP Server ###############################
