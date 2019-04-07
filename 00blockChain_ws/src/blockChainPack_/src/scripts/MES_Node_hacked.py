@@ -371,6 +371,7 @@ def callbackAuth(data):
     global nodeONOFF
     global nodeList
     global authOrderNumber
+    global mostCommonHash
 
     if data.nodeName in nodeList:
         nodeONOFF[nodeList.index(data.nodeName)] = 1  # filling in the online array
@@ -380,6 +381,7 @@ def callbackAuth(data):
     name = data.nodeName
 
     node[int(name[4]) - 1] = data.hash
+    mostCommonHash = Counter(node)
     # print("finding node 4")
     # print(node)
 
@@ -394,8 +396,8 @@ def authTrigger():
     global nodeHacked
 
     while not rospy.is_shutdown():
-        time.sleep(5)
-        mostCommonHash = Counter(node)
+        time.sleep(10)
+
 
         # print(mostCommonHash.most_common(3))
         try:

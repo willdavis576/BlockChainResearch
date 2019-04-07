@@ -123,6 +123,14 @@ Station: 5
 Order Number: 1296
 CarrierID: 3
 Product Code: 211
+Block Hash: bbdcc0222022b2dda4ae701f0f7c9274c133cef6a494a3143e3c25ad1262ce3f
+Previous Hash: 2e0d61052b10515aa02e5b0314ec5ecfce0792657531b60d9b16f164607119b2
+-------------------------------
+Time Stamp for Block: 18:54:01 - 19/03/2019
+Station: 5
+Order Number: 1296
+CarrierID: 3
+Product Code: 211
 Block Hash: f8894f75b8024b0ec2257628888660f7e1333d1da15dec24edf7fac3d32f3407
 Previous Hash: bbdcc0222022b2dda4ae701f0f7c9274c133cef6a494a3143e3c25ad1262ce3f
 -------------------------------
