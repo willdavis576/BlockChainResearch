@@ -10,9 +10,10 @@ def main():
     counter = 1
     while(True):
 
-        s.sendall(str(counter) + ',1296,3,211,01,54,18,19,03,2019')
+        s.sendall(str(1) + ',1296,3,211,01,54,18,19,03,2019')
+        print(str(counter) + ',1296,3,211,01,54,18,19,03,2019')
         s.sendall('                                ')
-        time.sleep(0.5)
+        time.sleep(5)
         counter = counter + 1
 
         if counter == 6:

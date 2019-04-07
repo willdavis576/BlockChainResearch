@@ -69,6 +69,7 @@ authOrderNumber = 0
 blockString = ''
 nodeName = "NODE1"  ############### THIS IS WHERE YOU SPECIFY A NODE'S NAME #######################
 nodeHacked = ''
+stationHistory = [''] * 7
 
 # TCP SERVER STUFF
 tcpStationName = 0
@@ -252,20 +253,21 @@ def mainProg():
 
             if newGenesis == 0:
                 time.sleep(1)
-                blockUpdate(blockNumber=block[tcpOrderNumber][tcpCarrierNumber].index(''), orderNumber=tcpOrderNumber,
-                            station=tcpStationName, carrierID=tcpCarrierNumber, productCode=tcpProductCode,
-                            seconds=tcpSeconds, minutes=tcpMinutes, hours=tcpHours, days=tcpDays, months=tcpMonths,
-                            years=tcpYears)
-                # print("sending message in gen0")
-                # print(block[orderNumber][tcpCarrierNumber][block[tcpOrderNumber][tcpCarrierNumber].index('') - 1])
-
-                sendMessage()
-                time.sleep(1)
-                pub.publish(message)
-                # print(orderNumber, blockNumber)
-                blockNumber = block[tcpOrderNumber][tcpCarrierNumber].index('')
-                newGenesis = 3
-                dataFollowing = 0
+                if tcpStationName not in stationHistory:
+                    blockUpdate(blockNumber=block[tcpOrderNumber][tcpCarrierNumber].index(''), orderNumber=tcpOrderNumber,
+                                station=tcpStationName, carrierID=tcpCarrierNumber, productCode=tcpProductCode,
+                                seconds=tcpSeconds, minutes=tcpMinutes, hours=tcpHours, days=tcpDays, months=tcpMonths,
+                                years=tcpYears)
+                    # print("sending message in gen0")
+                    # print(block[orderNumber][tcpCarrierNumber][block[tcpOrderNumber][tcpCarrierNumber].index('') - 1])
+                    sendMessage()
+                    time.sleep(1)
+                    pub.publish(message)
+                    # print(orderNumber, blockNumber)
+                    blockNumber = block[tcpOrderNumber][tcpCarrierNumber].index('')
+                    newGenesis = 3
+                    dataFollowing = 0
+                    stationHistory[int(tcpStationName)] = tcpStationName
 
         rate.sleep()
 
@@ -818,3 +820,4 @@ if __name__ == '__main__':
 #       - QR Codes on casings
 #           - update blockchain size
 #       - Create RFID tags that can be written to when the product is completed.
+#           - Possibly a webserver that has access to all the log files.
