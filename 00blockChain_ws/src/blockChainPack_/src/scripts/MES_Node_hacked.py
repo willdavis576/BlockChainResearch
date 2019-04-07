@@ -25,7 +25,6 @@ print("24%")
 buildBlock = 0
 oldData = ''
 emit = False
-Rdone = 0
 
 serialNumberNum = 0
 serialNumberStr = 'PRODUCT'
@@ -93,10 +92,10 @@ years = 0
 # Emitter
 hashingArray = ''
 
-# Rewrite
+#Rewrite
 nodeToRewrite = 10
 
-# authTrigger
+#authTrigger
 mostCommonHash = ''
 
 
@@ -143,8 +142,7 @@ def blockUpdate(blockNumber, orderNumber, carrierID, station, productCode, secon
     for i in range(blockNumber, blockNumber + 1):
         blockNumber = i
         block[orderNumber][tcpCarrierNumber][blockNumber] = blockChain(
-            previousHash=SblockHash[tcpOrderNumber][tcpCarrierNumber][block[tcpOrderNumber][tcpCarrierNumber].index('') - 1],
-            station=station,
+            previousHash=SblockHash[tcpOrderNumber][tcpCarrierNumber][block[tcpOrderNumber][tcpCarrierNumber].index('') - 1], station=station,
             productCode=productCode, orderNumber=orderNumber, carrierID=carrierID, seconds=seconds, minutes=minutes,
             hours=hours, days=days, months=months, years=years)
         # print("blockUpdate")
@@ -160,20 +158,13 @@ def sendMessage():
     try:
         message = blockDetail()
         message.blockNumber = block[orderNumber][tcpCarrierNumber].index('') - 1
-        message.timeStamp = block[orderNumber][tcpCarrierNumber][
-            block[tcpOrderNumber][tcpCarrierNumber].index('') - 1].getTimeStamp()
-        message.station = str(
-            block[orderNumber][tcpCarrierNumber][block[tcpOrderNumber][tcpCarrierNumber].index('') - 1].getStation())
-        message.orderNumber = block[orderNumber][tcpCarrierNumber][
-            block[tcpOrderNumber][tcpCarrierNumber].index('') - 1].getOrderNumber()
-        message.carrierID = block[orderNumber][tcpCarrierNumber][
-            block[tcpOrderNumber][tcpCarrierNumber].index('') - 1].getCarrierID()
-        message.productCode = block[orderNumber][tcpCarrierNumber][
-            block[tcpOrderNumber][tcpCarrierNumber].index('') - 1].getProductCode()
-        message.blockHash = block[orderNumber][tcpCarrierNumber][
-            block[tcpOrderNumber][tcpCarrierNumber].index('') - 1].getBlockHash()
-        message.previousHash = block[orderNumber][tcpCarrierNumber][
-            block[tcpOrderNumber][tcpCarrierNumber].index('') - 1].getPreviousHash()
+        message.timeStamp = block[orderNumber][tcpCarrierNumber][block[tcpOrderNumber][tcpCarrierNumber].index('') - 1].getTimeStamp()
+        message.station = str(block[orderNumber][tcpCarrierNumber][block[tcpOrderNumber][tcpCarrierNumber].index('') - 1].getStation())
+        message.orderNumber = block[orderNumber][tcpCarrierNumber][block[tcpOrderNumber][tcpCarrierNumber].index('') - 1].getOrderNumber()
+        message.carrierID = block[orderNumber][tcpCarrierNumber][block[tcpOrderNumber][tcpCarrierNumber].index('') - 1].getCarrierID()
+        message.productCode = block[orderNumber][tcpCarrierNumber][block[tcpOrderNumber][tcpCarrierNumber].index('') - 1].getProductCode()
+        message.blockHash = block[orderNumber][tcpCarrierNumber][block[tcpOrderNumber][tcpCarrierNumber].index('') - 1].getBlockHash()
+        message.previousHash = block[orderNumber][tcpCarrierNumber][block[tcpOrderNumber][tcpCarrierNumber].index('') - 1].getPreviousHash()
         # print(block[orderNumber][block[orderNumber].index('') - 1].getPreviousHash())
 
     except:
@@ -201,7 +192,6 @@ def mainProg():
     pub = rospy.Publisher('publishingBlockStream', blockDetail, queue_size=100)
     while not rospy.is_shutdown():
         if dataFollowing == 1:
-
             # Setup for genesis block
             orderNumber = tcpOrderNumber
             # print(orderNumber)
@@ -266,6 +256,8 @@ def mainProg():
                 blockNumber = block[tcpOrderNumber][tcpCarrierNumber].index('')
                 newGenesis = 3
                 dataFollowing = 0
+
+        rate.sleep()
 
         # if the order number doesn't exist in the array then create genesis block. If it does, then continue where the system left off.
 
@@ -339,18 +331,17 @@ def callback(data):
                                                                                hours=data.timeStamp[0] + data.timeStamp[1],
                                                                                days=data.timeStamp[11] + data.timeStamp[12],
                                                                                months=data.timeStamp[14] + data.timeStamp[15],
-                                                                               years=data.timeStamp[17] + data.timeStamp[18] +
-                                                                                     data.timeStamp[19] +
+                                                                               years=data.timeStamp[17] + data.timeStamp[18] + data.timeStamp[19] +
                                                                                      data.timeStamp[20])
 
     if runYet[data.orderNumber][data.carrierID] == '':
-        f = open("/home/ros/blockChainGit/00blockChain_ws/src/Product" + str(data.orderNumber + 1264) + "C:" + str(
+        f = open("/home/ros/blockChainGit/00blockChain_ws/Product" + str(data.orderNumber + 1264) + "C:" + str(
             data.carrierID) + ".txt", "w")
         f.close()
         runYet[data.orderNumber][data.carrierID] = "1"
 
     if runYet[data.orderNumber][data.carrierID] == "1":
-        f = open("/home/ros/blockChainGit/00blockChain_ws/src/Product" + str(data.orderNumber + 1264) + "C:" + str(
+        f = open("/home/ros/blockChainGit/00blockChain_ws/Product" + str(data.orderNumber + 1264) + "C:" + str(
             data.carrierID) + ".txt", "a")
         f.write(str(data_to_print))
         f.write("\n-------------------------------\n")
@@ -370,7 +361,7 @@ def callbackAuth(data):
 
     if data.nodeName in nodeList:
         nodeONOFF[nodeList.index(data.nodeName)] = 1  # filling in the online array
-        # print(data.nodeName + " is online!")
+        #print(data.nodeName + " is online!")
     # for i in range(10): #10 being a max node amount - can be changed as the array size is 100
 
     name = data.nodeName
@@ -378,7 +369,6 @@ def callbackAuth(data):
     node[int(name[4]) - 1] = data.hash
     # print("finding node 4")
     # print(node)
-
 
 def authTrigger():
     global Trigger
@@ -397,8 +387,8 @@ def authTrigger():
             print(nodeList[(node.index(str(mostCommonHash.most_common(3)[2][0])))] + " has been hacked")
             nodeToRewrite = nodeList[(node.index(str(mostCommonHash.most_common(3)[2][0])))]
 
-            # if nodeList[(node.index(str(mostCommonHash.most_common(3)[2][0])))] != nodeName:
-            #     rewriteNodes()
+            if nodeList[(node.index(str(mostCommonHash.most_common(3)[2][0])))] != nodeName:
+                rewriteNodes()
 
         except:
             print("all fine")
@@ -423,6 +413,7 @@ def emitter():
                 for j in range(len(SblockHash[i])):
                     for z in range(len(SblockHash[i][j])):
                         hashingArray = hashlib.sha256(hashingArray + SblockHash[i][j][z]).hexdigest()
+
 
             message2 = lastHash()
             message2.hash = hashingArray
@@ -461,10 +452,8 @@ def callbackRecData(data):
     dStation = dataSplit[4]
     dProductCode = int(dataSplit[5])
 
-
-
     try:
-        if data.done == 1  and Rdone == 0 and nodeList[(node.index(str(mostCommonHash.most_common(3)[2][0])))] == nodeName:
+        if data.done == 1 and Rdone == 0 and nodeList[(node.index(str(mostCommonHash.most_common(3)[2][0])))] == nodeName:
             SblockHash = [[['' for _ in range(Range)] for _ in range(cRange)] for _ in range(Range)]
             block = [[['' for _ in range(Range)] for _ in range(cRange)] for _ in range(Range)]
             Rdone = 1
@@ -551,22 +540,25 @@ def rewriteNodes():
     # if nodeNumber == int(nodeName[4]) + 1 :
     # this node will rewrite the hacked node
 
+
+
     strData = ''
 
     print("rewrite commence")
     message3 = rewriteNode()
 
-    # TimeStamp
+    #TimeStamp
+
 
     for i in range(Range):
         for j in range(cRange):
             for z in range(Range):
                 if SblockTimeStamp[i][j][z] != '':
-                    strData = str(i) + ',' + str(j) + ',' + str(z) + ',' + SblockTimeStamp[i][j][z] + ',' + str(
-                        SblockTrans[i][j][z]) + ',' + str(SblockProductCode[i][j][z])
-                    message3.SblockTimeStamp = strData
-                    message3.done = 1
-                    pub.publish(message3)
+                        strData = str(i) + ',' + str(j) + ',' + str(z) + ',' + SblockTimeStamp[i][j][z] + ',' + str(SblockTrans[i][j][z]) + ',' + str(SblockProductCode[i][j][z])
+                        message3.SblockTimeStamp = strData
+                        message3.done = 1
+                        pub.publish(message3)
+
 
     message3.done = 0
     pub.publish(message3)
@@ -679,9 +671,8 @@ if __name__ == '__main__':
         p4 = threading.Thread(target=emitter, args=())
         p5 = threading.Thread(target=authTrigger, args=())
         p6 = threading.Thread(target=recNewData, args=())
-        # p7 = threading.Thread(target=hackedOneTime, args=())
-        p8 = threading.Thread(target=manual, args=())
-        # p9 = threading.Thread(target=blockUpdate, args=())
+        p7 = threading.Thread(target=manual, args=())
+        p8 = threading.Thread(target=hackedOneTime, args=())
 
         p1.daemon = True
         p2.daemon = True
@@ -689,9 +680,8 @@ if __name__ == '__main__':
         p4.daemon = True
         p5.daemon = True
         p6.daemon = True
-        # p7.daemon = True
+        p7.daemon = True
         p8.daemon = True
-        # p9.daemon = True
 
         p1.start()
         p2.start()
@@ -699,9 +689,8 @@ if __name__ == '__main__':
         p4.start()
         p5.start()
         p6.start()
-        # p7.start()
+        p7.start()
         p8.start()
-        # p9.start()
 
         p1.join()
         p2.join()
@@ -709,9 +698,9 @@ if __name__ == '__main__':
         p4.join()
         p5.join()
         p6.join()
-        # p7.join()
+        p7.join()
         p8.join()
-        # p9.join()
+
 
 # each stage of the production line needs to log:
 
