@@ -24,6 +24,7 @@ orderNcarrierNumberList = [['' for _ in range(cRange)] for _ in range(Range)]
 print("24%")
 buildBlock = 0
 oldData = ''
+emit = False
 
 serialNumberNum = 0
 serialNumberStr = 'PRODUCT'
@@ -42,7 +43,7 @@ nodeList = ['NODE1', 'NODE2', 'NODE3',
             'NODE4']  ################# IF INCLUDING MORE NODES, EXTEND THIS ARRAY SIZE #######################
 nodeONOFF = [1, 0, 0, 0]  ################# IF INCLUDING MORE NODES, EXTEND THIS ARRAY SIZE #######################
 oldNodeONOFF = [0, 0, 0, 0]  ################# IF INCLUDING MORE NODES, EXTEND THIS ARRAY SIZE #######################
-node = [['' for _ in range(Range)] for _ in range(cRange)]
+node = ['' for _ in range(20)]
 print("29%")
 counter1 = 0;
 
@@ -87,6 +88,12 @@ hours = 0
 days = 0
 months = 0
 years = 0
+
+# Emitter
+hashingArray = ''
+
+#Rewrite
+nodeToRewrite = 10
 
 
 class blockChain:
@@ -271,6 +278,9 @@ def callback(data):
     global SOrderNumber
 
     global node
+    global emit
+
+    emit = True
 
     orderNumber1 = data.orderNumber
     data_to_print = "Time Stamp for Block: {0}\nStation: {1}\nOrder Number: {2}\nCarrierID: {3}\nProduct Code: {4}\nBlock Hash: {5}\nPrevious Hash: {6}".format(
@@ -321,13 +331,13 @@ def callback(data):
                                                                                      data.timeStamp[20])
 
     if runYet[data.orderNumber][data.carrierID] == '':
-        f = open("/home/ros/blockChainGit/00blockChain_ws/src/Product" + str(data.orderNumber + 1264) + "C:" + str(
+        f = open("/home/ros/blockChainGit/00blockChain_ws/Product" + str(data.orderNumber + 1264) + "C:" + str(
             data.carrierID) + ".txt", "w")
         f.close()
         runYet[data.orderNumber][data.carrierID] = "1"
 
     if runYet[data.orderNumber][data.carrierID] == "1":
-        f = open("/home/ros/blockChainGit/00blockChain_ws/src/Product" + str(data.orderNumber + 1264) + "C:" + str(
+        f = open("/home/ros/blockChainGit/00blockChain_ws/Product" + str(data.orderNumber + 1264) + "C:" + str(
             data.carrierID) + ".txt", "a")
         f.write(str(data_to_print))
         f.write("\n-------------------------------\n")
@@ -344,32 +354,36 @@ def callbackAuth(data):
     global nodeONOFF
     global nodeList
     global authOrderNumber
+
     if data.nodeName in nodeList:
         nodeONOFF[nodeList.index(data.nodeName)] = 1  # filling in the online array
+        #print(data.nodeName + " is online!")
     # for i in range(10): #10 being a max node amount - can be changed as the array size is 100
 
     name = data.nodeName
-    authOrderNumber = data.orderNumber
-    # print("I heard: ")
-    # print(node[data.orderNumber][int(name[4]) - 1])
-    node[data.orderNumber][int(name[4]) - 1] = data.hash
-    # print(node[data.orderNumber][int(name[4])])
 
+    node[int(name[4]) - 1] = data.hash
+    # print("finding node 4")
+    # print(node)
 
 def authTrigger():
     global Trigger
     global authOrderNumber
     global node
+    global nodeToRewrite
 
     while not rospy.is_shutdown():
         time.sleep(5)
-        mostCommonHash = Counter(node[authOrderNumber])
+        mostCommonHash = Counter(node)
+
+        # print(mostCommonHash.most_common(3))
         try:
-            common = mostCommonHash.most_common(3)[2][0]
-            print(nodeList[
-                      node[authOrderNumber].index((mostCommonHash.most_common(3)[2][0]), 1)] + " has been hacked")
+            print(nodeList[(node.index(str(mostCommonHash.most_common(3)[2][0])))] + " has been hacked")
+            nodeToRewrite = nodeList[(node.index(str(mostCommonHash.most_common(3)[2][0])))]
+            rewriteNodes()
         except:
-            man = "loves an easter egg"
+            print("all fine")
+
     rospy.spin()
 
 
@@ -379,54 +393,68 @@ def emitter():
     global Trigger
     global station
     global SblockHash
+    global hashingArray
+    global emit
 
     pub = rospy.Publisher('Last_Hash', lastHash, queue_size=100)
 
     while not rospy.is_shutdown():
-        for i in range(orderNumber + 1):
+        if emit == True:
+            for i in range(len(SblockHash)):
+                for j in range(len(SblockHash[i])):
+                    for z in range(len(SblockHash[i][j])):
+                        hashingArray = hashlib.sha256(hashingArray + SblockHash[i][j][z]).hexdigest()
+
 
             message2 = lastHash()
-            message2.nodeName = "NODE3"
-            message2.orderNumber = i
-            message2.hash = SblockHash[i][SblockHash[i].index('', 1) - 1]
+            message2.hash = hashingArray
+            message2.nodeName = 'NODE3'
             pub.publish(message2)
-            # print("emitter: ")
-            # print(blockHash[i][blockHash[i].index('', 1) - 1])
-            time.sleep(0.1)
+            hashingArray = ''
+            time.sleep(1)
 
-    # rospy.spin()
+
 
 
 def rewriteNodes():
     global blockString
-
     global SblockTimeStamp  # orderNumber,blockNumber
     global SblockTrans
     global SblockProductCode
     global SblockHash
     global SblockPreviousHash
-
     global SblockNumber
     global SOrderNumber
+    global Range
+    global cRange
+    global nodeToRewrite
 
-    time.sleep(10)
+    # rewrite NODE(nodeNumber)
+    pub = rospy.Publisher('Rewrite', rewriteNode, queue_size=100)
+
+    # if nodeNumber == int(nodeName[4]) + 1 :
+    # this node will rewrite the hacked node
+
+
+
+    strData = ''
+
+    print("rewrite commence")
     message3 = rewriteNode()
 
-    while not rospy.is_shutdown():
-        try:
+    #TimeStamp
+    for i in range(Range):
+        for j in range(cRange):
+            for z in range(Range):
+                if SblockTimeStamp[i][j][z] != '':
+                        strData = str(i) + ',' + str(j) + ',' + str(z) + ',' + SblockTimeStamp[i][j][z] + ',' + str(SblockTrans[i][j][z]) + ',' + str(SblockProductCode[i][j][z])
+                        message3.SblockTimeStamp = strData
+                        pub.publish(message3)
 
-            time.sleep(1)
 
-        except:
-            print("didn'work lol")
-            time.sleep(1)
+    print("finished")
 
-    # try:
-    #     for i in range ()
-    #
-    #
-    # except:
-    #     print("nah mate")
+
 
 
 ############################### TCP Server ###############################
@@ -451,7 +479,7 @@ def manual():
     # Then bind() is used to associate the socket with the server address. In this case, the address is localhost, referring to the current server, and the port number is 10000.
 
     # Bind the socket to the port
-    server_address = ('172.21.4.152', 4502)
+    server_address = ('127.0.0.1', 4502)
     print sys.stderr, 'starting up on %s port %s' % server_address
     sock.bind(server_address)
     # Calling listen() puts the socket into server mode, and accept() waits for an incoming connection.
@@ -523,9 +551,9 @@ if __name__ == '__main__':
     while not rospy.is_shutdown():
         p1 = threading.Thread(target=listener, args=())
         p2 = threading.Thread(target=mainProg, args=())
-        # p3 = threading.Thread(target=authentication, args=())
-        # p4 = threading.Thread(target=emitter, args=())
-        # p5 = threading.Thread(target=authTrigger, args=())
+        p3 = threading.Thread(target=authentication, args=())
+        p4 = threading.Thread(target=emitter, args=())
+        p5 = threading.Thread(target=authTrigger, args=())
         # p6 = threading.Thread(target=rewriteNodes, args=())
         # p7 = threading.Thread(target=sendMessage, args=())
         p8 = threading.Thread(target=manual, args=())
@@ -533,9 +561,9 @@ if __name__ == '__main__':
 
         p1.daemon = True
         p2.daemon = True
-        # p3.daemon = True
-        # p4.daemon = True
-        # p5.daemon = True
+        p3.daemon = True
+        p4.daemon = True
+        p5.daemon = True
         # p6.daemon = True
         # p7.daemon = True
         p8.daemon = True
@@ -543,9 +571,9 @@ if __name__ == '__main__':
 
         p1.start()
         p2.start()
-        # p3.start()
-        # p4.start()
-        # p5.start()
+        p3.start()
+        p4.start()
+        p5.start()
         # p6.start()
         # p7.start()
         p8.start()
@@ -553,9 +581,9 @@ if __name__ == '__main__':
 
         p1.join()
         p2.join()
-        # p3.join()
-        # p4.join()
-        # p5.join()
+        p3.join()
+        p4.join()
+        p5.join()
         # p6.join()
         # p7.join()
         p8.join()
@@ -608,3 +636,21 @@ if __name__ == '__main__':
 # - 2 reads 4
 # - 1 reads 3
 # - 3 reads 3
+
+# Once a node has been found to have been compromised, the node will be rebooted. Once a new node is on the network, the node needs
+# to be updated with all the current data.
+
+# station[][][]
+# block[][][]
+# orderNcarrierNumberList[][]
+# runYet[][]
+# nodeList[]
+# nodeONOFF[]
+# oldNodeONOFF[]
+# node[]
+# SblockTimeStamp[][][]
+# SblockTrans[][][]
+# SblockProductCode[][][]
+# SblockHash[][][]
+# SblockPreviousHash[][][]
+# SCarrierNumber[][][]

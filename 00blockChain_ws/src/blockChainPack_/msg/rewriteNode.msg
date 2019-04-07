@@ -2,4 +2,4 @@ string SblockTimeStamp
 string SblockTrans
 string SblockProductCode
 string SCarrierNumber
-
+int64 done

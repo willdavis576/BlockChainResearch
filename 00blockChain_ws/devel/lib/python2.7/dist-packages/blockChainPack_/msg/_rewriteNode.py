@@ -7,17 +7,17 @@ import struct
 
 
 class rewriteNode(genpy.Message):
-  _md5sum = "7efbc7ca051609e91b5eb44f1e5cdf10"
+  _md5sum = "69b49f45a96149b09ab624e642e92d9e"
   _type = "blockChainPack_/rewriteNode"
   _has_header = False #flag to mark the presence of a Header object
   _full_text = """string SblockTimeStamp
 string SblockTrans
 string SblockProductCode
 string SCarrierNumber
-
+int64 done
 """
-  __slots__ = ['SblockTimeStamp','SblockTrans','SblockProductCode','SCarrierNumber']
-  _slot_types = ['string','string','string','string']
+  __slots__ = ['SblockTimeStamp','SblockTrans','SblockProductCode','SCarrierNumber','done']
+  _slot_types = ['string','string','string','string','int64']
 
   def __init__(self, *args, **kwds):
     """
@@ -27,7 +27,7 @@ string SCarrierNumber
     changes.  You cannot mix in-order arguments and keyword arguments.
 
     The available fields are:
-       SblockTimeStamp,SblockTrans,SblockProductCode,SCarrierNumber
+       SblockTimeStamp,SblockTrans,SblockProductCode,SCarrierNumber,done
 
     :param args: complete set of field values, in .msg order
     :param kwds: use keyword arguments corresponding to message field names
@@ -44,11 +44,14 @@ string SCarrierNumber
         self.SblockProductCode = ''
       if self.SCarrierNumber is None:
         self.SCarrierNumber = ''
+      if self.done is None:
+        self.done = 0
     else:
       self.SblockTimeStamp = ''
       self.SblockTrans = ''
       self.SblockProductCode = ''
       self.SCarrierNumber = ''
+      self.done = 0
 
   def _get_types(self):
     """
@@ -86,6 +89,7 @@ string SCarrierNumber
         _x = _x.encode('utf-8')
         length = len(_x)
       buff.write(struct.pack('<I%ss'%length, length, _x))
+      buff.write(_get_struct_q().pack(self.done))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -132,6 +136,9 @@ string SCarrierNumber
         self.SCarrierNumber = str[start:end].decode('utf-8')
       else:
         self.SCarrierNumber = str[start:end]
+      start = end
+      end += 8
+      (self.done,) = _get_struct_q().unpack(str[start:end])
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
@@ -168,6 +175,7 @@ string SCarrierNumber
         _x = _x.encode('utf-8')
         length = len(_x)
       buff.write(struct.pack('<I%ss'%length, length, _x))
+      buff.write(_get_struct_q().pack(self.done))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -215,6 +223,9 @@ string SCarrierNumber
         self.SCarrierNumber = str[start:end].decode('utf-8')
       else:
         self.SCarrierNumber = str[start:end]
+      start = end
+      end += 8
+      (self.done,) = _get_struct_q().unpack(str[start:end])
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
@@ -223,3 +234,9 @@ _struct_I = genpy.struct_I
 def _get_struct_I():
     global _struct_I
     return _struct_I
+_struct_q = None
+def _get_struct_q():
+    global _struct_q
+    if _struct_q is None:
+        _struct_q = struct.Struct("<q")
+    return _struct_q

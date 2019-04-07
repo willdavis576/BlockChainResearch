@@ -12,7 +12,7 @@ def main():
 
         s.sendall(str(counter) + ',1296,3,211,01,54,18,19,03,2019')
         s.sendall('                                ')
-        time.sleep(10)
+        time.sleep(0.5)
         counter = counter + 1
 
         if counter == 6:

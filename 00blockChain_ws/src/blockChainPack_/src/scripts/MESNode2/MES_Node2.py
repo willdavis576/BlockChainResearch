@@ -41,7 +41,7 @@ runYet = [['' for _ in range(Range)] for _ in range(Range)]
 Trigger = False
 nodeList = ['NODE1', 'NODE2', 'NODE3',
             'NODE4']  ################# IF INCLUDING MORE NODES, EXTEND THIS ARRAY SIZE #######################
-nodeONOFF = [0, 1, 0, 0]  ################# IF INCLUDING MORE NODES, EXTEND THIS ARRAY SIZE #######################
+nodeONOFF = [1, 0, 0, 0]  ################# IF INCLUDING MORE NODES, EXTEND THIS ARRAY SIZE #######################
 oldNodeONOFF = [0, 0, 0, 0]  ################# IF INCLUDING MORE NODES, EXTEND THIS ARRAY SIZE #######################
 node = ['' for _ in range(20)]
 print("29%")
@@ -91,6 +91,9 @@ years = 0
 
 # Emitter
 hashingArray = ''
+
+#Rewrite
+nodeToRewrite = 10
 
 
 class blockChain:
@@ -343,7 +346,6 @@ def callback(data):
 
 def authentication():
     rospy.Subscriber('Last_Hash', lastHash, callbackAuth)
-
     rospy.spin()
 
 
@@ -352,6 +354,7 @@ def callbackAuth(data):
     global nodeONOFF
     global nodeList
     global authOrderNumber
+
     if data.nodeName in nodeList:
         nodeONOFF[nodeList.index(data.nodeName)] = 1  # filling in the online array
         #print(data.nodeName + " is online!")
@@ -367,6 +370,7 @@ def authTrigger():
     global Trigger
     global authOrderNumber
     global node
+    global nodeToRewrite
 
     while not rospy.is_shutdown():
         time.sleep(5)
@@ -375,6 +379,8 @@ def authTrigger():
         # print(mostCommonHash.most_common(3))
         try:
             print(nodeList[(node.index(str(mostCommonHash.most_common(3)[2][0])))] + " has been hacked")
+            nodeToRewrite = nodeList[(node.index(str(mostCommonHash.most_common(3)[2][0])))]
+            # rewriteNodes()
         except:
             print("all fine")
 
@@ -412,34 +418,43 @@ def emitter():
 
 def rewriteNodes():
     global blockString
-
     global SblockTimeStamp  # orderNumber,blockNumber
     global SblockTrans
     global SblockProductCode
     global SblockHash
     global SblockPreviousHash
-
     global SblockNumber
     global SOrderNumber
+    global Range
+    global cRange
+    global nodeToRewrite
 
-    time.sleep(10)
+    # rewrite NODE(nodeNumber)
+    pub = rospy.Publisher('Rewrite', rewriteNode, queue_size=100)
+
+    # if nodeNumber == int(nodeName[4]) + 1 :
+    # this node will rewrite the hacked node
+
+
+
+    strData = ''
+
+    print("rewrite commence")
     message3 = rewriteNode()
 
-    while not rospy.is_shutdown():
-        try:
+    #TimeStamp
+    for i in range(Range):
+        for j in range(cRange):
+            for z in range(Range):
+                if SblockTimeStamp[i][j][z] != '':
+                        strData = str(i) + ',' + str(j) + ',' + str(z) + ',' + SblockTimeStamp[i][j][z] + ',' + str(SblockTrans[i][j][z]) + ',' + str(SblockProductCode[i][j][z])
+                        message3.SblockTimeStamp = strData
+                        pub.publish(message3)
 
-            time.sleep(1)
 
-        except:
-            print("didn'work lol")
-            time.sleep(1)
+    print("finished")
 
-    # try:
-    #     for i in range ()
-    #
-    #
-    # except:
-    #     print("nah mate")
+
 
 
 ############################### TCP Server ###############################
@@ -599,7 +614,7 @@ if __name__ == '__main__':
 #                   - Using just a list instead because it's easier
 #                           - Need to create a catchUpListner.py program so it can receive an updated blockchain file after authentication.
 #                                   - For the authentication program, possibley need it seperate as a authenticate.py program.
-#   - use blockchain authentication to validate data.
+#   - use blockchain authentiation to validate data.
 
 # Authentication ideas:
 #	- new script and stream for ask all nodes to do an authentication check
@@ -622,7 +637,20 @@ if __name__ == '__main__':
 # - 1 reads 3
 # - 3 reads 3
 
-
 # Once a node has been found to have been compromised, the node will be rebooted. Once a new node is on the network, the node needs
 # to be updated with all the current data.
 
+# station[][][]
+# block[][][]
+# orderNcarrierNumberList[][]
+# runYet[][]
+# nodeList[]
+# nodeONOFF[]
+# oldNodeONOFF[]
+# node[]
+# SblockTimeStamp[][][]
+# SblockTrans[][][]
+# SblockProductCode[][][]
+# SblockHash[][][]
+# SblockPreviousHash[][][]
+# SCarrierNumber[][][]

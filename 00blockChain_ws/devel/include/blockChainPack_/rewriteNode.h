@@ -27,13 +27,15 @@ struct rewriteNode_
     : SblockTimeStamp()
     , SblockTrans()
     , SblockProductCode()
-    , SCarrierNumber()  {
+    , SCarrierNumber()
+    , done(0)  {
     }
   rewriteNode_(const ContainerAllocator& _alloc)
     : SblockTimeStamp(_alloc)
     , SblockTrans(_alloc)
     , SblockProductCode(_alloc)
-    , SCarrierNumber(_alloc)  {
+    , SCarrierNumber(_alloc)
+    , done(0)  {
   (void)_alloc;
     }
 
@@ -50,6 +52,9 @@ struct rewriteNode_
 
    typedef std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other >  _SCarrierNumber_type;
   _SCarrierNumber_type SCarrierNumber;
+
+   typedef int64_t _done_type;
+  _done_type done;
 
 
 
@@ -129,12 +134,12 @@ struct MD5Sum< ::blockChainPack_::rewriteNode_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "7efbc7ca051609e91b5eb44f1e5cdf10";
+    return "69b49f45a96149b09ab624e642e92d9e";
   }
 
   static const char* value(const ::blockChainPack_::rewriteNode_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0x7efbc7ca051609e9ULL;
-  static const uint64_t static_value2 = 0x1b5eb44f1e5cdf10ULL;
+  static const uint64_t static_value1 = 0x69b49f45a96149b0ULL;
+  static const uint64_t static_value2 = 0x9ab624e642e92d9eULL;
 };
 
 template<class ContainerAllocator>
@@ -157,7 +162,7 @@ struct Definition< ::blockChainPack_::rewriteNode_<ContainerAllocator> >
 string SblockTrans\n\
 string SblockProductCode\n\
 string SCarrierNumber\n\
-\n\
+int64 done\n\
 ";
   }
 
@@ -180,6 +185,7 @@ namespace serialization
       stream.next(m.SblockTrans);
       stream.next(m.SblockProductCode);
       stream.next(m.SCarrierNumber);
+      stream.next(m.done);
     }
 
     ROS_DECLARE_ALLINONE_SERIALIZER
@@ -206,6 +212,8 @@ struct Printer< ::blockChainPack_::rewriteNode_<ContainerAllocator> >
     Printer<std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other > >::stream(s, indent + "  ", v.SblockProductCode);
     s << indent << "SCarrierNumber: ";
     Printer<std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other > >::stream(s, indent + "  ", v.SCarrierNumber);
+    s << indent << "done: ";
+    Printer<int64_t>::stream(s, indent + "  ", v.done);
   }
 };
 

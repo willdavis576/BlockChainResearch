@@ -22,6 +22,7 @@ class rewriteNode {
       this.SblockTrans = null;
       this.SblockProductCode = null;
       this.SCarrierNumber = null;
+      this.done = null;
     }
     else {
       if (initObj.hasOwnProperty('SblockTimeStamp')) {
@@ -48,6 +49,12 @@ class rewriteNode {
       else {
         this.SCarrierNumber = '';
       }
+      if (initObj.hasOwnProperty('done')) {
+        this.done = initObj.done
+      }
+      else {
+        this.done = 0;
+      }
     }
   }
 
@@ -61,6 +68,8 @@ class rewriteNode {
     bufferOffset = _serializer.string(obj.SblockProductCode, buffer, bufferOffset);
     // Serialize message field [SCarrierNumber]
     bufferOffset = _serializer.string(obj.SCarrierNumber, buffer, bufferOffset);
+    // Serialize message field [done]
+    bufferOffset = _serializer.int64(obj.done, buffer, bufferOffset);
     return bufferOffset;
   }
 
@@ -76,6 +85,8 @@ class rewriteNode {
     data.SblockProductCode = _deserializer.string(buffer, bufferOffset);
     // Deserialize message field [SCarrierNumber]
     data.SCarrierNumber = _deserializer.string(buffer, bufferOffset);
+    // Deserialize message field [done]
+    data.done = _deserializer.int64(buffer, bufferOffset);
     return data;
   }
 
@@ -85,7 +96,7 @@ class rewriteNode {
     length += object.SblockTrans.length;
     length += object.SblockProductCode.length;
     length += object.SCarrierNumber.length;
-    return length + 16;
+    return length + 24;
   }
 
   static datatype() {
@@ -95,7 +106,7 @@ class rewriteNode {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return '7efbc7ca051609e91b5eb44f1e5cdf10';
+    return '69b49f45a96149b09ab624e642e92d9e';
   }
 
   static messageDefinition() {
@@ -105,7 +116,7 @@ class rewriteNode {
     string SblockTrans
     string SblockProductCode
     string SCarrierNumber
-    
+    int64 done
     
     `;
   }
@@ -142,6 +153,13 @@ class rewriteNode {
     }
     else {
       resolved.SCarrierNumber = ''
+    }
+
+    if (msg.done !== undefined) {
+      resolved.done = msg.done;
+    }
+    else {
+      resolved.done = 0
     }
 
     return resolved;

@@ -7,4 +7,6 @@
           SBLOCKPRODUCTCODE
           SCARRIERNUMBER-VAL
           SCARRIERNUMBER
+          DONE-VAL
+          DONE
 ))
