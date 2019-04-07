@@ -423,17 +423,7 @@ def emitter():
 
 
 def recNewData():
-    global nodeName
-    global node
-    global nodeList
-    global mostCommonHash
-
-    try:
-        if nodeList[(node.index(str(mostCommonHash.most_common(3)[2][0])))] == nodeName:
-            rospy.Subscriber('Rewrite', rewriteNode, callbackRecData)
-    except:
-        ye = "man"
-
+    rospy.Subscriber('Rewrite', rewriteNode, callbackRecData)
     rospy.spin()
 
 

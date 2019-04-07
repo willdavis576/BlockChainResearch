@@ -423,17 +423,7 @@ def emitter():
 
 
 def recNewData():
-    global nodeName
-    global node
-    global nodeList
-    global mostCommonHash
-
-    try:
-        if nodeList[(node.index(str(mostCommonHash.most_common(3)[2][0])))] == nodeName:
-            rospy.Subscriber('Rewrite', rewriteNode, callbackRecData)
-    except:
-        ye = "man"
-
+    rospy.Subscriber('Rewrite', rewriteNode, callbackRecData)
     rospy.spin()
 
 
@@ -671,7 +661,7 @@ if __name__ == '__main__':
         p1 = threading.Thread(target=listener, args=())
         p2 = threading.Thread(target=mainProg, args=())
         p3 = threading.Thread(target=authentication, args=())
-        p4 = threading.Thread(target=emitter, args=())
+        # p4 = threading.Thread(target=emitter, args=())
         p5 = threading.Thread(target=authTrigger, args=())
         p6 = threading.Thread(target=recNewData, args=())
         # p7 = threading.Thread(target=sendMessage, args=())
@@ -681,7 +671,7 @@ if __name__ == '__main__':
         p1.daemon = True
         p2.daemon = True
         p3.daemon = True
-        p4.daemon = True
+        # p4.daemon = True
         p5.daemon = True
         p6.daemon = True
         # p7.daemon = True
@@ -691,7 +681,7 @@ if __name__ == '__main__':
         p1.start()
         p2.start()
         p3.start()
-        p4.start()
+        # p4.start()
         p5.start()
         p6.start()
         # p7.start()
@@ -701,7 +691,7 @@ if __name__ == '__main__':
         p1.join()
         p2.join()
         p3.join()
-        p4.join()
+        # p4.join()
         p5.join()
         p6.join()
         # p7.join()

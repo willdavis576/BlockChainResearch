@@ -1,32 +1,16 @@
-Time Stamp for Block: 12:12:07 - 07/04/2019
+Time Stamp for Block: 12:23:13 - 07/04/2019
 Station: Start production
 Order Number: 1296
 CarrierID: 3
 Product Code: 211
-Block Hash: 81932cf05451227473810e2f74631b1f38056472604d8a3780c5973eb93eb945
+Block Hash: ec8a0d99f8c0f6693cc5f57d75bc4ca698ee1e91497332c6fe48b1aca5533e48
 Previous Hash: 
 -------------------------------
 Time Stamp for Block: 18:54:01 - 19/03/2019
-Station: 4
+Station: 3
 Order Number: 1296
 CarrierID: 3
 Product Code: 211
-Block Hash: c0dfd393c7299ba267ab730254391fed97893da3c63c86ac6cc73568eb4565da
-Previous Hash: 81932cf05451227473810e2f74631b1f38056472604d8a3780c5973eb93eb945
--------------------------------
-Time Stamp for Block: 18:54:01 - 19/03/2019
-Station: 4
-Order Number: 1296
-CarrierID: 3
-Product Code: 211
-Block Hash: c0dfd393c7299ba267ab730254391fed97893da3c63c86ac6cc73568eb4565da
-Previous Hash: 81932cf05451227473810e2f74631b1f38056472604d8a3780c5973eb93eb945
--------------------------------
-Time Stamp for Block: 18:54:01 - 19/03/2019
-Station: 4
-Order Number: 1296
-CarrierID: 3
-Product Code: 211
-Block Hash: c0dfd393c7299ba267ab730254391fed97893da3c63c86ac6cc73568eb4565da
-Previous Hash: 81932cf05451227473810e2f74631b1f38056472604d8a3780c5973eb93eb945
+Block Hash: 8ba6b88ca3e4965c1ecb37d4cbe49d15fa6d6f06d7fa05a5e0ee611936c9750b
+Previous Hash: ec8a0d99f8c0f6693cc5f57d75bc4ca698ee1e91497332c6fe48b1aca5533e48
 -------------------------------

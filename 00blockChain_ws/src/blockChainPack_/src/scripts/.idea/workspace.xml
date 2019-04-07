@@ -2,9 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d548811d-0aca-477e-bfa2-a5ed9f109e3c" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/../../../../Product1296C:3.txt" afterPath="$PROJECT_DIR$/../../../../Product1296C:3.txt" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/MESNode1/MES_Node1.py" afterPath="$PROJECT_DIR$/MESNode1/MES_Node1.py" />
       <change beforePath="$PROJECT_DIR$/MESNode2/MES_Node2.py" afterPath="$PROJECT_DIR$/MESNode2/MES_Node2.py" />
       <change beforePath="$PROJECT_DIR$/MESNode3/MES_Node3.py" afterPath="$PROJECT_DIR$/MESNode3/MES_Node3.py" />
-      <change beforePath="$PROJECT_DIR$/MES_Node_hacked.py" afterPath="$PROJECT_DIR$/MES_Node_hacked.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -25,11 +27,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MES_Node1.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="MES_Node1.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MESNode1/MES_Node1.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5280">
-              <caret line="532" column="19" lean-forward="true" selection-start-line="532" selection-start-column="19" selection-end-line="532" selection-end-column="19" />
+            <state relative-caret-position="247">
+              <caret line="426" column="16" lean-forward="false" selection-start-line="426" selection-start-column="16" selection-end-line="426" selection-end-column="16" />
               <folding>
                 <element signature="e#19#78#0" expanded="true" />
                 <element signature="e#2908#4040#0" expanded="false" />
@@ -39,9 +41,9 @@
                 <element signature="e#10156#10237#0" expanded="false" />
                 <element signature="e#14663#14733#0" expanded="false" />
                 <element signature="e#14764#15221#0" expanded="false" />
-                <element signature="e#15942#16675#0" expanded="false" />
-                <element signature="e#22331#25768#0" expanded="false" />
-                <element signature="e#27009#27058#0" expanded="false" />
+                <element signature="e#20896#22010#0" expanded="false" />
+                <element signature="e#22110#25547#0" expanded="false" />
+                <element signature="e#26796#26845#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -95,8 +97,8 @@
       <file leaf-file-name="MES_Node_hacked.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MES_Node_hacked.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="928">
-              <caret line="572" column="21" lean-forward="true" selection-start-line="572" selection-start-column="21" selection-end-line="572" selection-end-column="21" />
+            <state relative-caret-position="367">
+              <caret line="435" column="4" lean-forward="false" selection-start-line="435" selection-start-column="4" selection-end-line="436" selection-end-column="16" />
               <folding>
                 <element signature="e#19#78#0" expanded="true" />
                 <element signature="e#2920#4052#0" expanded="false" />
@@ -116,8 +118,8 @@
       <file leaf-file-name="MES_Node2.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MESNode2/MES_Node2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="742">
-              <caret line="600" column="39" lean-forward="false" selection-start-line="600" selection-start-column="39" selection-end-line="600" selection-end-column="39" />
+            <state relative-caret-position="511">
+              <caret line="428" column="0" lean-forward="true" selection-start-line="428" selection-start-column="0" selection-end-line="428" selection-end-column="0" />
               <folding>
                 <element signature="e#19#78#0" expanded="true" />
                 <element signature="e#2908#4040#0" expanded="false" />
@@ -133,11 +135,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MES_Node3.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="MES_Node3.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MESNode3/MES_Node3.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="942">
-              <caret line="600" column="39" lean-forward="false" selection-start-line="600" selection-start-column="39" selection-end-line="600" selection-end-column="39" />
+            <state relative-caret-position="447">
+              <caret line="426" column="16" lean-forward="false" selection-start-line="426" selection-start-column="16" selection-end-line="426" selection-end-column="16" />
               <folding>
                 <element signature="e#19#78#0" expanded="true" />
                 <element signature="e#2908#4040#0" expanded="false" />
@@ -175,7 +177,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>[1,1</find>
       <find>counter1</find>
       <find>queu</find>
       <find>while</find>
@@ -204,6 +205,7 @@
       <find>station</find>
       <find>SCarrierNumber</find>
       <find>&quot;hello&quot;</find>
+      <find>all fine</find>
       <find>node1</find>
     </findStrings>
   </component>
@@ -250,8 +252,8 @@
         <option value="$PROJECT_DIR$/rewriteBroadcast.py" />
         <option value="$PROJECT_DIR$/rewriteTest.py" />
         <option value="$PROJECT_DIR$/PLC Sim/SimNode1.py" />
-        <option value="$PROJECT_DIR$/MESNode1/MES_Node1.py" />
         <option value="$PROJECT_DIR$/MES_Node_hacked.py" />
+        <option value="$PROJECT_DIR$/MESNode1/MES_Node1.py" />
         <option value="$PROJECT_DIR$/MESNode2/MES_Node2.py" />
         <option value="$PROJECT_DIR$/MESNode3/MES_Node3.py" />
       </list>
@@ -580,8 +582,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/MES_Node_hacked.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="928">
-          <caret line="572" column="21" lean-forward="true" selection-start-line="572" selection-start-column="21" selection-end-line="572" selection-end-column="21" />
+        <state relative-caret-position="367">
+          <caret line="435" column="4" lean-forward="false" selection-start-line="435" selection-start-column="4" selection-end-line="436" selection-end-column="16" />
           <folding>
             <element signature="e#19#78#0" expanded="true" />
             <element signature="e#2920#4052#0" expanded="false" />
@@ -597,10 +599,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MESNode3/MES_Node3.py">
+    <entry file="file://$PROJECT_DIR$/MESNode1/MES_Node1.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="942">
-          <caret line="600" column="39" lean-forward="false" selection-start-line="600" selection-start-column="39" selection-end-line="600" selection-end-column="39" />
+        <state relative-caret-position="247">
+          <caret line="426" column="16" lean-forward="false" selection-start-line="426" selection-start-column="16" selection-end-line="426" selection-end-column="16" />
           <folding>
             <element signature="e#19#78#0" expanded="true" />
             <element signature="e#2908#4040#0" expanded="false" />
@@ -610,15 +612,17 @@
             <element signature="e#10156#10237#0" expanded="false" />
             <element signature="e#14663#14733#0" expanded="false" />
             <element signature="e#14764#15221#0" expanded="false" />
-            <element signature="e#15942#16675#0" expanded="false" />
+            <element signature="e#20896#22010#0" expanded="false" />
+            <element signature="e#22110#25547#0" expanded="false" />
+            <element signature="e#26796#26845#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/MESNode2/MES_Node2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="742">
-          <caret line="600" column="39" lean-forward="false" selection-start-line="600" selection-start-column="39" selection-end-line="600" selection-end-column="39" />
+        <state relative-caret-position="511">
+          <caret line="428" column="0" lean-forward="true" selection-start-line="428" selection-start-column="0" selection-end-line="428" selection-end-column="0" />
           <folding>
             <element signature="e#19#78#0" expanded="true" />
             <element signature="e#2908#4040#0" expanded="false" />
@@ -633,10 +637,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MESNode1/MES_Node1.py">
+    <entry file="file://$PROJECT_DIR$/MESNode3/MES_Node3.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5280">
-          <caret line="532" column="19" lean-forward="true" selection-start-line="532" selection-start-column="19" selection-end-line="532" selection-end-column="19" />
+        <state relative-caret-position="447">
+          <caret line="426" column="16" lean-forward="false" selection-start-line="426" selection-start-column="16" selection-end-line="426" selection-end-column="16" />
           <folding>
             <element signature="e#19#78#0" expanded="true" />
             <element signature="e#2908#4040#0" expanded="false" />
@@ -647,8 +651,6 @@
             <element signature="e#14663#14733#0" expanded="false" />
             <element signature="e#14764#15221#0" expanded="false" />
             <element signature="e#15942#16675#0" expanded="false" />
-            <element signature="e#22331#25768#0" expanded="false" />
-            <element signature="e#27009#27058#0" expanded="false" />
           </folding>
         </state>
       </provider>
