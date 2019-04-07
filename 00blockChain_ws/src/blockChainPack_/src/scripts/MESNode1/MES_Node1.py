@@ -69,7 +69,7 @@ authOrderNumber = 0
 blockString = ''
 nodeName = "NODE1"  ############### THIS IS WHERE YOU SPECIFY A NODE'S NAME #######################
 nodeHacked = ''
-stationHistory = [''] * 7
+stationHistory = [['' for _ in range(7)] for _ in range(5)]
 
 # TCP SERVER STUFF
 tcpStationName = 0
@@ -199,6 +199,7 @@ def mainProg():
     global orderNcarrierNumberList
     global dataFollowing
     global SblockNumber
+    global Range
 
     pub = rospy.Publisher('publishingBlockStream', blockDetail, queue_size=100)
     while not rospy.is_shutdown():
@@ -253,21 +254,34 @@ def mainProg():
 
             if newGenesis == 0:
                 time.sleep(1)
-                if tcpStationName not in stationHistory:
-                    blockUpdate(blockNumber=block[tcpOrderNumber][tcpCarrierNumber].index(''), orderNumber=tcpOrderNumber,
-                                station=tcpStationName, carrierID=tcpCarrierNumber, productCode=tcpProductCode,
-                                seconds=tcpSeconds, minutes=tcpMinutes, hours=tcpHours, days=tcpDays, months=tcpMonths,
-                                years=tcpYears)
-                    # print("sending message in gen0")
-                    # print(block[orderNumber][tcpCarrierNumber][block[tcpOrderNumber][tcpCarrierNumber].index('') - 1])
-                    sendMessage()
-                    time.sleep(1)
-                    pub.publish(message)
-                    # print(orderNumber, blockNumber)
-                    blockNumber = block[tcpOrderNumber][tcpCarrierNumber].index('')
-                    newGenesis = 3
-                    dataFollowing = 0
-                    stationHistory[int(tcpStationName)] = tcpStationName
+                if stationHistory[int(tcpCarrierNumber)] != ['','1','2','3','4','5','6']:
+
+                    if tcpStationName not in stationHistory[int(tcpCarrierNumber)]:
+                        print("1")
+                        blockUpdate(blockNumber=block[tcpOrderNumber][tcpCarrierNumber].index(''), orderNumber=tcpOrderNumber,
+                                    station=tcpStationName, carrierID=tcpCarrierNumber, productCode=tcpProductCode,
+                                    seconds=tcpSeconds, minutes=tcpMinutes, hours=tcpHours, days=tcpDays, months=tcpMonths,
+                                    years=tcpYears)
+                        # print("sending message in gen0")
+                        # print(block[orderNumber][tcpCarrierNumber][block[tcpOrderNumber][tcpCarrierNumber].index('') - 1])
+                        sendMessage()
+                        time.sleep(1)
+                        pub.publish(message)
+                        # print(orderNumber, blockNumber)
+                        blockNumber = block[tcpOrderNumber][tcpCarrierNumber].index('')
+                        newGenesis = 3
+                        dataFollowing = 0
+                        stationHistory[int(tcpCarrierNumber)][int(tcpStationName)] = tcpStationName
+                        print(stationHistory)
+
+                if stationHistory[int(tcpCarrierNumber)] == ['', '1', '2', '3', '4', '5', '6']:
+                    print("2")
+                    print(tcpStationName)
+                    if tcpStationName == '2': #means the product is finished
+                        block[tcpOrderNumber][tcpCarrierNumber] = [''] * Range
+                        SCarrierNumber[tcpOrderNumber][tcpCarrierNumber] = [''] * Range
+                        stationHistory[int(tcpCarrierNumber)] = [''] * 7
+                        print("Carrier ready for next product")
 
         rate.sleep()
 
