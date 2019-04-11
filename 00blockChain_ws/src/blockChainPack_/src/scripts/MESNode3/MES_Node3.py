@@ -79,7 +79,7 @@ blockString = ''
 
 nodeHacked = ''
 stationHistory = [['' for _ in range(4)] for _ in range(5)]
-REcounter = 0
+REcounter = [0] * Range
 
 # TCP SERVER STUFF
 tcpStationName = 0
@@ -345,7 +345,7 @@ def callbackFinish(data):
     # Comp = True
     # fCarrier = data.carrierID
     # fOrder = data.order
-    REcounter = data.counter
+    # REcounter = data.counter
 
 
 
@@ -353,6 +353,7 @@ def callback(data):
     global runYet
     global counter1
     global nodeName
+    global Range
 
     global SblockTimeStamp
     global SblockTrans
@@ -385,12 +386,6 @@ def callback(data):
     SCarrierNumber[data.orderNumber][data.carrierID] = 1
 
     SblockNumber = data.blockNumber
-
-    if data.station != 'Start production':
-        stationHistory[int(data.carrierID)][int(data.station)] = str(data.station)
-
-    if data.station == 'Start production':
-        stationHistory[int(data.carrierID)][0] = str(data.station)
 
 
     # block[orderNumber][blockNumber] = blockChain(
@@ -442,6 +437,25 @@ def callback(data):
         f.write(str(data_to_print))
         f.write("\n-------------------------------\n")
         f.close()
+
+
+    if data.station != 'Start production':
+        stationHistory[int(data.carrierID)][int(data.station)] = str(data.station)
+
+    if data.station == 'Start production':
+        stationHistory[int(data.carrierID)][0] = str(data.station)
+
+    if stationHistory[int(data.carrierID)] == ['Start production', '1', '2', '3']:
+        os.rename(
+                "/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + "/Product" + str(tcpOrderNumber + 1264) + "C:" + str(
+                tcpCarrierNumber) + ".txt", "/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + "/Product" + str(tcpOrderNumber + 1264) + "C:" + str(
+            tcpCarrierNumber) + "Comp" + str(REcounter[int(data.carrierID)]) + ".txt")
+        block[tcpOrderNumber][tcpCarrierNumber] = [''] * Range
+        SCarrierNumber[tcpOrderNumber][tcpCarrierNumber] = [''] * Range
+        stationHistory[int(tcpCarrierNumber)] = [''] * 4
+        runYet[tcpOrderNumber][tcpCarrierNumber] = ''
+        REcounter[int(data.carrierID)] = REcounter[int(data.carrierID)] + 1
+        print("Carrier ready for next product")
 
 
 def authentication():
