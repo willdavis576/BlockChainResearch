@@ -3,11 +3,11 @@
   (:export
    "<BLOCKDETAIL>"
    "BLOCKDETAIL"
+   "<FINISH>"
+   "FINISH"
    "<LASTHASH>"
    "LASTHASH"
    "<REWRITENODE>"
    "REWRITENODE"
-   "<STRINGMULTIARRAY>"
-   "STRINGMULTIARRAY"
   ))
 

@@ -5,9 +5,14 @@ from collections import Counter
 from blockChainPack_.msg import blockDetail
 from blockChainPack_.msg import lastHash
 from blockChainPack_.msg import rewriteNode
+from blockChainPack_.msg import finish
 
 # station, orderNumber, productCode, seconds, minutes, hours, days, months, years
 # productNubmer should now orderNumber
+
+nodeName = "NODE1"  ############### THIS IS WHERE YOU SPECIFY A NODE'S NAME #######################
+port = 4500
+lNodeToRewrite = "NODE2"
 
 Range = 200
 cRange = 5
@@ -25,6 +30,10 @@ print("24%")
 buildBlock = 0
 oldData = ''
 emit = False
+Comp = False
+fCarrier = 0
+fOrder = 0
+dCounter = 0
 
 serialNumberNum = 0
 serialNumberStr = 'PRODUCT'
@@ -67,9 +76,9 @@ print("Loading network..")
 Sblock = ''
 authOrderNumber = 0
 blockString = ''
-nodeName = "NODE1"  ############### THIS IS WHERE YOU SPECIFY A NODE'S NAME #######################
+
 nodeHacked = ''
-stationHistory = [['' for _ in range(7)] for _ in range(5)]
+stationHistory = [['' for _ in range(4)] for _ in range(5)]
 REcounter = 0
 
 # TCP SERVER STUFF
@@ -202,8 +211,15 @@ def mainProg():
     global SblockNumber
     global Range
     global REcounter
+    global nodeName
+    global Comp
+    global fCarrier
+    global fOrder
+    global dCounter
+
 
     pub = rospy.Publisher('publishingBlockStream', blockDetail, queue_size=100)
+    pub2 = rospy.Publisher('ProductFinished', finish, queue_size=100)
     while not rospy.is_shutdown():
         if dataFollowing == 1:
             # Setup for genesis block
@@ -256,7 +272,7 @@ def mainProg():
 
             if newGenesis == 0:
                 time.sleep(1)
-                if stationHistory[int(tcpCarrierNumber)] != ['', '1', '2', '3', '4', '5', '6']:
+                if stationHistory[int(tcpCarrierNumber)] != ['', '1', '2', '3']:
 
                     if tcpStationName not in stationHistory[int(tcpCarrierNumber)]:
                         print("1")
@@ -274,25 +290,37 @@ def mainProg():
                         newGenesis = 3
                         dataFollowing = 0
                         stationHistory[int(tcpCarrierNumber)][int(tcpStationName)] = tcpStationName
-                        print(stationHistory)
+                        # print(stationHistory)
 
-                if stationHistory[int(tcpCarrierNumber)] == ['', '1', '2', '3', '4', '5', '6']:
-                    print("2")
-                    print(tcpStationName)
-                    if tcpStationName == '2':  # means the product is finished
-                        block[tcpOrderNumber][tcpCarrierNumber] = [''] * Range
-                        SCarrierNumber[tcpOrderNumber][tcpCarrierNumber] = [''] * Range
-                        stationHistory[int(tcpCarrierNumber)] = [''] * 7
 
-                        os.rename(
-                            "/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_NODE1/Product" + str(tcpOrderNumber + 1264) + "C:" + str(
-                            tcpCarrierNumber) + ".txt", "/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_NODE1/Product" + str(tcpOrderNumber + 1264) + "C:" + str(
-                        tcpCarrierNumber) + "Comp" + str(REcounter) + ".txt")
-                        print("Carrier ready for next product")
+                if stationHistory[int(tcpCarrierNumber)] == ['Start production', '1', '2', '3']:
 
-                        REcounter = REcounter + 1
+                    message4 = finish()
+                    message4.counter = REcounter
+                #     message4.carrierID = int(tcpCarrierNumber)
+                #     message4.order = int(tcpOrderNumber)
+                    pub2.publish(message4)
 
-                        rate.sleep()
+                    time.sleep(0.2)
+
+                    os.rename(
+                        "/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + "/Product" + str(tcpOrderNumber + 1264) + "C:" + str(
+                        tcpCarrierNumber) + ".txt", "/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + "/Product" + str(tcpOrderNumber + 1264) + "C:" + str(
+                    tcpCarrierNumber) + "Comp" + str(REcounter) + ".txt")
+                    print("Carrier ready for next product")
+
+                    REcounter = REcounter + 1
+
+                    # print("2")
+                    # print(tcpStationName)
+                    # if Comp == True:  # means the product is finished
+                    block[tcpOrderNumber][tcpCarrierNumber] = [''] * Range
+                    SCarrierNumber[tcpOrderNumber][tcpCarrierNumber] = [''] * Range
+                    stationHistory[int(tcpCarrierNumber)] = [''] * 4
+                    runYet[tcpOrderNumber][tcpCarrierNumber] = ''
+
+                    # Comp = False
+                    rate.sleep()
 
                         # if the order number doesn't exist in the array then create genesis block. If it does, then continue where the system left off.
 
@@ -302,9 +330,29 @@ def listener():
     rospy.spin()
 
 
+def finishListener():
+    rospy.Subscriber('ProductFinished', finish, callbackFinish)
+    rospy.spin()
+
+def callbackFinish(data):
+    global Comp
+    global stationHistory
+    global fCarrier
+    global fOrder
+    global dCounter
+    global REcounter
+
+    # Comp = True
+    # fCarrier = data.carrierID
+    # fOrder = data.order
+    REcounter = data.counter
+
+
+
 def callback(data):
     global runYet
     global counter1
+    global nodeName
 
     global SblockTimeStamp
     global SblockTrans
@@ -318,6 +366,9 @@ def callback(data):
 
     global node
     global emit
+
+    global stationHistory
+    global Comp
 
     emit = True
 
@@ -334,6 +385,13 @@ def callback(data):
     SCarrierNumber[data.orderNumber][data.carrierID] = 1
 
     SblockNumber = data.blockNumber
+
+    if data.station != 'Start production':
+        stationHistory[int(data.carrierID)][int(data.station)] = str(data.station)
+
+    if data.station == 'Start production':
+        stationHistory[int(data.carrierID)][0] = str(data.station)
+
 
     # block[orderNumber][blockNumber] = blockChain(
     #     previousHash=SblockHash[tcpOrderNumber][block[orderNumber].index('') - 1], station=station,
@@ -371,14 +429,14 @@ def callback(data):
                                                                                      data.timeStamp[20])
 
     if runYet[data.orderNumber][data.carrierID] == '':
-        f = open("/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_NODE1/Product" + str(
+        f = open("/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + "/Product" + str(
             data.orderNumber + 1264) + "C:" + str(
             data.carrierID) + ".txt", "w")
         f.close()
         runYet[data.orderNumber][data.carrierID] = "1"
 
     if runYet[data.orderNumber][data.carrierID] == "1":
-        f = open("/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_NODE1/Product" + str(
+        f = open("/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + "/Product" + str(
             data.orderNumber + 1264) + "C:" + str(
             data.carrierID) + ".txt", "a")
         f.write(str(data_to_print))
@@ -419,18 +477,23 @@ def authTrigger():
     global mostCommonHash
     global nodeName
     global nodeHacked
+    global lNodeToRewrite
 
     while not rospy.is_shutdown():
-        time.sleep(10)
+        time.sleep(5)
 
         # print(mostCommonHash.most_common(3))
         try:
             nodeHacked = nodeList[(node.index(str(mostCommonHash.most_common(3)[2][0])))]
-            print(nodeHacked + " has been hacked")
-            nodeToRewrite = nodeList[(node.index(str(mostCommonHash.most_common(3)[2][0])))]
+            oldNodeHacked = nodeHacked
+            time.sleep(1)
+            nodeHacked = nodeList[(node.index(str(mostCommonHash.most_common(3)[2][0])))]
+            if oldNodeHacked == nodeHacked :
+                print(nodeHacked + " has been hacked")
+                nodeToRewrite = nodeList[(node.index(str(mostCommonHash.most_common(3)[2][0])))]
 
-            if nodeList[(node.index(str(mostCommonHash.most_common(3)[2][0])))] != nodeName:
-                rewriteNodes()
+                if nodeToRewrite == lNodeToRewrite:
+                    rewriteNodes()
 
         except:
             print("all fine")
@@ -446,6 +509,7 @@ def emitter():
     global SblockHash
     global hashingArray
     global emit
+    global nodeName
 
     pub = rospy.Publisher('Last_Hash', lastHash, queue_size=100)
 
@@ -458,7 +522,7 @@ def emitter():
 
             message2 = lastHash()
             message2.hash = hashingArray
-            message2.nodeName = 'NODE1'
+            message2.nodeName = nodeName
             pub.publish(message2)
             hashingArray = ''
             time.sleep(1)
@@ -524,17 +588,17 @@ def callbackRecData(data):
                                                                         days=dDay,
                                                                         months=dMonth,
                                                                         years=dYear)
-            print("1.1")
+            # print("1.1")
 
             SblockHash[dOrder][dCarrier][dBlock] = block[dOrder][dCarrier][dBlock].getBlockHash()
-            print("1.2")
+            # print("1.2")
 
             data_to_print = "Time Stamp for Block: {0}\nStation: {1}\nOrder Number: {2}\nCarrierID: {3}\nProduct Code: {4}\nBlock Hash: {5}\nPrevious Hash: ".format(
                 dataSplit[3], dStation, int(dOrder) + 1264, dCarrier, int(dProductCode), SblockHash[dOrder][dCarrier][dBlock])
             # print(block[dOrder][dCarrier][dBlock].getBlockHash())
 
         if dStation != "Start production":
-            print("2")
+            # print("2")
             # print(data.SblockTimeStamp)
             block[int(dOrder)][int(dCarrier)][int(dBlock)] = blockChain(
                 previousHash=block[int(dOrder)][int(dCarrier)][int(dBlock) - 1].getBlockHash(),
@@ -548,38 +612,38 @@ def callbackRecData(data):
                 days=dDay,
                 months=dMonth,
                 years=dYear)
-            print("2.1")
+            # print("2.1")
 
             SblockHash[dOrder][dCarrier][dBlock] = block[dOrder][dCarrier][dBlock].getBlockHash()
             # print(block[dOrder][dCarrier][dBlock].getBlockHash())
 
-            print("2.2")
+            # print("2.2")
             data_to_print = "Time Stamp for Block: {0}\nStation: {1}\nOrder Number: {2}\nCarrierID: {3}\nProduct Code: {4}\nBlock Hash: {5}\nPrevious Hash: {6}".format(
                 dataSplit[3], dStation, int(dOrder) + 1264, dCarrier, int(dProductCode), SblockHash[dOrder][dCarrier][dBlock],
                 block[int(dOrder)][int(dCarrier)][int(dBlock) - 1].getBlockHash())
 
-        print("3")
+        # print("3")
 
-        print("3.1")
+        # print("3.1")
 
         if runYet[int(dOrder)][int(dCarrier)] == '':
-            f = open("/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_NODE1/Product" + str(
+            f = open("/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + "/Product" + str(
                 int(dOrder) + 1264) + "C:" + str(
                 int(dCarrier)) + ".txt", "w")
             f.close()
             runYet[int(dOrder)][int(dCarrier)] = "1"
 
-        print("3.2")
+        # print("3.2")
 
         if runYet[int(dOrder)][int(dCarrier)] == "1":
-            f = open("/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_NODE1/Product" + str(
+            f = open("/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + "/Product" + str(
                 int(dOrder) + 1264) + "C:" + str(
                 int(dCarrier)) + ".txt", "a")
             f.write(str(data_to_print))
             f.write("\n-------------------------------\n")
             f.close()
 
-        print("3.3")
+        # print("3.3")
 
         if data.done == 0:
             hashingArray = ''
@@ -589,9 +653,9 @@ def callbackRecData(data):
                     for z in range(len(SblockHash[i][j])):
                         hashingArray = hashlib.sha256(hashingArray + SblockHash[i][j][z]).hexdigest()
 
-            print("2.3")
+            # print("2.3")
 
-            print(hashingArray)
+            # print(hashingArray)
             print("got rewritten")
 
     # except:
@@ -655,13 +719,14 @@ def manual():
     global tcpYears
     global dataFollowing
     global oldData
+    global port
 
     # Create a TCP/IP socket
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     # Then bind() is used to associate the socket with the server address. In this case, the address is localhost, referring to the current server, and the port number is 10000.
 
     # Bind the socket to the port
-    server_address = ('127.0.0.1', 4500)
+    server_address = ('127.0.0.1', port)
     print sys.stderr, 'starting up on %s port %s' % server_address
     sock.bind(server_address)
     # Calling listen() puts the socket into server mode, and accept() waits for an incoming connection.
@@ -738,6 +803,7 @@ if __name__ == '__main__':
         p5 = threading.Thread(target=authTrigger, args=())
         p6 = threading.Thread(target=recNewData, args=())
         p7 = threading.Thread(target=manual, args=())
+        p8 = threading.Thread(target=finishListener, args=())
 
         p1.daemon = True
         p2.daemon = True
@@ -746,6 +812,7 @@ if __name__ == '__main__':
         p5.daemon = True
         p6.daemon = True
         p7.daemon = True
+        p8.daemon = True
 
         p1.start()
         p2.start()
@@ -754,6 +821,7 @@ if __name__ == '__main__':
         p5.start()
         p6.start()
         p7.start()
+        p8.start()
 
         p1.join()
         p2.join()
@@ -762,6 +830,7 @@ if __name__ == '__main__':
         p5.join()
         p6.join()
         p7.join()
+        p8.join()
 
 # each stage of the production line needs to log:
 
@@ -838,6 +907,7 @@ if __name__ == '__main__':
 #             recorded a second time.
 #           - Find out what the last station is in the production line and then wipe the blockchain for that specific
 #             carrier. Extend the log file's name to have completed at the end of it. Set the next product going.
+#               - update rewrite function for SblockTrans and stationHistory
 #       - QR Codes on casings
 #           - update blockchain size
 #       - Create RFID tags that can be written to when the product is completed.

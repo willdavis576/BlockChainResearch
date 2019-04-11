@@ -53,7 +53,7 @@ find_package(catkin REQUIRED COMPONENTS
    blockDetail.msg
    lastHash.msg
    rewriteNode.msg
-   stringMultiarray.msg
+   finish.msg
 #   Message2.msg
 )
 
