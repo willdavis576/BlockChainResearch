@@ -258,7 +258,7 @@ def mainProg():
                 print(block[orderNumber][tcpCarrierNumber][
                     block[tcpOrderNumber][tcpCarrierNumber].index('') - 1].getBlockHash())
 
-                time.sleep(1)
+                time.sleep(0.1)
                 # print("sending message in gen1")
                 sendMessage()
                 pub.publish(message)
@@ -271,25 +271,24 @@ def mainProg():
                 newGenesis = 0
 
             if newGenesis == 0:
-                # time.sleep(1)
-                # if stationHistory[int(tcpCarrierNumber)] != ['', '1', '2', '3']:
-                #
-                #     if tcpStationName not in stationHistory[int(tcpCarrierNumber)]:
-                print("1")
-                blockUpdate(blockNumber=block[tcpOrderNumber][tcpCarrierNumber].index(''), orderNumber=tcpOrderNumber,
-                            station=tcpStationName, carrierID=tcpCarrierNumber, productCode=tcpProductCode,
-                            seconds=tcpSeconds, minutes=tcpMinutes, hours=tcpHours, days=tcpDays, months=tcpMonths,
-                            years=tcpYears)
-                # print("sending message in gen0")
-                # print(block[orderNumber][tcpCarrierNumber][block[tcpOrderNumber][tcpCarrierNumber].index('') - 1])
-                sendMessage()
-                time.sleep(1)
-                pub.publish(message)
-                # print(orderNumber, blockNumber)
-                blockNumber = block[tcpOrderNumber][tcpCarrierNumber].index('')
-                newGenesis = 3
-                dataFollowing = 0
-                stationHistory[int(tcpCarrierNumber)][int(tcpStationName)] = tcpStationName
+                time.sleep(0.1)
+
+                if tcpStationName not in stationHistory[int(tcpCarrierNumber)]:
+                    print("1")
+                    blockUpdate(blockNumber=block[tcpOrderNumber][tcpCarrierNumber].index(''), orderNumber=tcpOrderNumber,
+                                station=tcpStationName, carrierID=tcpCarrierNumber, productCode=tcpProductCode,
+                                seconds=tcpSeconds, minutes=tcpMinutes, hours=tcpHours, days=tcpDays, months=tcpMonths,
+                                years=tcpYears)
+                    # print("sending message in gen0")
+                    # print(block[orderNumber][tcpCarrierNumber][block[tcpOrderNumber][tcpCarrierNumber].index('') - 1])
+                    sendMessage()
+                    time.sleep(0.1)
+                    pub.publish(message)
+                    # print(orderNumber, blockNumber)
+                    blockNumber = block[tcpOrderNumber][tcpCarrierNumber].index('')
+                    newGenesis = 3
+                    dataFollowing = 0
+                # stationHistory[int(tcpCarrierNumber)][int(tcpStationName)] = tcpStationName
                 # print(stationHistory)
 
 
@@ -320,7 +319,7 @@ def mainProg():
                 #     runYet[tcpOrderNumber][tcpCarrierNumber] = ''
 
                     # Comp = False
-                rate.sleep()
+    rate.sleep()
 
                         # if the order number doesn't exist in the array then create genesis block. If it does, then continue where the system left off.
 
@@ -386,7 +385,8 @@ def callback(data):
     SCarrierNumber[data.orderNumber][data.carrierID] = 1
 
     SblockNumber = data.blockNumber
-
+    print("last hash")
+    print(data.previousHash)
 
     # block[orderNumber][blockNumber] = blockChain(
     #     previousHash=SblockHash[tcpOrderNumber][block[orderNumber].index('') - 1], station=station,
@@ -817,7 +817,7 @@ if __name__ == '__main__':
         p5 = threading.Thread(target=authTrigger, args=())
         p6 = threading.Thread(target=recNewData, args=())
         p7 = threading.Thread(target=manual, args=())
-        p8 = threading.Thread(target=finishListener, args=())
+        # p8 = threading.Thread(target=finishListener, args=())
 
         p1.daemon = True
         p2.daemon = True
@@ -826,7 +826,7 @@ if __name__ == '__main__':
         p5.daemon = True
         p6.daemon = True
         p7.daemon = True
-        p8.daemon = True
+        # p8.daemon = True
 
         p1.start()
         p2.start()
@@ -835,7 +835,7 @@ if __name__ == '__main__':
         p5.start()
         p6.start()
         p7.start()
-        p8.start()
+        # p8.start()
 
         p1.join()
         p2.join()
@@ -844,7 +844,7 @@ if __name__ == '__main__':
         p5.join()
         p6.join()
         p7.join()
-        p8.join()
+        # p8.join()
 
 # each stage of the production line needs to log:
 
