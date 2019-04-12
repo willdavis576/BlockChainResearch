@@ -370,7 +370,7 @@ def callback(data):
     global stationHistory
     global Comp
 
-    emit = True
+
 
     orderNumber1 = data.orderNumber
     data_to_print = "Time Stamp for Block: {0}\nStation: {1}\nOrder Number: {2}\nCarrierID: {3}\nProduct Code: {4}\nBlock Hash: {5}\nPrevious Hash: {6}".format(
@@ -457,6 +457,7 @@ def callback(data):
         REcounter[int(data.carrierID)] = REcounter[int(data.carrierID)] + 1
         print("Carrier ready for next product")
 
+    emit = True
 
 def authentication():
     rospy.Subscriber('Last_Hash', lastHash, callbackAuth)
@@ -507,6 +508,7 @@ def authTrigger():
                 nodeToRewrite = nodeList[(node.index(str(mostCommonHash.most_common(3)[2][0])))]
 
                 if nodeToRewrite == lNodeToRewrite:
+                    print("Gonna rewrite this " + lNodeToRewrite)
                     rewriteNodes()
 
         except:
@@ -560,7 +562,7 @@ def callbackRecData(data):
 
     # 32,3,1,18:54:01 - 19/03/2019,1,211
     # 32,3,0,09:57:40 - 06/04/2019,Start production,211
-    print("rewriting")
+
     dataSplit = data.SblockTimeStamp.split(",")
 
     dOrder = int(dataSplit[0])
@@ -577,6 +579,7 @@ def callbackRecData(data):
 
     try:
         if data.done == 1 and Rdone == 0 and nodeHacked == nodeName:
+            print("rewriting")
             SblockHash = [[['' for _ in range(Range)] for _ in range(cRange)] for _ in range(Range)]
             block = [[['' for _ in range(Range)] for _ in range(cRange)] for _ in range(Range)]
             Rdone = 1
@@ -715,6 +718,7 @@ def rewriteNodes():
     message3.done = 0
     pub.publish(message3)
     print("finished")
+    rate.sleep()
 
 
 ############################### TCP Server ###############################

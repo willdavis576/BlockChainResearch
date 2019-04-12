@@ -507,6 +507,7 @@ def authTrigger():
                 nodeToRewrite = nodeList[(node.index(str(mostCommonHash.most_common(3)[2][0])))]
 
                 if nodeToRewrite == lNodeToRewrite:
+                    print("Gonna rewrite this " + lNodeToRewrite)
                     rewriteNodes()
 
         except:
@@ -560,7 +561,7 @@ def callbackRecData(data):
 
     # 32,3,1,18:54:01 - 19/03/2019,1,211
     # 32,3,0,09:57:40 - 06/04/2019,Start production,211
-    print("rewriting")
+
     dataSplit = data.SblockTimeStamp.split(",")
 
     dOrder = int(dataSplit[0])
@@ -577,6 +578,7 @@ def callbackRecData(data):
 
     try:
         if data.done == 1 and Rdone == 0 and nodeHacked == nodeName:
+            print("rewriting")
             SblockHash = [[['' for _ in range(Range)] for _ in range(cRange)] for _ in range(Range)]
             block = [[['' for _ in range(Range)] for _ in range(cRange)] for _ in range(Range)]
             Rdone = 1
@@ -586,10 +588,10 @@ def callbackRecData(data):
         print("init wipe didn't work")
 
     # try:
-    if nodeHacked == nodeName:
+    if nodeHacked == nodeName and data.done == 1:
 
         if dStation == "Start production":
-            print("1")
+            # print("1")
             # print(data.SblockTimeStamp)
             block[int(dOrder)][int(dCarrier)][int(dBlock)] = blockChain(previousHash='',
                                                                         station=dStation,
@@ -661,6 +663,7 @@ def callbackRecData(data):
 
         if data.done == 0:
             hashingArray = ''
+            time.sleep(1)
             Rdone = 0
             for i in range(len(SblockHash)):
                 for j in range(len(SblockHash[i])):
@@ -669,7 +672,7 @@ def callbackRecData(data):
 
             # print("2.3")
 
-            # print(hashingArray)
+            print(hashingArray)
             print("got rewritten")
 
     # except:
