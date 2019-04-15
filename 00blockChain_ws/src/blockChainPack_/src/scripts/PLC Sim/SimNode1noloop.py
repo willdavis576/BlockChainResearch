@@ -5,6 +5,8 @@ send = ''
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.connect(('127.0.0.1', 4500))
 
+var = ''
+
 def getData():
 
     dateTime = str(datetime.now())
@@ -17,7 +19,7 @@ def getData():
     product = 211
     station = 1
     carrier = 2
-    order = 1303
+    order = 1304
 
     send = str(station) + ',' + str(order) + ',' + str(carrier) + ',' + str(product) + ',' + str(second) + ',' + str(
         minute) + ',' + str(hour) + ',' + str(day) + ',' + str(month) + ',' + str(year)
@@ -26,12 +28,29 @@ def getData():
 
 
 def main():
+    global var
+    while (True):
+        if var == '':
+            s.sendall('                                ')
 
-    s.sendall(getData())
-    print(getData())
-    s.sendall('                                ')
 
+def user():
+    global var
+    var = raw_input("now?")
+
+    while (True):
+        if var == "y":
+            s.sendall(getData())
+            s.sendall('                                ')
+            var == ''
 
 
 if __name__ == '__main__':
-    main()
+    p1 = threading.Thread(target=main, args=())
+    p2 = threading.Thread(target=user, args=())
+
+    p1.start()
+    p2.start()
+
+    p1.join()
+    p2.join()

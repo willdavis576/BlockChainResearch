@@ -273,6 +273,15 @@ def mainProg():
             if newGenesis == 0:
                 time.sleep(0.1)
 
+                if tcpStationName in stationHistory[int(tcpCarrierNumber)]:
+                    print("is in")
+                    if tcpStationName == '2':
+                        print("is " + tcpStationName)
+                        sendMessage()
+                        message.station = '2'
+                        time.sleep(0.1)
+                        pub.publish(message)
+
                 if tcpStationName not in stationHistory[int(tcpCarrierNumber)]:
                     print("1")
                     blockUpdate(blockNumber=block[tcpOrderNumber][tcpCarrierNumber].index(''), orderNumber=tcpOrderNumber,
@@ -370,86 +379,89 @@ def callback(data):
     global stationHistory
     global Comp
 
-    orderNumber1 = data.orderNumber
-    data_to_print = "Time Stamp for Block: {0}\nStation: {1}\nOrder Number: {2}\nCarrierID: {3}\nProduct Code: {4}\nBlock Hash: {5}\nPrevious Hash: {6}".format(
-        data.timeStamp, data.station, data.orderNumber + 1264, data.carrierID, data.productCode, data.blockHash,
-        data.previousHash)
-    # print(SblockHash[orderNumber][0] == '')
-    SblockTimeStamp[data.orderNumber][data.carrierID][data.blockNumber] = data.timeStamp
-    SblockTrans[data.orderNumber][data.carrierID][data.blockNumber] = data.station
-    SblockProductCode[data.orderNumber][data.carrierID][data.blockNumber] = data.productCode
-    SblockHash[data.orderNumber][data.carrierID][data.blockNumber] = data.blockHash
-    SblockPreviousHash[data.orderNumber][data.carrierID][data.blockNumber] = data.previousHash
-    SCarrierNumber[data.orderNumber][data.carrierID] = 1
+    if data.station in stationHistory[int(data.carrierID)]:
+        print("call back 1 " + data.station)
+        if data.station == '2':
+            print("call back 2")
+            if stationHistory[int(data.carrierID)] == ['Start production', '1', '2', '3']:
+                print("call back 3")
 
-    SblockNumber = data.blockNumber
-    print("last hash")
-    print(data.previousHash)
+                os.rename(
+                    "/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + "/Product" + str(
+                        tcpOrderNumber + 1264) + "C:" + str(
+                        tcpCarrierNumber) + ".txt",
+                    "/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + "/Product" + str(
+                        tcpOrderNumber + 1264) + "C:" + str(
+                        tcpCarrierNumber) + "Comp" + str(REcounter[int(data.carrierID)]) + ".txt")
+                block[tcpOrderNumber][tcpCarrierNumber] = [''] * Range
+                SCarrierNumber[tcpOrderNumber][tcpCarrierNumber] = [''] * Range
+                stationHistory[int(tcpCarrierNumber)] = [''] * 4
+                runYet[tcpOrderNumber][tcpCarrierNumber] = ''
+                REcounter[int(data.carrierID)] = REcounter[int(data.carrierID)] + 1
+                print("Carrier ready for next product")
 
-    # block[orderNumber][blockNumber] = blockChain(
-    #     previousHash=SblockHash[tcpOrderNumber][block[orderNumber].index('') - 1], station=station,
-    #     productCode=productCode, orderNumber=orderNumber, seconds=seconds, minutes=minutes,
-    #     hours=hours, days=days, months=months, years=years)
+    if data.station not in stationHistory[int(data.carrierID)]:
 
-    # hours + ':' + minutes + ':' + seconds + ' - ' + days + '/' + months + '/' + years
+        orderNumber1 = data.orderNumber
+        data_to_print = "Time Stamp for Block: {0}\nStation: {1}\nOrder Number: {2}\nCarrierID: {3}\nProduct Code: {4}\nBlock Hash: {5}\nPrevious Hash: {6}".format(
+            data.timeStamp, data.station, data.orderNumber + 1264, data.carrierID, data.productCode, data.blockHash,
+            data.previousHash)
+        # print(SblockHash[orderNumber][0] == '')
+        SblockTimeStamp[data.orderNumber][data.carrierID][data.blockNumber] = data.timeStamp
+        SblockTrans[data.orderNumber][data.carrierID][data.blockNumber] = data.station
+        SblockProductCode[data.orderNumber][data.carrierID][data.blockNumber] = data.productCode
+        SblockHash[data.orderNumber][data.carrierID][data.blockNumber] = data.blockHash
+        SblockPreviousHash[data.orderNumber][data.carrierID][data.blockNumber] = data.previousHash
+        SCarrierNumber[data.orderNumber][data.carrierID] = 1
 
-    # 18:54:01 - 19 / 03 / 2019
-    # print(block[data.orderNumber][data.carrierID][data.blockNumber])
-    # print(data.timeStamp)
-    # print(data.timeStamp[6] + data.timeStamp[7])
-    # print(data.timeStamp[3] + data.timeStamp[4])
-    # print(data.timeStamp[0] + data.timeStamp[1])
-    # print(data.timeStamp[11] + data.timeStamp[12])
-    # print(data.timeStamp[14] + data.timeStamp[15])
-    # print(data.timeStamp[17] + data.timeStamp[18] + data.timeStamp[19] + data.timeStamp[20])
-    # print(data_to_print)
-    # print("blockNumber: {0}".format(data.blockNumber))
-    # print("callback")
-    # print(block[data.orderNumber][data.carrierID][data.blockNumber])
-    if block[data.orderNumber][data.carrierID][data.blockNumber] == '':
-        block[data.orderNumber][data.carrierID][data.blockNumber] = blockChain(previousHash=data.previousHash,
-                                                                               station=data.station,
-                                                                               productCode=data.productCode,
-                                                                               orderNumber=data.orderNumber,
-                                                                               carrierID=data.carrierID,
-                                                                               seconds=data.timeStamp[6] + data.timeStamp[7],
-                                                                               minutes=data.timeStamp[3] + data.timeStamp[4],
-                                                                               hours=data.timeStamp[0] + data.timeStamp[1],
-                                                                               days=data.timeStamp[11] + data.timeStamp[12],
-                                                                               months=data.timeStamp[14] + data.timeStamp[15],
-                                                                               years=data.timeStamp[17] + data.timeStamp[18] +
-                                                                                     data.timeStamp[19] +
-                                                                                     data.timeStamp[20])
+        SblockNumber = data.blockNumber
+        print("last hash")
+        print(data.previousHash)
 
+        # block[orderNumber][blockNumber] = blockChain(
+        #     previousHash=SblockHash[tcpOrderNumber][block[orderNumber].index('') - 1], station=station,
+        #     productCode=productCode, orderNumber=orderNumber, seconds=seconds, minutes=minutes,
+        #     hours=hours, days=days, months=months, years=years)
 
+        # hours + ':' + minutes + ':' + seconds + ' - ' + days + '/' + months + '/' + years
 
-    if stationHistory[int(data.carrierID)] != ['Start production', '1', '2', '3']:
+        # 18:54:01 - 19 / 03 / 2019
+        # print(block[data.orderNumber][data.carrierID][data.blockNumber])
+        # print(data.timeStamp)
+        # print(data.timeStamp[6] + data.timeStamp[7])
+        # print(data.timeStamp[3] + data.timeStamp[4])
+        # print(data.timeStamp[0] + data.timeStamp[1])
+        # print(data.timeStamp[11] + data.timeStamp[12])
+        # print(data.timeStamp[14] + data.timeStamp[15])
+        # print(data.timeStamp[17] + data.timeStamp[18] + data.timeStamp[19] + data.timeStamp[20])
+        # print(data_to_print)
+        # print("blockNumber: {0}".format(data.blockNumber))
+        # print("callback")
+        # print(block[data.orderNumber][data.carrierID][data.blockNumber])
+        if block[data.orderNumber][data.carrierID][data.blockNumber] == '':
+            block[data.orderNumber][data.carrierID][data.blockNumber] = blockChain(previousHash=data.previousHash,
+                                                                                   station=data.station,
+                                                                                   productCode=data.productCode,
+                                                                                   orderNumber=data.orderNumber,
+                                                                                   carrierID=data.carrierID,
+                                                                                   seconds=data.timeStamp[6] + data.timeStamp[7],
+                                                                                   minutes=data.timeStamp[3] + data.timeStamp[4],
+                                                                                   hours=data.timeStamp[0] + data.timeStamp[1],
+                                                                                   days=data.timeStamp[11] + data.timeStamp[12],
+                                                                                   months=data.timeStamp[14] + data.timeStamp[15],
+                                                                                   years=data.timeStamp[17] + data.timeStamp[18] +
+                                                                                         data.timeStamp[19] +
+                                                                                         data.timeStamp[20])
 
-        if data.station != 'Start production':
-            stationHistory[int(data.carrierID)][int(data.station)] = str(data.station)
-
-        if data.station == 'Start production':
-            stationHistory[int(data.carrierID)][0] = str(data.station)
 
 
         if stationHistory[int(data.carrierID)] != ['Start production', '1', '2', '3']:
 
-            if runYet[data.orderNumber][data.carrierID] == '':
-                f = open("/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + "/Product" + str(
-                    data.orderNumber + 1264) + "C:" + str(
-                    data.carrierID) + ".txt", "w")
-                f.close()
-                runYet[data.orderNumber][data.carrierID] = "1"
+            if data.station != 'Start production':
+                stationHistory[int(data.carrierID)][int(data.station)] = str(data.station)
 
-            if runYet[data.orderNumber][data.carrierID] == "1":
-                f = open("/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + "/Product" + str(
-                    data.orderNumber + 1264) + "C:" + str(
-                    data.carrierID) + ".txt", "a")
-                f.write(str(data_to_print))
-                f.write("\n-------------------------------\n")
-                f.close()
-
-        if stationHistory[int(data.carrierID)] == ['Start production', '1', '2', '3']:
+            if data.station == 'Start production':
+                stationHistory[int(data.carrierID)][0] = str(data.station)
 
             if runYet[data.orderNumber][data.carrierID] == '':
                 f = open("/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + "/Product" + str(
@@ -466,18 +478,10 @@ def callback(data):
                 f.write("\n-------------------------------\n")
                 f.close()
 
-            os.rename(
-                    "/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + "/Product" + str(tcpOrderNumber + 1264) + "C:" + str(
-                    tcpCarrierNumber) + ".txt", "/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + "/Product" + str(tcpOrderNumber + 1264) + "C:" + str(
-                tcpCarrierNumber) + "Comp" + str(REcounter[int(data.carrierID)]) + ".txt")
-            block[tcpOrderNumber][tcpCarrierNumber] = [''] * Range
-            SCarrierNumber[tcpOrderNumber][tcpCarrierNumber] = [''] * Range
-            stationHistory[int(tcpCarrierNumber)] = [''] * 4
-            runYet[tcpOrderNumber][tcpCarrierNumber] = ''
-            REcounter[int(data.carrierID)] = REcounter[int(data.carrierID)] + 1
-            print("Carrier ready for next product")
 
-    emit = True
+
+
+        emit = True
 
 
 def authentication():
@@ -812,12 +816,12 @@ def manual():
                     if data == '                               ':
                         dataFollowing = 0
                     if data != '                                ':
-
                         # example: 1,1230, 211,48, 6,18,21, 3,2019
                         # print data
                         try:
                             # print(data)
                             if oldData != data:
+
                                 # print(data)
                                 tcpStationName = data[0]
                                 tcpOrderNumber = int(data[2] + data[3] + data[4] + data[5]) - 1264
