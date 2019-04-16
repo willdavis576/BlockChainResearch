@@ -508,7 +508,7 @@ def callback(data):
         wipe = False
 
 
-        emit = True
+    emit = True
 
 
 def authentication():
@@ -631,9 +631,11 @@ def callbackRecData(data):
     dStation = dataSplit[4]
     dProductCode = int(dataSplit[5])
 
+    print(data.SblockTimeStamp)
+
     try:
         if data.done == 1 and Rdone == 0 and nodeHacked == nodeName:
-            print("rewriting")
+            # print("rewriting")
             SblockHash = [[['' for _ in range(Range)] for _ in range(cRange)] for _ in range(Range)]
             block = [[['' for _ in range(Range)] for _ in range(cRange)] for _ in range(Range)]
             Rdone = 1
@@ -649,7 +651,7 @@ def callbackRecData(data):
 
         if dStation == "Start production":
             stationHistory[int(dCarrier)][0] = str(dStation)
-            print("1")
+            # print("1")
             # print(data.SblockTimeStamp)
             block[int(dOrder)][int(dCarrier)][int(dBlock)] = blockChain(previousHash='',
                                                                         station=dStation,
@@ -662,10 +664,10 @@ def callbackRecData(data):
                                                                         days=dDay,
                                                                         months=dMonth,
                                                                         years=dYear)
-            print("1.1")
+            # print("1.1")
 
             SblockHash[dOrder][dCarrier][dBlock] = block[dOrder][dCarrier][dBlock].getBlockHash()
-            print("1.2")
+            # print("1.2")
 
             data_to_print = "Time Stamp for Block: {0}\nStation: {1}\nOrder Number: {2}\nCarrierID: {3}\nProduct Code: {4}\nBlock Hash: {5}\nPrevious Hash: ".format(
                 dataSplit[3], dStation, int(dOrder) + 1264, dCarrier, int(dProductCode), SblockHash[dOrder][dCarrier][dBlock])
@@ -673,7 +675,7 @@ def callbackRecData(data):
 
         if dStation != "Start production":
             stationHistory[int(dCarrier)][int(dStation)] = str(dStation)
-            print("2")
+            # print("2")
             # print(data.SblockTimeStamp)
             block[int(dOrder)][int(dCarrier)][int(dBlock)] = blockChain(
                 previousHash=block[int(dOrder)][int(dCarrier)][int(dBlock) - 1].getBlockHash(),
@@ -687,19 +689,19 @@ def callbackRecData(data):
                 days=dDay,
                 months=dMonth,
                 years=dYear)
-            print("2.1")
+            # print("2.1")
 
             SblockHash[dOrder][dCarrier][dBlock] = block[dOrder][dCarrier][dBlock].getBlockHash()
             # print(block[dOrder][dCarrier][dBlock].getBlockHash())
 
-            print("2.2")
+            # print("2.2")
             data_to_print = "Time Stamp for Block: {0}\nStation: {1}\nOrder Number: {2}\nCarrierID: {3}\nProduct Code: {4}\nBlock Hash: {5}\nPrevious Hash: {6}".format(
                 dataSplit[3], dStation, int(dOrder) + 1264, dCarrier, int(dProductCode), SblockHash[dOrder][dCarrier][dBlock],
                 block[int(dOrder)][int(dCarrier)][int(dBlock) - 1].getBlockHash())
 
-        print("3")
-
-        print("3.1")
+        # print("3")
+        #
+        # print("3.1")
 
         if stationHistory[int(dCarrier)] == ['Start production', '1', '2', '3']:
             os.rename(
@@ -722,7 +724,7 @@ def callbackRecData(data):
             f.close()
             runYet[int(dOrder)][int(dCarrier)] = "1"
 
-        print("3.2")
+        # print("3.2")
 
         if runYet[int(dOrder)][int(dCarrier)] == "1":
             f = open("/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + "/Product" + str(
@@ -732,7 +734,7 @@ def callbackRecData(data):
             f.write("\n-------------------------------\n")
             f.close()
 
-        print("3.3")
+        # print("3.3")
 
         if data.done == 0:
             hashingArray = ''
@@ -743,7 +745,7 @@ def callbackRecData(data):
                     for z in range(len(SblockHash[i][j])):
                         hashingArray = hashlib.sha256(hashingArray + SblockHash[i][j][z]).hexdigest()
 
-            print("2.3")
+            # print("2.3")
 
             print(hashingArray)
             print("got rewritten")
@@ -891,8 +893,8 @@ if __name__ == '__main__':
         p2 = threading.Thread(target=mainProg, args=())
         p3 = threading.Thread(target=authentication, args=())
         p4 = threading.Thread(target=emitter, args=())
-        # p5 = threading.Thread(target=authTrigger, args=())
-        # p6 = threading.Thread(target=recNewData, args=())
+        p5 = threading.Thread(target=authTrigger, args=())
+        p6 = threading.Thread(target=recNewData, args=())
         p7 = threading.Thread(target=manual, args=())
         # p8 = threading.Thread(target=finishListener, args=())
 
@@ -900,8 +902,8 @@ if __name__ == '__main__':
         p2.daemon = True
         p3.daemon = True
         p4.daemon = True
-        # p5.daemon = True
-        # p6.daemon = True
+        p5.daemon = True
+        p6.daemon = True
         p7.daemon = True
         # p8.daemon = True
 
@@ -909,8 +911,8 @@ if __name__ == '__main__':
         p2.start()
         p3.start()
         p4.start()
-        # p5.start()
-        # p6.start()
+        p5.start()
+        p6.start()
         p7.start()
         # p8.start()
 
@@ -918,8 +920,8 @@ if __name__ == '__main__':
         p2.join()
         p3.join()
         p4.join()
-        # p5.join()
-        # p6.join()
+        p5.join()
+        p6.join()
         p7.join()
         # p8.join()
 
@@ -995,10 +997,10 @@ if __name__ == '__main__':
 # Next objectives:
 #       - Make it so you can have more than products in an order.
 #           - Make it so the carriages can only be recorded once at each station, so if it goes through again it won't be
-#             recorded a second time.
+#             recorded a second time. => DONE!
 #           - Find out what the last station is in the production line and then wipe the blockchain for that specific
-#             carrier. Extend the log file's name to have completed at the end of it. Set the next product going.
-#               - update rewrite function for SblockTrans and stationHistory
+#             carrier. Extend the log file's name to have completed at the end of it. Set the next product going. => DONE!
+#           - update rewrite function for SblockTrans and stationHistory
 #       - QR Codes on casings
 #           - update blockchain size
 #       - Create RFID tags that can be written to when the product is completed.

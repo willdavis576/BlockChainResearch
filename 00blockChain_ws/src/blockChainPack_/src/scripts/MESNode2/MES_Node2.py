@@ -1,5 +1,5 @@
 #! /usr/bin/python
-import hashlib, sys, random, rospy, threading, time, socket, os
+import hashlib, sys, random, rospy, threading, time, socket, os, glob
 from datetime import datetime
 from collections import Counter
 from blockChainPack_.msg import blockDetail
@@ -506,7 +506,7 @@ def callback(data):
         wipe = False
 
 
-        emit = True
+    emit = True
 
 
 def authentication():
@@ -776,17 +776,29 @@ def rewriteNodes():
 
     # TimeStamp
 
-    for i in range(Range):
-        for j in range(cRange):
-            for z in range(Range):
-                if SblockTimeStamp[i][j][z] != '':
-                    strData = str(i) + ',' + str(j) + ',' + str(z) + ',' + SblockTimeStamp[i][j][z] + ',' + str(
-                        SblockTrans[i][j][z]) + ',' + str(SblockProductCode[i][j][z])
-                    message3.SblockTimeStamp = strData
-                    message3.done = 1
-                    pub.publish(message3)
+    Files = [x[2] for x in os.walk("/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_NODE2")]
+    str(Files)[]
+
+
+    f = open("demofile.txt", "r")
+    for x in f:
+        print(x)
+
+
+        # for i in range(Range):
+    #     for j in range(cRange):
+    #         for z in range(Range):
+    #             if SblockTimeStamp[i][j][z] != '':
+    #                 strData = str(i) + ',' + str(j) + ',' + str(z) + ',' + SblockTimeStamp[i][j][z] + ',' + str(
+    #                     SblockTrans[i][j][z]) + ',' + str(SblockProductCode[i][j][z])
+    #                 message3.SblockTimeStamp = strData
+    #                 print(strData)
+    #                 message3.done = 1
+    #                 pub.publish(message3)
+    #                 rate.sleep()
 
     message3.done = 0
+    message3.SblockTimeStamp = 'hash' # hash of log file
     pub.publish(message3)
     print("finished")
 
@@ -889,8 +901,8 @@ if __name__ == '__main__':
         p2 = threading.Thread(target=mainProg, args=())
         p3 = threading.Thread(target=authentication, args=())
         p4 = threading.Thread(target=emitter, args=())
-        # p5 = threading.Thread(target=authTrigger, args=())
-        # p6 = threading.Thread(target=recNewData, args=())
+        p5 = threading.Thread(target=authTrigger, args=())
+        p6 = threading.Thread(target=recNewData, args=())
         p7 = threading.Thread(target=manual, args=())
         # p8 = threading.Thread(target=finishListener, args=())
 
@@ -898,8 +910,8 @@ if __name__ == '__main__':
         p2.daemon = True
         p3.daemon = True
         p4.daemon = True
-        # p5.daemon = True
-        # p6.daemon = True
+        p5.daemon = True
+        p6.daemon = True
         p7.daemon = True
         # p8.daemon = True
 
@@ -907,8 +919,8 @@ if __name__ == '__main__':
         p2.start()
         p3.start()
         p4.start()
-        # p5.start()
-        # p6.start()
+        p5.start()
+        p6.start()
         p7.start()
         # p8.start()
 
@@ -916,8 +928,8 @@ if __name__ == '__main__':
         p2.join()
         p3.join()
         p4.join()
-        # p5.join()
-        # p6.join()
+        p5.join()
+        p6.join()
         p7.join()
         # p8.join()
 
