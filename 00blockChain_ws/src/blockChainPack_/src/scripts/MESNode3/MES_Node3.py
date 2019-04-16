@@ -12,6 +12,7 @@ from blockChainPack_.msg import finish
 
 nodeName = "NODE3"  ############### THIS IS WHERE YOU SPECIFY A NODE'S NAME #######################
 port = 4502
+address = '172.21.4.152'
 lNodeToRewrite = "NODE1"
 
 Range = 200
@@ -217,10 +218,12 @@ def mainProg():
     global fOrder
     global dCounter
 
+    wipe = False
 
     pub = rospy.Publisher('publishingBlockStream', blockDetail, queue_size=100)
     pub2 = rospy.Publisher('ProductFinished', finish, queue_size=100)
     while not rospy.is_shutdown():
+        stationFinish = False
         if dataFollowing == 1:
             # Setup for genesis block
             orderNumber = tcpOrderNumber
@@ -274,12 +277,24 @@ def mainProg():
                 time.sleep(0.1)
 
                 if tcpStationName in stationHistory[int(tcpCarrierNumber)]:
+                    print("is in")
                     if tcpStationName == '2':
-                        sendMessage()
+                        print("is " + tcpStationName)
+                        message.blockNumber = 0
+                        message.orderNumber = 0
+                        message.carrierID = tcpCarrierNumber
+                        message.timeStamp = '00:00:00 - 00 / 00 / 0000' #18:54:01 - 19 / 03 / 2019
+                        message.station = tcpStationName
+                        message.productCode = 0
+                        message.blockHash = ''
+                        message.previousHash = ''
                         time.sleep(0.1)
                         pub.publish(message)
+                        dataFollowing = 0
+                        stationFinish = True
 
-                if tcpStationName not in stationHistory[int(tcpCarrierNumber)]:
+
+                if tcpStationName not in stationHistory[int(tcpCarrierNumber)] and stationFinish == False:
                     print("1")
                     blockUpdate(blockNumber=block[tcpOrderNumber][tcpCarrierNumber].index(''), orderNumber=tcpOrderNumber,
                                 station=tcpStationName, carrierID=tcpCarrierNumber, productCode=tcpProductCode,
@@ -294,6 +309,8 @@ def mainProg():
                     blockNumber = block[tcpOrderNumber][tcpCarrierNumber].index('')
                     newGenesis = 3
                     dataFollowing = 0
+
+
                 # stationHistory[int(tcpCarrierNumber)][int(tcpStationName)] = tcpStationName
                 # print(stationHistory)
 
@@ -376,20 +393,29 @@ def callback(data):
     global stationHistory
     global Comp
 
-    if data.station in stationHistory[int(data.carrierID)] and data.station == '2' and stationHistory[int(data.carrierID)] == ['Start production', '1', '2', '3']:
-            os.rename(
-                "/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + "/Product" + str(
-                    tcpOrderNumber + 1264) + "C:" + str(
-                    tcpCarrierNumber) + ".txt",
-                "/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + "/Product" + str(
-                    tcpOrderNumber + 1264) + "C:" + str(
-                    tcpCarrierNumber) + "Comp" + str(REcounter[int(data.carrierID)]) + ".txt")
-            block[tcpOrderNumber][tcpCarrierNumber] = [''] * Range
-            SCarrierNumber[tcpOrderNumber][tcpCarrierNumber] = [''] * Range
-            stationHistory[int(tcpCarrierNumber)] = [''] * 4
-            runYet[tcpOrderNumber][tcpCarrierNumber] = ''
-            REcounter[int(data.carrierID)] = REcounter[int(data.carrierID)] + 1
-            print("Carrier ready for next product")
+    wipe = False
+
+    if data.station in stationHistory[int(data.carrierID)]:
+        print("call back 1 " + data.station)
+        if data.station == '2':
+            print("call back 2")
+            print(stationHistory)
+            if stationHistory[int(data.carrierID)] == ['Start production', '1', '2', '3']:
+                print("call back 3")
+
+                os.rename(
+                    "/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + "/Product" + str(
+                        tcpOrderNumber + 1264) + "C:" + str(
+                        tcpCarrierNumber) + ".txt",
+                    "/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + "/Product" + str(
+                        tcpOrderNumber + 1264) + "C:" + str(
+                        tcpCarrierNumber) + "Comp" + str(REcounter[int(data.carrierID)]) + ".txt")
+                block[tcpOrderNumber][tcpCarrierNumber] = [''] * Range
+                SCarrierNumber[tcpOrderNumber][tcpCarrierNumber] = [''] * Range
+                runYet[tcpOrderNumber][tcpCarrierNumber] = ''
+                wipe = True
+                REcounter[int(data.carrierID)] = REcounter[int(data.carrierID)] + 1
+                print("Carrier ready for next product")
 
     if data.station not in stationHistory[int(data.carrierID)]:
 
@@ -469,7 +495,9 @@ def callback(data):
                 f.write("\n-------------------------------\n")
                 f.close()
 
-
+    if wipe == True:
+        stationHistory[int(tcpCarrierNumber)] = [''] * 4
+        wipe = False
 
 
         emit = True
@@ -774,13 +802,14 @@ def manual():
     global dataFollowing
     global oldData
     global port
+    global address
 
     # Create a TCP/IP socket
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     # Then bind() is used to associate the socket with the server address. In this case, the address is localhost, referring to the current server, and the port number is 10000.
 
     # Bind the socket to the port
-    server_address = ('127.0.0.1', port)
+    server_address = (address, port)
     print sys.stderr, 'starting up on %s port %s' % server_address
     sock.bind(server_address)
     # Calling listen() puts the socket into server mode, and accept() waits for an incoming connection.
