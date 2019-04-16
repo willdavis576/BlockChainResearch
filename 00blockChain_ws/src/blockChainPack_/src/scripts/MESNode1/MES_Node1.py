@@ -244,7 +244,7 @@ def mainProg():
 
             # Genesis Block
             # print(SblockHash[orderNumber].index('') == 0)
-            if newGenesis == 1:
+            if newGenesis == 1 and tcpStationName == '1':
                 block[orderNumber][tcpCarrierNumber][block[tcpOrderNumber][tcpCarrierNumber].index('')] = blockChain(
                     previousHash='',
                     station="Start production",
@@ -275,23 +275,23 @@ def mainProg():
 
             if newGenesis == 0:
                 time.sleep(0.1)
-
-                if tcpStationName in stationHistory[int(tcpCarrierNumber)]:
-                    print("is in")
-                    if tcpStationName == '2':
-                        print("is " + tcpStationName)
-                        message.blockNumber = 0
-                        message.orderNumber = 0
-                        message.carrierID = tcpCarrierNumber
-                        message.timeStamp = '00:00:00 - 00 / 00 / 0000' #18:54:01 - 19 / 03 / 2019
-                        message.station = tcpStationName
-                        message.productCode = 0
-                        message.blockHash = ''
-                        message.previousHash = ''
-                        time.sleep(0.1)
-                        pub.publish(message)
-                        dataFollowing = 0
-                        stationFinish = True
+                print("newgen = 0 " + tcpStationName)
+                if tcpStationName in stationHistory[int(tcpCarrierNumber)] and tcpStationName == '2':
+                    print("is " + tcpStationName)
+                    message.blockNumber = 0
+                    message.orderNumber = 0
+                    message.carrierID = tcpCarrierNumber
+                    message.timeStamp = '00:00:00 - 00 / 00 / 0000' #18:54:01 - 19 / 03 / 2019
+                    message.station = tcpStationName
+                    message.productCode = 0
+                    message.blockHash = ''
+                    message.previousHash = ''
+                    time.sleep(0.1)
+                    pub.publish(message)
+                    dataFollowing = 0
+                    stationFinish = True
+                    newGenesis = 3
+                print("294 " + tcpStationName)
 
 
                 if tcpStationName not in stationHistory[int(tcpCarrierNumber)] and stationFinish == False:
@@ -309,6 +309,13 @@ def mainProg():
                     blockNumber = block[tcpOrderNumber][tcpCarrierNumber].index('')
                     newGenesis = 3
                     dataFollowing = 0
+
+                else:
+                    newGenesis = 3
+                    dataFollowing = 0
+            else:
+                newGenesis = 3
+                dataFollowing = 0
 
 
                 # stationHistory[int(tcpCarrierNumber)][int(tcpStationName)] = tcpStationName
@@ -432,8 +439,7 @@ def callback(data):
         SCarrierNumber[data.orderNumber][data.carrierID] = 1
 
         SblockNumber = data.blockNumber
-        print("last hash")
-        print(data.previousHash)
+
 
         # block[orderNumber][blockNumber] = blockChain(
         #     previousHash=SblockHash[tcpOrderNumber][block[orderNumber].index('') - 1], station=station,
@@ -883,7 +889,7 @@ if __name__ == '__main__':
         p2 = threading.Thread(target=mainProg, args=())
         p3 = threading.Thread(target=authentication, args=())
         p4 = threading.Thread(target=emitter, args=())
-        p5 = threading.Thread(target=authTrigger, args=())
+        # p5 = threading.Thread(target=authTrigger, args=())
         # p6 = threading.Thread(target=recNewData, args=())
         p7 = threading.Thread(target=manual, args=())
         # p8 = threading.Thread(target=finishListener, args=())
@@ -892,7 +898,7 @@ if __name__ == '__main__':
         p2.daemon = True
         p3.daemon = True
         p4.daemon = True
-        p5.daemon = True
+        # p5.daemon = True
         # p6.daemon = True
         p7.daemon = True
         # p8.daemon = True
@@ -901,7 +907,7 @@ if __name__ == '__main__':
         p2.start()
         p3.start()
         p4.start()
-        p5.start()
+        # p5.start()
         # p6.start()
         p7.start()
         # p8.start()
@@ -910,7 +916,7 @@ if __name__ == '__main__':
         p2.join()
         p3.join()
         p4.join()
-        p5.join()
+        # p5.join()
         # p6.join()
         p7.join()
         # p8.join()
