@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d548811d-0aca-477e-bfa2-a5ed9f109e3c" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/MESNode1/MES_Node1.py" afterPath="$PROJECT_DIR$/MESNode1/MES_Node1.py" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/MESNode2/MES_Node2.py" afterPath="$PROJECT_DIR$/MESNode2/MES_Node2.py" />
-      <change beforePath="$PROJECT_DIR$/MESNode3/MES_Node3.py" afterPath="$PROJECT_DIR$/MESNode3/MES_Node3.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -37,19 +36,19 @@
       <file leaf-file-name="MES_Node2.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MESNode2/MES_Node2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="429">
-              <caret line="779" column="15" lean-forward="false" selection-start-line="779" selection-start-column="15" selection-end-line="779" selection-end-column="15" />
+            <state relative-caret-position="693">
+              <caret line="649" column="60" lean-forward="true" selection-start-line="649" selection-start-column="60" selection-end-line="649" selection-end-column="60" />
               <folding>
                 <element signature="e#19#88#0" expanded="true" />
                 <element signature="e#4460#5195#0" expanded="false" />
                 <element signature="e#11913#11990#0" expanded="false" />
                 <element signature="e#13867#13943#0" expanded="false" />
                 <element signature="e#13975#14199#0" expanded="false" />
-                <element signature="e#16873#16920#0" expanded="false" />
-                <element signature="e#20931#21001#0" expanded="false" />
-                <element signature="e#21032#21551#0" expanded="false" />
-                <element signature="e#22555#23308#0" expanded="false" />
-                <element signature="e#23441#30038#0" expanded="false" />
+                <element signature="e#16949#16996#0" expanded="false" />
+                <element signature="e#21007#21077#0" expanded="false" />
+                <element signature="e#21108#21627#0" expanded="false" />
+                <element signature="e#21653#22609#0" expanded="false" />
+                <element signature="e#22631#23384#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -644,19 +643,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/MESNode2/MES_Node2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="429">
-          <caret line="779" column="15" lean-forward="false" selection-start-line="779" selection-start-column="15" selection-end-line="779" selection-end-column="15" />
+        <state relative-caret-position="693">
+          <caret line="649" column="60" lean-forward="true" selection-start-line="649" selection-start-column="60" selection-end-line="649" selection-end-column="60" />
           <folding>
             <element signature="e#19#88#0" expanded="true" />
             <element signature="e#4460#5195#0" expanded="false" />
             <element signature="e#11913#11990#0" expanded="false" />
             <element signature="e#13867#13943#0" expanded="false" />
             <element signature="e#13975#14199#0" expanded="false" />
-            <element signature="e#16873#16920#0" expanded="false" />
-            <element signature="e#20931#21001#0" expanded="false" />
-            <element signature="e#21032#21551#0" expanded="false" />
-            <element signature="e#22555#23308#0" expanded="false" />
-            <element signature="e#23441#30038#0" expanded="false" />
+            <element signature="e#16949#16996#0" expanded="false" />
+            <element signature="e#21007#21077#0" expanded="false" />
+            <element signature="e#21108#21627#0" expanded="false" />
+            <element signature="e#21653#22609#0" expanded="false" />
+            <element signature="e#22631#23384#0" expanded="false" />
           </folding>
         </state>
       </provider>

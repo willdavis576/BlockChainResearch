@@ -419,6 +419,7 @@ def callback(data):
                         tcpCarrierNumber) + "Comp" + str(REcounter[int(data.carrierID)]) + ".txt")
                 block[tcpOrderNumber][tcpCarrierNumber] = [''] * Range
                 SCarrierNumber[tcpOrderNumber][tcpCarrierNumber] = [''] * Range
+                SblockHash[tcpOrderNumber][tcpCarrierNumber] = [''] * Range
                 runYet[tcpOrderNumber][tcpCarrierNumber] = ''
                 wipe = True
                 REcounter[int(data.carrierID)] = REcounter[int(data.carrierID)] + 1
@@ -775,14 +776,25 @@ def rewriteNodes():
     message3 = rewriteNode()
 
     # TimeStamp
+    fileNames = [''] * 200
+    counter = 0
 
-    Files = [x[2] for x in os.walk("/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_NODE2")]
-    str(Files)[]
+    os.chdir("/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_NODE2")
+    for i in glob.glob("*.txt"):
+        fileNames[counter] = i
+        counter = counter + 1
 
+    fileNum = fileNames.index('')
 
-    f = open("demofile.txt", "r")
-    for x in f:
-        print(x)
+    for i in range(fileNum):
+        f = open(fileNames[i], "r")
+        for x in f:
+            message3.done = 1
+            message3.fileName = fileNames[i]
+            message3.SblockTimeStamp = x
+            pub.publish(message3)
+            rate.sleep()
+
 
 
         # for i in range(Range):
