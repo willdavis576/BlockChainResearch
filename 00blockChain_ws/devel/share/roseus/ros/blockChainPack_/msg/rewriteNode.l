@@ -14,50 +14,57 @@
 
 (defclass blockChainPack_::rewriteNode
   :super ros::object
-  :slots (_SblockTimeStamp _SblockTrans _SblockProductCode _SCarrierNumber _done ))
+  :slots (_arrayTransfer _fileName _logFile _logHash _REcounter _done ))
 
 (defmethod blockChainPack_::rewriteNode
   (:init
    (&key
-    ((:SblockTimeStamp __SblockTimeStamp) "")
-    ((:SblockTrans __SblockTrans) "")
-    ((:SblockProductCode __SblockProductCode) "")
-    ((:SCarrierNumber __SCarrierNumber) "")
+    ((:arrayTransfer __arrayTransfer) "")
+    ((:fileName __fileName) "")
+    ((:logFile __logFile) "")
+    ((:logHash __logHash) "")
+    ((:REcounter __REcounter) 0)
     ((:done __done) 0)
     )
    (send-super :init)
-   (setq _SblockTimeStamp (string __SblockTimeStamp))
-   (setq _SblockTrans (string __SblockTrans))
-   (setq _SblockProductCode (string __SblockProductCode))
-   (setq _SCarrierNumber (string __SCarrierNumber))
+   (setq _arrayTransfer (string __arrayTransfer))
+   (setq _fileName (string __fileName))
+   (setq _logFile (string __logFile))
+   (setq _logHash (string __logHash))
+   (setq _REcounter (round __REcounter))
    (setq _done (round __done))
    self)
-  (:SblockTimeStamp
-   (&optional __SblockTimeStamp)
-   (if __SblockTimeStamp (setq _SblockTimeStamp __SblockTimeStamp)) _SblockTimeStamp)
-  (:SblockTrans
-   (&optional __SblockTrans)
-   (if __SblockTrans (setq _SblockTrans __SblockTrans)) _SblockTrans)
-  (:SblockProductCode
-   (&optional __SblockProductCode)
-   (if __SblockProductCode (setq _SblockProductCode __SblockProductCode)) _SblockProductCode)
-  (:SCarrierNumber
-   (&optional __SCarrierNumber)
-   (if __SCarrierNumber (setq _SCarrierNumber __SCarrierNumber)) _SCarrierNumber)
+  (:arrayTransfer
+   (&optional __arrayTransfer)
+   (if __arrayTransfer (setq _arrayTransfer __arrayTransfer)) _arrayTransfer)
+  (:fileName
+   (&optional __fileName)
+   (if __fileName (setq _fileName __fileName)) _fileName)
+  (:logFile
+   (&optional __logFile)
+   (if __logFile (setq _logFile __logFile)) _logFile)
+  (:logHash
+   (&optional __logHash)
+   (if __logHash (setq _logHash __logHash)) _logHash)
+  (:REcounter
+   (&optional __REcounter)
+   (if __REcounter (setq _REcounter __REcounter)) _REcounter)
   (:done
    (&optional __done)
    (if __done (setq _done __done)) _done)
   (:serialization-length
    ()
    (+
-    ;; string _SblockTimeStamp
-    4 (length _SblockTimeStamp)
-    ;; string _SblockTrans
-    4 (length _SblockTrans)
-    ;; string _SblockProductCode
-    4 (length _SblockProductCode)
-    ;; string _SCarrierNumber
-    4 (length _SCarrierNumber)
+    ;; string _arrayTransfer
+    4 (length _arrayTransfer)
+    ;; string _fileName
+    4 (length _fileName)
+    ;; string _logFile
+    4 (length _logFile)
+    ;; string _logHash
+    4 (length _logHash)
+    ;; int64 _REcounter
+    8
     ;; int64 _done
     8
     ))
@@ -65,14 +72,26 @@
    (&optional strm)
    (let ((s (if strm strm
               (make-string-output-stream (send self :serialization-length)))))
-     ;; string _SblockTimeStamp
-       (write-long (length _SblockTimeStamp) s) (princ _SblockTimeStamp s)
-     ;; string _SblockTrans
-       (write-long (length _SblockTrans) s) (princ _SblockTrans s)
-     ;; string _SblockProductCode
-       (write-long (length _SblockProductCode) s) (princ _SblockProductCode s)
-     ;; string _SCarrierNumber
-       (write-long (length _SCarrierNumber) s) (princ _SCarrierNumber s)
+     ;; string _arrayTransfer
+       (write-long (length _arrayTransfer) s) (princ _arrayTransfer s)
+     ;; string _fileName
+       (write-long (length _fileName) s) (princ _fileName s)
+     ;; string _logFile
+       (write-long (length _logFile) s) (princ _logFile s)
+     ;; string _logHash
+       (write-long (length _logHash) s) (princ _logHash s)
+     ;; int64 _REcounter
+#+(or :alpha :irix6 :x86_64)
+       (progn (sys::poke _REcounter (send s :buffer) (send s :count) :long) (incf (stream-count s) 8))
+#-(or :alpha :irix6 :x86_64)
+       (cond ((and (class _REcounter) (= (length (_REcounter . bv)) 2)) ;; bignum
+              (write-long (ash (elt (_REcounter . bv) 0) 0) s)
+              (write-long (ash (elt (_REcounter . bv) 1) -1) s))
+             ((and (class _REcounter) (= (length (_REcounter . bv)) 1)) ;; big1
+              (write-long (elt (_REcounter . bv) 0) s)
+              (write-long (if (>= _REcounter 0) 0 #xffffffff) s))
+             (t                                         ;; integer
+              (write-long _REcounter s)(write-long (if (>= _REcounter 0) 0 #xffffffff) s)))
      ;; int64 _done
 #+(or :alpha :irix6 :x86_64)
        (progn (sys::poke _done (send s :buffer) (send s :count) :long) (incf (stream-count s) 8))
@@ -89,14 +108,26 @@
      (if (null strm) (get-output-stream-string s))))
   (:deserialize
    (buf &optional (ptr- 0))
-   ;; string _SblockTimeStamp
-     (let (n) (setq n (sys::peek buf ptr- :integer)) (incf ptr- 4) (setq _SblockTimeStamp (subseq buf ptr- (+ ptr- n))) (incf ptr- n))
-   ;; string _SblockTrans
-     (let (n) (setq n (sys::peek buf ptr- :integer)) (incf ptr- 4) (setq _SblockTrans (subseq buf ptr- (+ ptr- n))) (incf ptr- n))
-   ;; string _SblockProductCode
-     (let (n) (setq n (sys::peek buf ptr- :integer)) (incf ptr- 4) (setq _SblockProductCode (subseq buf ptr- (+ ptr- n))) (incf ptr- n))
-   ;; string _SCarrierNumber
-     (let (n) (setq n (sys::peek buf ptr- :integer)) (incf ptr- 4) (setq _SCarrierNumber (subseq buf ptr- (+ ptr- n))) (incf ptr- n))
+   ;; string _arrayTransfer
+     (let (n) (setq n (sys::peek buf ptr- :integer)) (incf ptr- 4) (setq _arrayTransfer (subseq buf ptr- (+ ptr- n))) (incf ptr- n))
+   ;; string _fileName
+     (let (n) (setq n (sys::peek buf ptr- :integer)) (incf ptr- 4) (setq _fileName (subseq buf ptr- (+ ptr- n))) (incf ptr- n))
+   ;; string _logFile
+     (let (n) (setq n (sys::peek buf ptr- :integer)) (incf ptr- 4) (setq _logFile (subseq buf ptr- (+ ptr- n))) (incf ptr- n))
+   ;; string _logHash
+     (let (n) (setq n (sys::peek buf ptr- :integer)) (incf ptr- 4) (setq _logHash (subseq buf ptr- (+ ptr- n))) (incf ptr- n))
+   ;; int64 _REcounter
+#+(or :alpha :irix6 :x86_64)
+      (setf _REcounter (prog1 (sys::peek buf ptr- :long) (incf ptr- 8)))
+#-(or :alpha :irix6 :x86_64)
+      (setf _REcounter (let ((b0 (prog1 (sys::peek buf ptr- :integer) (incf ptr- 4)))
+                  (b1 (prog1 (sys::peek buf ptr- :integer) (incf ptr- 4))))
+              (cond ((= b1 -1) b0)
+                     ((and (= b1  0)
+                           (<= lisp::most-negative-fixnum b0 lisp::most-positive-fixnum))
+                      b0)
+                    ((= b1  0) (make-instance bignum :size 1 :bv (integer-vector b0)))
+                    (t (make-instance bignum :size 2 :bv (integer-vector b0 (ash b1 1)))))))
    ;; int64 _done
 #+(or :alpha :irix6 :x86_64)
       (setf _done (prog1 (sys::peek buf ptr- :long) (incf ptr- 8)))
@@ -113,19 +144,20 @@
    self)
   )
 
-(setf (get blockChainPack_::rewriteNode :md5sum-) "69b49f45a96149b09ab624e642e92d9e")
+(setf (get blockChainPack_::rewriteNode :md5sum-) "ce6d37a12366ea5169180721d54de41b")
 (setf (get blockChainPack_::rewriteNode :datatype-) "blockChainPack_/rewriteNode")
 (setf (get blockChainPack_::rewriteNode :definition-)
-      "string SblockTimeStamp
-string SblockTrans
-string SblockProductCode
-string SCarrierNumber
+      "string arrayTransfer
+string fileName
+string logFile
+string logHash
+int64 REcounter
 int64 done
 
 ")
 
 
 
-(provide :blockChainPack_/rewriteNode "69b49f45a96149b09ab624e642e92d9e")
+(provide :blockChainPack_/rewriteNode "ce6d37a12366ea5169180721d54de41b")
 
 

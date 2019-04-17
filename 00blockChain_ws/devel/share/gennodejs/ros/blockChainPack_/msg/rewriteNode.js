@@ -18,36 +18,43 @@ class rewriteNode {
   constructor(initObj={}) {
     if (initObj === null) {
       // initObj === null is a special case for deserialization where we don't initialize fields
-      this.SblockTimeStamp = null;
-      this.SblockTrans = null;
-      this.SblockProductCode = null;
-      this.SCarrierNumber = null;
+      this.arrayTransfer = null;
+      this.fileName = null;
+      this.logFile = null;
+      this.logHash = null;
+      this.REcounter = null;
       this.done = null;
     }
     else {
-      if (initObj.hasOwnProperty('SblockTimeStamp')) {
-        this.SblockTimeStamp = initObj.SblockTimeStamp
+      if (initObj.hasOwnProperty('arrayTransfer')) {
+        this.arrayTransfer = initObj.arrayTransfer
       }
       else {
-        this.SblockTimeStamp = '';
+        this.arrayTransfer = '';
       }
-      if (initObj.hasOwnProperty('SblockTrans')) {
-        this.SblockTrans = initObj.SblockTrans
-      }
-      else {
-        this.SblockTrans = '';
-      }
-      if (initObj.hasOwnProperty('SblockProductCode')) {
-        this.SblockProductCode = initObj.SblockProductCode
+      if (initObj.hasOwnProperty('fileName')) {
+        this.fileName = initObj.fileName
       }
       else {
-        this.SblockProductCode = '';
+        this.fileName = '';
       }
-      if (initObj.hasOwnProperty('SCarrierNumber')) {
-        this.SCarrierNumber = initObj.SCarrierNumber
+      if (initObj.hasOwnProperty('logFile')) {
+        this.logFile = initObj.logFile
       }
       else {
-        this.SCarrierNumber = '';
+        this.logFile = '';
+      }
+      if (initObj.hasOwnProperty('logHash')) {
+        this.logHash = initObj.logHash
+      }
+      else {
+        this.logHash = '';
+      }
+      if (initObj.hasOwnProperty('REcounter')) {
+        this.REcounter = initObj.REcounter
+      }
+      else {
+        this.REcounter = 0;
       }
       if (initObj.hasOwnProperty('done')) {
         this.done = initObj.done
@@ -60,14 +67,16 @@ class rewriteNode {
 
   static serialize(obj, buffer, bufferOffset) {
     // Serializes a message object of type rewriteNode
-    // Serialize message field [SblockTimeStamp]
-    bufferOffset = _serializer.string(obj.SblockTimeStamp, buffer, bufferOffset);
-    // Serialize message field [SblockTrans]
-    bufferOffset = _serializer.string(obj.SblockTrans, buffer, bufferOffset);
-    // Serialize message field [SblockProductCode]
-    bufferOffset = _serializer.string(obj.SblockProductCode, buffer, bufferOffset);
-    // Serialize message field [SCarrierNumber]
-    bufferOffset = _serializer.string(obj.SCarrierNumber, buffer, bufferOffset);
+    // Serialize message field [arrayTransfer]
+    bufferOffset = _serializer.string(obj.arrayTransfer, buffer, bufferOffset);
+    // Serialize message field [fileName]
+    bufferOffset = _serializer.string(obj.fileName, buffer, bufferOffset);
+    // Serialize message field [logFile]
+    bufferOffset = _serializer.string(obj.logFile, buffer, bufferOffset);
+    // Serialize message field [logHash]
+    bufferOffset = _serializer.string(obj.logHash, buffer, bufferOffset);
+    // Serialize message field [REcounter]
+    bufferOffset = _serializer.int64(obj.REcounter, buffer, bufferOffset);
     // Serialize message field [done]
     bufferOffset = _serializer.int64(obj.done, buffer, bufferOffset);
     return bufferOffset;
@@ -77,14 +86,16 @@ class rewriteNode {
     //deserializes a message object of type rewriteNode
     let len;
     let data = new rewriteNode(null);
-    // Deserialize message field [SblockTimeStamp]
-    data.SblockTimeStamp = _deserializer.string(buffer, bufferOffset);
-    // Deserialize message field [SblockTrans]
-    data.SblockTrans = _deserializer.string(buffer, bufferOffset);
-    // Deserialize message field [SblockProductCode]
-    data.SblockProductCode = _deserializer.string(buffer, bufferOffset);
-    // Deserialize message field [SCarrierNumber]
-    data.SCarrierNumber = _deserializer.string(buffer, bufferOffset);
+    // Deserialize message field [arrayTransfer]
+    data.arrayTransfer = _deserializer.string(buffer, bufferOffset);
+    // Deserialize message field [fileName]
+    data.fileName = _deserializer.string(buffer, bufferOffset);
+    // Deserialize message field [logFile]
+    data.logFile = _deserializer.string(buffer, bufferOffset);
+    // Deserialize message field [logHash]
+    data.logHash = _deserializer.string(buffer, bufferOffset);
+    // Deserialize message field [REcounter]
+    data.REcounter = _deserializer.int64(buffer, bufferOffset);
     // Deserialize message field [done]
     data.done = _deserializer.int64(buffer, bufferOffset);
     return data;
@@ -92,11 +103,11 @@ class rewriteNode {
 
   static getMessageSize(object) {
     let length = 0;
-    length += object.SblockTimeStamp.length;
-    length += object.SblockTrans.length;
-    length += object.SblockProductCode.length;
-    length += object.SCarrierNumber.length;
-    return length + 24;
+    length += object.arrayTransfer.length;
+    length += object.fileName.length;
+    length += object.logFile.length;
+    length += object.logHash.length;
+    return length + 32;
   }
 
   static datatype() {
@@ -106,16 +117,17 @@ class rewriteNode {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return '69b49f45a96149b09ab624e642e92d9e';
+    return 'ce6d37a12366ea5169180721d54de41b';
   }
 
   static messageDefinition() {
     // Returns full string definition for message
     return `
-    string SblockTimeStamp
-    string SblockTrans
-    string SblockProductCode
-    string SCarrierNumber
+    string arrayTransfer
+    string fileName
+    string logFile
+    string logHash
+    int64 REcounter
     int64 done
     
     `;
@@ -127,32 +139,39 @@ class rewriteNode {
       msg = {};
     }
     const resolved = new rewriteNode(null);
-    if (msg.SblockTimeStamp !== undefined) {
-      resolved.SblockTimeStamp = msg.SblockTimeStamp;
+    if (msg.arrayTransfer !== undefined) {
+      resolved.arrayTransfer = msg.arrayTransfer;
     }
     else {
-      resolved.SblockTimeStamp = ''
+      resolved.arrayTransfer = ''
     }
 
-    if (msg.SblockTrans !== undefined) {
-      resolved.SblockTrans = msg.SblockTrans;
+    if (msg.fileName !== undefined) {
+      resolved.fileName = msg.fileName;
     }
     else {
-      resolved.SblockTrans = ''
+      resolved.fileName = ''
     }
 
-    if (msg.SblockProductCode !== undefined) {
-      resolved.SblockProductCode = msg.SblockProductCode;
+    if (msg.logFile !== undefined) {
+      resolved.logFile = msg.logFile;
     }
     else {
-      resolved.SblockProductCode = ''
+      resolved.logFile = ''
     }
 
-    if (msg.SCarrierNumber !== undefined) {
-      resolved.SCarrierNumber = msg.SCarrierNumber;
+    if (msg.logHash !== undefined) {
+      resolved.logHash = msg.logHash;
     }
     else {
-      resolved.SCarrierNumber = ''
+      resolved.logHash = ''
+    }
+
+    if (msg.REcounter !== undefined) {
+      resolved.REcounter = msg.REcounter;
+    }
+    else {
+      resolved.REcounter = 0
     }
 
     if (msg.done !== undefined) {

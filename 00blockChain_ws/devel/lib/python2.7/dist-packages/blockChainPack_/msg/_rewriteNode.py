@@ -7,17 +7,18 @@ import struct
 
 
 class rewriteNode(genpy.Message):
-  _md5sum = "69b49f45a96149b09ab624e642e92d9e"
+  _md5sum = "ce6d37a12366ea5169180721d54de41b"
   _type = "blockChainPack_/rewriteNode"
   _has_header = False #flag to mark the presence of a Header object
-  _full_text = """string SblockTimeStamp
-string SblockTrans
-string SblockProductCode
-string SCarrierNumber
+  _full_text = """string arrayTransfer
+string fileName
+string logFile
+string logHash
+int64 REcounter
 int64 done
 """
-  __slots__ = ['SblockTimeStamp','SblockTrans','SblockProductCode','SCarrierNumber','done']
-  _slot_types = ['string','string','string','string','int64']
+  __slots__ = ['arrayTransfer','fileName','logFile','logHash','REcounter','done']
+  _slot_types = ['string','string','string','string','int64','int64']
 
   def __init__(self, *args, **kwds):
     """
@@ -27,7 +28,7 @@ int64 done
     changes.  You cannot mix in-order arguments and keyword arguments.
 
     The available fields are:
-       SblockTimeStamp,SblockTrans,SblockProductCode,SCarrierNumber,done
+       arrayTransfer,fileName,logFile,logHash,REcounter,done
 
     :param args: complete set of field values, in .msg order
     :param kwds: use keyword arguments corresponding to message field names
@@ -36,21 +37,24 @@ int64 done
     if args or kwds:
       super(rewriteNode, self).__init__(*args, **kwds)
       #message fields cannot be None, assign default values for those that are
-      if self.SblockTimeStamp is None:
-        self.SblockTimeStamp = ''
-      if self.SblockTrans is None:
-        self.SblockTrans = ''
-      if self.SblockProductCode is None:
-        self.SblockProductCode = ''
-      if self.SCarrierNumber is None:
-        self.SCarrierNumber = ''
+      if self.arrayTransfer is None:
+        self.arrayTransfer = ''
+      if self.fileName is None:
+        self.fileName = ''
+      if self.logFile is None:
+        self.logFile = ''
+      if self.logHash is None:
+        self.logHash = ''
+      if self.REcounter is None:
+        self.REcounter = 0
       if self.done is None:
         self.done = 0
     else:
-      self.SblockTimeStamp = ''
-      self.SblockTrans = ''
-      self.SblockProductCode = ''
-      self.SCarrierNumber = ''
+      self.arrayTransfer = ''
+      self.fileName = ''
+      self.logFile = ''
+      self.logHash = ''
+      self.REcounter = 0
       self.done = 0
 
   def _get_types(self):
@@ -65,31 +69,32 @@ int64 done
     :param buff: buffer, ``StringIO``
     """
     try:
-      _x = self.SblockTimeStamp
+      _x = self.arrayTransfer
       length = len(_x)
       if python3 or type(_x) == unicode:
         _x = _x.encode('utf-8')
         length = len(_x)
       buff.write(struct.pack('<I%ss'%length, length, _x))
-      _x = self.SblockTrans
+      _x = self.fileName
       length = len(_x)
       if python3 or type(_x) == unicode:
         _x = _x.encode('utf-8')
         length = len(_x)
       buff.write(struct.pack('<I%ss'%length, length, _x))
-      _x = self.SblockProductCode
+      _x = self.logFile
       length = len(_x)
       if python3 or type(_x) == unicode:
         _x = _x.encode('utf-8')
         length = len(_x)
       buff.write(struct.pack('<I%ss'%length, length, _x))
-      _x = self.SCarrierNumber
+      _x = self.logHash
       length = len(_x)
       if python3 or type(_x) == unicode:
         _x = _x.encode('utf-8')
         length = len(_x)
       buff.write(struct.pack('<I%ss'%length, length, _x))
-      buff.write(_get_struct_q().pack(self.done))
+      _x = self
+      buff.write(_get_struct_2q().pack(_x.REcounter, _x.done))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -106,39 +111,40 @@ int64 done
       start = end
       end += length
       if python3:
-        self.SblockTimeStamp = str[start:end].decode('utf-8')
+        self.arrayTransfer = str[start:end].decode('utf-8')
       else:
-        self.SblockTimeStamp = str[start:end]
+        self.arrayTransfer = str[start:end]
       start = end
       end += 4
       (length,) = _struct_I.unpack(str[start:end])
       start = end
       end += length
       if python3:
-        self.SblockTrans = str[start:end].decode('utf-8')
+        self.fileName = str[start:end].decode('utf-8')
       else:
-        self.SblockTrans = str[start:end]
+        self.fileName = str[start:end]
       start = end
       end += 4
       (length,) = _struct_I.unpack(str[start:end])
       start = end
       end += length
       if python3:
-        self.SblockProductCode = str[start:end].decode('utf-8')
+        self.logFile = str[start:end].decode('utf-8')
       else:
-        self.SblockProductCode = str[start:end]
+        self.logFile = str[start:end]
       start = end
       end += 4
       (length,) = _struct_I.unpack(str[start:end])
       start = end
       end += length
       if python3:
-        self.SCarrierNumber = str[start:end].decode('utf-8')
+        self.logHash = str[start:end].decode('utf-8')
       else:
-        self.SCarrierNumber = str[start:end]
+        self.logHash = str[start:end]
+      _x = self
       start = end
-      end += 8
-      (self.done,) = _get_struct_q().unpack(str[start:end])
+      end += 16
+      (_x.REcounter, _x.done,) = _get_struct_2q().unpack(str[start:end])
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
@@ -151,31 +157,32 @@ int64 done
     :param numpy: numpy python module
     """
     try:
-      _x = self.SblockTimeStamp
+      _x = self.arrayTransfer
       length = len(_x)
       if python3 or type(_x) == unicode:
         _x = _x.encode('utf-8')
         length = len(_x)
       buff.write(struct.pack('<I%ss'%length, length, _x))
-      _x = self.SblockTrans
+      _x = self.fileName
       length = len(_x)
       if python3 or type(_x) == unicode:
         _x = _x.encode('utf-8')
         length = len(_x)
       buff.write(struct.pack('<I%ss'%length, length, _x))
-      _x = self.SblockProductCode
+      _x = self.logFile
       length = len(_x)
       if python3 or type(_x) == unicode:
         _x = _x.encode('utf-8')
         length = len(_x)
       buff.write(struct.pack('<I%ss'%length, length, _x))
-      _x = self.SCarrierNumber
+      _x = self.logHash
       length = len(_x)
       if python3 or type(_x) == unicode:
         _x = _x.encode('utf-8')
         length = len(_x)
       buff.write(struct.pack('<I%ss'%length, length, _x))
-      buff.write(_get_struct_q().pack(self.done))
+      _x = self
+      buff.write(_get_struct_2q().pack(_x.REcounter, _x.done))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -193,39 +200,40 @@ int64 done
       start = end
       end += length
       if python3:
-        self.SblockTimeStamp = str[start:end].decode('utf-8')
+        self.arrayTransfer = str[start:end].decode('utf-8')
       else:
-        self.SblockTimeStamp = str[start:end]
+        self.arrayTransfer = str[start:end]
       start = end
       end += 4
       (length,) = _struct_I.unpack(str[start:end])
       start = end
       end += length
       if python3:
-        self.SblockTrans = str[start:end].decode('utf-8')
+        self.fileName = str[start:end].decode('utf-8')
       else:
-        self.SblockTrans = str[start:end]
+        self.fileName = str[start:end]
       start = end
       end += 4
       (length,) = _struct_I.unpack(str[start:end])
       start = end
       end += length
       if python3:
-        self.SblockProductCode = str[start:end].decode('utf-8')
+        self.logFile = str[start:end].decode('utf-8')
       else:
-        self.SblockProductCode = str[start:end]
+        self.logFile = str[start:end]
       start = end
       end += 4
       (length,) = _struct_I.unpack(str[start:end])
       start = end
       end += length
       if python3:
-        self.SCarrierNumber = str[start:end].decode('utf-8')
+        self.logHash = str[start:end].decode('utf-8')
       else:
-        self.SCarrierNumber = str[start:end]
+        self.logHash = str[start:end]
+      _x = self
       start = end
-      end += 8
-      (self.done,) = _get_struct_q().unpack(str[start:end])
+      end += 16
+      (_x.REcounter, _x.done,) = _get_struct_2q().unpack(str[start:end])
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
@@ -234,9 +242,9 @@ _struct_I = genpy.struct_I
 def _get_struct_I():
     global _struct_I
     return _struct_I
-_struct_q = None
-def _get_struct_q():
-    global _struct_q
-    if _struct_q is None:
-        _struct_q = struct.Struct("<q")
-    return _struct_q
+_struct_2q = None
+def _get_struct_2q():
+    global _struct_2q
+    if _struct_2q is None:
+        _struct_2q = struct.Struct("<2q")
+    return _struct_2q

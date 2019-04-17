@@ -420,6 +420,9 @@ def callback(data):
                 block[tcpOrderNumber][tcpCarrierNumber] = [''] * Range
                 SCarrierNumber[tcpOrderNumber][tcpCarrierNumber] = [''] * Range
                 SblockHash[tcpOrderNumber][tcpCarrierNumber] = [''] * Range
+                SblockTimeStamp[tcpOrderNumber][tcpCarrierNumber] = [''] * Range
+                SblockTrans[tcpOrderNumber][tcpCarrierNumber] = [''] * Range
+                SblockProductCode[tcpOrderNumber][tcpCarrierNumber] = [''] * Range
                 runYet[tcpOrderNumber][tcpCarrierNumber] = ''
                 wipe = True
                 REcounter[int(data.carrierID)] = REcounter[int(data.carrierID)] + 1
@@ -613,10 +616,9 @@ def callbackRecData(data):
     global stationHistory
     global REcounter
 
-    # 32,3,1,18:54:01 - 19/03/2019,1,211
-    # 32,3,0,09:57:40 - 06/04/2019,Start production,211
+    runYetLoc = [['' for _ in range(Range)] for _ in range(Range)]
 
-    dataSplit = data.SblockTimeStamp.split(",")
+    dataSplit = data.arrayTransfer.split(",")
 
     dOrder = int(dataSplit[0])
     dCarrier = int(dataSplit[1])
@@ -629,6 +631,20 @@ def callbackRecData(data):
     dYear = str((dataSplit[3])[17] + (dataSplit[3])[18] + (dataSplit[3])[19] + (dataSplit[3])[20])
     dStation = dataSplit[4]
     dProductCode = int(dataSplit[5])
+
+
+    # 32,3,1,18:54:01 - 19/03/2019,1,211
+    # 32,3,0,09:57:40 - 06/04/2019,Start production,211
+    if nodeHacked == nodeName and runYetLoc[int(dOrder)][int(dCarrier)] == '':
+        f = open(data.fileName, "w")
+        f.close()
+        runYetLoc[int(dOrder)][int(dCarrier)] = "1"
+
+    if nodeHacked == nodeName and runYetLoc[int(dOrder)][int(dCarrier)] == "1":
+        f = open(data.fileName, "a")
+        f.write(str(data.logFile))
+        f.close()
+
 
     try:
         if data.done == 1 and Rdone == 0 and nodeHacked == nodeName:
@@ -745,7 +761,9 @@ def callbackRecData(data):
             print("2.3")
 
             print(hashingArray)
-            print("got rewritten")
+            print("got rewritten - live array transfer")
+
+
 
     # except:
     #     print("couldn't rewrite")
@@ -770,47 +788,69 @@ def rewriteNodes():
     # if nodeNumber == int(nodeName[4]) + 1 :
     # this node will rewrite the hacked node
 
+    ########### Log file transfer ###########
+
     strData = ''
 
     print("rewrite commence")
     message3 = rewriteNode()
 
-    # TimeStamp
     fileNames = [''] * 200
+    REcounter = [''] * 200
     counter = 0
+    counter2 = 0
+    logHash = ''
 
-    os.chdir("/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_NODE2")
+    os.chdir("/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName)
+    print("open")
     for i in glob.glob("*.txt"):
-        fileNames[counter] = i
-        counter = counter + 1
+        if "Comp" in i:
+            fileNames[counter] = i
+            fileNames[counter] = fileNames[counter].replace(".txt", "")
+            REcounter[counter] = int(str(fileNames[counter])[18])
+            counter = counter + 1
 
     fileNum = fileNames.index('')
+    print(fileNum)
 
     for i in range(fileNum):
-        f = open(fileNames[i], "r")
+        print(fileNames[i])
+        f = open(fileNames[i] + ".txt", "r")
+        for j in range(32):
+            logHash = logHash + f.readline()
+        f.close()
+        logHash = hashlib.sha256(logHash.encode()).hexdigest()
+
+        f = open(fileNames[i] + ".txt", "r")
         for x in f:
-            message3.done = 1
+            message3 = rewriteNode()
+            message3.REcounter = REcounter[i]
             message3.fileName = fileNames[i]
-            message3.SblockTimeStamp = x
+            message3.logFile = x
+            message3.done = 0
+            message3.arrayTransfer = ''
+            message3.logHash = logHash
             pub.publish(message3)
-            rate.sleep()
+            time.sleep(0.1)
 
+        print("finish")
 
+    ########### Live Array Transfer ###########
 
-        # for i in range(Range):
-    #     for j in range(cRange):
-    #         for z in range(Range):
-    #             if SblockTimeStamp[i][j][z] != '':
-    #                 strData = str(i) + ',' + str(j) + ',' + str(z) + ',' + SblockTimeStamp[i][j][z] + ',' + str(
-    #                     SblockTrans[i][j][z]) + ',' + str(SblockProductCode[i][j][z])
-    #                 message3.SblockTimeStamp = strData
-    #                 print(strData)
-    #                 message3.done = 1
-    #                 pub.publish(message3)
-    #                 rate.sleep()
+    for i in range(Range):
+        for j in range(cRange):
+            for z in range(Range):
+                if SblockTimeStamp[i][j][z] != '':
+                    strData = str(i) + ',' + str(j) + ',' + str(z) + ',' + SblockTimeStamp[i][j][z] + ',' + str(
+                        SblockTrans[i][j][z]) + ',' + str(SblockProductCode[i][j][z])
+                    message3.arrayTransfer = strData
+                    print(strData)
+                    message3.done = 1
+                    pub.publish(message3)
+                    rate.sleep()
 
     message3.done = 0
-    message3.SblockTimeStamp = 'hash' # hash of log file
+    message3.logHash = 'hash' # hash of log file
     pub.publish(message3)
     print("finished")
 

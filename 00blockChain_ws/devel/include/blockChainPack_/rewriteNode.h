@@ -24,34 +24,39 @@ struct rewriteNode_
   typedef rewriteNode_<ContainerAllocator> Type;
 
   rewriteNode_()
-    : SblockTimeStamp()
-    , SblockTrans()
-    , SblockProductCode()
-    , SCarrierNumber()
+    : arrayTransfer()
+    , fileName()
+    , logFile()
+    , logHash()
+    , REcounter(0)
     , done(0)  {
     }
   rewriteNode_(const ContainerAllocator& _alloc)
-    : SblockTimeStamp(_alloc)
-    , SblockTrans(_alloc)
-    , SblockProductCode(_alloc)
-    , SCarrierNumber(_alloc)
+    : arrayTransfer(_alloc)
+    , fileName(_alloc)
+    , logFile(_alloc)
+    , logHash(_alloc)
+    , REcounter(0)
     , done(0)  {
   (void)_alloc;
     }
 
 
 
-   typedef std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other >  _SblockTimeStamp_type;
-  _SblockTimeStamp_type SblockTimeStamp;
+   typedef std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other >  _arrayTransfer_type;
+  _arrayTransfer_type arrayTransfer;
 
-   typedef std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other >  _SblockTrans_type;
-  _SblockTrans_type SblockTrans;
+   typedef std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other >  _fileName_type;
+  _fileName_type fileName;
 
-   typedef std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other >  _SblockProductCode_type;
-  _SblockProductCode_type SblockProductCode;
+   typedef std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other >  _logFile_type;
+  _logFile_type logFile;
 
-   typedef std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other >  _SCarrierNumber_type;
-  _SCarrierNumber_type SCarrierNumber;
+   typedef std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other >  _logHash_type;
+  _logHash_type logHash;
+
+   typedef int64_t _REcounter_type;
+  _REcounter_type REcounter;
 
    typedef int64_t _done_type;
   _done_type done;
@@ -134,12 +139,12 @@ struct MD5Sum< ::blockChainPack_::rewriteNode_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "69b49f45a96149b09ab624e642e92d9e";
+    return "ce6d37a12366ea5169180721d54de41b";
   }
 
   static const char* value(const ::blockChainPack_::rewriteNode_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0x69b49f45a96149b0ULL;
-  static const uint64_t static_value2 = 0x9ab624e642e92d9eULL;
+  static const uint64_t static_value1 = 0xce6d37a12366ea51ULL;
+  static const uint64_t static_value2 = 0x69180721d54de41bULL;
 };
 
 template<class ContainerAllocator>
@@ -158,10 +163,11 @@ struct Definition< ::blockChainPack_::rewriteNode_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "string SblockTimeStamp\n\
-string SblockTrans\n\
-string SblockProductCode\n\
-string SCarrierNumber\n\
+    return "string arrayTransfer\n\
+string fileName\n\
+string logFile\n\
+string logHash\n\
+int64 REcounter\n\
 int64 done\n\
 ";
   }
@@ -181,10 +187,11 @@ namespace serialization
   {
     template<typename Stream, typename T> inline static void allInOne(Stream& stream, T m)
     {
-      stream.next(m.SblockTimeStamp);
-      stream.next(m.SblockTrans);
-      stream.next(m.SblockProductCode);
-      stream.next(m.SCarrierNumber);
+      stream.next(m.arrayTransfer);
+      stream.next(m.fileName);
+      stream.next(m.logFile);
+      stream.next(m.logHash);
+      stream.next(m.REcounter);
       stream.next(m.done);
     }
 
@@ -204,14 +211,16 @@ struct Printer< ::blockChainPack_::rewriteNode_<ContainerAllocator> >
 {
   template<typename Stream> static void stream(Stream& s, const std::string& indent, const ::blockChainPack_::rewriteNode_<ContainerAllocator>& v)
   {
-    s << indent << "SblockTimeStamp: ";
-    Printer<std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other > >::stream(s, indent + "  ", v.SblockTimeStamp);
-    s << indent << "SblockTrans: ";
-    Printer<std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other > >::stream(s, indent + "  ", v.SblockTrans);
-    s << indent << "SblockProductCode: ";
-    Printer<std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other > >::stream(s, indent + "  ", v.SblockProductCode);
-    s << indent << "SCarrierNumber: ";
-    Printer<std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other > >::stream(s, indent + "  ", v.SCarrierNumber);
+    s << indent << "arrayTransfer: ";
+    Printer<std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other > >::stream(s, indent + "  ", v.arrayTransfer);
+    s << indent << "fileName: ";
+    Printer<std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other > >::stream(s, indent + "  ", v.fileName);
+    s << indent << "logFile: ";
+    Printer<std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other > >::stream(s, indent + "  ", v.logFile);
+    s << indent << "logHash: ";
+    Printer<std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other > >::stream(s, indent + "  ", v.logHash);
+    s << indent << "REcounter: ";
+    Printer<int64_t>::stream(s, indent + "  ", v.REcounter);
     s << indent << "done: ";
     Printer<int64_t>::stream(s, indent + "  ", v.done);
   }

@@ -1,12 +1,14 @@
 (cl:in-package blockChainPack_-msg)
-(cl:export '(SBLOCKTIMESTAMP-VAL
-          SBLOCKTIMESTAMP
-          SBLOCKTRANS-VAL
-          SBLOCKTRANS
-          SBLOCKPRODUCTCODE-VAL
-          SBLOCKPRODUCTCODE
-          SCARRIERNUMBER-VAL
-          SCARRIERNUMBER
+(cl:export '(ARRAYTRANSFER-VAL
+          ARRAYTRANSFER
+          FILENAME-VAL
+          FILENAME
+          LOGFILE-VAL
+          LOGFILE
+          LOGHASH-VAL
+          LOGHASH
+          RECOUNTER-VAL
+          RECOUNTER
           DONE-VAL
           DONE
 ))
