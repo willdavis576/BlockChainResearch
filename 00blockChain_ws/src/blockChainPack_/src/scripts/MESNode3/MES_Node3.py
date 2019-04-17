@@ -12,7 +12,7 @@ from blockChainPack_.msg import finish
 
 nodeName = "NODE3"  ############### THIS IS WHERE YOU SPECIFY A NODE'S NAME #######################
 port = 4502
-address = '127.0.0.1' #172.21.4.152
+address = '172.21.4.152' #127.0.0.1
 lNodeToRewrite = "NODE1"
 
 Range = 200
@@ -585,12 +585,34 @@ def emitter():
 
     pub = rospy.Publisher('Last_Hash', lastHash, queue_size=100)
 
-    while not rospy.is_shutdown():
+    fileNames = [''] * 200
+    fileAmount = [''] * 50
+    REcounter = [''] * 200
+    counter = 0
+    counter2 = 0
+    logHash = ''
+
+    while not rospy.is_shutdown(): #THIS IS PROBABLY A CPU POWER DRAINER
+
+        os.chdir("/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName)
+        for i in glob.glob("*.txt"):
+            fileAmount[counter2] = i
+            if "Comp" in i:
+                fileNames[counter] = i
+                fileNames[counter] = fileNames[counter].replace(".txt", "")
+                REcounter[counter] = int(str(fileNames[counter])[18])
+                counter = counter + 1
+            counter2 = counter2 + 1
+
+        counter = 0
+        counter2 = 0
+        fileNum = fileAmount.index('')
+
         if emit == True:
             for i in range(len(SblockHash)):
                 for j in range(len(SblockHash[i])):
                     for z in range(len(SblockHash[i][j])):
-                        hashingArray = hashlib.sha256(hashingArray + SblockHash[i][j][z]).hexdigest()
+                        hashingArray = hashlib.sha256(hashingArray + str(fileNum) + SblockHash[i][j][z]).hexdigest()
 
             message2 = lastHash()
             message2.hash = hashingArray
@@ -598,6 +620,7 @@ def emitter():
             pub.publish(message2)
             hashingArray = ''
             time.sleep(1)
+    rate.sleep()
 
 
 def recNewData():
@@ -632,7 +655,7 @@ def callbackRecData(data):
         f.close()
         runYetLoc = 1
 
-    if nodeHacked == nodeName and runYetLoc == 1:
+    if nodeHacked == nodeName and runYetLoc == 1 and data.fileOrArray == "file":
         f = open("/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + '/' + data.fileName, "a")
         f.write(str(data.logFile))
         f.close()
