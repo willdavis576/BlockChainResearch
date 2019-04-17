@@ -7,15 +7,13 @@ import struct
 
 
 class finish(genpy.Message):
-  _md5sum = "1efba28662379f734d4ad8a51cd40130"
+  _md5sum = "32144edba68833e7b59cc9286ebcccc6"
   _type = "blockChainPack_/finish"
   _has_header = False #flag to mark the presence of a Header object
-  _full_text = """int64 carrierID
-int64 order
-int64 counter
+  _full_text = """int64 compFiles
 """
-  __slots__ = ['carrierID','order','counter']
-  _slot_types = ['int64','int64','int64']
+  __slots__ = ['compFiles']
+  _slot_types = ['int64']
 
   def __init__(self, *args, **kwds):
     """
@@ -25,7 +23,7 @@ int64 counter
     changes.  You cannot mix in-order arguments and keyword arguments.
 
     The available fields are:
-       carrierID,order,counter
+       compFiles
 
     :param args: complete set of field values, in .msg order
     :param kwds: use keyword arguments corresponding to message field names
@@ -34,16 +32,10 @@ int64 counter
     if args or kwds:
       super(finish, self).__init__(*args, **kwds)
       #message fields cannot be None, assign default values for those that are
-      if self.carrierID is None:
-        self.carrierID = 0
-      if self.order is None:
-        self.order = 0
-      if self.counter is None:
-        self.counter = 0
+      if self.compFiles is None:
+        self.compFiles = 0
     else:
-      self.carrierID = 0
-      self.order = 0
-      self.counter = 0
+      self.compFiles = 0
 
   def _get_types(self):
     """
@@ -57,8 +49,7 @@ int64 counter
     :param buff: buffer, ``StringIO``
     """
     try:
-      _x = self
-      buff.write(_get_struct_3q().pack(_x.carrierID, _x.order, _x.counter))
+      buff.write(_get_struct_q().pack(self.compFiles))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -69,10 +60,9 @@ int64 counter
     """
     try:
       end = 0
-      _x = self
       start = end
-      end += 24
-      (_x.carrierID, _x.order, _x.counter,) = _get_struct_3q().unpack(str[start:end])
+      end += 8
+      (self.compFiles,) = _get_struct_q().unpack(str[start:end])
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
@@ -85,8 +75,7 @@ int64 counter
     :param numpy: numpy python module
     """
     try:
-      _x = self
-      buff.write(_get_struct_3q().pack(_x.carrierID, _x.order, _x.counter))
+      buff.write(_get_struct_q().pack(self.compFiles))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -98,10 +87,9 @@ int64 counter
     """
     try:
       end = 0
-      _x = self
       start = end
-      end += 24
-      (_x.carrierID, _x.order, _x.counter,) = _get_struct_3q().unpack(str[start:end])
+      end += 8
+      (self.compFiles,) = _get_struct_q().unpack(str[start:end])
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
@@ -110,9 +98,9 @@ _struct_I = genpy.struct_I
 def _get_struct_I():
     global _struct_I
     return _struct_I
-_struct_3q = None
-def _get_struct_3q():
-    global _struct_3q
-    if _struct_3q is None:
-        _struct_3q = struct.Struct("<3q")
-    return _struct_3q
+_struct_q = None
+def _get_struct_q():
+    global _struct_q
+    if _struct_q is None:
+        _struct_q = struct.Struct("<q")
+    return _struct_q

@@ -24,27 +24,17 @@ struct finish_
   typedef finish_<ContainerAllocator> Type;
 
   finish_()
-    : carrierID(0)
-    , order(0)
-    , counter(0)  {
+    : compFiles(0)  {
     }
   finish_(const ContainerAllocator& _alloc)
-    : carrierID(0)
-    , order(0)
-    , counter(0)  {
+    : compFiles(0)  {
   (void)_alloc;
     }
 
 
 
-   typedef int64_t _carrierID_type;
-  _carrierID_type carrierID;
-
-   typedef int64_t _order_type;
-  _order_type order;
-
-   typedef int64_t _counter_type;
-  _counter_type counter;
+   typedef int64_t _compFiles_type;
+  _compFiles_type compFiles;
 
 
 
@@ -124,12 +114,12 @@ struct MD5Sum< ::blockChainPack_::finish_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "1efba28662379f734d4ad8a51cd40130";
+    return "32144edba68833e7b59cc9286ebcccc6";
   }
 
   static const char* value(const ::blockChainPack_::finish_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0x1efba28662379f73ULL;
-  static const uint64_t static_value2 = 0x4d4ad8a51cd40130ULL;
+  static const uint64_t static_value1 = 0x32144edba68833e7ULL;
+  static const uint64_t static_value2 = 0xb59cc9286ebcccc6ULL;
 };
 
 template<class ContainerAllocator>
@@ -148,9 +138,7 @@ struct Definition< ::blockChainPack_::finish_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "int64 carrierID\n\
-int64 order\n\
-int64 counter\n\
+    return "int64 compFiles\n\
 ";
   }
 
@@ -169,9 +157,7 @@ namespace serialization
   {
     template<typename Stream, typename T> inline static void allInOne(Stream& stream, T m)
     {
-      stream.next(m.carrierID);
-      stream.next(m.order);
-      stream.next(m.counter);
+      stream.next(m.compFiles);
     }
 
     ROS_DECLARE_ALLINONE_SERIALIZER
@@ -190,12 +176,8 @@ struct Printer< ::blockChainPack_::finish_<ContainerAllocator> >
 {
   template<typename Stream> static void stream(Stream& s, const std::string& indent, const ::blockChainPack_::finish_<ContainerAllocator>& v)
   {
-    s << indent << "carrierID: ";
-    Printer<int64_t>::stream(s, indent + "  ", v.carrierID);
-    s << indent << "order: ";
-    Printer<int64_t>::stream(s, indent + "  ", v.order);
-    s << indent << "counter: ";
-    Printer<int64_t>::stream(s, indent + "  ", v.counter);
+    s << indent << "compFiles: ";
+    Printer<int64_t>::stream(s, indent + "  ", v.compFiles);
   }
 };
 

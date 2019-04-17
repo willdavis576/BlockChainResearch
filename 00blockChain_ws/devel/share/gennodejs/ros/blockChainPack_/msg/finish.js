@@ -18,40 +18,22 @@ class finish {
   constructor(initObj={}) {
     if (initObj === null) {
       // initObj === null is a special case for deserialization where we don't initialize fields
-      this.carrierID = null;
-      this.order = null;
-      this.counter = null;
+      this.compFiles = null;
     }
     else {
-      if (initObj.hasOwnProperty('carrierID')) {
-        this.carrierID = initObj.carrierID
+      if (initObj.hasOwnProperty('compFiles')) {
+        this.compFiles = initObj.compFiles
       }
       else {
-        this.carrierID = 0;
-      }
-      if (initObj.hasOwnProperty('order')) {
-        this.order = initObj.order
-      }
-      else {
-        this.order = 0;
-      }
-      if (initObj.hasOwnProperty('counter')) {
-        this.counter = initObj.counter
-      }
-      else {
-        this.counter = 0;
+        this.compFiles = 0;
       }
     }
   }
 
   static serialize(obj, buffer, bufferOffset) {
     // Serializes a message object of type finish
-    // Serialize message field [carrierID]
-    bufferOffset = _serializer.int64(obj.carrierID, buffer, bufferOffset);
-    // Serialize message field [order]
-    bufferOffset = _serializer.int64(obj.order, buffer, bufferOffset);
-    // Serialize message field [counter]
-    bufferOffset = _serializer.int64(obj.counter, buffer, bufferOffset);
+    // Serialize message field [compFiles]
+    bufferOffset = _serializer.int64(obj.compFiles, buffer, bufferOffset);
     return bufferOffset;
   }
 
@@ -59,17 +41,13 @@ class finish {
     //deserializes a message object of type finish
     let len;
     let data = new finish(null);
-    // Deserialize message field [carrierID]
-    data.carrierID = _deserializer.int64(buffer, bufferOffset);
-    // Deserialize message field [order]
-    data.order = _deserializer.int64(buffer, bufferOffset);
-    // Deserialize message field [counter]
-    data.counter = _deserializer.int64(buffer, bufferOffset);
+    // Deserialize message field [compFiles]
+    data.compFiles = _deserializer.int64(buffer, bufferOffset);
     return data;
   }
 
   static getMessageSize(object) {
-    return 24;
+    return 8;
   }
 
   static datatype() {
@@ -79,15 +57,13 @@ class finish {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return '1efba28662379f734d4ad8a51cd40130';
+    return '32144edba68833e7b59cc9286ebcccc6';
   }
 
   static messageDefinition() {
     // Returns full string definition for message
     return `
-    int64 carrierID
-    int64 order
-    int64 counter
+    int64 compFiles
     
     `;
   }
@@ -98,25 +74,11 @@ class finish {
       msg = {};
     }
     const resolved = new finish(null);
-    if (msg.carrierID !== undefined) {
-      resolved.carrierID = msg.carrierID;
+    if (msg.compFiles !== undefined) {
+      resolved.compFiles = msg.compFiles;
     }
     else {
-      resolved.carrierID = 0
-    }
-
-    if (msg.order !== undefined) {
-      resolved.order = msg.order;
-    }
-    else {
-      resolved.order = 0
-    }
-
-    if (msg.counter !== undefined) {
-      resolved.counter = msg.counter;
-    }
-    else {
-      resolved.counter = 0
+      resolved.compFiles = 0
     }
 
     return resolved;
