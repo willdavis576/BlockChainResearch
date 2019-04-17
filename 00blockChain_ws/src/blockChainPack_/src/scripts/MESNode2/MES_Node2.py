@@ -853,6 +853,7 @@ def rewriteNodes():
             for z in range(32):
                 message3 = rewriteNode()
                 time.sleep(0.1)
+
                 message3.REcounter = REcounter[i]
                 message3.fileName = fileNames[i]
                 message3.logFile = f.readline()
@@ -863,8 +864,8 @@ def rewriteNodes():
                 pub.publish(message3)
                 time.sleep(0.1)
 
-            print("finish")
-
+            # print("finish")
+            # 
             message3.REcounter = 0
             message3.fileName = ''
             message3.logFile = ''
@@ -876,18 +877,19 @@ def rewriteNodes():
 
     ########### Live Array Transfer ###########
 
-    # for i in range(Range):
-    #     for j in range(cRange):
-    #         for z in range(Range):
-    #             if SblockTimeStamp[i][j][z] != '':
-    #                 strData = str(i) + ',' + str(j) + ',' + str(z) + ',' + SblockTimeStamp[i][j][z] + ',' + str(
-    #                     SblockTrans[i][j][z]) + ',' + str(SblockProductCode[i][j][z])
-    #                 message3.arrayTransfer = strData
-    #                 print(strData)
-    #
-    #                 message3.done = 1
-    #                 pub.publish(message3)
-    #                 rate.sleep()
+    for i in range(Range):
+        for j in range(cRange):
+            for z in range(Range):
+                if SblockTimeStamp[i][j][z] != '':
+                    strData = str(i) + ',' + str(j) + ',' + str(z) + ',' + SblockTimeStamp[i][j][z] + ',' + str(
+                        SblockTrans[i][j][z]) + ',' + str(SblockProductCode[i][j][z])
+                    message3.arrayTransfer = strData
+                    print(strData)
+
+                    message3.done = 1
+                    pub.publish(message3)
+                    rate.sleep()
+
 
     message3.done = 0
     pub.publish(message3)
