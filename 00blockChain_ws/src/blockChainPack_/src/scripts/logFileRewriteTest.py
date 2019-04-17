@@ -47,18 +47,20 @@ def main():
             logHash = logHash + f.readline()
         f.close()
         logHash = hashlib.sha256(logHash.encode()).hexdigest()
+        print(logHash)
 
         f = open(fileNames[i] + ".txt", "r")
-        for x in f:
+        for z in range(32):
             message3 = rewriteNode()
+            time.sleep(0.1)
             message3.REcounter = REcounter[i]
             message3.fileName = fileNames[i]
-            message3.logFile = x
+            message3.logFile = f.readline()
             message3.done = 0
-            message3.arrayTransfer = ''
+            # message3.arrayTransfer = ''
             message3.logHash = logHash
             pub.publish(message3)
-            time.sleep(0.05)
+            time.sleep(0.1)
 
         print("finish")
 

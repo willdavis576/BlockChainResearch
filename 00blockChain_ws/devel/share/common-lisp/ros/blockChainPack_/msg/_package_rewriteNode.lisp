@@ -7,8 +7,12 @@
           LOGFILE
           LOGHASH-VAL
           LOGHASH
+          FILEORARRAY-VAL
+          FILEORARRAY
           RECOUNTER-VAL
           RECOUNTER
+          CARRIER-VAL
+          CARRIER
           DONE-VAL
           DONE
 ))

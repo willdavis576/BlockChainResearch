@@ -1,5 +1,5 @@
 #! /usr/bin/python
-import hashlib, sys, random, rospy, threading, time, socket, os
+import hashlib, sys, random, rospy, threading, time, socket, os, glob
 from datetime import datetime
 from collections import Counter
 from blockChainPack_.msg import blockDetail
@@ -12,7 +12,7 @@ from blockChainPack_.msg import finish
 
 nodeName = "NODE1"  ############### THIS IS WHERE YOU SPECIFY A NODE'S NAME #######################
 port = 4500
-address = '172.21.4.152'
+address = '127.0.0.1' #172.21.4.152
 lNodeToRewrite = "NODE2"
 
 Range = 200
@@ -108,6 +108,8 @@ hashingArray = ''
 # Rewrite
 nodeToRewrite = 10
 Rdone = 0
+logHash = ''
+runYetLoc = [['' for _ in range(Range)] for _ in range(Range)]
 
 # authTrigger
 mostCommonHash = ''
@@ -419,6 +421,10 @@ def callback(data):
                         tcpCarrierNumber) + "Comp" + str(REcounter[int(data.carrierID)]) + ".txt")
                 block[tcpOrderNumber][tcpCarrierNumber] = [''] * Range
                 SCarrierNumber[tcpOrderNumber][tcpCarrierNumber] = [''] * Range
+                SblockHash[tcpOrderNumber][tcpCarrierNumber] = [''] * Range
+                SblockTimeStamp[tcpOrderNumber][tcpCarrierNumber] = [''] * Range
+                SblockTrans[tcpOrderNumber][tcpCarrierNumber] = [''] * Range
+                SblockProductCode[tcpOrderNumber][tcpCarrierNumber] = [''] * Range
                 runYet[tcpOrderNumber][tcpCarrierNumber] = ''
                 wipe = True
                 REcounter[int(data.carrierID)] = REcounter[int(data.carrierID)] + 1
@@ -611,140 +617,170 @@ def callbackRecData(data):
     global nodeHacked
     global stationHistory
     global REcounter
+    global runYetLoc
+    global logHash
+
+
+
 
     # 32,3,1,18:54:01 - 19/03/2019,1,211
     # 32,3,0,09:57:40 - 06/04/2019,Start production,211
+    if nodeHacked == nodeName and runYetLoc == 0 and data.fileOrArray == "file":
+        REcounter = [0] * Range
+        REcounter[data.carrier] = data.REcounter
+        f = open("/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + '/' + data.fileName, "w")
+        f.close()
+        runYetLoc = 1
 
-    dataSplit = data.SblockTimeStamp.split(",")
+    if nodeHacked == nodeName and runYetLoc == 1:
+        f = open("/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + '/' + data.fileName, "a")
+        f.write(str(data.logFile))
+        f.close()
 
-    dOrder = int(dataSplit[0])
-    dCarrier = int(dataSplit[1])
-    dBlock = int(dataSplit[2])
-    dHour = str((dataSplit[3])[0] + (dataSplit[3])[1])
-    dMinute = str((dataSplit[3])[3] + (dataSplit[3])[4])
-    dSecond = str((dataSplit[3])[6] + (dataSplit[3])[7])
-    dDay = str((dataSplit[3])[11] + (dataSplit[3])[12])
-    dMonth = str((dataSplit[3])[14] + (dataSplit[3])[15])
-    dYear = str((dataSplit[3])[17] + (dataSplit[3])[18] + (dataSplit[3])[19] + (dataSplit[3])[20])
-    dStation = dataSplit[4]
-    dProductCode = int(dataSplit[5])
+    # f = open("/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + '/' + data.fileName, "r")
+    # for j in range(32):
+    #     logHash = logHash + f.readline()
+    #
+    # logHash = hashlib.sha256(logHash.encode()).hexdigest()
+    #
+    # print(logHash)
 
-    try:
-        if data.done == 1 and Rdone == 0 and nodeHacked == nodeName:
-            print("rewriting")
-            SblockHash = [[['' for _ in range(Range)] for _ in range(cRange)] for _ in range(Range)]
-            block = [[['' for _ in range(Range)] for _ in range(cRange)] for _ in range(Range)]
-            Rdone = 1
-            runYet = [['' for _ in range(Range)] for _ in range(Range)]
-            stationHistory = [['' for _ in range(4)] for _ in range(5)]
-            REcounter = [0] * Range
+    if data.fileOrArray == "array":
 
-    except:
-        print("init wipe didn't work")
+        dataSplit = data.arrayTransfer.split(",")
 
-    # try:
-    if nodeHacked == nodeName and data.done == 1:
+        dOrder = int(dataSplit[0])
+        dCarrier = int(dataSplit[1])
+        dBlock = int(dataSplit[2])
+        dHour = str((dataSplit[3])[0] + (dataSplit[3])[1])
+        dMinute = str((dataSplit[3])[3] + (dataSplit[3])[4])
+        dSecond = str((dataSplit[3])[6] + (dataSplit[3])[7])
+        dDay = str((dataSplit[3])[11] + (dataSplit[3])[12])
+        dMonth = str((dataSplit[3])[14] + (dataSplit[3])[15])
+        dYear = str((dataSplit[3])[17] + (dataSplit[3])[18] + (dataSplit[3])[19] + (dataSplit[3])[20])
+        dStation = dataSplit[4]
+        dProductCode = int(dataSplit[5])
 
-        if dStation == "Start production":
-            stationHistory[int(dCarrier)][0] = str(dStation)
-            print("1")
-            # print(data.SblockTimeStamp)
-            block[int(dOrder)][int(dCarrier)][int(dBlock)] = blockChain(previousHash='',
-                                                                        station=dStation,
-                                                                        productCode=dProductCode,
-                                                                        orderNumber=dOrder,
-                                                                        carrierID=dCarrier,
-                                                                        seconds=dSecond,
-                                                                        minutes=dMinute,
-                                                                        hours=dHour,
-                                                                        days=dDay,
-                                                                        months=dMonth,
-                                                                        years=dYear)
-            print("1.1")
 
-            SblockHash[dOrder][dCarrier][dBlock] = block[dOrder][dCarrier][dBlock].getBlockHash()
-            print("1.2")
 
-            data_to_print = "Time Stamp for Block: {0}\nStation: {1}\nOrder Number: {2}\nCarrierID: {3}\nProduct Code: {4}\nBlock Hash: {5}\nPrevious Hash: ".format(
-                dataSplit[3], dStation, int(dOrder) + 1264, dCarrier, int(dProductCode), SblockHash[dOrder][dCarrier][dBlock])
-            # print(block[dOrder][dCarrier][dBlock].getBlockHash())
+        try:
+            if data.done == 1 and Rdone == 0 and nodeHacked == nodeName:
+                print("rewriting")
+                SblockHash = [[['' for _ in range(Range)] for _ in range(cRange)] for _ in range(Range)]
+                block = [[['' for _ in range(Range)] for _ in range(cRange)] for _ in range(Range)]
+                Rdone = 1
+                runYet = [['' for _ in range(Range)] for _ in range(Range)]
+                stationHistory = [['' for _ in range(4)] for _ in range(5)]
+                REcounter = [0] * Range
 
-        if dStation != "Start production":
-            stationHistory[int(dCarrier)][int(dStation)] = str(dStation)
-            print("2")
-            # print(data.SblockTimeStamp)
-            block[int(dOrder)][int(dCarrier)][int(dBlock)] = blockChain(
-                previousHash=block[int(dOrder)][int(dCarrier)][int(dBlock) - 1].getBlockHash(),
-                station=dStation,
-                productCode=dProductCode,
-                orderNumber=dOrder,
-                carrierID=dCarrier,
-                seconds=dSecond,
-                minutes=dMinute,
-                hours=dHour,
-                days=dDay,
-                months=dMonth,
-                years=dYear)
-            print("2.1")
+        except:
+            print("init wipe didn't work")
 
-            SblockHash[dOrder][dCarrier][dBlock] = block[dOrder][dCarrier][dBlock].getBlockHash()
-            # print(block[dOrder][dCarrier][dBlock].getBlockHash())
+        # try:
+        if nodeHacked == nodeName and data.done == 1:
 
-            print("2.2")
-            data_to_print = "Time Stamp for Block: {0}\nStation: {1}\nOrder Number: {2}\nCarrierID: {3}\nProduct Code: {4}\nBlock Hash: {5}\nPrevious Hash: {6}".format(
-                dataSplit[3], dStation, int(dOrder) + 1264, dCarrier, int(dProductCode), SblockHash[dOrder][dCarrier][dBlock],
-                block[int(dOrder)][int(dCarrier)][int(dBlock) - 1].getBlockHash())
+            if dStation == "Start production":
+                stationHistory[int(dCarrier)][0] = str(dStation)
+                print("1")
+                # print(data.SblockTimeStamp)
+                block[int(dOrder)][int(dCarrier)][int(dBlock)] = blockChain(previousHash='',
+                                                                            station=dStation,
+                                                                            productCode=dProductCode,
+                                                                            orderNumber=dOrder,
+                                                                            carrierID=dCarrier,
+                                                                            seconds=dSecond,
+                                                                            minutes=dMinute,
+                                                                            hours=dHour,
+                                                                            days=dDay,
+                                                                            months=dMonth,
+                                                                            years=dYear)
+                print("1.1")
 
-        print("3")
+                SblockHash[dOrder][dCarrier][dBlock] = block[dOrder][dCarrier][dBlock].getBlockHash()
+                print("1.2")
 
-        print("3.1")
+                data_to_print = "Time Stamp for Block: {0}\nStation: {1}\nOrder Number: {2}\nCarrierID: {3}\nProduct Code: {4}\nBlock Hash: {5}\nPrevious Hash: ".format(
+                    dataSplit[3], dStation, int(dOrder) + 1264, dCarrier, int(dProductCode), SblockHash[dOrder][dCarrier][dBlock])
+                # print(block[dOrder][dCarrier][dBlock].getBlockHash())
 
-        if stationHistory[int(dCarrier)] == ['Start production', '1', '2', '3']:
-            os.rename(
-                "/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + "/Product" + str(
+            if dStation != "Start production":
+                stationHistory[int(dCarrier)][int(dStation)] = str(dStation)
+                print("2")
+                # print(data.SblockTimeStamp)
+                block[int(dOrder)][int(dCarrier)][int(dBlock)] = blockChain(
+                    previousHash=block[int(dOrder)][int(dCarrier)][int(dBlock) - 1].getBlockHash(),
+                    station=dStation,
+                    productCode=dProductCode,
+                    orderNumber=dOrder,
+                    carrierID=dCarrier,
+                    seconds=dSecond,
+                    minutes=dMinute,
+                    hours=dHour,
+                    days=dDay,
+                    months=dMonth,
+                    years=dYear)
+                print("2.1")
+
+                SblockHash[dOrder][dCarrier][dBlock] = block[dOrder][dCarrier][dBlock].getBlockHash()
+                # print(block[dOrder][dCarrier][dBlock].getBlockHash())
+
+                print("2.2")
+                data_to_print = "Time Stamp for Block: {0}\nStation: {1}\nOrder Number: {2}\nCarrierID: {3}\nProduct Code: {4}\nBlock Hash: {5}\nPrevious Hash: {6}".format(
+                    dataSplit[3], dStation, int(dOrder) + 1264, dCarrier, int(dProductCode), SblockHash[dOrder][dCarrier][dBlock],
+                    block[int(dOrder)][int(dCarrier)][int(dBlock) - 1].getBlockHash())
+
+            print("3")
+
+            print("3.1")
+
+            if stationHistory[int(dCarrier)] == ['Start production', '1', '2', '3']:
+                os.rename(
+                    "/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + "/Product" + str(
+                        int(dOrder) + 1264) + "C:" + str(
+                        int(dCarrier)) + ".txt",
+                    "/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + "/Product" + str(
+                        int(dOrder) + 1264) + "C:" + str(
+                        int(dCarrier)) + "Comp" + str(REcounter[int(dCarrier)]) + ".txt")
+                block[dOrder][dCarrier] = [''] * Range
+                SCarrierNumber[dOrder][dCarrier] = [''] * Range
+                stationHistory[int(dCarrier)] = [''] * 4
+                runYet[dOrder][dCarrier] = ''
+                REcounter[int(dCarrier)] = REcounter[int(dCarrier)] + 1
+
+            if runYet[int(dOrder)][int(dCarrier)] == '':
+                f = open("/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + "/Product" + str(
                     int(dOrder) + 1264) + "C:" + str(
-                    int(dCarrier)) + ".txt",
-                "/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + "/Product" + str(
+                    int(dCarrier)) + ".txt", "w")
+                f.close()
+                runYet[int(dOrder)][int(dCarrier)] = "1"
+
+            print("3.2")
+
+            if runYet[int(dOrder)][int(dCarrier)] == "1":
+                f = open("/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + "/Product" + str(
                     int(dOrder) + 1264) + "C:" + str(
-                    int(dCarrier)) + "Comp" + str(REcounter[int(dCarrier)]) + ".txt")
-            block[dOrder][dCarrier] = [''] * Range
-            SCarrierNumber[dOrder][dCarrier] = [''] * Range
-            stationHistory[int(dCarrier)] = [''] * 4
-            runYet[dOrder][dCarrier] = ''
-            REcounter[int(dCarrier)] = REcounter[int(dCarrier)] + 1
+                    int(dCarrier)) + ".txt", "a")
+                f.write(str(data_to_print))
+                f.write("\n-------------------------------\n")
+                f.close()
 
-        if runYet[int(dOrder)][int(dCarrier)] == '':
-            f = open("/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + "/Product" + str(
-                int(dOrder) + 1264) + "C:" + str(
-                int(dCarrier)) + ".txt", "w")
-            f.close()
-            runYet[int(dOrder)][int(dCarrier)] = "1"
+            print("3.3")
 
-        print("3.2")
+            if data.done == 0:
+                hashingArray = ''
+                time.sleep(1)
+                Rdone = 0
+                for i in range(len(SblockHash)):
+                    for j in range(len(SblockHash[i])):
+                        for z in range(len(SblockHash[i][j])):
+                            hashingArray = hashlib.sha256(hashingArray + SblockHash[i][j][z]).hexdigest()
 
-        if runYet[int(dOrder)][int(dCarrier)] == "1":
-            f = open("/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + "/Product" + str(
-                int(dOrder) + 1264) + "C:" + str(
-                int(dCarrier)) + ".txt", "a")
-            f.write(str(data_to_print))
-            f.write("\n-------------------------------\n")
-            f.close()
+                print("2.3")
 
-        print("3.3")
+                print(hashingArray)
+                print("got rewritten - live array transfer")
 
-        if data.done == 0:
-            hashingArray = ''
-            time.sleep(1)
-            Rdone = 0
-            for i in range(len(SblockHash)):
-                for j in range(len(SblockHash[i])):
-                    for z in range(len(SblockHash[i][j])):
-                        hashingArray = hashlib.sha256(hashingArray + SblockHash[i][j][z]).hexdigest()
 
-            print("2.3")
-
-            print(hashingArray)
-            print("got rewritten")
 
     # except:
     #     print("couldn't rewrite")
@@ -769,12 +805,66 @@ def rewriteNodes():
     # if nodeNumber == int(nodeName[4]) + 1 :
     # this node will rewrite the hacked node
 
+    ########### Log file transfer ###########
+
     strData = ''
 
     print("rewrite commence")
     message3 = rewriteNode()
 
-    # TimeStamp
+    fileNames = [''] * 200
+    REcounter = [''] * 200
+    counter = 0
+    counter2 = 0
+    logHash = ''
+
+    os.chdir("/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName)
+    print("open")
+    for i in glob.glob("*.txt"):
+        if "Comp" in i:
+            fileNames[counter] = i
+            fileNames[counter] = fileNames[counter].replace(".txt", "")
+            REcounter[counter] = int(str(fileNames[counter])[18])
+            counter = counter + 1
+
+    fileNum = fileNames.index('')
+    print(fileNum)
+
+    for i in range(fileNum):
+        print(fileNames[i])
+        f = open(fileNames[i] + ".txt", "r")
+        for j in range(32):
+            logHash = logHash + f.readline()
+        f.close()
+        logHash = hashlib.sha256(logHash.encode()).hexdigest()
+        print(logHash)
+
+        f = open(fileNames[i] + ".txt", "r")
+        for z in range(32):
+            message3 = rewriteNode()
+            time.sleep(0.1)
+            message3.REcounter = REcounter[i]
+            message3.fileName = fileNames[i]
+            message3.logFile = f.readline()
+            message3.done = 0
+            # message3.arrayTransfer = ''
+            message3.logHash = logHash
+            message3.fileOrArray = "file"
+            pub.publish(message3)
+            time.sleep(0.1)
+
+        print("finish")
+
+        message3.REcounter = 0
+        message3.fileName = ''
+        message3.logFile = ''
+        message3.done = 0
+        # message3.arrayTransfer = ''
+        message3.logHash = ''
+        message3.fileOrArray = "array"
+
+
+    ########### Live Array Transfer ###########
 
     for i in range(Range):
         for j in range(cRange):
@@ -782,9 +872,12 @@ def rewriteNodes():
                 if SblockTimeStamp[i][j][z] != '':
                     strData = str(i) + ',' + str(j) + ',' + str(z) + ',' + SblockTimeStamp[i][j][z] + ',' + str(
                         SblockTrans[i][j][z]) + ',' + str(SblockProductCode[i][j][z])
-                    message3.SblockTimeStamp = strData
+                    message3.arrayTransfer = strData
+                    print(strData)
+
                     message3.done = 1
                     pub.publish(message3)
+                    rate.sleep()
 
     message3.done = 0
     pub.publish(message3)

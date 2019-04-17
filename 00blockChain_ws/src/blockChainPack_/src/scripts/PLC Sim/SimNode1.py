@@ -13,7 +13,7 @@ def main():
             s.sendall('1' + ',1296,' + str(i + 1) + ',211,01,54,18,19,03,2019')
             print(str('1') + ',1296,' + str(i + 1) + ',211,01,54,18,19,03,2019')
             s.sendall('                                ')
-            time.sleep(12)
+            time.sleep(15)
 
 
 if __name__ == '__main__':

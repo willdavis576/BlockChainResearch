@@ -7,18 +7,20 @@ import struct
 
 
 class rewriteNode(genpy.Message):
-  _md5sum = "ce6d37a12366ea5169180721d54de41b"
+  _md5sum = "085590d527d397fa9632b68bed17ef19"
   _type = "blockChainPack_/rewriteNode"
   _has_header = False #flag to mark the presence of a Header object
   _full_text = """string arrayTransfer
 string fileName
 string logFile
 string logHash
+string fileOrArray
 int64 REcounter
+int64 carrier
 int64 done
 """
-  __slots__ = ['arrayTransfer','fileName','logFile','logHash','REcounter','done']
-  _slot_types = ['string','string','string','string','int64','int64']
+  __slots__ = ['arrayTransfer','fileName','logFile','logHash','fileOrArray','REcounter','carrier','done']
+  _slot_types = ['string','string','string','string','string','int64','int64','int64']
 
   def __init__(self, *args, **kwds):
     """
@@ -28,7 +30,7 @@ int64 done
     changes.  You cannot mix in-order arguments and keyword arguments.
 
     The available fields are:
-       arrayTransfer,fileName,logFile,logHash,REcounter,done
+       arrayTransfer,fileName,logFile,logHash,fileOrArray,REcounter,carrier,done
 
     :param args: complete set of field values, in .msg order
     :param kwds: use keyword arguments corresponding to message field names
@@ -45,8 +47,12 @@ int64 done
         self.logFile = ''
       if self.logHash is None:
         self.logHash = ''
+      if self.fileOrArray is None:
+        self.fileOrArray = ''
       if self.REcounter is None:
         self.REcounter = 0
+      if self.carrier is None:
+        self.carrier = 0
       if self.done is None:
         self.done = 0
     else:
@@ -54,7 +60,9 @@ int64 done
       self.fileName = ''
       self.logFile = ''
       self.logHash = ''
+      self.fileOrArray = ''
       self.REcounter = 0
+      self.carrier = 0
       self.done = 0
 
   def _get_types(self):
@@ -93,8 +101,14 @@ int64 done
         _x = _x.encode('utf-8')
         length = len(_x)
       buff.write(struct.pack('<I%ss'%length, length, _x))
+      _x = self.fileOrArray
+      length = len(_x)
+      if python3 or type(_x) == unicode:
+        _x = _x.encode('utf-8')
+        length = len(_x)
+      buff.write(struct.pack('<I%ss'%length, length, _x))
       _x = self
-      buff.write(_get_struct_2q().pack(_x.REcounter, _x.done))
+      buff.write(_get_struct_3q().pack(_x.REcounter, _x.carrier, _x.done))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -141,10 +155,19 @@ int64 done
         self.logHash = str[start:end].decode('utf-8')
       else:
         self.logHash = str[start:end]
+      start = end
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      start = end
+      end += length
+      if python3:
+        self.fileOrArray = str[start:end].decode('utf-8')
+      else:
+        self.fileOrArray = str[start:end]
       _x = self
       start = end
-      end += 16
-      (_x.REcounter, _x.done,) = _get_struct_2q().unpack(str[start:end])
+      end += 24
+      (_x.REcounter, _x.carrier, _x.done,) = _get_struct_3q().unpack(str[start:end])
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
@@ -181,8 +204,14 @@ int64 done
         _x = _x.encode('utf-8')
         length = len(_x)
       buff.write(struct.pack('<I%ss'%length, length, _x))
+      _x = self.fileOrArray
+      length = len(_x)
+      if python3 or type(_x) == unicode:
+        _x = _x.encode('utf-8')
+        length = len(_x)
+      buff.write(struct.pack('<I%ss'%length, length, _x))
       _x = self
-      buff.write(_get_struct_2q().pack(_x.REcounter, _x.done))
+      buff.write(_get_struct_3q().pack(_x.REcounter, _x.carrier, _x.done))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -230,10 +259,19 @@ int64 done
         self.logHash = str[start:end].decode('utf-8')
       else:
         self.logHash = str[start:end]
+      start = end
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      start = end
+      end += length
+      if python3:
+        self.fileOrArray = str[start:end].decode('utf-8')
+      else:
+        self.fileOrArray = str[start:end]
       _x = self
       start = end
-      end += 16
-      (_x.REcounter, _x.done,) = _get_struct_2q().unpack(str[start:end])
+      end += 24
+      (_x.REcounter, _x.carrier, _x.done,) = _get_struct_3q().unpack(str[start:end])
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
@@ -242,9 +280,9 @@ _struct_I = genpy.struct_I
 def _get_struct_I():
     global _struct_I
     return _struct_I
-_struct_2q = None
-def _get_struct_2q():
-    global _struct_2q
-    if _struct_2q is None:
-        _struct_2q = struct.Struct("<2q")
-    return _struct_2q
+_struct_3q = None
+def _get_struct_3q():
+    global _struct_3q
+    if _struct_3q is None:
+        _struct_3q = struct.Struct("<3q")
+    return _struct_3q

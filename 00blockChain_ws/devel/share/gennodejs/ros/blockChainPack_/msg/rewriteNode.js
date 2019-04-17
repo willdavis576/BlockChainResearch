@@ -22,7 +22,9 @@ class rewriteNode {
       this.fileName = null;
       this.logFile = null;
       this.logHash = null;
+      this.fileOrArray = null;
       this.REcounter = null;
+      this.carrier = null;
       this.done = null;
     }
     else {
@@ -50,11 +52,23 @@ class rewriteNode {
       else {
         this.logHash = '';
       }
+      if (initObj.hasOwnProperty('fileOrArray')) {
+        this.fileOrArray = initObj.fileOrArray
+      }
+      else {
+        this.fileOrArray = '';
+      }
       if (initObj.hasOwnProperty('REcounter')) {
         this.REcounter = initObj.REcounter
       }
       else {
         this.REcounter = 0;
+      }
+      if (initObj.hasOwnProperty('carrier')) {
+        this.carrier = initObj.carrier
+      }
+      else {
+        this.carrier = 0;
       }
       if (initObj.hasOwnProperty('done')) {
         this.done = initObj.done
@@ -75,8 +89,12 @@ class rewriteNode {
     bufferOffset = _serializer.string(obj.logFile, buffer, bufferOffset);
     // Serialize message field [logHash]
     bufferOffset = _serializer.string(obj.logHash, buffer, bufferOffset);
+    // Serialize message field [fileOrArray]
+    bufferOffset = _serializer.string(obj.fileOrArray, buffer, bufferOffset);
     // Serialize message field [REcounter]
     bufferOffset = _serializer.int64(obj.REcounter, buffer, bufferOffset);
+    // Serialize message field [carrier]
+    bufferOffset = _serializer.int64(obj.carrier, buffer, bufferOffset);
     // Serialize message field [done]
     bufferOffset = _serializer.int64(obj.done, buffer, bufferOffset);
     return bufferOffset;
@@ -94,8 +112,12 @@ class rewriteNode {
     data.logFile = _deserializer.string(buffer, bufferOffset);
     // Deserialize message field [logHash]
     data.logHash = _deserializer.string(buffer, bufferOffset);
+    // Deserialize message field [fileOrArray]
+    data.fileOrArray = _deserializer.string(buffer, bufferOffset);
     // Deserialize message field [REcounter]
     data.REcounter = _deserializer.int64(buffer, bufferOffset);
+    // Deserialize message field [carrier]
+    data.carrier = _deserializer.int64(buffer, bufferOffset);
     // Deserialize message field [done]
     data.done = _deserializer.int64(buffer, bufferOffset);
     return data;
@@ -107,7 +129,8 @@ class rewriteNode {
     length += object.fileName.length;
     length += object.logFile.length;
     length += object.logHash.length;
-    return length + 32;
+    length += object.fileOrArray.length;
+    return length + 44;
   }
 
   static datatype() {
@@ -117,7 +140,7 @@ class rewriteNode {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return 'ce6d37a12366ea5169180721d54de41b';
+    return '085590d527d397fa9632b68bed17ef19';
   }
 
   static messageDefinition() {
@@ -127,7 +150,9 @@ class rewriteNode {
     string fileName
     string logFile
     string logHash
+    string fileOrArray
     int64 REcounter
+    int64 carrier
     int64 done
     
     `;
@@ -167,11 +192,25 @@ class rewriteNode {
       resolved.logHash = ''
     }
 
+    if (msg.fileOrArray !== undefined) {
+      resolved.fileOrArray = msg.fileOrArray;
+    }
+    else {
+      resolved.fileOrArray = ''
+    }
+
     if (msg.REcounter !== undefined) {
       resolved.REcounter = msg.REcounter;
     }
     else {
       resolved.REcounter = 0
+    }
+
+    if (msg.carrier !== undefined) {
+      resolved.carrier = msg.carrier;
+    }
+    else {
+      resolved.carrier = 0
     }
 
     if (msg.done !== undefined) {
