@@ -1117,3 +1117,7 @@ if __name__ == '__main__':
 #           - update blockchain size
 #       - Create RFID tags that can be written to when the product is completed.
 #           - Possibly a webserver that has access to all the log files.
+
+#   -Instead of the RFID, I'm going to use QR codes on the casings. Easier.
+#       - Each QR code needs to have a web link that reveals the receipts.
+#       - When a product is finished, the QR code is linked to a receipt on the file server which can then be scanned with an iphone.
