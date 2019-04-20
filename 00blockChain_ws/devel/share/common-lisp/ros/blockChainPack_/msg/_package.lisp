@@ -9,5 +9,7 @@
    "LASTHASH"
    "<REWRITENODE>"
    "REWRITENODE"
+   "<SIM>"
+   "SIM"
   ))
 

@@ -3,6 +3,7 @@ file(REMOVE_RECURSE
   "/home/ros/blockChainGit/00blockChain_ws/devel/include/blockChainPack_/lastHash.h"
   "/home/ros/blockChainGit/00blockChain_ws/devel/include/blockChainPack_/blockDetail.h"
   "/home/ros/blockChainGit/00blockChain_ws/devel/include/blockChainPack_/finish.h"
+  "/home/ros/blockChainGit/00blockChain_ws/devel/include/blockChainPack_/sim.h"
   "/home/ros/blockChainGit/00blockChain_ws/devel/include/blockChainPack_/rewriteNode.h"
 )
 

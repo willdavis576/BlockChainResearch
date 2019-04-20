@@ -38,6 +38,7 @@ if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspeci
     "/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/lastHash.msg"
     "/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/rewriteNode.msg"
     "/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/finish.msg"
+    "/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/sim.msg"
     )
 endif()
 

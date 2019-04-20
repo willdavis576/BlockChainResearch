@@ -3,6 +3,7 @@ file(REMOVE_RECURSE
   "/home/ros/blockChainGit/00blockChain_ws/devel/share/roseus/ros/blockChainPack_/msg/lastHash.l"
   "/home/ros/blockChainGit/00blockChain_ws/devel/share/roseus/ros/blockChainPack_/msg/blockDetail.l"
   "/home/ros/blockChainGit/00blockChain_ws/devel/share/roseus/ros/blockChainPack_/msg/finish.l"
+  "/home/ros/blockChainGit/00blockChain_ws/devel/share/roseus/ros/blockChainPack_/msg/sim.l"
   "/home/ros/blockChainGit/00blockChain_ws/devel/share/roseus/ros/blockChainPack_/msg/rewriteNode.l"
   "/home/ros/blockChainGit/00blockChain_ws/devel/share/roseus/ros/blockChainPack_/manifest.l"
 )

@@ -12,4 +12,6 @@
     (:file "_package_lastHash" :depends-on ("_package"))
     (:file "rewriteNode" :depends-on ("_package_rewriteNode"))
     (:file "_package_rewriteNode" :depends-on ("_package"))
+    (:file "sim" :depends-on ("_package_sim"))
+    (:file "_package_sim" :depends-on ("_package"))
   ))

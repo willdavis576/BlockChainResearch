@@ -54,6 +54,7 @@ find_package(catkin REQUIRED COMPONENTS
    lastHash.msg
    rewriteNode.msg
    finish.msg
+   sim.msg
 #   Message2.msg
 )
 

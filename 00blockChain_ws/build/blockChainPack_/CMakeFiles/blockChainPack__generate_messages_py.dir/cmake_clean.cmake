@@ -3,6 +3,7 @@ file(REMOVE_RECURSE
   "/home/ros/blockChainGit/00blockChain_ws/devel/lib/python2.7/dist-packages/blockChainPack_/msg/_lastHash.py"
   "/home/ros/blockChainGit/00blockChain_ws/devel/lib/python2.7/dist-packages/blockChainPack_/msg/_blockDetail.py"
   "/home/ros/blockChainGit/00blockChain_ws/devel/lib/python2.7/dist-packages/blockChainPack_/msg/_finish.py"
+  "/home/ros/blockChainGit/00blockChain_ws/devel/lib/python2.7/dist-packages/blockChainPack_/msg/_sim.py"
   "/home/ros/blockChainGit/00blockChain_ws/devel/lib/python2.7/dist-packages/blockChainPack_/msg/_rewriteNode.py"
   "/home/ros/blockChainGit/00blockChain_ws/devel/lib/python2.7/dist-packages/blockChainPack_/msg/__init__.py"
 )

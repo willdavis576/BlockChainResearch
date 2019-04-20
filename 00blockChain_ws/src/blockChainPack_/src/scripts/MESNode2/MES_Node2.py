@@ -12,7 +12,7 @@ from blockChainPack_.msg import finish
 
 nodeName = "NODE2"  ############### THIS IS WHERE YOU SPECIFY A NODE'S NAME #######################
 port = 4501
-address = '172.21.4.152' #127.0.0.1
+address = '127.0.0.1' #172.21.4.152
 lNodeToRewrite = "NODE3"
 
 Range = 200
