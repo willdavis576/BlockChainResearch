@@ -1,5 +1,5 @@
 #! /usr/bin/python
-import hashlib, sys, random, rospy, threading, time, socket, os, glob, shutil
+import hashlib, sys, random, rospy, threading, time, socket, os, glob
 from datetime import datetime
 from collections import Counter
 from blockChainPack_.msg import blockDetail
@@ -10,10 +10,10 @@ from blockChainPack_.msg import finish
 # station, orderNumber, productCode, seconds, minutes, hours, days, months, years
 # productNubmer should now orderNumber
 
-nodeName = "NODE3"  ############### THIS IS WHERE YOU SPECIFY A NODE'S NAME #######################
-port = 4502
-address = '127.0.0.1' #172.21.4.152
-lNodeToRewrite = "NODE4"
+nodeName = "NODE4"  ############### THIS IS WHERE YOU SPECIFY A NODE'S NAME #######################
+port = 4503
+address = '172.21.4.152' #127.0.0.1
+lNodeToRewrite = "NODE5"
 
 Range = 200
 cRange = 5
@@ -109,8 +109,7 @@ hashingArray = ''
 nodeToRewrite = 10
 Rdone = 0
 logHash = ''
-runYetLoc = 0
-worked = 0
+runYetLoc = [['' for _ in range(Range)] for _ in range(Range)]
 
 # authTrigger
 mostCommonHash = ''
@@ -550,7 +549,6 @@ def authTrigger():
     global nodeName
     global nodeHacked
     global lNodeToRewrite
-    global worked
 
     while not rospy.is_shutdown():
         time.sleep(5)
@@ -563,12 +561,10 @@ def authTrigger():
             nodeHacked = nodeList[(node.index(str(mostCommonHash.most_common(3)[2][0])))]
             if oldNodeHacked == nodeHacked :
                 print(nodeHacked + " has been hacked")
-                worked = 0
                 nodeToRewrite = nodeList[(node.index(str(mostCommonHash.most_common(3)[2][0])))]
 
                 if nodeToRewrite == lNodeToRewrite:
                     print("Gonna rewrite this " + lNodeToRewrite)
-
                     rewriteNodes()
 
         except:
@@ -646,56 +642,33 @@ def callbackRecData(data):
     global REcounter
     global runYetLoc
     global logHash
-    global emit
-    global worked
 
 
-    emit = 0
+
 
     # 32,3,1,18:54:01 - 19/03/2019,1,211
-    # 32,3,0,09:57:40 - 06/04/2019,Start production,
-    if data.logFile != '' and worked == 0 and nodeHacked == nodeName:
+    # 32,3,0,09:57:40 - 06/04/2019,Start production,211
+    if nodeHacked == nodeName and runYetLoc == 0 and data.fileOrArray == "file":
+        REcounter = [0] * Range
+        REcounter[data.carrier] = data.REcounter
+        f = open("/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + '/' + data.fileName, "w")
+        f.close()
+        runYetLoc = 1
 
-        if nodeHacked == nodeName and runYetLoc == 0 and data.fileOrArray == "file":
-            print("wipe")
-            logHash = ''
-            shutil.rmtree("/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_NODE3")
-            os.mkdir("/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_NODE3")
-            REcounter = [0] * Range
-            REcounter[data.carrier] = data.REcounter
-            f = open("/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + '/' + data.fileName + ".txt", "w")
-            f.close()
-            runYetLoc = 1
+    if nodeHacked == nodeName and runYetLoc == 1 and data.fileOrArray == "file":
+        f = open("/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + '/' + data.fileName, "a")
+        f.write(str(data.logFile))
+        f.close()
 
-        if nodeHacked == nodeName and runYetLoc == 1 and data.fileOrArray == "file":
-            f = open("/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + '/' + data.fileName + ".txt", "a")
-            f.write(str(data.logFile))
-            f.close()
+    # f = open("/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + '/' + data.fileName, "r")
+    # for j in range(32):
+    #     logHash = logHash + f.readline()
+    #
+    # logHash = hashlib.sha256(logHash.encode()).hexdigest()
+    #
+    # print(logHash)
 
-    if data.logFile == '' and worked == 0 and nodeHacked == nodeName:
-        f = open("/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + '/' + data.fileName, "r")
-        for j in range(32):
-            logHash = logHash + f.readline()
-
-        logHash = hashlib.sha256(logHash.encode()).hexdigest()
-        print(logHash)
-        print(data.logHash)
-
-        if logHash == data.logHash:
-            print("data matches")
-            pub3 = rospy.Publisher('finishedCompFiles', finish, queue_size=100)
-            message4 = finish()
-            message4.compFiles = 1
-            pub3.publish(message4)
-            logHash = ''
-            worked = 1
-
-
-        if logHash != data.logHash and worked == 0:
-            print("fail")
-            runYetLoc = 0
-
-    if data.fileOrArray == "array" and nodeHacked == nodeName:
+    if data.fileOrArray == "array":
 
         dataSplit = data.arrayTransfer.split(",")
 
@@ -727,7 +700,7 @@ def callbackRecData(data):
             print("init wipe didn't work")
 
         # try:
-        if nodeHacked == nodeName and data.done == 1 and worked == 1:
+        if nodeHacked == nodeName and data.done == 1:
 
             if dStation == "Start production":
                 stationHistory[int(dCarrier)][0] = str(dStation)
@@ -816,22 +789,20 @@ def callbackRecData(data):
 
             print("3.3")
 
-        if nodeHacked == nodeName and data.done == 0 and data.fileOrArray == "array":
+            if data.done == 0:
+                hashingArray = ''
+                time.sleep(1)
+                Rdone = 0
+                for i in range(len(SblockHash)):
+                    for j in range(len(SblockHash[i])):
+                        for z in range(len(SblockHash[i][j])):
+                            hashingArray = hashlib.sha256(hashingArray + SblockHash[i][j][z]).hexdigest()
 
-            hashingArray = ''
-            time.sleep(1)
-            Rdone = 0
-            for i in range(len(SblockHash)):
-                for j in range(len(SblockHash[i])):
-                    for z in range(len(SblockHash[i][j])):
-                        hashingArray = hashlib.sha256(hashingArray + SblockHash[i][j][z]).hexdigest()
+                print("2.3")
 
-            print("2.3")
+                print(hashingArray)
+                print("got rewritten - live array transfer")
 
-            print(hashingArray)
-            print("got rewritten - live array transfer")
-
-            emit = 1
 
 
     # except:
@@ -1141,11 +1112,12 @@ if __name__ == '__main__':
 #             recorded a second time.
 #           - Find out what the last station is in the production line and then wipe the blockchain for that specific
 #             carrier. Extend the log file's name to have completed at the end of it. Set the next product going.
-#           - update rewrite function for SblockTrans and stationHistory
-#               - look at file size
+#               - update rewrite function for SblockTrans and stationHistory
 #       - QR Codes on casings
 #           - update blockchain size
 #       - Create RFID tags that can be written to when the product is completed.
 #           - Possibly a webserver that has access to all the log files.
 
-
+#   -Instead of the RFID, I'm going to use QR codes on the casings. Easier.
+#       - Each QR code needs to have a web link that reveals the receipts.
+#       - When a product is finished, the QR code is linked to a receipt on the file server which can then be scanned with an iphone.

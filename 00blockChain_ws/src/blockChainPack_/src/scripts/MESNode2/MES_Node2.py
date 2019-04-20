@@ -992,37 +992,37 @@ if __name__ == '__main__':
     while not rospy.is_shutdown():
         p1 = threading.Thread(target=listener, args=())
         p2 = threading.Thread(target=mainProg, args=())
-        p3 = threading.Thread(target=authentication, args=())
-        p4 = threading.Thread(target=emitter, args=())
-        p5 = threading.Thread(target=authTrigger, args=())
-        p6 = threading.Thread(target=recNewData, args=())
+        # p3 = threading.Thread(target=authentication, args=())
+        # p4 = threading.Thread(target=emitter, args=())
+        # p5 = threading.Thread(target=authTrigger, args=())
+        # p6 = threading.Thread(target=recNewData, args=())
         p7 = threading.Thread(target=manual, args=())
         # p8 = threading.Thread(target=finishListener, args=())
 
         p1.daemon = True
         p2.daemon = True
-        p3.daemon = True
-        p4.daemon = True
-        p5.daemon = True
-        p6.daemon = True
+        # p3.daemon = True
+        # p4.daemon = True
+        # p5.daemon = True
+        # p6.daemon = True
         p7.daemon = True
         # p8.daemon = True
 
         p1.start()
         p2.start()
-        p3.start()
-        p4.start()
-        p5.start()
-        p6.start()
+        # p3.start()
+        # p4.start()
+        # p5.start()
+        # p6.start()
         p7.start()
         # p8.start()
 
         p1.join()
         p2.join()
-        p3.join()
-        p4.join()
-        p5.join()
-        p6.join()
+        # p3.join()
+        # p4.join()
+        # p5.join()
+        # p6.join()
         p7.join()
         # p8.join()
 

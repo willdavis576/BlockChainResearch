@@ -21,7 +21,7 @@ def lowerCasing():
     # Then bind() is used to associate the socket with the server address. In this case, the address is localhost, referring to the current server, and the port number is 10000.
 
     # Bind the socket to the port
-    server_address = ('172.21.4.152', 4500)
+    server_address = ('172.21.4.152', 4504)
     print sys.stderr, 'starting up on %s port %s' % server_address
     sock.bind(server_address)
     # Calling listen() puts the socket into server mode, and accept() waits for an incoming connection.
@@ -41,17 +41,19 @@ def lowerCasing():
 
             # Receive the data in small chunks and retransmit it
             while True:
-                data = connection.recv(31)
+                data = connection.recv(32)
 
                 if data:
                     dataFollowing = 0
+		    print(data)
                     # if data == '                              ':
                     #     dataFollowing = 0
-                    if data != '                               ':
-
+                    if data != '                                ':
+			print("before try")
                         # example: 1,1230, 211,48, 6,18,21, 3,2019
                         # print data
                         try:
+			    print("trying")	
                             print(data)
                             tcpStationName = data[0]
                             tcpOrderNumber = int(data[2] + data[3] + data[4] + data[5])
