@@ -12,7 +12,7 @@ from blockChainPack_.msg import finish
 
 nodeName = "NODE1"  ############### THIS IS WHERE YOU SPECIFY A NODE'S NAME #######################
 port = 4500
-address = '127.0.0.1' #172.21.4.152
+address = '172.21.4.152' #127.0.0.1
 lNodeToRewrite = "NODE2"
 
 Range = 200
@@ -50,7 +50,7 @@ noGen = 0
 runYet = [['' for _ in range(Range)] for _ in range(Range)]
 Trigger = False
 nodeList = ['NODE1', 'NODE2', 'NODE3',
-            'NODE4']  ################# IF INCLUDING MORE NODES, EXTEND THIS ARRAY SIZE #######################
+            'NODE4','NODE5','NODE6']  ################# IF INCLUDING MORE NODES, EXTEND THIS ARRAY SIZE #######################
 nodeONOFF = [1, 0, 0, 0]  ################# IF INCLUDING MORE NODES, EXTEND THIS ARRAY SIZE #######################
 oldNodeONOFF = [0, 0, 0, 0]  ################# IF INCLUDING MORE NODES, EXTEND THIS ARRAY SIZE #######################
 node = ['' for _ in range(20)]
@@ -79,7 +79,7 @@ authOrderNumber = 0
 blockString = ''
 
 nodeHacked = ''
-stationHistory = [['' for _ in range(4)] for _ in range(5)]
+stationHistory = [['' for _ in range(7)] for _ in range(5)]
 REcounter = [0] * Range
 
 # TCP SERVER STUFF
@@ -403,13 +403,15 @@ def callback(data):
     global Comp
 
     wipe = False
+    print(data.station)
+    print(stationHistory)
 
     if data.station in stationHistory[int(data.carrierID)]:
         print("call back 1 " + data.station)
         if data.station == '2':
             print("call back 2")
             print(stationHistory)
-            if stationHistory[int(data.carrierID)] == ['Start production', '1', '2', '3']:
+            if stationHistory[int(data.carrierID)] == ['Start production', '1', '2', '3', '4', '5', '6']:
                 print("call back 3")
 
                 os.rename(
@@ -484,8 +486,8 @@ def callback(data):
 
 
 
-        if stationHistory[int(data.carrierID)] != ['Start production', '1', '2', '3']:
-
+        if stationHistory[int(data.carrierID)] != ['Start production', '1', '2', '3','4','5','6']:
+            print(data.station)
             if data.station != 'Start production':
                 stationHistory[int(data.carrierID)][int(data.station)] = str(data.station)
 
@@ -507,6 +509,7 @@ def callback(data):
                 f.write("\n-------------------------------\n")
                 f.close()
 
+    print(stationHistory)
     if wipe == True:
         stationHistory[int(tcpCarrierNumber)] = [''] * 4
         wipe = False

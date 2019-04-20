@@ -50,7 +50,7 @@ noGen = 0
 runYet = [['' for _ in range(Range)] for _ in range(Range)]
 Trigger = False
 nodeList = ['NODE1', 'NODE2', 'NODE3',
-            'NODE4']  ################# IF INCLUDING MORE NODES, EXTEND THIS ARRAY SIZE #######################
+            'NODE4','NODE5','NODE6']  ################# IF INCLUDING MORE NODES, EXTEND THIS ARRAY SIZE #######################
 nodeONOFF = [1, 0, 0, 0]  ################# IF INCLUDING MORE NODES, EXTEND THIS ARRAY SIZE #######################
 oldNodeONOFF = [0, 0, 0, 0]  ################# IF INCLUDING MORE NODES, EXTEND THIS ARRAY SIZE #######################
 node = ['' for _ in range(20)]
@@ -79,7 +79,7 @@ authOrderNumber = 0
 blockString = ''
 
 nodeHacked = ''
-stationHistory = [['' for _ in range(4)] for _ in range(5)]
+stationHistory = [['' for _ in range(7)] for _ in range(5)]
 REcounter = [0] * Range
 
 # TCP SERVER STUFF
@@ -409,7 +409,7 @@ def callback(data):
         if data.station == '2':
             print("call back 2")
             print(stationHistory)
-            if stationHistory[int(data.carrierID)] == ['Start production', '1', '2', '3']:
+            if stationHistory[int(data.carrierID)] == ['Start production', '1', '2', '3','4','5','6']:
                 print("call back 3")
 
                 os.rename(
@@ -484,7 +484,7 @@ def callback(data):
 
 
 
-        if stationHistory[int(data.carrierID)] != ['Start production', '1', '2', '3']:
+        if stationHistory[int(data.carrierID)] != ['Start production', '1', '2', '3','4','5','6']:
 
             if data.station != 'Start production':
                 stationHistory[int(data.carrierID)][int(data.station)] = str(data.station)

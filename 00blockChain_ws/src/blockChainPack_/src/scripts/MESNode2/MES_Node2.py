@@ -12,7 +12,7 @@ from blockChainPack_.msg import finish
 
 nodeName = "NODE2"  ############### THIS IS WHERE YOU SPECIFY A NODE'S NAME #######################
 port = 4501
-address = '127.0.0.1' #172.21.4.152
+address = '172.21.4.152' #127.0.0.1
 lNodeToRewrite = "NODE3"
 
 Range = 200
@@ -50,7 +50,7 @@ noGen = 0
 runYet = [['' for _ in range(Range)] for _ in range(Range)]
 Trigger = False
 nodeList = ['NODE1', 'NODE2', 'NODE3',
-            'NODE4']  ################# IF INCLUDING MORE NODES, EXTEND THIS ARRAY SIZE #######################
+            'NODE4','NODE5','NODE6']  ################# IF INCLUDING MORE NODES, EXTEND THIS ARRAY SIZE #######################
 nodeONOFF = [1, 0, 0, 0]  ################# IF INCLUDING MORE NODES, EXTEND THIS ARRAY SIZE #######################
 oldNodeONOFF = [0, 0, 0, 0]  ################# IF INCLUDING MORE NODES, EXTEND THIS ARRAY SIZE #######################
 node = ['' for _ in range(20)]
@@ -79,7 +79,7 @@ authOrderNumber = 0
 blockString = ''
 
 nodeHacked = ''
-stationHistory = [['' for _ in range(4)] for _ in range(5)]
+stationHistory = [['' for _ in range(7)] for _ in range(5)]
 REcounter = [0] * Range
 
 # TCP SERVER STUFF
@@ -226,21 +226,24 @@ def mainProg():
     pub = rospy.Publisher('publishingBlockStream', blockDetail, queue_size=100)
     pub2 = rospy.Publisher('ProductFinished', finish, queue_size=100)
     while not rospy.is_shutdown():
+        # print("top of the loop")
         stationFinish = False
+        # print("stationFinish", stationFinish)
+        # print("dataFollowing", dataFollowing)
         if dataFollowing == 1:
             # Setup for genesis block
             orderNumber = tcpOrderNumber
             # print(orderNumber)
-            # print("trying to build")
+            print("trying to build")
             try:
-                # print("Trying to create block")
+                print("Trying to create block")
                 if orderNcarrierNumberList[tcpOrderNumber][tcpCarrierNumber].index(1) > -1:
                     newGenesis = 0
             except:
-                # print("exception")
+                print("exception")
                 if SCarrierNumber[tcpOrderNumber][tcpCarrierNumber] != 1:
                     newGenesis = 1
-                    # print("Order number not a thing, creating a new blockchain")
+                    print("Order number not a thing, creating a new blockchain")
 
                 else:  # this node has already published information
                     newGenesis = 0
@@ -265,10 +268,10 @@ def mainProg():
                     block[tcpOrderNumber][tcpCarrierNumber].index('') - 1].getBlockHash())
 
                 time.sleep(0.1)
-                # print("sending message in gen1")
+                print("sending message in gen1")
                 sendMessage()
                 pub.publish(message)
-                # print(orderNumber, blockNumber)
+                print(orderNumber, blockNumber)
                 # print(block[orderNumber].index(('')))
                 blockNumber = block[tcpOrderNumber][tcpCarrierNumber].index(
                     '')  # key part, as each station uploads information, this variable is incremented to generate a new block
@@ -303,7 +306,7 @@ def mainProg():
                                 station=tcpStationName, carrierID=tcpCarrierNumber, productCode=tcpProductCode,
                                 seconds=tcpSeconds, minutes=tcpMinutes, hours=tcpHours, days=tcpDays, months=tcpMonths,
                                 years=tcpYears)
-                    # print("sending message in gen0")
+                    print("sending message in gen0")
                     # print(block[orderNumber][tcpCarrierNumber][block[tcpOrderNumber][tcpCarrierNumber].index('') - 1])
                     sendMessage()
                     time.sleep(0.1)
@@ -319,6 +322,7 @@ def mainProg():
             else:
                 newGenesis = 3
                 dataFollowing = 0
+
 
 
                 # stationHistory[int(tcpCarrierNumber)][int(tcpStationName)] = tcpStationName
@@ -391,7 +395,7 @@ def callback(data):
         if data.station == '2':
             print("call back 2")
             print(stationHistory)
-            if stationHistory[int(data.carrierID)] == ['Start production', '1', '2', '3']:
+            if stationHistory[int(data.carrierID)] == ['Start production', '1', '2', '3','4','5','6']:
                 print("call back 3")
 
                 os.rename(
@@ -466,7 +470,7 @@ def callback(data):
 
 
 
-        if stationHistory[int(data.carrierID)] != ['Start production', '1', '2', '3']:
+        if stationHistory[int(data.carrierID)] != ['Start production', '1', '2', '3','4','5','6']:
 
             if data.station != 'Start production':
                 stationHistory[int(data.carrierID)][int(data.station)] = str(data.station)
@@ -865,7 +869,7 @@ def rewriteNodes():
                 time.sleep(0.1)
 
             # print("finish")
-            # 
+            #
             message3.REcounter = 0
             message3.fileName = ''
             message3.logFile = ''
@@ -943,12 +947,12 @@ def manual():
                 data = connection.recv(32)
 
                 if data:
-
+                    print(data)
                     if data == '                               ':
                         dataFollowing = 0
                     if data != '                                ':
                         # example: 1,1230, 211,48, 6,18,21, 3,2019
-                        # print data
+                        print(data)
                         try:
                             # print(data)
                             if oldData != data:
