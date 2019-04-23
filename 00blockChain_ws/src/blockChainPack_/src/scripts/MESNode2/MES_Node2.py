@@ -956,8 +956,9 @@ def manual():
                         try:
                             # print(data)
                             if oldData != data:
+                                #2,1291,2,211,11,51,13,23, 4,2019
 
-                                # print(data)
+                                print(data)
                                 tcpStationName = data[0]
                                 tcpOrderNumber = int(data[2] + data[3] + data[4] + data[5]) - 1264
                                 tcpCarrierNumber = int(data[7])
