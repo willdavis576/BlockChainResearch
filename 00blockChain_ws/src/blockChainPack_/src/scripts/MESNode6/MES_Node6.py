@@ -484,7 +484,7 @@ def callback(data):
 
 
 
-        if stationHistory[int(data.carrierID)] != ['Start production', '1', '2', '3','4','5']:
+        if stationHistory[int(data.carrierID)] != ['Start production', '1', '2', '3','4','5','6']:
 
             if data.station != 'Start production':
                 stationHistory[int(data.carrierID)][int(data.station)] = str(data.station)
