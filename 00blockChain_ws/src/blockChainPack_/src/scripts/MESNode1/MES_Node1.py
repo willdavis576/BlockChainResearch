@@ -79,7 +79,7 @@ authOrderNumber = 0
 blockString = ''
 
 nodeHacked = ''
-stationHistory = [['' for _ in range(5)] for _ in range(5)]
+stationHistory = [['' for _ in range(6)] for _ in range(5)]
 REcounter = [0] * Range
 
 # TCP SERVER STUFF
@@ -411,7 +411,7 @@ def callback(data):
         if data.station == '2':
             print("call back 2")
             print(stationHistory)
-            if stationHistory[int(data.carrierID)] == ['Start production', '1', '2', '3','4']:
+            if stationHistory[int(data.carrierID)] == ['Start production', '1', '2', '3','4','5']:
                 print("call back 3")
 
                 os.rename(
@@ -486,7 +486,7 @@ def callback(data):
 
 
 
-        if stationHistory[int(data.carrierID)] != ['Start production', '1', '2', '3','4']:
+        if stationHistory[int(data.carrierID)] != ['Start production', '1', '2', '3','4','5']:
             print(data.station)
             if data.station != 'Start production':
                 stationHistory[int(data.carrierID)][int(data.station)] = str(data.station)
