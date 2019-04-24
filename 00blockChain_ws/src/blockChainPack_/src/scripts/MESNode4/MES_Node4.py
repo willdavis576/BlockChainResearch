@@ -508,7 +508,7 @@ def callback(data):
                 f.close()
 
     if wipe == True:
-        stationHistory[int(tcpCarrierNumber)] = [''] * 4
+        stationHistory[int(tcpCarrierNumber)] = [''] * 7
         wipe = False
 
 

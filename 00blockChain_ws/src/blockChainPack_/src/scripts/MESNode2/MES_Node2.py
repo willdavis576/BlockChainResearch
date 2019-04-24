@@ -494,7 +494,7 @@ def callback(data):
                 f.close()
 
     if wipe == True:
-        stationHistory[int(tcpCarrierNumber)] = [''] * 4
+        stationHistory[int(tcpCarrierNumber)] = [''] * 7
         wipe = False
 
 
@@ -956,7 +956,6 @@ def manual():
                         try:
                             # print(data)
                             if oldData != data:
-                                #2,1291,2,211,11,51,13,23, 4,2019
 
                                 print(data)
                                 tcpStationName = data[0]
