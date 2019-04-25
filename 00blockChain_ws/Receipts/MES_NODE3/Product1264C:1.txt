@@ -1,8 +1,0 @@
-Time Stamp for Block: 00:00:00 - 00 / 00 / 0000
-Station: 2
-Order Number: 1264
-CarrierID: 1
-Product Code: 0
-Block Hash: 
-Previous Hash: 
--------------------------------

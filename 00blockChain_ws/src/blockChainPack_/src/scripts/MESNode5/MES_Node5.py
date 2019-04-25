@@ -12,7 +12,7 @@ from blockChainPack_.msg import finish
 
 nodeName = "NODE5"  ############### THIS IS WHERE YOU SPECIFY A NODE'S NAME #######################
 port = 4504
-address = '172.21.4.152' #127.0.0.1
+address = '172.21.4.152'  # 127.0.0.1
 lNodeToRewrite = "NODE6"
 
 Range = 200
@@ -50,7 +50,7 @@ noGen = 0
 runYet = [['' for _ in range(Range)] for _ in range(Range)]
 Trigger = False
 nodeList = ['NODE1', 'NODE2', 'NODE3',
-            'NODE4','NODE5','NODE6']  ################# IF INCLUDING MORE NODES, EXTEND THIS ARRAY SIZE #######################
+            'NODE4', 'NODE5', 'NODE6']  ################# IF INCLUDING MORE NODES, EXTEND THIS ARRAY SIZE #######################
 nodeONOFF = [1, 0, 0, 0]  ################# IF INCLUDING MORE NODES, EXTEND THIS ARRAY SIZE #######################
 oldNodeONOFF = [0, 0, 0, 0]  ################# IF INCLUDING MORE NODES, EXTEND THIS ARRAY SIZE #######################
 node = ['' for _ in range(20)]
@@ -224,136 +224,139 @@ def mainProg():
 
     pub = rospy.Publisher('publishingBlockStream', blockDetail, queue_size=100)
     pub2 = rospy.Publisher('ProductFinished', finish, queue_size=100)
-    while not rospy.is_shutdown():
-        stationFinish = False
-        if dataFollowing == 1:
-            # Setup for genesis block
-            orderNumber = tcpOrderNumber
-            # print(orderNumber)
-            # print("trying to build")
-            try:
-                # print("Trying to create block")
-                if orderNcarrierNumberList[tcpOrderNumber][tcpCarrierNumber].index(1) > -1:
-                    newGenesis = 0
-            except:
-                # print("exception")
-                if SCarrierNumber[tcpOrderNumber][tcpCarrierNumber] != 1:
-                    newGenesis = 1
-                    # print("Order number not a thing, creating a new blockchain")
+    # while not rospy.is_shutdown():
+    stationFinish = False
 
-                else:  # this node has already published information
-                    newGenesis = 0
+    # Setup for genesis block
+    orderNumber = tcpOrderNumber
+    # print(orderNumber)
+    # print("trying to build")
+    try:
+        print("Trying to create block")
+        if orderNcarrierNumberList[tcpOrderNumber][tcpCarrierNumber].index(1) > -1:
+            newGenesis = 0
+    except:
+        print("exception")
+        if SCarrierNumber[tcpOrderNumber][tcpCarrierNumber] != 1:
+            newGenesis = 1
+            print("Order number not a thing, creating a new blockchain")
 
-            # Genesis Block
-            # print(SblockHash[orderNumber].index('') == 0)
-            if newGenesis == 1 and tcpStationName == '1':
-                block[orderNumber][tcpCarrierNumber][block[tcpOrderNumber][tcpCarrierNumber].index('')] = blockChain(
-                    previousHash='',
-                    station="Start production",
-                    productCode=tcpProductCode,
-                    orderNumber=tcpOrderNumber, carrierID=tcpCarrierNumber,
-                    seconds=str(datetime.now())[17:19],
-                    minutes=str(datetime.now())[14:16],
-                    hours=str(datetime.now())[11:13],
-                    days=str(datetime.now())[8:10],
-                    months=str(datetime.now())[5:7],
-                    years=str(datetime.now())[0:4])
-                orderNcarrierNumberList[tcpOrderNumber][tcpCarrierNumber] = 1
-                print("genesis: ")
-                print(block[orderNumber][tcpCarrierNumber][
-                    block[tcpOrderNumber][tcpCarrierNumber].index('') - 1].getBlockHash())
+        else:  # this node has already published information
+            newGenesis = 0
 
-                time.sleep(0.1)
-                # print("sending message in gen1")
-                sendMessage()
-                pub.publish(message)
-                # print(orderNumber, blockNumber)
-                # print(block[orderNumber].index(('')))
-                blockNumber = block[tcpOrderNumber][tcpCarrierNumber].index(
-                    '')  # key part, as each station uploads information, this variable is incremented to generate a new block
-                # print(orderNumber, blockNumber)
-                # print(block[orderNumber][blockNumber - 1].getBlockHash())
-                newGenesis = 0
+    # Genesis Block
+    # print(SblockHash[orderNumber].index('') == 0)
+    if newGenesis == 1 and tcpStationName == '1':
+        block[orderNumber][tcpCarrierNumber][block[tcpOrderNumber][tcpCarrierNumber].index('')] = blockChain(
+            previousHash='',
+            station="Start production",
+            productCode=tcpProductCode,
+            orderNumber=tcpOrderNumber, carrierID=tcpCarrierNumber,
+            seconds=str(datetime.now())[17:19],
+            minutes=str(datetime.now())[14:16],
+            hours=str(datetime.now())[11:13],
+            days=str(datetime.now())[8:10],
+            months=str(datetime.now())[5:7],
+            years=str(datetime.now())[0:4])
+        orderNcarrierNumberList[tcpOrderNumber][tcpCarrierNumber] = 1
+        print("genesis: ")
+        print(block[orderNumber][tcpCarrierNumber][
+            block[tcpOrderNumber][tcpCarrierNumber].index('') - 1].getBlockHash())
 
-            if newGenesis == 0:
-                time.sleep(0.1)
-                print("newgen = 0 " + tcpStationName)
-                if tcpStationName in stationHistory[int(tcpCarrierNumber)] and tcpStationName == '2':
-                    print("is " + tcpStationName)
-                    message.blockNumber = 0
-                    message.orderNumber = 0
-                    message.carrierID = tcpCarrierNumber
-                    message.timeStamp = '00:00:00 - 00 / 00 / 0000' #18:54:01 - 19 / 03 / 2019
-                    message.station = tcpStationName
-                    message.productCode = 0
-                    message.blockHash = ''
-                    message.previousHash = ''
-                    time.sleep(0.1)
-                    pub.publish(message)
-                    dataFollowing = 0
-                    stationFinish = True
-                    newGenesis = 3
-                print("294 " + tcpStationName)
+        time.sleep(0.1)
+        print("sending message in gen1")
+        sendMessage()
+        pub.publish(message)
+        print(orderNumber, blockNumber)
+        # print(block[orderNumber].index(('')))
+        blockNumber = block[tcpOrderNumber][tcpCarrierNumber].index(
+            '')  # key part, as each station uploads information, this variable is incremented to generate a new block
+        # print(orderNumber, blockNumber)
+        # print(block[orderNumber][blockNumber - 1].getBlockHash())
+        newGenesis = 0
+
+    if newGenesis == 0:
+        time.sleep(0.1)
+        print("newgen = 0 " + tcpStationName)
+        if tcpStationName in stationHistory[int(tcpCarrierNumber)] and tcpStationName == '2':
+            print("is " + tcpStationName)
+            message.blockNumber = 0
+            message.orderNumber = tcpOrderNumber
+            message.carrierID = tcpCarrierNumber
+            message.timeStamp = '00:00:00 - 00 / 00 / 0000'  # 18:54:01 - 19 / 03 / 2019
+            message.station = tcpStationName
+            message.productCode = 0
+            message.blockHash = ''
+            message.previousHash = ''
+            time.sleep(0.1)
+            pub.publish(message)
+            dataFollowing = 0
+            stationFinish = True
+            newGenesis = 3
+        print("294 " + tcpStationName)
+
+        if tcpStationName not in stationHistory[int(tcpCarrierNumber)] and stationFinish == False:
+            print("1")
+            blockUpdate(blockNumber=block[tcpOrderNumber][tcpCarrierNumber].index(''), orderNumber=tcpOrderNumber,
+                        station=tcpStationName, carrierID=tcpCarrierNumber, productCode=tcpProductCode,
+                        seconds=tcpSeconds, minutes=tcpMinutes, hours=tcpHours, days=tcpDays, months=tcpMonths,
+                        years=tcpYears)
+            print("sending message in gen0")
+            # print(block[orderNumber][tcpCarrierNumber][block[tcpOrderNumber][tcpCarrierNumber].index('') - 1])
+            sendMessage()
+            time.sleep(0.1)
+            pub.publish(message)
+            print(orderNumber, blockNumber)
+            blockNumber = block[tcpOrderNumber][tcpCarrierNumber].index('')
+            newGenesis = 3
+            dataFollowing = 0
+            print("dataFollowing1", dataFollowing)
+
+        else:
+            newGenesis = 3
+            dataFollowing = 0
+            print("datafollowing2", dataFollowing)
+    else:
+        newGenesis = 3
+        dataFollowing = 0
+        print("datafollowing3", dataFollowing)
+#
+#     print("datafollowing4", dataFollowing)
+# print("datafollowing5", dataFollowing)
+
+# stationHistory[int(tcpCarrierNumber)][int(tcpStationName)] = tcpStationName
+# print(stationHistory)
+
+# if stationHistory[int(tcpCarrierNumber)] == ['Start production', '1', '2', '3']:
+#
+#     message4 = finish()
+#     message4.counter = REcounter
+# #     message4.carrierID = int(tcpCarrierNumber)
+# #     message4.order = int(tcpOrderNumber)
+#     pub2.publish(message4)
+#
+#     time.sleep(0.2)
+#
+#     os.rename(
+#         "/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + "/Product" + str(tcpOrderNumber + 1264) + "C:" + str(
+#         tcpCarrierNumber) + ".txt", "/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + "/Product" + str(tcpOrderNumber + 1264) + "C:" + str(
+#     tcpCarrierNumber) + "Comp" + str(REcounter) + ".txt")
+#     print("Carrier ready for next product")
+#
+#     REcounter = REcounter + 1
+#
+#     # print("2")
+#     # print(tcpStationName)
+#     # if Comp == True:  # means the product is finished
+#     block[tcpOrderNumber][tcpCarrierNumber] = [''] * Range
+#     SCarrierNumber[tcpOrderNumber][tcpCarrierNumber] = [''] * Range
+#     stationHistory[int(tcpCarrierNumber)] = [''] * 4
+#     runYet[tcpOrderNumber][tcpCarrierNumber] = ''
+
+# Comp = False
 
 
-                if tcpStationName not in stationHistory[int(tcpCarrierNumber)] and stationFinish == False:
-                    print("1")
-                    blockUpdate(blockNumber=block[tcpOrderNumber][tcpCarrierNumber].index(''), orderNumber=tcpOrderNumber,
-                                station=tcpStationName, carrierID=tcpCarrierNumber, productCode=tcpProductCode,
-                                seconds=tcpSeconds, minutes=tcpMinutes, hours=tcpHours, days=tcpDays, months=tcpMonths,
-                                years=tcpYears)
-                    # print("sending message in gen0")
-                    # print(block[orderNumber][tcpCarrierNumber][block[tcpOrderNumber][tcpCarrierNumber].index('') - 1])
-                    sendMessage()
-                    time.sleep(0.1)
-                    pub.publish(message)
-                    # print(orderNumber, blockNumber)
-                    blockNumber = block[tcpOrderNumber][tcpCarrierNumber].index('')
-                    newGenesis = 3
-                    dataFollowing = 0
-
-                else:
-                    newGenesis = 3
-                    dataFollowing = 0
-            else:
-                newGenesis = 3
-                dataFollowing = 0
-
-
-                # stationHistory[int(tcpCarrierNumber)][int(tcpStationName)] = tcpStationName
-                # print(stationHistory)
-
-
-                # if stationHistory[int(tcpCarrierNumber)] == ['Start production', '1', '2', '3']:
-                #
-                #     message4 = finish()
-                #     message4.counter = REcounter
-                # #     message4.carrierID = int(tcpCarrierNumber)
-                # #     message4.order = int(tcpOrderNumber)
-                #     pub2.publish(message4)
-                #
-                #     time.sleep(0.2)
-                #
-                #     os.rename(
-                #         "/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + "/Product" + str(tcpOrderNumber + 1264) + "C:" + str(
-                #         tcpCarrierNumber) + ".txt", "/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + "/Product" + str(tcpOrderNumber + 1264) + "C:" + str(
-                #     tcpCarrierNumber) + "Comp" + str(REcounter) + ".txt")
-                #     print("Carrier ready for next product")
-                #
-                #     REcounter = REcounter + 1
-                #
-                #     # print("2")
-                #     # print(tcpStationName)
-                #     # if Comp == True:  # means the product is finished
-                #     block[tcpOrderNumber][tcpCarrierNumber] = [''] * Range
-                #     SCarrierNumber[tcpOrderNumber][tcpCarrierNumber] = [''] * Range
-                #     stationHistory[int(tcpCarrierNumber)] = [''] * 4
-                #     runYet[tcpOrderNumber][tcpCarrierNumber] = ''
-
-                    # Comp = False
-    rate.sleep()
-
-                        # if the order number doesn't exist in the array then create genesis block. If it does, then continue where the system left off.
+# if the order number doesn't exist in the array then create genesis block. If it does, then continue where the system left off.
 
 
 def listener():
@@ -364,6 +367,7 @@ def listener():
 def finishListener():
     rospy.Subscriber('ProductFinished', finish, callbackFinish)
     rospy.spin()
+
 
 def callbackFinish(data):
     global Comp
@@ -377,7 +381,6 @@ def callbackFinish(data):
     # fCarrier = data.carrierID
     # fOrder = data.order
     # REcounter = data.counter
-
 
 
 def callback(data):
@@ -403,31 +406,34 @@ def callback(data):
     global Comp
 
     wipe = False
+    print(data.station)
+    print(stationHistory)
 
     if data.station in stationHistory[int(data.carrierID)]:
         print("call back 1 " + data.station)
         if data.station == '2':
             print("call back 2")
             print(stationHistory)
-            if stationHistory[int(data.carrierID)] == ['Start production', '1', '2', '3','4', '5', '6']:
+            if stationHistory[int(data.carrierID)] == ['Start production', '1', '2', '3', '4', '5', '6']:
                 print("call back 3")
 
                 os.rename(
                     "/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + "/Product" + str(
-                        tcpOrderNumber + 1264) + "C:" + str(
-                        tcpCarrierNumber) + ".txt",
+                        data.orderNumber + 1264) + "C:" + str(
+                        data.carrierID) + ".txt",
                     "/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + "/Product" + str(
-                        tcpOrderNumber + 1264) + "C:" + str(
-                        tcpCarrierNumber) + "Comp" + str(REcounter[int(data.carrierID)]) + ".txt")
-                block[tcpOrderNumber][tcpCarrierNumber] = [''] * Range
-                SCarrierNumber[tcpOrderNumber][tcpCarrierNumber] = [''] * Range
-                SblockHash[tcpOrderNumber][tcpCarrierNumber] = [''] * Range
-                SblockTimeStamp[tcpOrderNumber][tcpCarrierNumber] = [''] * Range
-                SblockTrans[tcpOrderNumber][tcpCarrierNumber] = [''] * Range
-                SblockProductCode[tcpOrderNumber][tcpCarrierNumber] = [''] * Range
-                runYet[tcpOrderNumber][tcpCarrierNumber] = ''
-                wipe = True
+                        data.orderNumber + 1264) + "C:" + str(
+                        data.carrierID) + "Comp" + str(REcounter[int(data.carrierID)]) + ".txt")
+                block[data.orderNumber][data.carrierID] = [''] * Range
+                SCarrierNumber[data.orderNumber][data.carrierID] = [''] * Range
+                SblockHash[data.orderNumber][data.carrierID] = [''] * Range
+                SblockTimeStamp[data.orderNumber][data.carrierID] = [''] * Range
+                SblockTrans[data.orderNumber][data.carrierID] = [''] * Range
+                SblockProductCode[data.orderNumber][data.carrierID] = [''] * Range
+                runYet[data.orderNumber][data.carrierID] = ''
+
                 REcounter[int(data.carrierID)] = REcounter[int(data.carrierID)] + 1
+                wipe = True
                 print("Carrier ready for next product")
 
     if data.station not in stationHistory[int(data.carrierID)]:
@@ -445,7 +451,6 @@ def callback(data):
         SCarrierNumber[data.orderNumber][data.carrierID] = 1
 
         SblockNumber = data.blockNumber
-
 
         # block[orderNumber][blockNumber] = blockChain(
         #     previousHash=SblockHash[tcpOrderNumber][block[orderNumber].index('') - 1], station=station,
@@ -482,10 +487,8 @@ def callback(data):
                                                                                          data.timeStamp[19] +
                                                                                          data.timeStamp[20])
 
-
-
-        if stationHistory[int(data.carrierID)] != ['Start production', '1', '2', '3','4','5', '6']:
-
+        if stationHistory[int(data.carrierID)] != ['Start production', '1', '2', '3', '4', '5', '6']:
+            print(data.station)
             if data.station != 'Start production':
                 stationHistory[int(data.carrierID)][int(data.station)] = str(data.station)
 
@@ -508,9 +511,9 @@ def callback(data):
                 f.close()
 
     if wipe == True:
-        stationHistory[int(tcpCarrierNumber)] = [''] * 7
+        stationHistory[int(data.carrierID)] = [''] * 7
+        print(stationHistory)
         wipe = False
-
 
     emit = True
 
@@ -559,7 +562,7 @@ def authTrigger():
             oldNodeHacked = nodeHacked
             time.sleep(1)
             nodeHacked = nodeList[(node.index(str(mostCommonHash.most_common(3)[2][0])))]
-            if oldNodeHacked == nodeHacked :
+            if oldNodeHacked == nodeHacked:
                 print(nodeHacked + " has been hacked")
                 nodeToRewrite = nodeList[(node.index(str(mostCommonHash.most_common(3)[2][0])))]
 
@@ -592,7 +595,7 @@ def emitter():
     counter2 = 0
     logHash = ''
 
-    while not rospy.is_shutdown(): #THIS IS PROBABLY A CPU POWER DRAINER
+    while not rospy.is_shutdown():  # THIS IS PROBABLY A CPU POWER DRAINER
 
         os.chdir("/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName)
         for i in glob.glob("*.txt"):
@@ -643,9 +646,6 @@ def callbackRecData(data):
     global runYetLoc
     global logHash
 
-
-
-
     # 32,3,1,18:54:01 - 19/03/2019,1,211
     # 32,3,0,09:57:40 - 06/04/2019,Start production,211
     if nodeHacked == nodeName and runYetLoc == 0 and data.fileOrArray == "file":
@@ -683,8 +683,6 @@ def callbackRecData(data):
         dYear = str((dataSplit[3])[17] + (dataSplit[3])[18] + (dataSplit[3])[19] + (dataSplit[3])[20])
         dStation = dataSplit[4]
         dProductCode = int(dataSplit[5])
-
-
 
         try:
             if data.done == 1 and Rdone == 0 and nodeHacked == nodeName:
@@ -803,8 +801,6 @@ def callbackRecData(data):
                 print(hashingArray)
                 print("got rewritten - live array transfer")
 
-
-
     # except:
     #     print("couldn't rewrite")
 
@@ -886,7 +882,6 @@ def rewriteNodes():
         message3.logHash = ''
         message3.fileOrArray = "array"
 
-
     ########### Live Array Transfer ###########
 
     for i in range(Range):
@@ -963,7 +958,6 @@ def manual():
                         try:
                             # print(data)
                             if oldData != data:
-
                                 # print(data)
                                 tcpStationName = data[0]
                                 tcpOrderNumber = int(data[2] + data[3] + data[4] + data[5]) - 1264
@@ -976,6 +970,7 @@ def manual():
                                 tcpMonths = data[25] + data[26]
                                 tcpYears = data[28] + data[29] + data[30] + data[31]
                                 dataFollowing = 1
+                                mainProg()
                                 oldData = data
                                 # print(dataFollowing)
 
@@ -1002,7 +997,7 @@ if __name__ == '__main__':
     rate = rospy.Rate(10)
     while not rospy.is_shutdown():
         p1 = threading.Thread(target=listener, args=())
-        p2 = threading.Thread(target=mainProg, args=())
+        # p2 = threading.Thread(target=mainProg, args=())
         # p3 = threading.Thread(target=authentication, args=())
         # p4 = threading.Thread(target=emitter, args=())
         # p5 = threading.Thread(target=authTrigger, args=())
@@ -1011,7 +1006,7 @@ if __name__ == '__main__':
         # p8 = threading.Thread(target=finishListener, args=())
 
         p1.daemon = True
-        p2.daemon = True
+        # p2.daemon = True
         # p3.daemon = True
         # p4.daemon = True
         # p5.daemon = True
@@ -1020,7 +1015,7 @@ if __name__ == '__main__':
         # p8.daemon = True
 
         p1.start()
-        p2.start()
+        # p2.start()
         # p3.start()
         # p4.start()
         # p5.start()
@@ -1029,7 +1024,7 @@ if __name__ == '__main__':
         # p8.start()
 
         p1.join()
-        p2.join()
+        # p2.join()
         # p3.join()
         # p4.join()
         # p5.join()

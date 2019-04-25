@@ -226,100 +226,134 @@ def mainProg():
     pub2 = rospy.Publisher('ProductFinished', finish, queue_size=100)
     # while not rospy.is_shutdown():
     stationFinish = False
-    while dataFollowing == 1:
-        # Setup for genesis block
-        orderNumber = tcpOrderNumber
-        # print(orderNumber)
-        # print("trying to build")
-        try:
-            # print("Trying to create block")
-            if orderNcarrierNumberList[tcpOrderNumber][tcpCarrierNumber].index(1) > -1:
-                newGenesis = 0
-        except:
-            # print("exception")
-            if SCarrierNumber[tcpOrderNumber][tcpCarrierNumber] != 1:
-                newGenesis = 1
-                # print("Order number not a thing, creating a new blockchain")
 
-            else:  # this node has already published information
-                newGenesis = 0
+    # Setup for genesis block
+    orderNumber = tcpOrderNumber
+    # print(orderNumber)
+    # print("trying to build")
+    try:
+        print("Trying to create block")
+        if orderNcarrierNumberList[tcpOrderNumber][tcpCarrierNumber].index(1) > -1:
+            newGenesis = 0
+    except:
+        print("exception")
+        if SCarrierNumber[tcpOrderNumber][tcpCarrierNumber] != 1:
+            newGenesis = 1
+            print("Order number not a thing, creating a new blockchain")
 
-        # Genesis Block
-        # print(SblockHash[orderNumber].index('') == 0)
-        if newGenesis == 1 and tcpStationName == '1':
-            block[orderNumber][tcpCarrierNumber][block[tcpOrderNumber][tcpCarrierNumber].index('')] = blockChain(
-                previousHash='',
-                station="Start production",
-                productCode=tcpProductCode,
-                orderNumber=tcpOrderNumber, carrierID=tcpCarrierNumber,
-                seconds=str(datetime.now())[17:19],
-                minutes=str(datetime.now())[14:16],
-                hours=str(datetime.now())[11:13],
-                days=str(datetime.now())[8:10],
-                months=str(datetime.now())[5:7],
-                years=str(datetime.now())[0:4])
-            orderNcarrierNumberList[tcpOrderNumber][tcpCarrierNumber] = 1
-            print("genesis: ")
-            print(block[orderNumber][tcpCarrierNumber][
-                block[tcpOrderNumber][tcpCarrierNumber].index('') - 1].getBlockHash())
-
-            time.sleep(0.1)
-            # print("sending message in gen1")
-            sendMessage()
-            pub.publish(message)
-            # print(orderNumber, blockNumber)
-            # print(block[orderNumber].index(('')))
-            blockNumber = block[tcpOrderNumber][tcpCarrierNumber].index(
-                '')  # key part, as each station uploads information, this variable is incremented to generate a new block
-            # print(orderNumber, blockNumber)
-            # print(block[orderNumber][blockNumber - 1].getBlockHash())
+        else:  # this node has already published information
             newGenesis = 0
 
-        if newGenesis == 0:
+    # Genesis Block
+    # print(SblockHash[orderNumber].index('') == 0)
+    if newGenesis == 1 and tcpStationName == '1':
+        block[orderNumber][tcpCarrierNumber][block[tcpOrderNumber][tcpCarrierNumber].index('')] = blockChain(
+            previousHash='',
+            station="Start production",
+            productCode=tcpProductCode,
+            orderNumber=tcpOrderNumber, carrierID=tcpCarrierNumber,
+            seconds=str(datetime.now())[17:19],
+            minutes=str(datetime.now())[14:16],
+            hours=str(datetime.now())[11:13],
+            days=str(datetime.now())[8:10],
+            months=str(datetime.now())[5:7],
+            years=str(datetime.now())[0:4])
+        orderNcarrierNumberList[tcpOrderNumber][tcpCarrierNumber] = 1
+        print("genesis: ")
+        print(block[orderNumber][tcpCarrierNumber][
+            block[tcpOrderNumber][tcpCarrierNumber].index('') - 1].getBlockHash())
+
+        time.sleep(0.1)
+        print("sending message in gen1")
+        sendMessage()
+        pub.publish(message)
+        print(orderNumber, blockNumber)
+        # print(block[orderNumber].index(('')))
+        blockNumber = block[tcpOrderNumber][tcpCarrierNumber].index(
+            '')  # key part, as each station uploads information, this variable is incremented to generate a new block
+        # print(orderNumber, blockNumber)
+        # print(block[orderNumber][blockNumber - 1].getBlockHash())
+        newGenesis = 0
+
+    if newGenesis == 0:
+        time.sleep(0.1)
+        print("newgen = 0 " + tcpStationName)
+        if tcpStationName in stationHistory[int(tcpCarrierNumber)] and tcpStationName == '2':
+            print("is " + tcpStationName)
+            message.blockNumber = 0
+            message.orderNumber = tcpOrderNumber
+            message.carrierID = tcpCarrierNumber
+            message.timeStamp = '00:00:00 - 00 / 00 / 0000'  # 18:54:01 - 19 / 03 / 2019
+            message.station = tcpStationName
+            message.productCode = 0
+            message.blockHash = ''
+            message.previousHash = ''
             time.sleep(0.1)
-            print("newgen = 0 " + tcpStationName)
-            if tcpStationName in stationHistory[int(tcpCarrierNumber)] and tcpStationName == '2':
-                print("is " + tcpStationName)
-                message.blockNumber = 0
-                message.orderNumber = 0
-                message.carrierID = tcpCarrierNumber
-                message.timeStamp = '00:00:00 - 00 / 00 / 0000'  # 18:54:01 - 19 / 03 / 2019
-                message.station = tcpStationName
-                message.productCode = 0
-                message.blockHash = ''
-                message.previousHash = ''
-                time.sleep(0.1)
-                pub.publish(message)
-                dataFollowing = 0
-                stationFinish = True
-                newGenesis = 3
-            print("294 " + tcpStationName)
+            pub.publish(message)
+            dataFollowing = 0
+            stationFinish = True
+            newGenesis = 3
+        print("294 " + tcpStationName)
 
-            if tcpStationName not in stationHistory[int(tcpCarrierNumber)] and stationFinish == False:
-                print("1")
-                blockUpdate(blockNumber=block[tcpOrderNumber][tcpCarrierNumber].index(''), orderNumber=tcpOrderNumber,
-                            station=tcpStationName, carrierID=tcpCarrierNumber, productCode=tcpProductCode,
-                            seconds=tcpSeconds, minutes=tcpMinutes, hours=tcpHours, days=tcpDays, months=tcpMonths,
-                            years=tcpYears)
-                # print("sending message in gen0")
-                # print(block[orderNumber][tcpCarrierNumber][block[tcpOrderNumber][tcpCarrierNumber].index('') - 1])
-                sendMessage()
-                time.sleep(0.1)
-                pub.publish(message)
-                # print(orderNumber, blockNumber)
-                blockNumber = block[tcpOrderNumber][tcpCarrierNumber].index('')
-                newGenesis = 3
-                dataFollowing = 0
+        if tcpStationName not in stationHistory[int(tcpCarrierNumber)] and stationFinish == False:
+            print("1")
+            blockUpdate(blockNumber=block[tcpOrderNumber][tcpCarrierNumber].index(''), orderNumber=tcpOrderNumber,
+                        station=tcpStationName, carrierID=tcpCarrierNumber, productCode=tcpProductCode,
+                        seconds=tcpSeconds, minutes=tcpMinutes, hours=tcpHours, days=tcpDays, months=tcpMonths,
+                        years=tcpYears)
+            print("sending message in gen0")
+            # print(block[orderNumber][tcpCarrierNumber][block[tcpOrderNumber][tcpCarrierNumber].index('') - 1])
+            sendMessage()
+            time.sleep(0.1)
+            pub.publish(message)
+            print(orderNumber, blockNumber)
+            blockNumber = block[tcpOrderNumber][tcpCarrierNumber].index('')
+            newGenesis = 3
+            dataFollowing = 0
+            print("dataFollowing1", dataFollowing)
 
-            else:
-                newGenesis = 3
-                dataFollowing = 0
         else:
             newGenesis = 3
             dataFollowing = 0
+            print("datafollowing2", dataFollowing)
+    else:
+        newGenesis = 3
+        dataFollowing = 0
+        print("datafollowing3", dataFollowing)
+#
+#     print("datafollowing4", dataFollowing)
+# print("datafollowing5", dataFollowing)
 
+# stationHistory[int(tcpCarrierNumber)][int(tcpStationName)] = tcpStationName
+# print(stationHistory)
 
+# if stationHistory[int(tcpCarrierNumber)] == ['Start production', '1', '2', '3']:
+#
+#     message4 = finish()
+#     message4.counter = REcounter
+# #     message4.carrierID = int(tcpCarrierNumber)
+# #     message4.order = int(tcpOrderNumber)
+#     pub2.publish(message4)
+#
+#     time.sleep(0.2)
+#
+#     os.rename(
+#         "/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + "/Product" + str(tcpOrderNumber + 1264) + "C:" + str(
+#         tcpCarrierNumber) + ".txt", "/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + "/Product" + str(tcpOrderNumber + 1264) + "C:" + str(
+#     tcpCarrierNumber) + "Comp" + str(REcounter) + ".txt")
+#     print("Carrier ready for next product")
+#
+#     REcounter = REcounter + 1
+#
+#     # print("2")
+#     # print(tcpStationName)
+#     # if Comp == True:  # means the product is finished
+#     block[tcpOrderNumber][tcpCarrierNumber] = [''] * Range
+#     SCarrierNumber[tcpOrderNumber][tcpCarrierNumber] = [''] * Range
+#     stationHistory[int(tcpCarrierNumber)] = [''] * 4
+#     runYet[tcpOrderNumber][tcpCarrierNumber] = ''
 
+# Comp = False
 
 
 # if the order number doesn't exist in the array then create genesis block. If it does, then continue where the system left off.
@@ -385,20 +419,21 @@ def callback(data):
 
                 os.rename(
                     "/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + "/Product" + str(
-                        tcpOrderNumber + 1264) + "C:" + str(
-                        tcpCarrierNumber) + ".txt",
+                        data.orderNumber + 1264) + "C:" + str(
+                        data.carrierID) + ".txt",
                     "/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + "/Product" + str(
-                        tcpOrderNumber + 1264) + "C:" + str(
-                        tcpCarrierNumber) + "Comp" + str(REcounter[int(data.carrierID)]) + ".txt")
-                block[tcpOrderNumber][tcpCarrierNumber] = [''] * Range
-                SCarrierNumber[tcpOrderNumber][tcpCarrierNumber] = [''] * Range
-                SblockHash[tcpOrderNumber][tcpCarrierNumber] = [''] * Range
-                SblockTimeStamp[tcpOrderNumber][tcpCarrierNumber] = [''] * Range
-                SblockTrans[tcpOrderNumber][tcpCarrierNumber] = [''] * Range
-                SblockProductCode[tcpOrderNumber][tcpCarrierNumber] = [''] * Range
-                runYet[tcpOrderNumber][tcpCarrierNumber] = ''
-                wipe = True
+                        data.orderNumber + 1264) + "C:" + str(
+                        data.carrierID) + "Comp" + str(REcounter[int(data.carrierID)]) + ".txt")
+                block[data.orderNumber][data.carrierID] = [''] * Range
+                SCarrierNumber[data.orderNumber][data.carrierID] = [''] * Range
+                SblockHash[data.orderNumber][data.carrierID] = [''] * Range
+                SblockTimeStamp[data.orderNumber][data.carrierID] = [''] * Range
+                SblockTrans[data.orderNumber][data.carrierID] = [''] * Range
+                SblockProductCode[data.orderNumber][data.carrierID] = [''] * Range
+                runYet[data.orderNumber][data.carrierID] = ''
+
                 REcounter[int(data.carrierID)] = REcounter[int(data.carrierID)] + 1
+                wipe = True
                 print("Carrier ready for next product")
 
     if data.station not in stationHistory[int(data.carrierID)]:
@@ -475,9 +510,9 @@ def callback(data):
                 f.write("\n-------------------------------\n")
                 f.close()
 
-    print(stationHistory)
     if wipe == True:
-        stationHistory[int(tcpCarrierNumber)] = [''] * 7
+        stationHistory[int(data.carrierID)] = [''] * 7
+        print(stationHistory)
         wipe = False
 
     emit = True
