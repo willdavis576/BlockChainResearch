@@ -1,0 +1,4 @@
+<launch>
+	<node pkg="blockChainPack_" type="R_MES_Node3.py" name="Node3" output="screen">
+	</node>
+</launch>
