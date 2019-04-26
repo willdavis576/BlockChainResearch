@@ -51,6 +51,10 @@ find_package(catkin REQUIRED COMPONENTS
  add_message_files(
    FILES
    blockDetail.msg
+   lastHash.msg
+   rewriteNode.msg
+   finish.msg
+   sim.msg
 #   Message2.msg
 )
 

@@ -1,0 +1,2 @@
+string nodeName
+string hash

@@ -3,5 +3,13 @@
   (:export
    "<BLOCKDETAIL>"
    "BLOCKDETAIL"
+   "<FINISH>"
+   "FINISH"
+   "<LASTHASH>"
+   "LASTHASH"
+   "<REWRITENODE>"
+   "REWRITENODE"
+   "<SIM>"
+   "SIM"
   ))
 
