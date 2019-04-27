@@ -1,0 +1,8 @@
+<launch>
+	<node pkg="blockChainPack_" type="listenerTest.py" name="listening" output="screen">
+	</node>
+	<node pkg="blockChainPack_" type="talkerTest.py" name="talker1">
+	</node>
+	<node pkg="blockChainPack_" type="talker2Test.py" name="talker2">
+	</node>
+</launch>

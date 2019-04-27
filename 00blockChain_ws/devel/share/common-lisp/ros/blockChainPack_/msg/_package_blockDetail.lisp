@@ -1,16 +1,22 @@
 (cl:in-package blockChainPack_-msg)
 (cl:export '(BLOCKNUMBER-VAL
           BLOCKNUMBER
-          PRODUCTNUMBER-VAL
-          PRODUCTNUMBER
+          ORDERNUMBER-VAL
+          ORDERNUMBER
+          CARRIERID-VAL
+          CARRIERID
           TIMESTAMP-VAL
           TIMESTAMP
-          TRANSACTIONS-VAL
-          TRANSACTIONS
-          SERIALNUMBER-VAL
-          SERIALNUMBER
+          STATION-VAL
+          STATION
+          PRODUCTCODE-VAL
+          PRODUCTCODE
           BLOCKHASH-VAL
           BLOCKHASH
           PREVIOUSHASH-VAL
           PREVIOUSHASH
+          DATA1-VAL
+          DATA1
+          DATA2-VAL
+          DATA2
 ))

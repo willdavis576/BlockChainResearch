@@ -1,0 +1,20 @@
+Time Stamp for Block: 22:42:33 - 26/04/2019
+Station: Start production
+Order Number: 1366
+CarrierID: 1
+Product Code: 211
+Block Hash: 895f74ce35b8f916e5236388bb6bde0f1d8976d8690f69ecc2a3fe7e52217c0f
+Previous Hash: 
+
+
+-------------------------------
+Time Stamp for Block: 15: 9:39 - 27/ 4/2019
+Station: 1
+Order Number: 1366
+CarrierID: 1
+Product Code: 211
+Block Hash: 177c1695c982b83d3e82b502f31ac6dc0e6a34f452be1cc7c060cc1e6524e3cf
+Previous Hash: 895f74ce35b8f916e5236388bb6bde0f1d8976d8690f69ecc2a3fe7e52217c0f
+No data available0.0
+No data available0.0
+-------------------------------

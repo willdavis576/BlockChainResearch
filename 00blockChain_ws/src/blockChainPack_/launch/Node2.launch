@@ -1,0 +1,4 @@
+<launch>
+	<node pkg="blockChainPack_" type="blockChainNode2.py" name="Node2" output="screen">
+	</node>
+</launch>

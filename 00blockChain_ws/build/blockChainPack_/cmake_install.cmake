@@ -1,8 +1,8 @@
-# Install script for directory: /home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_
+# Install script for directory: /home/pi/blockChainGit/00blockChain_ws/src/blockChainPack_
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/ros/blockChainGit/00blockChain_ws/install")
+  set(CMAKE_INSTALL_PREFIX "/home/pi/blockChainGit/00blockChain_ws/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -32,54 +32,60 @@ if(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
   set(CMAKE_INSTALL_SO_NO_EXE "1")
 endif()
 
-if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/blockChainPack_/msg" TYPE FILE FILES "/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/blockDetail.msg")
-endif()
-
-if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/blockChainPack_/cmake" TYPE FILE FILES "/home/ros/blockChainGit/00blockChain_ws/build/blockChainPack_/catkin_generated/installspace/blockChainPack_-msg-paths.cmake")
-endif()
-
-if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include" TYPE DIRECTORY FILES "/home/ros/blockChainGit/00blockChain_ws/devel/include/blockChainPack_")
-endif()
-
-if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/roseus/ros" TYPE DIRECTORY FILES "/home/ros/blockChainGit/00blockChain_ws/devel/share/roseus/ros/blockChainPack_")
-endif()
-
-if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/common-lisp/ros" TYPE DIRECTORY FILES "/home/ros/blockChainGit/00blockChain_ws/devel/share/common-lisp/ros/blockChainPack_")
-endif()
-
-if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/gennodejs/ros" TYPE DIRECTORY FILES "/home/ros/blockChainGit/00blockChain_ws/devel/share/gennodejs/ros/blockChainPack_")
-endif()
-
-if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  execute_process(COMMAND "/usr/bin/python" -m compileall "/home/ros/blockChainGit/00blockChain_ws/devel/lib/python2.7/dist-packages/blockChainPack_")
-endif()
-
-if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/python2.7/dist-packages" TYPE DIRECTORY FILES "/home/ros/blockChainGit/00blockChain_ws/devel/lib/python2.7/dist-packages/blockChainPack_")
-endif()
-
-if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/ros/blockChainGit/00blockChain_ws/build/blockChainPack_/catkin_generated/installspace/blockChainPack_.pc")
-endif()
-
-if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/blockChainPack_/cmake" TYPE FILE FILES "/home/ros/blockChainGit/00blockChain_ws/build/blockChainPack_/catkin_generated/installspace/blockChainPack_-msg-extras.cmake")
-endif()
-
-if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/blockChainPack_/cmake" TYPE FILE FILES
-    "/home/ros/blockChainGit/00blockChain_ws/build/blockChainPack_/catkin_generated/installspace/blockChainPack_Config.cmake"
-    "/home/ros/blockChainGit/00blockChain_ws/build/blockChainPack_/catkin_generated/installspace/blockChainPack_Config-version.cmake"
+if("${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/blockChainPack_/msg" TYPE FILE FILES
+    "/home/pi/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/blockDetail.msg"
+    "/home/pi/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/lastHash.msg"
+    "/home/pi/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/rewriteNode.msg"
+    "/home/pi/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/finish.msg"
+    "/home/pi/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/sim.msg"
     )
 endif()
 
-if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/blockChainPack_" TYPE FILE FILES "/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/package.xml")
+if("${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/blockChainPack_/cmake" TYPE FILE FILES "/home/pi/blockChainGit/00blockChain_ws/build/blockChainPack_/catkin_generated/installspace/blockChainPack_-msg-paths.cmake")
+endif()
+
+if("${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include" TYPE DIRECTORY FILES "/home/pi/blockChainGit/00blockChain_ws/devel/include/blockChainPack_")
+endif()
+
+if("${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/roseus/ros" TYPE DIRECTORY FILES "/home/pi/blockChainGit/00blockChain_ws/devel/share/roseus/ros/blockChainPack_")
+endif()
+
+if("${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/common-lisp/ros" TYPE DIRECTORY FILES "/home/pi/blockChainGit/00blockChain_ws/devel/share/common-lisp/ros/blockChainPack_")
+endif()
+
+if("${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/gennodejs/ros" TYPE DIRECTORY FILES "/home/pi/blockChainGit/00blockChain_ws/devel/share/gennodejs/ros/blockChainPack_")
+endif()
+
+if("${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
+  execute_process(COMMAND "/usr/bin/python" -m compileall "/home/pi/blockChainGit/00blockChain_ws/devel/lib/python2.7/dist-packages/blockChainPack_")
+endif()
+
+if("${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/python2.7/dist-packages" TYPE DIRECTORY FILES "/home/pi/blockChainGit/00blockChain_ws/devel/lib/python2.7/dist-packages/blockChainPack_")
+endif()
+
+if("${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/pi/blockChainGit/00blockChain_ws/build/blockChainPack_/catkin_generated/installspace/blockChainPack_.pc")
+endif()
+
+if("${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/blockChainPack_/cmake" TYPE FILE FILES "/home/pi/blockChainGit/00blockChain_ws/build/blockChainPack_/catkin_generated/installspace/blockChainPack_-msg-extras.cmake")
+endif()
+
+if("${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/blockChainPack_/cmake" TYPE FILE FILES
+    "/home/pi/blockChainGit/00blockChain_ws/build/blockChainPack_/catkin_generated/installspace/blockChainPack_Config.cmake"
+    "/home/pi/blockChainGit/00blockChain_ws/build/blockChainPack_/catkin_generated/installspace/blockChainPack_Config-version.cmake"
+    )
+endif()
+
+if("${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/blockChainPack_" TYPE FILE FILES "/home/pi/blockChainGit/00blockChain_ws/src/blockChainPack_/package.xml")
 endif()
 

@@ -1,8 +1,8 @@
-prefix=/home/ros/blockChainGit/00blockChain_ws/devel
+prefix=/home/pi/blockChainGit/00blockChain_ws/devel
 
 Name: blockChainPack_
 Description: Description of blockChainPack_
 Version: 0.0.0
-Cflags: -I/home/ros/blockChainGit/00blockChain_ws/devel/include
-Libs: -L/home/ros/blockChainGit/00blockChain_ws/devel/lib 
+Cflags: -I/home/pi/blockChainGit/00blockChain_ws/devel/include
+Libs: -L/home/pi/blockChainGit/00blockChain_ws/devel/lib 
 Requires: message_runtime

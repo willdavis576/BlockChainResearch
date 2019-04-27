@@ -1,7 +1,10 @@
 int64 blockNumber
-int64 productNumber
+int64 orderNumber
+int64 carrierID
 string timeStamp
-string transactions
-string serialNumber
+string station
+int64 productCode
 string blockHash
 string previousHash
+string data1
+string data2
