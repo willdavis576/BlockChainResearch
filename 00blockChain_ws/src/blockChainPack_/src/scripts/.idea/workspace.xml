@@ -50,9 +50,85 @@
       <change beforePath="$PROJECT_DIR$/../../../../Receipts/MES_NODE6/Product1329C:3Comp0.txt" afterPath="" />
       <change beforePath="$PROJECT_DIR$/../../../../Receipts/MES_NODE6/Product1329C:3Comp1.txt" afterPath="" />
       <change beforePath="$PROJECT_DIR$/../../../../Receipts/MES_NODE6/Product1329C:4Comp1.txt" afterPath="" />
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/fileServer.py" afterPath="" />
       <change beforePath="$PROJECT_DIR$/../../../../../raspberryPiFiles/blockChain.py" afterPath="" />
+=======
+<<<<<<< HEAD
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/fileServer.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/../../../../../raspberryPiFiles/blockChain.py" afterPath="" />
+=======
+      <change beforePath="$PROJECT_DIR$/../../../../build/CMakeFiles/3.5.1/CMakeSystem.cmake" afterPath="$PROJECT_DIR$/../../../../build/CMakeFiles/3.5.1/CMakeSystem.cmake" />
+      <change beforePath="$PROJECT_DIR$/../../../../build/CMakeFiles/CMakeError.log" afterPath="$PROJECT_DIR$/../../../../build/CMakeFiles/CMakeError.log" />
+      <change beforePath="$PROJECT_DIR$/../../../../build/CMakeFiles/CMakeOutput.log" afterPath="$PROJECT_DIR$/../../../../build/CMakeFiles/CMakeOutput.log" />
+      <change beforePath="$PROJECT_DIR$/../../../../build/CMakeFiles/CMakeRuleHashes.txt" afterPath="$PROJECT_DIR$/../../../../build/CMakeFiles/CMakeRuleHashes.txt" />
+      <change beforePath="$PROJECT_DIR$/../../../../build/CMakeFiles/Makefile.cmake" afterPath="$PROJECT_DIR$/../../../../build/CMakeFiles/Makefile.cmake" />
+      <change beforePath="$PROJECT_DIR$/../../../../build/blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_nodeOnline.dir/DependInfo.cmake" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/../../../../build/blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_nodeOnline.dir/build.make" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/../../../../build/blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_nodeOnline.dir/cmake_clean.cmake" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/../../../../build/blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_nodeOnline.dir/depend.internal" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/../../../../build/blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_nodeOnline.dir/depend.make" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/../../../../build/blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_nodeOnline.dir/progress.make" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/../../../../build/blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_nodeOnlineMsg.dir/DependInfo.cmake" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/../../../../build/blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_nodeOnlineMsg.dir/build.make" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/../../../../build/blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_nodeOnlineMsg.dir/cmake_clean.cmake" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/../../../../build/blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_nodeOnlineMsg.dir/depend.internal" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/../../../../build/blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_nodeOnlineMsg.dir/depend.make" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/../../../../build/blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_nodeOnlineMsg.dir/progress.make" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/../../../../build/blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_stringMultiarray.dir/DependInfo.cmake" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/../../../../build/blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_stringMultiarray.dir/build.make" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/../../../../build/blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_stringMultiarray.dir/cmake_clean.cmake" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/../../../../build/blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_stringMultiarray.dir/depend.internal" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/../../../../build/blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_stringMultiarray.dir/depend.make" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/../../../../build/blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_stringMultiarray.dir/progress.make" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/../../../../build/blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_stringarray.dir/DependInfo.cmake" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/../../../../build/blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_stringarray.dir/build.make" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/../../../../build/blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_stringarray.dir/cmake_clean.cmake" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/../../../../build/blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_stringarray.dir/depend.internal" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/../../../../build/blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_stringarray.dir/depend.make" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/../../../../build/blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_stringarray.dir/progress.make" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/../../../../build/catkin_generated/setup_cached.sh" afterPath="$PROJECT_DIR$/../../../../build/catkin_generated/setup_cached.sh" />
+      <change beforePath="$PROJECT_DIR$/../../../../devel/include/blockChainPack_/blockDetail.h" afterPath="$PROJECT_DIR$/../../../../devel/include/blockChainPack_/blockDetail.h" />
+      <change beforePath="$PROJECT_DIR$/../../../../devel/include/blockChainPack_/nodeOnline.h" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/../../../../devel/include/blockChainPack_/nodeOnlineMsg.h" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/../../../../devel/include/blockChainPack_/stringMultiarray.h" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/../../../../devel/include/blockChainPack_/stringarray.h" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/../../../../devel/lib/python2.7/dist-packages/blockChainPack_/msg/__init__.py" afterPath="$PROJECT_DIR$/../../../../devel/lib/python2.7/dist-packages/blockChainPack_/msg/__init__.py" />
+      <change beforePath="$PROJECT_DIR$/../../../../devel/lib/python2.7/dist-packages/blockChainPack_/msg/_blockDetail.py" afterPath="$PROJECT_DIR$/../../../../devel/lib/python2.7/dist-packages/blockChainPack_/msg/_blockDetail.py" />
+      <change beforePath="$PROJECT_DIR$/../../../../devel/lib/python2.7/dist-packages/blockChainPack_/msg/_nodeOnline.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/../../../../devel/lib/python2.7/dist-packages/blockChainPack_/msg/_nodeOnlineMsg.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/../../../../devel/lib/python2.7/dist-packages/blockChainPack_/msg/_stringMultiarray.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/../../../../devel/lib/python2.7/dist-packages/blockChainPack_/msg/_stringarray.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/../../../../devel/share/common-lisp/ros/blockChainPack_/msg/_package_blockDetail.lisp" afterPath="$PROJECT_DIR$/../../../../devel/share/common-lisp/ros/blockChainPack_/msg/_package_blockDetail.lisp" />
+      <change beforePath="$PROJECT_DIR$/../../../../devel/share/common-lisp/ros/blockChainPack_/msg/_package_nodeOnline.lisp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/../../../../devel/share/common-lisp/ros/blockChainPack_/msg/_package_nodeOnlineMsg.lisp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/../../../../devel/share/common-lisp/ros/blockChainPack_/msg/_package_stringMultiarray.lisp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/../../../../devel/share/common-lisp/ros/blockChainPack_/msg/_package_stringarray.lisp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/../../../../devel/share/common-lisp/ros/blockChainPack_/msg/blockDetail.lisp" afterPath="$PROJECT_DIR$/../../../../devel/share/common-lisp/ros/blockChainPack_/msg/blockDetail.lisp" />
+      <change beforePath="$PROJECT_DIR$/../../../../devel/share/common-lisp/ros/blockChainPack_/msg/nodeOnline.lisp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/../../../../devel/share/common-lisp/ros/blockChainPack_/msg/nodeOnlineMsg.lisp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/../../../../devel/share/common-lisp/ros/blockChainPack_/msg/stringMultiarray.lisp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/../../../../devel/share/common-lisp/ros/blockChainPack_/msg/stringarray.lisp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/../../../../devel/share/gennodejs/ros/blockChainPack_/msg/blockDetail.js" afterPath="$PROJECT_DIR$/../../../../devel/share/gennodejs/ros/blockChainPack_/msg/blockDetail.js" />
+      <change beforePath="$PROJECT_DIR$/../../../../devel/share/gennodejs/ros/blockChainPack_/msg/nodeOnline.js" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/../../../../devel/share/gennodejs/ros/blockChainPack_/msg/nodeOnlineMsg.js" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/../../../../devel/share/gennodejs/ros/blockChainPack_/msg/stringMultiarray.js" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/../../../../devel/share/gennodejs/ros/blockChainPack_/msg/stringarray.js" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/../../../../devel/share/roseus/ros/blockChainPack_/msg/blockDetail.l" afterPath="$PROJECT_DIR$/../../../../devel/share/roseus/ros/blockChainPack_/msg/blockDetail.l" />
+      <change beforePath="$PROJECT_DIR$/../../../../devel/share/roseus/ros/blockChainPack_/msg/nodeOnline.l" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/../../../../devel/share/roseus/ros/blockChainPack_/msg/nodeOnlineMsg.l" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/../../../../devel/share/roseus/ros/blockChainPack_/msg/stringMultiarray.l" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/../../../../devel/share/roseus/ros/blockChainPack_/msg/stringarray.l" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/../../msg/blockDetail.msg" afterPath="$PROJECT_DIR$/../../msg/blockDetail.msg" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/PLC Sim/SimNode1noloop.py" afterPath="$PROJECT_DIR$/PLC Sim/SimNode1noloop.py" />
+      <change beforePath="$PROJECT_DIR$/RaspberryPi_MES/RP_MES_Node1.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/Unused Currently/testTCP 1.py" afterPath="$PROJECT_DIR$/Unused Currently/testTCP 1.py" />
+      <change beforePath="$PROJECT_DIR$/fileServer.py" afterPath="" />
+>>>>>>> 04495caef248ff88c82b4aada68a5c73c263b2d4
+>>>>>>> 707126bdf0988d6187233f40a3e49789231d159b
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -63,10 +139,72 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="600">
+<<<<<<< HEAD
       <file leaf-file-name="MES_Node1.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MESNode1/MES_Node1.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1421">
+=======
+<<<<<<< HEAD
+      <file leaf-file-name="MES_Node1.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MESNode1/MES_Node1.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1421">
+              <caret line="1118" column="0" lean-forward="false" selection-start-line="1118" selection-start-column="0" selection-end-line="1118" selection-end-column="0" />
+=======
+      <file leaf-file-name="MES_Node2.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MESNode2/MES_Node2.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+>>>>>>> 04495caef248ff88c82b4aada68a5c73c263b2d4
+              <folding>
+                <element signature="e#19#88#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+<<<<<<< HEAD
+      <file leaf-file-name="MES_Node2.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MESNode2/MES_Node2.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1421">
+=======
+      <file leaf-file-name="R_MES_Node5.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/RaspberryPi_MES/R_MES_Node5.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="462">
+              <caret line="20" column="10" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="1148" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="R_MES_Node6.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/RaspberryPi_MES/R_MES_Node6.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="144">
+              <caret line="521" column="31" lean-forward="true" selection-start-line="521" selection-start-column="31" selection-end-line="521" selection-end-column="31" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SimNode1noloop.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/PLC Sim/SimNode1noloop.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="594">
+              <caret line="19" column="15" lean-forward="true" selection-start-line="19" selection-start-column="15" selection-end-line="19" selection-end-column="15" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MES_Node3.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MESNode3/MES_Node3.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="36696">
               <caret line="1118" column="0" lean-forward="false" selection-start-line="1118" selection-start-column="0" selection-end-line="1118" selection-end-column="0" />
               <folding>
                 <element signature="e#19#88#0" expanded="true" />
@@ -75,6 +213,40 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="MES_Node4.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MESNode4/MES_Node4.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="36696">
+>>>>>>> 04495caef248ff88c82b4aada68a5c73c263b2d4
+              <caret line="1118" column="0" lean-forward="false" selection-start-line="1118" selection-start-column="0" selection-end-line="1118" selection-end-column="0" />
+              <folding>
+                <element signature="e#19#88#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+<<<<<<< HEAD
+      <file leaf-file-name="MES_Node3.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MESNode3/MES_Node3.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1356">
+=======
+      <file leaf-file-name="MES_Node5.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MESNode5/MES_Node5.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="36696">
+>>>>>>> 04495caef248ff88c82b4aada68a5c73c263b2d4
+>>>>>>> 707126bdf0988d6187233f40a3e49789231d159b
+              <caret line="1118" column="0" lean-forward="false" selection-start-line="1118" selection-start-column="0" selection-end-line="1118" selection-end-column="0" />
+              <folding>
+                <element signature="e#19#88#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+<<<<<<< HEAD
       <file leaf-file-name="MES_Node2.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MESNode2/MES_Node2.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -82,11 +254,82 @@
               <caret line="1118" column="0" lean-forward="false" selection-start-line="1118" selection-start-column="0" selection-end-line="1118" selection-end-column="0" />
               <folding>
                 <element signature="e#19#88#0" expanded="true" />
+=======
+<<<<<<< HEAD
+      <file leaf-file-name="MES_Node4.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MESNode4/MES_Node4.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1421">
+              <caret line="1118" column="0" lean-forward="false" selection-start-line="1118" selection-start-column="0" selection-end-line="1118" selection-end-column="0" />
+              <folding>
+                <element signature="e#19#88#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="MES_Node5.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MESNode5/MES_Node5.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1421">
+              <caret line="1118" column="0" lean-forward="false" selection-start-line="1118" selection-start-column="0" selection-end-line="1118" selection-end-column="0" />
+              <folding>
+                <element signature="e#19#88#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MES_Node6.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/MESNode6/MES_Node6.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1421">
+              <caret line="1118" column="0" lean-forward="false" selection-start-line="1118" selection-start-column="0" selection-end-line="1118" selection-end-column="0" />
+              <folding>
+                <element signature="e#19#88#0" expanded="true" />
+              </folding>
+=======
+      <file leaf-file-name="MES_Node6.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MESNode6/MES_Node6.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+>>>>>>> 04495caef248ff88c82b4aada68a5c73c263b2d4
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="fileServer.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CompletedReceiptsQR/fileServer.py">
+          <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+=======
+            <state relative-caret-position="693">
+              <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+>>>>>>> 04495caef248ff88c82b4aada68a5c73c263b2d4
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="barcodeScanner.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/barcodeScanner.py">
+          <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+            <state relative-caret-position="858">
+              <caret line="26" column="35" lean-forward="false" selection-start-line="26" selection-start-column="35" selection-end-line="26" selection-end-column="35" />
+              <folding>
+                <element signature="e#60#90#0" expanded="true" />
+>>>>>>> 707126bdf0988d6187233f40a3e49789231d159b
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+<<<<<<< HEAD
       <file leaf-file-name="MES_Node3.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MESNode3/MES_Node3.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -164,6 +407,21 @@
               <caret line="24" column="0" lean-forward="false" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
               <folding>
                 <element signature="e#60#90#0" expanded="true" />
+=======
+      <file leaf-file-name="QRcodeGenerator.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/QRcodeGenerator.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="561">
+              <caret line="24" column="0" lean-forward="false" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+              <folding>
+                <element signature="e#60#90#0" expanded="true" />
+=======
+            <state relative-caret-position="759">
+              <caret line="26" column="35" lean-forward="false" selection-start-line="26" selection-start-column="35" selection-end-line="26" selection-end-column="35" />
+              <folding>
+                <element signature="e#60#90#0" expanded="true" />
+>>>>>>> 04495caef248ff88c82b4aada68a5c73c263b2d4
+>>>>>>> 707126bdf0988d6187233f40a3e49789231d159b
               </folding>
             </state>
           </provider>
@@ -181,7 +439,14 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
+<<<<<<< HEAD
       <find>pub</find>
+=======
+<<<<<<< HEAD
+      <find>pub</find>
+=======
+>>>>>>> 04495caef248ff88c82b4aada68a5c73c263b2d4
+>>>>>>> 707126bdf0988d6187233f40a3e49789231d159b
       <find>message</find>
       <find>before</find>
       <find>nodetorewrite</find>
@@ -208,9 +473,22 @@
       <find>tcpordernumber</find>
       <find>data.orderNumer</find>
       <find>tcpcarriernumber</find>
+<<<<<<< HEAD
       <find>ros</find>
       <find>rate.sleep</find>
       <find>rate.slee</find>
+=======
+<<<<<<< HEAD
+      <find>ros</find>
+      <find>rate.sleep</find>
+      <find>rate.slee</find>
+=======
+      <find>rate.sleep</find>
+      <find>rate.slee</find>
+      <find>pi</find>
+      <find>ros</find>
+>>>>>>> 04495caef248ff88c82b4aada68a5c73c263b2d4
+>>>>>>> 707126bdf0988d6187233f40a3e49789231d159b
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -219,8 +497,16 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/NODE3/blockChainNode3.py" />
         <option value="$PROJECT_DIR$/NODE2/blockChainNode2.py" />
+=======
+<<<<<<< HEAD
+        <option value="$PROJECT_DIR$/NODE3/blockChainNode3.py" />
+        <option value="$PROJECT_DIR$/NODE2/blockChainNode2.py" />
+=======
+>>>>>>> 04495caef248ff88c82b4aada68a5c73c263b2d4
+>>>>>>> 707126bdf0988d6187233f40a3e49789231d159b
         <option value="$PROJECT_DIR$/hackedNode.py" />
         <option value="$PROJECT_DIR$/Testing/blockChainTesting.py" />
         <option value="$PROJECT_DIR$/stringArrayToString.py" />
@@ -242,7 +528,14 @@
         <option value="$PROJECT_DIR$/MES_Node_hacked.py" />
         <option value="$PROJECT_DIR$/Unused Currently/bitcoinMiningExample.py" />
         <option value="$PROJECT_DIR$/PLC Sim/uniSimAll.py" />
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/PLC Sim/SimNode1noloop.py" />
+=======
+<<<<<<< HEAD
+        <option value="$PROJECT_DIR$/PLC Sim/SimNode1noloop.py" />
+=======
+>>>>>>> 04495caef248ff88c82b4aada68a5c73c263b2d4
+>>>>>>> 707126bdf0988d6187233f40a3e49789231d159b
         <option value="$PROJECT_DIR$/PLC Sim/SimNode2noloop.py" />
         <option value="$PROJECT_DIR$/PLC Sim/SimNode3noloop.py" />
         <option value="$PROJECT_DIR$/logFileRewriteTestRec.py" />
@@ -270,6 +563,15 @@
         <option value="$PROJECT_DIR$/MESNode4/MES_Node4.py" />
         <option value="$PROJECT_DIR$/MESNode5/MES_Node5.py" />
         <option value="$PROJECT_DIR$/MESNode6/MES_Node6.py" />
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+        <option value="$PROJECT_DIR$/RaspberryPi_MES/R_MES_Node5.py" />
+        <option value="$PROJECT_DIR$/PLC Sim/SimNode1noloop.py" />
+        <option value="$PROJECT_DIR$/RaspberryPi_MES/R_MES_Node6.py" />
+>>>>>>> 04495caef248ff88c82b4aada68a5c73c263b2d4
+>>>>>>> 707126bdf0988d6187233f40a3e49789231d159b
       </list>
     </option>
   </component>
@@ -383,19 +685,43 @@
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23655914" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.027743526" sideWeight="0.50133336" order="0" side_tool="true" content_ui="tabs" />
+<<<<<<< HEAD
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298397" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32969034" sideWeight="0.49866667" order="6" side_tool="false" content_ui="tabs" />
+=======
+<<<<<<< HEAD
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298397" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32969034" sideWeight="0.49866667" order="6" side_tool="false" content_ui="tabs" />
+=======
+>>>>>>> 04495caef248ff88c82b4aada68a5c73c263b2d4
+>>>>>>> 707126bdf0988d6187233f40a3e49789231d159b
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32969034" sideWeight="0.49866667" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+<<<<<<< HEAD
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.03217972" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+=======
+<<<<<<< HEAD
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.03217972" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+=======
+>>>>>>> 04495caef248ff88c82b4aada68a5c73c263b2d4
+>>>>>>> 707126bdf0988d6187233f40a3e49789231d159b
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.03217972" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298397" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+>>>>>>> 04495caef248ff88c82b4aada68a5c73c263b2d4
+>>>>>>> 707126bdf0988d6187233f40a3e49789231d159b
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -409,8 +735,16 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/hackedNode.py" />
     <entry file="file://$PROJECT_DIR$/calumServer.py" />
+=======
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/hackedNode.py" />
+    <entry file="file://$PROJECT_DIR$/calumServer.py" />
+=======
+>>>>>>> 04495caef248ff88c82b4aada68a5c73c263b2d4
+>>>>>>> 707126bdf0988d6187233f40a3e49789231d159b
     <entry file="file://$PROJECT_DIR$/pubStringArray.py" />
     <entry file="file://$PROJECT_DIR$/MESNode1/blockChainNode1.py" />
     <entry file="file://$PROJECT_DIR$/../../../../../raspberryPiFiles/listener.py">
@@ -429,6 +763,10 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 707126bdf0988d6187233f40a3e49789231d159b
     <entry file="file://$PROJECT_DIR$/RaspberryPi_MES/RP_MES_Node1.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="155">
@@ -436,6 +774,12 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+=======
+=======
+    <entry file="file://$PROJECT_DIR$/RaspberryPi_MES/RP_MES_Node1.py" />
+>>>>>>> 04495caef248ff88c82b4aada68a5c73c263b2d4
+>>>>>>> 707126bdf0988d6187233f40a3e49789231d159b
     <entry file="file://$PROJECT_DIR$/testTCP.py" />
     <entry file="file://$PROJECT_DIR$/Server2.py" />
     <entry file="file://$PROJECT_DIR$/3Server.py" />
@@ -540,6 +884,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="561">
           <caret line="24" column="0" lean-forward="false" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+<<<<<<< HEAD
           <folding>
             <element signature="e#60#90#0" expanded="true" />
           </folding>
@@ -594,10 +939,79 @@
             <element signature="e#20636#22121#0" expanded="false" />
             <element signature="e#22254#30744#0" expanded="false" />
             <element signature="e#38834#38883#0" expanded="false" />
+=======
+<<<<<<< HEAD
+          <folding>
+            <element signature="e#60#90#0" expanded="true" />
+>>>>>>> 707126bdf0988d6187233f40a3e49789231d159b
           </folding>
+=======
+>>>>>>> 04495caef248ff88c82b4aada68a5c73c263b2d4
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/FileWipe.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="5" column="20" lean-forward="false" selection-start-line="5" selection-start-column="20" selection-end-line="5" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/PLC Sim/SimNode1noloop.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="674">
+          <caret line="35" column="0" lean-forward="true" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+=======
+>>>>>>> 04495caef248ff88c82b4aada68a5c73c263b2d4
+    <entry file="file://$PROJECT_DIR$/PLC Sim/SimNode1.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="740">
+          <caret line="24" column="30" lean-forward="true" selection-start-line="24" selection-start-column="30" selection-end-line="24" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/../../../../../raspberryPiFiles/blockChain.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="489">
+          <caret line="486" column="7" lean-forward="false" selection-start-line="486" selection-start-column="4" selection-end-line="486" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../../../raspberryPiFiles/MES_Node1.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="14" column="23" lean-forward="false" selection-start-line="14" selection-start-column="23" selection-end-line="14" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../../../raspberryPiFiles/MES_Node2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="462">
+          <caret line="14" column="23" lean-forward="false" selection-start-line="14" selection-start-column="23" selection-end-line="14" selection-end-column="23" />
+          <folding>
+            <element signature="e#19#88#0" expanded="false" />
+            <element signature="e#19114#19633#0" expanded="false" />
+            <element signature="e#19659#20614#0" expanded="false" />
+            <element signature="e#20636#22121#0" expanded="false" />
+            <element signature="e#22254#30744#0" expanded="false" />
+            <element signature="e#38834#38883#0" expanded="false" />
+=======
+    <entry file="file://$PROJECT_DIR$/../../../../../raspberryPiFiles/blockChain.py" />
+    <entry file="file://$PROJECT_DIR$/../../../../../raspberryPiFiles/MES_Node1.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="14" column="23" lean-forward="false" selection-start-line="14" selection-start-column="23" selection-end-line="14" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/../../../../../raspberryPiFiles/MES_Node3.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="462">
@@ -605,10 +1019,56 @@
           <folding>
             <element signature="e#19#88#0" expanded="false" />
             <element signature="e#5289#6653#0" expanded="false" />
+=======
+    <entry file="file://$PROJECT_DIR$/../../../../../raspberryPiFiles/MES_Node2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="462">
+          <caret line="14" column="23" lean-forward="false" selection-start-line="14" selection-start-column="23" selection-end-line="14" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../../../raspberryPiFiles/MES_Node3.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="462">
+          <caret line="14" column="23" lean-forward="false" selection-start-line="14" selection-start-column="23" selection-end-line="14" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../../../raspberryPiFiles/MES_Node4.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="14" column="23" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="1083" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../../../raspberryPiFiles/MES_Node5.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="297">
+          <caret line="15" column="23" lean-forward="false" selection-start-line="15" selection-start-column="23" selection-end-line="15" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../../../raspberryPiFiles/MES_Node6.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="759">
+          <caret line="29" column="12" lean-forward="true" selection-start-line="29" selection-start-column="12" selection-end-line="29" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fileServer.py" />
+    <entry file="file://$PROJECT_DIR$/MESNode1/MES_Node1.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36696">
+          <caret line="1118" column="0" lean-forward="false" selection-start-line="1118" selection-start-column="0" selection-end-line="1118" selection-end-column="0" />
+          <folding>
+            <element signature="e#19#88#0" expanded="false" />
+>>>>>>> 04495caef248ff88c82b4aada68a5c73c263b2d4
+>>>>>>> 707126bdf0988d6187233f40a3e49789231d159b
           </folding>
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/../../../../../raspberryPiFiles/MES_Node4.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="264">
@@ -639,26 +1099,68 @@
           <caret line="26" column="35" lean-forward="false" selection-start-line="26" selection-start-column="35" selection-end-line="26" selection-end-column="35" />
           <folding>
             <element signature="e#60#90#0" expanded="true" />
+=======
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/../../../../../raspberryPiFiles/MES_Node3.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="462">
+          <caret line="14" column="23" lean-forward="false" selection-start-line="14" selection-start-column="23" selection-end-line="14" selection-end-column="23" />
+          <folding>
+            <element signature="e#19#88#0" expanded="false" />
+            <element signature="e#5289#6653#0" expanded="false" />
+=======
+    <entry file="file://$PROJECT_DIR$/MESNode3/MES_Node3.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36696">
+          <caret line="1118" column="0" lean-forward="false" selection-start-line="1118" selection-start-column="0" selection-end-line="1118" selection-end-column="0" />
+          <folding>
+            <element signature="e#19#88#0" expanded="true" />
+>>>>>>> 04495caef248ff88c82b4aada68a5c73c263b2d4
+>>>>>>> 707126bdf0988d6187233f40a3e49789231d159b
           </folding>
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/fileServer.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="660">
           <caret line="20" column="25" lean-forward="true" selection-start-line="20" selection-start-column="25" selection-end-line="20" selection-end-column="25" />
+=======
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/../../../../../raspberryPiFiles/MES_Node4.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="14" column="23" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="1083" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/../../../../../raspberryPiFiles/MES_Node5.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="297">
+          <caret line="15" column="23" lean-forward="false" selection-start-line="15" selection-start-column="23" selection-end-line="15" selection-end-column="23" />
+>>>>>>> 707126bdf0988d6187233f40a3e49789231d159b
+          <folding />
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/CompletedReceiptsQR/fileServer.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+=======
+    <entry file="file://$PROJECT_DIR$/../../../../../raspberryPiFiles/MES_Node6.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="759">
+          <caret line="29" column="12" lean-forward="true" selection-start-line="29" selection-start-column="12" selection-end-line="29" selection-end-column="12" />
+>>>>>>> 707126bdf0988d6187233f40a3e49789231d159b
           <folding />
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/MESNode1/MES_Node1.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1421">
@@ -685,10 +1187,109 @@
           <caret line="1118" column="0" lean-forward="false" selection-start-line="1118" selection-start-column="0" selection-end-line="1118" selection-end-column="0" />
           <folding>
             <element signature="e#19#88#0" expanded="true" />
+=======
+    <entry file="file://$PROJECT_DIR$/barcodeScanner.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="858">
+          <caret line="26" column="35" lean-forward="false" selection-start-line="26" selection-start-column="35" selection-end-line="26" selection-end-column="35" />
+          <folding>
+            <element signature="e#60#90#0" expanded="true" />
+=======
+    <entry file="file://$PROJECT_DIR$/MESNode4/MES_Node4.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36696">
+          <caret line="1118" column="0" lean-forward="false" selection-start-line="1118" selection-start-column="0" selection-end-line="1118" selection-end-column="0" />
+          <folding>
+            <element signature="e#19#88#0" expanded="true" />
+>>>>>>> 04495caef248ff88c82b4aada68a5c73c263b2d4
+>>>>>>> 707126bdf0988d6187233f40a3e49789231d159b
           </folding>
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/MESNode4/MES_Node4.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1421">
+=======
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/fileServer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="660">
+          <caret line="20" column="25" lean-forward="true" selection-start-line="20" selection-start-column="25" selection-end-line="20" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CompletedReceiptsQR/fileServer.py">
+=======
+    <entry file="file://$PROJECT_DIR$/MESNode5/MES_Node5.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36696">
+>>>>>>> 707126bdf0988d6187233f40a3e49789231d159b
+          <caret line="1118" column="0" lean-forward="false" selection-start-line="1118" selection-start-column="0" selection-end-line="1118" selection-end-column="0" />
+          <folding>
+            <element signature="e#19#88#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/MESNode5/MES_Node5.py">
+      <provider selected="true" editor-type-id="text-editor">
+=======
+    <entry file="file://$PROJECT_DIR$/MESNode6/MES_Node6.py">
+>>>>>>> 04495caef248ff88c82b4aada68a5c73c263b2d4
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/MESNode1/MES_Node1.py">
+      <provider selected="true" editor-type-id="text-editor">
+>>>>>>> 707126bdf0988d6187233f40a3e49789231d159b
+        <state relative-caret-position="1421">
+          <caret line="1118" column="0" lean-forward="false" selection-start-line="1118" selection-start-column="0" selection-end-line="1118" selection-end-column="0" />
+          <folding>
+            <element signature="e#19#88#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
+=======
+    <entry file="file://$PROJECT_DIR$/MESNode2/MES_Node2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1421">
+          <caret line="1118" column="0" lean-forward="false" selection-start-line="1118" selection-start-column="0" selection-end-line="1118" selection-end-column="0" />
+          <folding>
+            <element signature="e#19#88#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MESNode3/MES_Node3.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1356">
+          <caret line="1118" column="0" lean-forward="false" selection-start-line="1118" selection-start-column="0" selection-end-line="1118" selection-end-column="0" />
+          <folding>
+            <element signature="e#19#88#0" expanded="true" />
+=======
+    <entry file="file://$PROJECT_DIR$/barcodeScanner.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="759">
+          <caret line="26" column="35" lean-forward="false" selection-start-line="26" selection-start-column="35" selection-end-line="26" selection-end-column="35" />
+          <folding>
+            <element signature="e#60#90#0" expanded="true" />
+>>>>>>> 04495caef248ff88c82b4aada68a5c73c263b2d4
+          </folding>
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/MESNode4/MES_Node4.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1421">
@@ -703,12 +1304,28 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1421">
           <caret line="1118" column="0" lean-forward="false" selection-start-line="1118" selection-start-column="0" selection-end-line="1118" selection-end-column="0" />
+=======
+    <entry file="file://$PROJECT_DIR$/CompletedReceiptsQR/fileServer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="693">
+          <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MESNode2/MES_Node2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+>>>>>>> 04495caef248ff88c82b4aada68a5c73c263b2d4
           <folding>
             <element signature="e#19#88#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+>>>>>>> 707126bdf0988d6187233f40a3e49789231d159b
     <entry file="file://$PROJECT_DIR$/MESNode6/MES_Node6.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1421">
@@ -716,6 +1333,32 @@
           <folding>
             <element signature="e#19#88#0" expanded="true" />
           </folding>
+<<<<<<< HEAD
+=======
+=======
+    <entry file="file://$PROJECT_DIR$/RaspberryPi_MES/R_MES_Node5.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="462">
+          <caret line="20" column="10" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="1148" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/PLC Sim/SimNode1noloop.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="594">
+          <caret line="19" column="15" lean-forward="true" selection-start-line="19" selection-start-column="15" selection-end-line="19" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RaspberryPi_MES/R_MES_Node6.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="521" column="31" lean-forward="true" selection-start-line="521" selection-start-column="31" selection-end-line="521" selection-end-column="31" />
+          <folding />
+>>>>>>> 04495caef248ff88c82b4aada68a5c73c263b2d4
+>>>>>>> 707126bdf0988d6187233f40a3e49789231d159b
         </state>
       </provider>
     </entry>

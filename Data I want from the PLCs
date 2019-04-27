@@ -1,0 +1,12 @@
+****************** Industry 4.0 ******************
+
+Data needed from the PLCs:
+	
+	Station:
+		Active?
+			if yes: product number
+
+		Addition of parts?
+			if yes: part number
+		
+		Next station?

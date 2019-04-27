@@ -56,6 +56,10 @@ CMAKE_BINARY_DIR = /home/pi/blockChainGit/00blockChain_ws/build
 #=============================================================================
 # Targets provided globally by CMake.
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 707126bdf0988d6187233f40a3e49789231d159b
 # Special rule for the target install/local
 install/local: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
@@ -72,6 +76,16 @@ edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
 	/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
 .PHONY : edit_cache
+<<<<<<< HEAD
+=======
+=======
+# Special rule for the target install
+install: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/usr/bin/cmake -P cmake_install.cmake
+.PHONY : install
+>>>>>>> 04495caef248ff88c82b4aada68a5c73c263b2d4
+>>>>>>> 707126bdf0988d6187233f40a3e49789231d159b
 
 # Special rule for the target edit_cache
 edit_cache/fast: edit_cache
@@ -132,6 +146,19 @@ test:
 test/fast: test
 
 .PHONY : test/fast
+<<<<<<< HEAD
+=======
+
+# Special rule for the target list_install_components
+list_install_components:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
+.PHONY : list_install_components
+
+# Special rule for the target list_install_components
+list_install_components/fast: list_install_components
+
+.PHONY : list_install_components/fast
+>>>>>>> 707126bdf0988d6187233f40a3e49789231d159b
 
 # The main all target
 all: cmake_check_build_system
@@ -212,8 +239,17 @@ blockChainPack__genlisp/fast:
 
 # Convenience name for target.
 blockChainPack_/CMakeFiles/blockChainPack__generate_messages_lisp.dir/rule:
+<<<<<<< HEAD
 	cd /home/pi/blockChainGit/00blockChain_ws/build && $(MAKE) -f CMakeFiles/Makefile2 blockChainPack_/CMakeFiles/blockChainPack__generate_messages_lisp.dir/rule
 .PHONY : blockChainPack_/CMakeFiles/blockChainPack__generate_messages_lisp.dir/rule
+=======
+<<<<<<< HEAD
+	cd /home/pi/blockChainGit/00blockChain_ws/build && $(MAKE) -f CMakeFiles/Makefile2 blockChainPack_/CMakeFiles/blockChainPack__generate_messages_lisp.dir/rule
+.PHONY : blockChainPack_/CMakeFiles/blockChainPack__generate_messages_lisp.dir/rule
+=======
+	cd /home/ros/blockChainGit/00blockChain_ws/build && $(MAKE) -f CMakeFiles/Makefile2 blockChainPack_/CMakeFiles/blockChainPack__generate_messages_lisp.dir/rule
+.PHONY : blockChainPack_/CMakeFiles/blockChainPack__generate_messages_lisp.dir/rule
+>>>>>>> 707126bdf0988d6187233f40a3e49789231d159b
 
 # Convenience name for target.
 blockChainPack__generate_messages_lisp: blockChainPack_/CMakeFiles/blockChainPack__generate_messages_lisp.dir/rule
@@ -222,6 +258,7 @@ blockChainPack__generate_messages_lisp: blockChainPack_/CMakeFiles/blockChainPac
 
 # fast build rule for target.
 blockChainPack__generate_messages_lisp/fast:
+<<<<<<< HEAD
 	cd /home/pi/blockChainGit/00blockChain_ws/build && $(MAKE) -f blockChainPack_/CMakeFiles/blockChainPack__generate_messages_lisp.dir/build.make blockChainPack_/CMakeFiles/blockChainPack__generate_messages_lisp.dir/build
 .PHONY : blockChainPack__generate_messages_lisp/fast
 
@@ -244,6 +281,31 @@ blockChainPack__geneus/fast:
 blockChainPack_/CMakeFiles/blockChainPack__generate_messages_eus.dir/rule:
 	cd /home/pi/blockChainGit/00blockChain_ws/build && $(MAKE) -f CMakeFiles/Makefile2 blockChainPack_/CMakeFiles/blockChainPack__generate_messages_eus.dir/rule
 .PHONY : blockChainPack_/CMakeFiles/blockChainPack__generate_messages_eus.dir/rule
+=======
+	cd /home/ros/blockChainGit/00blockChain_ws/build && $(MAKE) -f blockChainPack_/CMakeFiles/blockChainPack__generate_messages_lisp.dir/build.make blockChainPack_/CMakeFiles/blockChainPack__generate_messages_lisp.dir/build
+.PHONY : blockChainPack__generate_messages_lisp/fast
+
+# Convenience name for target.
+blockChainPack_/CMakeFiles/blockChainPack__gencpp.dir/rule:
+	cd /home/ros/blockChainGit/00blockChain_ws/build && $(MAKE) -f CMakeFiles/Makefile2 blockChainPack_/CMakeFiles/blockChainPack__gencpp.dir/rule
+.PHONY : blockChainPack_/CMakeFiles/blockChainPack__gencpp.dir/rule
+
+# Convenience name for target.
+blockChainPack__gencpp: blockChainPack_/CMakeFiles/blockChainPack__gencpp.dir/rule
+
+.PHONY : blockChainPack__gencpp
+
+# fast build rule for target.
+blockChainPack__gencpp/fast:
+	cd /home/ros/blockChainGit/00blockChain_ws/build && $(MAKE) -f blockChainPack_/CMakeFiles/blockChainPack__gencpp.dir/build.make blockChainPack_/CMakeFiles/blockChainPack__gencpp.dir/build
+.PHONY : blockChainPack__gencpp/fast
+
+# Convenience name for target.
+blockChainPack_/CMakeFiles/std_msgs_generate_messages_py.dir/rule:
+	cd /home/ros/blockChainGit/00blockChain_ws/build && $(MAKE) -f CMakeFiles/Makefile2 blockChainPack_/CMakeFiles/std_msgs_generate_messages_py.dir/rule
+.PHONY : blockChainPack_/CMakeFiles/std_msgs_generate_messages_py.dir/rule
+>>>>>>> 04495caef248ff88c82b4aada68a5c73c263b2d4
+>>>>>>> 707126bdf0988d6187233f40a3e49789231d159b
 
 # Convenience name for target.
 blockChainPack__generate_messages_eus: blockChainPack_/CMakeFiles/blockChainPack__generate_messages_eus.dir/rule
@@ -251,6 +313,7 @@ blockChainPack__generate_messages_eus: blockChainPack_/CMakeFiles/blockChainPack
 .PHONY : blockChainPack__generate_messages_eus
 
 # fast build rule for target.
+<<<<<<< HEAD
 blockChainPack__generate_messages_eus/fast:
 	cd /home/pi/blockChainGit/00blockChain_ws/build && $(MAKE) -f blockChainPack_/CMakeFiles/blockChainPack__generate_messages_eus.dir/build.make blockChainPack_/CMakeFiles/blockChainPack__generate_messages_eus.dir/build
 .PHONY : blockChainPack__generate_messages_eus/fast
@@ -319,6 +382,82 @@ blockChainPack__gennodejs/fast:
 blockChainPack_/CMakeFiles/blockChainPack__generate_messages_cpp.dir/rule:
 	cd /home/pi/blockChainGit/00blockChain_ws/build && $(MAKE) -f CMakeFiles/Makefile2 blockChainPack_/CMakeFiles/blockChainPack__generate_messages_cpp.dir/rule
 .PHONY : blockChainPack_/CMakeFiles/blockChainPack__generate_messages_cpp.dir/rule
+=======
+blockChainPack__generate_messages_lisp/fast:
+	cd /home/pi/blockChainGit/00blockChain_ws/build && $(MAKE) -f blockChainPack_/CMakeFiles/blockChainPack__generate_messages_lisp.dir/build.make blockChainPack_/CMakeFiles/blockChainPack__generate_messages_lisp.dir/build
+.PHONY : blockChainPack__generate_messages_lisp/fast
+
+# Convenience name for target.
+blockChainPack_/CMakeFiles/blockChainPack__geneus.dir/rule:
+	cd /home/pi/blockChainGit/00blockChain_ws/build && $(MAKE) -f CMakeFiles/Makefile2 blockChainPack_/CMakeFiles/blockChainPack__geneus.dir/rule
+.PHONY : blockChainPack_/CMakeFiles/blockChainPack__geneus.dir/rule
+
+# Convenience name for target.
+blockChainPack__geneus: blockChainPack_/CMakeFiles/blockChainPack__geneus.dir/rule
+
+.PHONY : blockChainPack__geneus
+
+# fast build rule for target.
+blockChainPack__geneus/fast:
+	cd /home/pi/blockChainGit/00blockChain_ws/build && $(MAKE) -f blockChainPack_/CMakeFiles/blockChainPack__geneus.dir/build.make blockChainPack_/CMakeFiles/blockChainPack__geneus.dir/build
+.PHONY : blockChainPack__geneus/fast
+
+# Convenience name for target.
+<<<<<<< HEAD
+blockChainPack_/CMakeFiles/blockChainPack__generate_messages_eus.dir/rule:
+	cd /home/pi/blockChainGit/00blockChain_ws/build && $(MAKE) -f CMakeFiles/Makefile2 blockChainPack_/CMakeFiles/blockChainPack__generate_messages_eus.dir/rule
+.PHONY : blockChainPack_/CMakeFiles/blockChainPack__generate_messages_eus.dir/rule
+
+# Convenience name for target.
+blockChainPack__generate_messages_eus: blockChainPack_/CMakeFiles/blockChainPack__generate_messages_eus.dir/rule
+
+.PHONY : blockChainPack__generate_messages_eus
+
+# fast build rule for target.
+blockChainPack__generate_messages_eus/fast:
+	cd /home/pi/blockChainGit/00blockChain_ws/build && $(MAKE) -f blockChainPack_/CMakeFiles/blockChainPack__generate_messages_eus.dir/build.make blockChainPack_/CMakeFiles/blockChainPack__generate_messages_eus.dir/build
+.PHONY : blockChainPack__generate_messages_eus/fast
+
+# Convenience name for target.
+blockChainPack_/CMakeFiles/blockChainPack__gencpp.dir/rule:
+	cd /home/pi/blockChainGit/00blockChain_ws/build && $(MAKE) -f CMakeFiles/Makefile2 blockChainPack_/CMakeFiles/blockChainPack__gencpp.dir/rule
+.PHONY : blockChainPack_/CMakeFiles/blockChainPack__gencpp.dir/rule
+=======
+blockChainPack_/CMakeFiles/roscpp_generate_messages_py.dir/rule:
+	cd /home/ros/blockChainGit/00blockChain_ws/build && $(MAKE) -f CMakeFiles/Makefile2 blockChainPack_/CMakeFiles/roscpp_generate_messages_py.dir/rule
+.PHONY : blockChainPack_/CMakeFiles/roscpp_generate_messages_py.dir/rule
+>>>>>>> 04495caef248ff88c82b4aada68a5c73c263b2d4
+
+# Convenience name for target.
+blockChainPack__gencpp: blockChainPack_/CMakeFiles/blockChainPack__gencpp.dir/rule
+
+.PHONY : blockChainPack__gencpp
+
+# fast build rule for target.
+blockChainPack__gencpp/fast:
+	cd /home/pi/blockChainGit/00blockChain_ws/build && $(MAKE) -f blockChainPack_/CMakeFiles/blockChainPack__gencpp.dir/build.make blockChainPack_/CMakeFiles/blockChainPack__gencpp.dir/build
+.PHONY : blockChainPack__gencpp/fast
+
+# Convenience name for target.
+blockChainPack_/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule:
+	cd /home/pi/blockChainGit/00blockChain_ws/build && $(MAKE) -f CMakeFiles/Makefile2 blockChainPack_/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule
+.PHONY : blockChainPack_/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule
+
+# Convenience name for target.
+rosgraph_msgs_generate_messages_lisp: blockChainPack_/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule
+
+.PHONY : rosgraph_msgs_generate_messages_lisp
+
+# fast build rule for target.
+rosgraph_msgs_generate_messages_lisp/fast:
+	cd /home/pi/blockChainGit/00blockChain_ws/build && $(MAKE) -f blockChainPack_/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/build.make blockChainPack_/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/build
+.PHONY : rosgraph_msgs_generate_messages_lisp/fast
+
+# Convenience name for target.
+blockChainPack_/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule:
+	cd /home/pi/blockChainGit/00blockChain_ws/build && $(MAKE) -f CMakeFiles/Makefile2 blockChainPack_/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule
+.PHONY : blockChainPack_/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule
+>>>>>>> 707126bdf0988d6187233f40a3e49789231d159b
 
 # Convenience name for target.
 blockChainPack__generate_messages_cpp: blockChainPack_/CMakeFiles/blockChainPack__generate_messages_cpp.dir/rule
@@ -326,6 +465,7 @@ blockChainPack__generate_messages_cpp: blockChainPack_/CMakeFiles/blockChainPack
 .PHONY : blockChainPack__generate_messages_cpp
 
 # fast build rule for target.
+<<<<<<< HEAD
 blockChainPack__generate_messages_cpp/fast:
 	cd /home/pi/blockChainGit/00blockChain_ws/build && $(MAKE) -f blockChainPack_/CMakeFiles/blockChainPack__generate_messages_cpp.dir/build.make blockChainPack_/CMakeFiles/blockChainPack__generate_messages_cpp.dir/build
 .PHONY : blockChainPack__generate_messages_cpp/fast
@@ -409,6 +549,16 @@ std_msgs_generate_messages_cpp/fast:
 blockChainPack_/CMakeFiles/roscpp_generate_messages_cpp.dir/rule:
 	cd /home/pi/blockChainGit/00blockChain_ws/build && $(MAKE) -f CMakeFiles/Makefile2 blockChainPack_/CMakeFiles/roscpp_generate_messages_cpp.dir/rule
 .PHONY : blockChainPack_/CMakeFiles/roscpp_generate_messages_cpp.dir/rule
+=======
+rosgraph_msgs_generate_messages_cpp/fast:
+	cd /home/pi/blockChainGit/00blockChain_ws/build && $(MAKE) -f blockChainPack_/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build.make blockChainPack_/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build
+.PHONY : rosgraph_msgs_generate_messages_cpp/fast
+
+# Convenience name for target.
+blockChainPack_/CMakeFiles/blockChainPack__gennodejs.dir/rule:
+	cd /home/pi/blockChainGit/00blockChain_ws/build && $(MAKE) -f CMakeFiles/Makefile2 blockChainPack_/CMakeFiles/blockChainPack__gennodejs.dir/rule
+.PHONY : blockChainPack_/CMakeFiles/blockChainPack__gennodejs.dir/rule
+>>>>>>> 707126bdf0988d6187233f40a3e49789231d159b
 
 # Convenience name for target.
 roscpp_generate_messages_cpp: blockChainPack_/CMakeFiles/roscpp_generate_messages_cpp.dir/rule
@@ -416,6 +566,7 @@ roscpp_generate_messages_cpp: blockChainPack_/CMakeFiles/roscpp_generate_message
 .PHONY : roscpp_generate_messages_cpp
 
 # fast build rule for target.
+<<<<<<< HEAD
 roscpp_generate_messages_cpp/fast:
 	cd /home/pi/blockChainGit/00blockChain_ws/build && $(MAKE) -f blockChainPack_/CMakeFiles/roscpp_generate_messages_cpp.dir/build.make blockChainPack_/CMakeFiles/roscpp_generate_messages_cpp.dir/build
 .PHONY : roscpp_generate_messages_cpp/fast
@@ -439,6 +590,407 @@ roscpp_generate_messages_eus/fast:
 blockChainPack_/CMakeFiles/std_msgs_generate_messages_py.dir/rule:
 	cd /home/pi/blockChainGit/00blockChain_ws/build && $(MAKE) -f CMakeFiles/Makefile2 blockChainPack_/CMakeFiles/std_msgs_generate_messages_py.dir/rule
 .PHONY : blockChainPack_/CMakeFiles/std_msgs_generate_messages_py.dir/rule
+
+# Convenience name for target.
+std_msgs_generate_messages_py: blockChainPack_/CMakeFiles/std_msgs_generate_messages_py.dir/rule
+
+.PHONY : std_msgs_generate_messages_py
+
+# fast build rule for target.
+std_msgs_generate_messages_py/fast:
+	cd /home/pi/blockChainGit/00blockChain_ws/build && $(MAKE) -f blockChainPack_/CMakeFiles/std_msgs_generate_messages_py.dir/build.make blockChainPack_/CMakeFiles/std_msgs_generate_messages_py.dir/build
+.PHONY : std_msgs_generate_messages_py/fast
+
+# Convenience name for target.
+blockChainPack_/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule:
+	cd /home/pi/blockChainGit/00blockChain_ws/build && $(MAKE) -f CMakeFiles/Makefile2 blockChainPack_/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule
+.PHONY : blockChainPack_/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule
+
+# Convenience name for target.
+roscpp_generate_messages_nodejs: blockChainPack_/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule
+
+.PHONY : roscpp_generate_messages_nodejs
+
+# fast build rule for target.
+roscpp_generate_messages_nodejs/fast:
+	cd /home/pi/blockChainGit/00blockChain_ws/build && $(MAKE) -f blockChainPack_/CMakeFiles/roscpp_generate_messages_nodejs.dir/build.make blockChainPack_/CMakeFiles/roscpp_generate_messages_nodejs.dir/build
+.PHONY : roscpp_generate_messages_nodejs/fast
+
+# Convenience name for target.
+blockChainPack_/CMakeFiles/std_msgs_generate_messages_eus.dir/rule:
+	cd /home/pi/blockChainGit/00blockChain_ws/build && $(MAKE) -f CMakeFiles/Makefile2 blockChainPack_/CMakeFiles/std_msgs_generate_messages_eus.dir/rule
+.PHONY : blockChainPack_/CMakeFiles/std_msgs_generate_messages_eus.dir/rule
+=======
+blockChainPack__gennodejs/fast:
+	cd /home/pi/blockChainGit/00blockChain_ws/build && $(MAKE) -f blockChainPack_/CMakeFiles/blockChainPack__gennodejs.dir/build.make blockChainPack_/CMakeFiles/blockChainPack__gennodejs.dir/build
+.PHONY : blockChainPack__gennodejs/fast
+
+# Convenience name for target.
+blockChainPack_/CMakeFiles/blockChainPack__generate_messages_cpp.dir/rule:
+	cd /home/pi/blockChainGit/00blockChain_ws/build && $(MAKE) -f CMakeFiles/Makefile2 blockChainPack_/CMakeFiles/blockChainPack__generate_messages_cpp.dir/rule
+.PHONY : blockChainPack_/CMakeFiles/blockChainPack__generate_messages_cpp.dir/rule
+
+# Convenience name for target.
+blockChainPack__generate_messages_cpp: blockChainPack_/CMakeFiles/blockChainPack__generate_messages_cpp.dir/rule
+
+.PHONY : blockChainPack__generate_messages_cpp
+
+# fast build rule for target.
+blockChainPack__generate_messages_cpp/fast:
+	cd /home/pi/blockChainGit/00blockChain_ws/build && $(MAKE) -f blockChainPack_/CMakeFiles/blockChainPack__generate_messages_cpp.dir/build.make blockChainPack_/CMakeFiles/blockChainPack__generate_messages_cpp.dir/build
+.PHONY : blockChainPack__generate_messages_cpp/fast
+
+# Convenience name for target.
+blockChainPack_/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule:
+	cd /home/pi/blockChainGit/00blockChain_ws/build && $(MAKE) -f CMakeFiles/Makefile2 blockChainPack_/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule
+.PHONY : blockChainPack_/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule
+
+# Convenience name for target.
+rosgraph_msgs_generate_messages_py: blockChainPack_/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule
+
+.PHONY : rosgraph_msgs_generate_messages_py
+
+# fast build rule for target.
+rosgraph_msgs_generate_messages_py/fast:
+	cd /home/pi/blockChainGit/00blockChain_ws/build && $(MAKE) -f blockChainPack_/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/build.make blockChainPack_/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/build
+.PHONY : rosgraph_msgs_generate_messages_py/fast
+
+# Convenience name for target.
+blockChainPack_/CMakeFiles/roscpp_generate_messages_py.dir/rule:
+	cd /home/pi/blockChainGit/00blockChain_ws/build && $(MAKE) -f CMakeFiles/Makefile2 blockChainPack_/CMakeFiles/roscpp_generate_messages_py.dir/rule
+.PHONY : blockChainPack_/CMakeFiles/roscpp_generate_messages_py.dir/rule
+>>>>>>> 707126bdf0988d6187233f40a3e49789231d159b
+
+# Convenience name for target.
+roscpp_generate_messages_py: blockChainPack_/CMakeFiles/roscpp_generate_messages_py.dir/rule
+
+.PHONY : roscpp_generate_messages_py
+
+# fast build rule for target.
+<<<<<<< HEAD
+std_msgs_generate_messages_eus/fast:
+	cd /home/pi/blockChainGit/00blockChain_ws/build && $(MAKE) -f blockChainPack_/CMakeFiles/std_msgs_generate_messages_eus.dir/build.make blockChainPack_/CMakeFiles/std_msgs_generate_messages_eus.dir/build
+.PHONY : std_msgs_generate_messages_eus/fast
+
+# Convenience name for target.
+blockChainPack_/CMakeFiles/std_msgs_generate_messages_lisp.dir/rule:
+	cd /home/pi/blockChainGit/00blockChain_ws/build && $(MAKE) -f CMakeFiles/Makefile2 blockChainPack_/CMakeFiles/std_msgs_generate_messages_lisp.dir/rule
+.PHONY : blockChainPack_/CMakeFiles/std_msgs_generate_messages_lisp.dir/rule
+=======
+roscpp_generate_messages_py/fast:
+	cd /home/pi/blockChainGit/00blockChain_ws/build && $(MAKE) -f blockChainPack_/CMakeFiles/roscpp_generate_messages_py.dir/build.make blockChainPack_/CMakeFiles/roscpp_generate_messages_py.dir/build
+.PHONY : roscpp_generate_messages_py/fast
+
+# Convenience name for target.
+blockChainPack_/CMakeFiles/blockChainPack__generate_messages_nodejs.dir/rule:
+	cd /home/pi/blockChainGit/00blockChain_ws/build && $(MAKE) -f CMakeFiles/Makefile2 blockChainPack_/CMakeFiles/blockChainPack__generate_messages_nodejs.dir/rule
+.PHONY : blockChainPack_/CMakeFiles/blockChainPack__generate_messages_nodejs.dir/rule
+>>>>>>> 707126bdf0988d6187233f40a3e49789231d159b
+
+# Convenience name for target.
+blockChainPack__generate_messages_nodejs: blockChainPack_/CMakeFiles/blockChainPack__generate_messages_nodejs.dir/rule
+
+.PHONY : blockChainPack__generate_messages_nodejs
+
+# fast build rule for target.
+<<<<<<< HEAD
+std_msgs_generate_messages_lisp/fast:
+	cd /home/pi/blockChainGit/00blockChain_ws/build && $(MAKE) -f blockChainPack_/CMakeFiles/std_msgs_generate_messages_lisp.dir/build.make blockChainPack_/CMakeFiles/std_msgs_generate_messages_lisp.dir/build
+.PHONY : std_msgs_generate_messages_lisp/fast
+
+# Convenience name for target.
+blockChainPack_/CMakeFiles/std_msgs_generate_messages_nodejs.dir/rule:
+	cd /home/pi/blockChainGit/00blockChain_ws/build && $(MAKE) -f CMakeFiles/Makefile2 blockChainPack_/CMakeFiles/std_msgs_generate_messages_nodejs.dir/rule
+.PHONY : blockChainPack_/CMakeFiles/std_msgs_generate_messages_nodejs.dir/rule
+
+# Convenience name for target.
+std_msgs_generate_messages_nodejs: blockChainPack_/CMakeFiles/std_msgs_generate_messages_nodejs.dir/rule
+
+.PHONY : std_msgs_generate_messages_nodejs
+
+# fast build rule for target.
+std_msgs_generate_messages_nodejs/fast:
+	cd /home/pi/blockChainGit/00blockChain_ws/build && $(MAKE) -f blockChainPack_/CMakeFiles/std_msgs_generate_messages_nodejs.dir/build.make blockChainPack_/CMakeFiles/std_msgs_generate_messages_nodejs.dir/build
+.PHONY : std_msgs_generate_messages_nodejs/fast
+
+# Convenience name for target.
+blockChainPack_/CMakeFiles/blockChainPack__generate_messages.dir/rule:
+	cd /home/pi/blockChainGit/00blockChain_ws/build && $(MAKE) -f CMakeFiles/Makefile2 blockChainPack_/CMakeFiles/blockChainPack__generate_messages.dir/rule
+.PHONY : blockChainPack_/CMakeFiles/blockChainPack__generate_messages.dir/rule
+
+# Convenience name for target.
+blockChainPack__generate_messages: blockChainPack_/CMakeFiles/blockChainPack__generate_messages.dir/rule
+
+.PHONY : blockChainPack__generate_messages
+
+# fast build rule for target.
+blockChainPack__generate_messages/fast:
+	cd /home/pi/blockChainGit/00blockChain_ws/build && $(MAKE) -f blockChainPack_/CMakeFiles/blockChainPack__generate_messages.dir/build.make blockChainPack_/CMakeFiles/blockChainPack__generate_messages.dir/build
+.PHONY : blockChainPack__generate_messages/fast
+=======
+blockChainPack__generate_messages_nodejs/fast:
+	cd /home/pi/blockChainGit/00blockChain_ws/build && $(MAKE) -f blockChainPack_/CMakeFiles/blockChainPack__generate_messages_nodejs.dir/build.make blockChainPack_/CMakeFiles/blockChainPack__generate_messages_nodejs.dir/build
+.PHONY : blockChainPack__generate_messages_nodejs/fast
+
+# Convenience name for target.
+blockChainPack_/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/rule:
+	cd /home/pi/blockChainGit/00blockChain_ws/build && $(MAKE) -f CMakeFiles/Makefile2 blockChainPack_/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/rule
+.PHONY : blockChainPack_/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/rule
+
+# Convenience name for target.
+rosgraph_msgs_generate_messages_nodejs: blockChainPack_/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/rule
+
+.PHONY : rosgraph_msgs_generate_messages_nodejs
+
+# fast build rule for target.
+rosgraph_msgs_generate_messages_nodejs/fast:
+	cd /home/pi/blockChainGit/00blockChain_ws/build && $(MAKE) -f blockChainPack_/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/build.make blockChainPack_/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/build
+.PHONY : rosgraph_msgs_generate_messages_nodejs/fast
+
+# Convenience name for target.
+blockChainPack_/CMakeFiles/std_msgs_generate_messages_cpp.dir/rule:
+	cd /home/pi/blockChainGit/00blockChain_ws/build && $(MAKE) -f CMakeFiles/Makefile2 blockChainPack_/CMakeFiles/std_msgs_generate_messages_cpp.dir/rule
+.PHONY : blockChainPack_/CMakeFiles/std_msgs_generate_messages_cpp.dir/rule
+
+# Convenience name for target.
+std_msgs_generate_messages_cpp: blockChainPack_/CMakeFiles/std_msgs_generate_messages_cpp.dir/rule
+
+.PHONY : std_msgs_generate_messages_cpp
+
+# fast build rule for target.
+std_msgs_generate_messages_cpp/fast:
+	cd /home/pi/blockChainGit/00blockChain_ws/build && $(MAKE) -f blockChainPack_/CMakeFiles/std_msgs_generate_messages_cpp.dir/build.make blockChainPack_/CMakeFiles/std_msgs_generate_messages_cpp.dir/build
+.PHONY : std_msgs_generate_messages_cpp/fast
+
+# Convenience name for target.
+<<<<<<< HEAD
+blockChainPack_/CMakeFiles/roscpp_generate_messages_cpp.dir/rule:
+	cd /home/pi/blockChainGit/00blockChain_ws/build && $(MAKE) -f CMakeFiles/Makefile2 blockChainPack_/CMakeFiles/roscpp_generate_messages_cpp.dir/rule
+.PHONY : blockChainPack_/CMakeFiles/roscpp_generate_messages_cpp.dir/rule
+=======
+blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_lastHash.dir/rule:
+	cd /home/ros/blockChainGit/00blockChain_ws/build && $(MAKE) -f CMakeFiles/Makefile2 blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_lastHash.dir/rule
+.PHONY : blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_lastHash.dir/rule
+
+# Convenience name for target.
+_blockChainPack__generate_messages_check_deps_lastHash: blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_lastHash.dir/rule
+
+.PHONY : _blockChainPack__generate_messages_check_deps_lastHash
+
+# fast build rule for target.
+_blockChainPack__generate_messages_check_deps_lastHash/fast:
+	cd /home/ros/blockChainGit/00blockChain_ws/build && $(MAKE) -f blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_lastHash.dir/build.make blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_lastHash.dir/build
+.PHONY : _blockChainPack__generate_messages_check_deps_lastHash/fast
+
+# Convenience name for target.
+blockChainPack_/CMakeFiles/blockChainPack__geneus.dir/rule:
+	cd /home/ros/blockChainGit/00blockChain_ws/build && $(MAKE) -f CMakeFiles/Makefile2 blockChainPack_/CMakeFiles/blockChainPack__geneus.dir/rule
+.PHONY : blockChainPack_/CMakeFiles/blockChainPack__geneus.dir/rule
+
+# Convenience name for target.
+blockChainPack__geneus: blockChainPack_/CMakeFiles/blockChainPack__geneus.dir/rule
+
+.PHONY : blockChainPack__geneus
+
+# fast build rule for target.
+blockChainPack__geneus/fast:
+	cd /home/ros/blockChainGit/00blockChain_ws/build && $(MAKE) -f blockChainPack_/CMakeFiles/blockChainPack__geneus.dir/build.make blockChainPack_/CMakeFiles/blockChainPack__geneus.dir/build
+.PHONY : blockChainPack__geneus/fast
+
+# Convenience name for target.
+blockChainPack_/CMakeFiles/roscpp_generate_messages_eus.dir/rule:
+	cd /home/ros/blockChainGit/00blockChain_ws/build && $(MAKE) -f CMakeFiles/Makefile2 blockChainPack_/CMakeFiles/roscpp_generate_messages_eus.dir/rule
+.PHONY : blockChainPack_/CMakeFiles/roscpp_generate_messages_eus.dir/rule
+
+# Convenience name for target.
+roscpp_generate_messages_eus: blockChainPack_/CMakeFiles/roscpp_generate_messages_eus.dir/rule
+
+.PHONY : roscpp_generate_messages_eus
+
+# fast build rule for target.
+roscpp_generate_messages_eus/fast:
+	cd /home/ros/blockChainGit/00blockChain_ws/build && $(MAKE) -f blockChainPack_/CMakeFiles/roscpp_generate_messages_eus.dir/build.make blockChainPack_/CMakeFiles/roscpp_generate_messages_eus.dir/build
+.PHONY : roscpp_generate_messages_eus/fast
+>>>>>>> 707126bdf0988d6187233f40a3e49789231d159b
+
+# Convenience name for target.
+blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_rewriteNode.dir/rule:
+	cd /home/pi/blockChainGit/00blockChain_ws/build && $(MAKE) -f CMakeFiles/Makefile2 blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_rewriteNode.dir/rule
+.PHONY : blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_rewriteNode.dir/rule
+
+# Convenience name for target.
+_blockChainPack__generate_messages_check_deps_rewriteNode: blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_rewriteNode.dir/rule
+
+.PHONY : _blockChainPack__generate_messages_check_deps_rewriteNode
+
+# fast build rule for target.
+_blockChainPack__generate_messages_check_deps_rewriteNode/fast:
+	cd /home/pi/blockChainGit/00blockChain_ws/build && $(MAKE) -f blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_rewriteNode.dir/build.make blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_rewriteNode.dir/build
+.PHONY : _blockChainPack__generate_messages_check_deps_rewriteNode/fast
+
+# Convenience name for target.
+<<<<<<< HEAD
+blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_finish.dir/rule:
+	cd /home/pi/blockChainGit/00blockChain_ws/build && $(MAKE) -f CMakeFiles/Makefile2 blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_finish.dir/rule
+.PHONY : blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_finish.dir/rule
+=======
+blockChainPack_/CMakeFiles/blockChainPack__generate_messages_eus.dir/rule:
+	cd /home/ros/blockChainGit/00blockChain_ws/build && $(MAKE) -f CMakeFiles/Makefile2 blockChainPack_/CMakeFiles/blockChainPack__generate_messages_eus.dir/rule
+.PHONY : blockChainPack_/CMakeFiles/blockChainPack__generate_messages_eus.dir/rule
+
+# Convenience name for target.
+blockChainPack__generate_messages_eus: blockChainPack_/CMakeFiles/blockChainPack__generate_messages_eus.dir/rule
+
+.PHONY : blockChainPack__generate_messages_eus
+
+# fast build rule for target.
+blockChainPack__generate_messages_eus/fast:
+	cd /home/ros/blockChainGit/00blockChain_ws/build && $(MAKE) -f blockChainPack_/CMakeFiles/blockChainPack__generate_messages_eus.dir/build.make blockChainPack_/CMakeFiles/blockChainPack__generate_messages_eus.dir/build
+.PHONY : blockChainPack__generate_messages_eus/fast
+
+# Convenience name for target.
+blockChainPack_/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule:
+	cd /home/ros/blockChainGit/00blockChain_ws/build && $(MAKE) -f CMakeFiles/Makefile2 blockChainPack_/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule
+.PHONY : blockChainPack_/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule
+>>>>>>> 707126bdf0988d6187233f40a3e49789231d159b
+
+# Convenience name for target.
+_blockChainPack__generate_messages_check_deps_finish: blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_finish.dir/rule
+
+.PHONY : _blockChainPack__generate_messages_check_deps_finish
+
+# fast build rule for target.
+_blockChainPack__generate_messages_check_deps_finish/fast:
+	cd /home/pi/blockChainGit/00blockChain_ws/build && $(MAKE) -f blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_finish.dir/build.make blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_finish.dir/build
+.PHONY : _blockChainPack__generate_messages_check_deps_finish/fast
+
+# Convenience name for target.
+blockChainPack_/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule:
+	cd /home/pi/blockChainGit/00blockChain_ws/build && $(MAKE) -f CMakeFiles/Makefile2 blockChainPack_/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule
+.PHONY : blockChainPack_/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule
+
+# Convenience name for target.
+rosgraph_msgs_generate_messages_eus: blockChainPack_/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule
+
+.PHONY : rosgraph_msgs_generate_messages_eus
+
+# fast build rule for target.
+rosgraph_msgs_generate_messages_eus/fast:
+	cd /home/pi/blockChainGit/00blockChain_ws/build && $(MAKE) -f blockChainPack_/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build.make blockChainPack_/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build
+.PHONY : rosgraph_msgs_generate_messages_eus/fast
+
+# Convenience name for target.
+blockChainPack_/CMakeFiles/roscpp_generate_messages_lisp.dir/rule:
+	cd /home/pi/blockChainGit/00blockChain_ws/build && $(MAKE) -f CMakeFiles/Makefile2 blockChainPack_/CMakeFiles/roscpp_generate_messages_lisp.dir/rule
+.PHONY : blockChainPack_/CMakeFiles/roscpp_generate_messages_lisp.dir/rule
+
+# Convenience name for target.
+roscpp_generate_messages_lisp: blockChainPack_/CMakeFiles/roscpp_generate_messages_lisp.dir/rule
+
+.PHONY : roscpp_generate_messages_lisp
+
+# fast build rule for target.
+roscpp_generate_messages_lisp/fast:
+	cd /home/pi/blockChainGit/00blockChain_ws/build && $(MAKE) -f blockChainPack_/CMakeFiles/roscpp_generate_messages_lisp.dir/build.make blockChainPack_/CMakeFiles/roscpp_generate_messages_lisp.dir/build
+.PHONY : roscpp_generate_messages_lisp/fast
+
+# Convenience name for target.
+<<<<<<< HEAD
+blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_lastHash.dir/rule:
+	cd /home/pi/blockChainGit/00blockChain_ws/build && $(MAKE) -f CMakeFiles/Makefile2 blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_lastHash.dir/rule
+.PHONY : blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_lastHash.dir/rule
+
+# Convenience name for target.
+_blockChainPack__generate_messages_check_deps_lastHash: blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_lastHash.dir/rule
+
+.PHONY : _blockChainPack__generate_messages_check_deps_lastHash
+
+# fast build rule for target.
+_blockChainPack__generate_messages_check_deps_lastHash/fast:
+	cd /home/pi/blockChainGit/00blockChain_ws/build && $(MAKE) -f blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_lastHash.dir/build.make blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_lastHash.dir/build
+.PHONY : _blockChainPack__generate_messages_check_deps_lastHash/fast
+
+# Convenience name for target.
+blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_sim.dir/rule:
+	cd /home/pi/blockChainGit/00blockChain_ws/build && $(MAKE) -f CMakeFiles/Makefile2 blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_sim.dir/rule
+.PHONY : blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_sim.dir/rule
+=======
+blockChainPack_/CMakeFiles/blockChainPack__gennodejs.dir/rule:
+	cd /home/ros/blockChainGit/00blockChain_ws/build && $(MAKE) -f CMakeFiles/Makefile2 blockChainPack_/CMakeFiles/blockChainPack__gennodejs.dir/rule
+.PHONY : blockChainPack_/CMakeFiles/blockChainPack__gennodejs.dir/rule
+>>>>>>> 04495caef248ff88c82b4aada68a5c73c263b2d4
+
+# Convenience name for target.
+roscpp_generate_messages_cpp: blockChainPack_/CMakeFiles/roscpp_generate_messages_cpp.dir/rule
+
+.PHONY : roscpp_generate_messages_cpp
+
+# fast build rule for target.
+roscpp_generate_messages_cpp/fast:
+	cd /home/pi/blockChainGit/00blockChain_ws/build && $(MAKE) -f blockChainPack_/CMakeFiles/roscpp_generate_messages_cpp.dir/build.make blockChainPack_/CMakeFiles/roscpp_generate_messages_cpp.dir/build
+.PHONY : roscpp_generate_messages_cpp/fast
+
+# Convenience name for target.
+blockChainPack_/CMakeFiles/roscpp_generate_messages_eus.dir/rule:
+	cd /home/pi/blockChainGit/00blockChain_ws/build && $(MAKE) -f CMakeFiles/Makefile2 blockChainPack_/CMakeFiles/roscpp_generate_messages_eus.dir/rule
+.PHONY : blockChainPack_/CMakeFiles/roscpp_generate_messages_eus.dir/rule
+>>>>>>> 707126bdf0988d6187233f40a3e49789231d159b
+
+# Convenience name for target.
+_blockChainPack__generate_messages_check_deps_sim: blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_sim.dir/rule
+
+.PHONY : _blockChainPack__generate_messages_check_deps_sim
+
+# fast build rule for target.
+<<<<<<< HEAD
+_blockChainPack__generate_messages_check_deps_sim/fast:
+	cd /home/pi/blockChainGit/00blockChain_ws/build && $(MAKE) -f blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_sim.dir/build.make blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_sim.dir/build
+.PHONY : _blockChainPack__generate_messages_check_deps_sim/fast
+
+# Convenience name for target.
+blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_blockDetail.dir/rule:
+	cd /home/pi/blockChainGit/00blockChain_ws/build && $(MAKE) -f CMakeFiles/Makefile2 blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_blockDetail.dir/rule
+.PHONY : blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_blockDetail.dir/rule
+
+# Convenience name for target.
+_blockChainPack__generate_messages_check_deps_blockDetail: blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_blockDetail.dir/rule
+
+.PHONY : _blockChainPack__generate_messages_check_deps_blockDetail
+
+# fast build rule for target.
+_blockChainPack__generate_messages_check_deps_blockDetail/fast:
+	cd /home/pi/blockChainGit/00blockChain_ws/build && $(MAKE) -f blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_blockDetail.dir/build.make blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_blockDetail.dir/build
+.PHONY : _blockChainPack__generate_messages_check_deps_blockDetail/fast
+=======
+roscpp_generate_messages_eus/fast:
+	cd /home/pi/blockChainGit/00blockChain_ws/build && $(MAKE) -f blockChainPack_/CMakeFiles/roscpp_generate_messages_eus.dir/build.make blockChainPack_/CMakeFiles/roscpp_generate_messages_eus.dir/build
+.PHONY : roscpp_generate_messages_eus/fast
+
+# Convenience name for target.
+<<<<<<< HEAD
+blockChainPack_/CMakeFiles/std_msgs_generate_messages_py.dir/rule:
+	cd /home/pi/blockChainGit/00blockChain_ws/build && $(MAKE) -f CMakeFiles/Makefile2 blockChainPack_/CMakeFiles/std_msgs_generate_messages_py.dir/rule
+.PHONY : blockChainPack_/CMakeFiles/std_msgs_generate_messages_py.dir/rule
+=======
+blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_finish.dir/rule:
+	cd /home/ros/blockChainGit/00blockChain_ws/build && $(MAKE) -f CMakeFiles/Makefile2 blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_finish.dir/rule
+.PHONY : blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_finish.dir/rule
+
+# Convenience name for target.
+_blockChainPack__generate_messages_check_deps_finish: blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_finish.dir/rule
+
+.PHONY : _blockChainPack__generate_messages_check_deps_finish
+
+# fast build rule for target.
+_blockChainPack__generate_messages_check_deps_finish/fast:
+	cd /home/ros/blockChainGit/00blockChain_ws/build && $(MAKE) -f blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_finish.dir/build.make blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_finish.dir/build
+.PHONY : _blockChainPack__generate_messages_check_deps_finish/fast
+
+# Convenience name for target.
+blockChainPack_/CMakeFiles/roscpp_generate_messages_lisp.dir/rule:
+	cd /home/ros/blockChainGit/00blockChain_ws/build && $(MAKE) -f CMakeFiles/Makefile2 blockChainPack_/CMakeFiles/roscpp_generate_messages_lisp.dir/rule
+.PHONY : blockChainPack_/CMakeFiles/roscpp_generate_messages_lisp.dir/rule
+>>>>>>> 04495caef248ff88c82b4aada68a5c73c263b2d4
 
 # Convenience name for target.
 std_msgs_generate_messages_py: blockChainPack_/CMakeFiles/std_msgs_generate_messages_py.dir/rule
@@ -496,6 +1048,7 @@ std_msgs_generate_messages_lisp/fast:
 .PHONY : std_msgs_generate_messages_lisp/fast
 
 # Convenience name for target.
+<<<<<<< HEAD
 blockChainPack_/CMakeFiles/std_msgs_generate_messages_nodejs.dir/rule:
 	cd /home/pi/blockChainGit/00blockChain_ws/build && $(MAKE) -f CMakeFiles/Makefile2 blockChainPack_/CMakeFiles/std_msgs_generate_messages_nodejs.dir/rule
 .PHONY : blockChainPack_/CMakeFiles/std_msgs_generate_messages_nodejs.dir/rule
@@ -513,6 +1066,10 @@ std_msgs_generate_messages_nodejs/fast:
 # Convenience name for target.
 blockChainPack_/CMakeFiles/blockChainPack__generate_messages.dir/rule:
 	cd /home/pi/blockChainGit/00blockChain_ws/build && $(MAKE) -f CMakeFiles/Makefile2 blockChainPack_/CMakeFiles/blockChainPack__generate_messages.dir/rule
+=======
+blockChainPack_/CMakeFiles/blockChainPack__generate_messages.dir/rule:
+	cd /home/ros/blockChainGit/00blockChain_ws/build && $(MAKE) -f CMakeFiles/Makefile2 blockChainPack_/CMakeFiles/blockChainPack__generate_messages.dir/rule
+>>>>>>> 04495caef248ff88c82b4aada68a5c73c263b2d4
 .PHONY : blockChainPack_/CMakeFiles/blockChainPack__generate_messages.dir/rule
 
 # Convenience name for target.
@@ -522,11 +1079,16 @@ blockChainPack__generate_messages: blockChainPack_/CMakeFiles/blockChainPack__ge
 
 # fast build rule for target.
 blockChainPack__generate_messages/fast:
+<<<<<<< HEAD
 	cd /home/pi/blockChainGit/00blockChain_ws/build && $(MAKE) -f blockChainPack_/CMakeFiles/blockChainPack__generate_messages.dir/build.make blockChainPack_/CMakeFiles/blockChainPack__generate_messages.dir/build
+=======
+	cd /home/ros/blockChainGit/00blockChain_ws/build && $(MAKE) -f blockChainPack_/CMakeFiles/blockChainPack__generate_messages.dir/build.make blockChainPack_/CMakeFiles/blockChainPack__generate_messages.dir/build
+>>>>>>> 04495caef248ff88c82b4aada68a5c73c263b2d4
 .PHONY : blockChainPack__generate_messages/fast
 
 # Convenience name for target.
 blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_rewriteNode.dir/rule:
+<<<<<<< HEAD
 	cd /home/pi/blockChainGit/00blockChain_ws/build && $(MAKE) -f CMakeFiles/Makefile2 blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_rewriteNode.dir/rule
 .PHONY : blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_rewriteNode.dir/rule
 
@@ -603,6 +1165,24 @@ _blockChainPack__generate_messages_check_deps_lastHash/fast:
 # Convenience name for target.
 blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_sim.dir/rule:
 	cd /home/pi/blockChainGit/00blockChain_ws/build && $(MAKE) -f CMakeFiles/Makefile2 blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_sim.dir/rule
+=======
+	cd /home/ros/blockChainGit/00blockChain_ws/build && $(MAKE) -f CMakeFiles/Makefile2 blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_rewriteNode.dir/rule
+.PHONY : blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_rewriteNode.dir/rule
+
+# Convenience name for target.
+_blockChainPack__generate_messages_check_deps_rewriteNode: blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_rewriteNode.dir/rule
+
+.PHONY : _blockChainPack__generate_messages_check_deps_rewriteNode
+
+# fast build rule for target.
+_blockChainPack__generate_messages_check_deps_rewriteNode/fast:
+	cd /home/ros/blockChainGit/00blockChain_ws/build && $(MAKE) -f blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_rewriteNode.dir/build.make blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_rewriteNode.dir/build
+.PHONY : _blockChainPack__generate_messages_check_deps_rewriteNode/fast
+
+# Convenience name for target.
+blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_sim.dir/rule:
+	cd /home/ros/blockChainGit/00blockChain_ws/build && $(MAKE) -f CMakeFiles/Makefile2 blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_sim.dir/rule
+>>>>>>> 04495caef248ff88c82b4aada68a5c73c263b2d4
 .PHONY : blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_sim.dir/rule
 
 # Convenience name for target.
@@ -612,6 +1192,7 @@ _blockChainPack__generate_messages_check_deps_sim: blockChainPack_/CMakeFiles/_b
 
 # fast build rule for target.
 _blockChainPack__generate_messages_check_deps_sim/fast:
+<<<<<<< HEAD
 	cd /home/pi/blockChainGit/00blockChain_ws/build && $(MAKE) -f blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_sim.dir/build.make blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_sim.dir/build
 .PHONY : _blockChainPack__generate_messages_check_deps_sim/fast
 
@@ -629,6 +1210,26 @@ _blockChainPack__generate_messages_check_deps_blockDetail: blockChainPack_/CMake
 _blockChainPack__generate_messages_check_deps_blockDetail/fast:
 	cd /home/pi/blockChainGit/00blockChain_ws/build && $(MAKE) -f blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_blockDetail.dir/build.make blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_blockDetail.dir/build
 .PHONY : _blockChainPack__generate_messages_check_deps_blockDetail/fast
+=======
+	cd /home/ros/blockChainGit/00blockChain_ws/build && $(MAKE) -f blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_sim.dir/build.make blockChainPack_/CMakeFiles/_blockChainPack__generate_messages_check_deps_sim.dir/build
+.PHONY : _blockChainPack__generate_messages_check_deps_sim/fast
+
+# Convenience name for target.
+blockChainPack_/CMakeFiles/blockChainPack__generate_messages_cpp.dir/rule:
+	cd /home/ros/blockChainGit/00blockChain_ws/build && $(MAKE) -f CMakeFiles/Makefile2 blockChainPack_/CMakeFiles/blockChainPack__generate_messages_cpp.dir/rule
+.PHONY : blockChainPack_/CMakeFiles/blockChainPack__generate_messages_cpp.dir/rule
+
+# Convenience name for target.
+blockChainPack__generate_messages_cpp: blockChainPack_/CMakeFiles/blockChainPack__generate_messages_cpp.dir/rule
+
+.PHONY : blockChainPack__generate_messages_cpp
+
+# fast build rule for target.
+blockChainPack__generate_messages_cpp/fast:
+	cd /home/ros/blockChainGit/00blockChain_ws/build && $(MAKE) -f blockChainPack_/CMakeFiles/blockChainPack__generate_messages_cpp.dir/build.make blockChainPack_/CMakeFiles/blockChainPack__generate_messages_cpp.dir/build
+.PHONY : blockChainPack__generate_messages_cpp/fast
+>>>>>>> 04495caef248ff88c82b4aada68a5c73c263b2d4
+>>>>>>> 707126bdf0988d6187233f40a3e49789231d159b
 
 # Help Target
 help:
@@ -636,11 +1237,24 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+	@echo "... install"
+	@echo "... rebuild_cache"
+	@echo "... test"
+>>>>>>> 04495caef248ff88c82b4aada68a5c73c263b2d4
+>>>>>>> 707126bdf0988d6187233f40a3e49789231d159b
 	@echo "... install/local"
 	@echo "... edit_cache"
 	@echo "... blockChainPack__genpy"
 	@echo "... rebuild_cache"
 	@echo "... blockChainPack__generate_messages_py"
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 707126bdf0988d6187233f40a3e49789231d159b
 	@echo "... install"
 	@echo "... blockChainPack__genlisp"
 	@echo "... blockChainPack__generate_messages_lisp"
@@ -653,20 +1267,56 @@ help:
 	@echo "... blockChainPack__generate_messages_cpp"
 	@echo "... install/strip"
 	@echo "... rosgraph_msgs_generate_messages_py"
+<<<<<<< HEAD
+=======
+=======
+	@echo "... blockChainPack__generate_messages_nodejs"
+	@echo "... blockChainPack__generate_messages_lisp"
+	@echo "... edit_cache"
+	@echo "... blockChainPack__gencpp"
+	@echo "... std_msgs_generate_messages_py"
+	@echo "... _blockChainPack__generate_messages_check_deps_blockDetail"
+>>>>>>> 04495caef248ff88c82b4aada68a5c73c263b2d4
+>>>>>>> 707126bdf0988d6187233f40a3e49789231d159b
 	@echo "... roscpp_generate_messages_py"
 	@echo "... blockChainPack__generate_messages_nodejs"
 	@echo "... rosgraph_msgs_generate_messages_nodejs"
 	@echo "... std_msgs_generate_messages_cpp"
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 707126bdf0988d6187233f40a3e49789231d159b
 	@echo "... roscpp_generate_messages_cpp"
 	@echo "... roscpp_generate_messages_eus"
 	@echo "... list_install_components"
 	@echo "... std_msgs_generate_messages_py"
 	@echo "... roscpp_generate_messages_nodejs"
+<<<<<<< HEAD
+=======
+=======
+	@echo "... _blockChainPack__generate_messages_check_deps_lastHash"
+	@echo "... blockChainPack__geneus"
+	@echo "... roscpp_generate_messages_eus"
+	@echo "... blockChainPack__genlisp"
+	@echo "... blockChainPack__generate_messages_eus"
+	@echo "... rosgraph_msgs_generate_messages_py"
+	@echo "... rosgraph_msgs_generate_messages_lisp"
+	@echo "... roscpp_generate_messages_nodejs"
+	@echo "... blockChainPack__gennodejs"
+	@echo "... std_msgs_generate_messages_nodejs"
+	@echo "... _blockChainPack__generate_messages_check_deps_finish"
+	@echo "... roscpp_generate_messages_lisp"
+>>>>>>> 04495caef248ff88c82b4aada68a5c73c263b2d4
+>>>>>>> 707126bdf0988d6187233f40a3e49789231d159b
 	@echo "... std_msgs_generate_messages_eus"
 	@echo "... std_msgs_generate_messages_lisp"
 	@echo "... std_msgs_generate_messages_nodejs"
 	@echo "... blockChainPack__generate_messages"
 	@echo "... _blockChainPack__generate_messages_check_deps_rewriteNode"
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 707126bdf0988d6187233f40a3e49789231d159b
 	@echo "... _blockChainPack__generate_messages_check_deps_finish"
 	@echo "... rosgraph_msgs_generate_messages_eus"
 	@echo "... roscpp_generate_messages_lisp"
@@ -674,6 +1324,14 @@ help:
 	@echo "... _blockChainPack__generate_messages_check_deps_sim"
 	@echo "... test"
 	@echo "... _blockChainPack__generate_messages_check_deps_blockDetail"
+<<<<<<< HEAD
+=======
+=======
+	@echo "... list_install_components"
+	@echo "... _blockChainPack__generate_messages_check_deps_sim"
+	@echo "... blockChainPack__generate_messages_cpp"
+>>>>>>> 04495caef248ff88c82b4aada68a5c73c263b2d4
+>>>>>>> 707126bdf0988d6187233f40a3e49789231d159b
 .PHONY : help
 
 

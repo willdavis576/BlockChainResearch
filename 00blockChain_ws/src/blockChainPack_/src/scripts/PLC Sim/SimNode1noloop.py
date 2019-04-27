@@ -3,7 +3,15 @@ import hashlib, sys, random, rospy, threading, time, socket
 from datetime import datetime
 send = ''
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+<<<<<<< HEAD
 s.connect(('127.0.0.1', 4500))
+=======
+<<<<<<< HEAD
+s.connect(('127.0.0.1', 4500))
+=======
+s.connect(('127.0.0.1', 4505))
+>>>>>>> 04495caef248ff88c82b4aada68a5c73c263b2d4
+>>>>>>> 707126bdf0988d6187233f40a3e49789231d159b
 
 var = ''
 
@@ -22,7 +30,15 @@ def getData():
     order = 1304
 
     send = str(station) + ',' + str(order) + ',' + str(carrier) + ',' + str(product) + ',' + str(second) + ',' + str(
+<<<<<<< HEAD
         minute) + ',' + str(hour) + ',' + str(day) + ',' + str(month) + ',' + str(year)
+=======
+<<<<<<< HEAD
+        minute) + ',' + str(hour) + ',' + str(day) + ',' + str(month) + ',' + str(year)
+=======
+        minute) + ',' + str(hour) + ',' + str(day) + ',' + str(month) + ',' + str(year) + ',' + str(371) + ',' + str(335)
+>>>>>>> 04495caef248ff88c82b4aada68a5c73c263b2d4
+>>>>>>> 707126bdf0988d6187233f40a3e49789231d159b
 
     return send
 
@@ -31,7 +47,16 @@ def main():
     global var
     while (True):
         if var == '':
+<<<<<<< HEAD
             s.sendall('                                ')
+=======
+<<<<<<< HEAD
+            s.sendall('                                ')
+=======
+            s.sendall('                                        ')
+            time.sleep(1)
+>>>>>>> 04495caef248ff88c82b4aada68a5c73c263b2d4
+>>>>>>> 707126bdf0988d6187233f40a3e49789231d159b
 
 
 def user():
@@ -41,8 +66,19 @@ def user():
     while (True):
         if var == "y":
             s.sendall(getData())
+<<<<<<< HEAD
             s.sendall('                                ')
             var == ''
+=======
+<<<<<<< HEAD
+            s.sendall('                                ')
+            var == ''
+=======
+            s.sendall('                                        ')
+            var = ''
+
+>>>>>>> 04495caef248ff88c82b4aada68a5c73c263b2d4
+>>>>>>> 707126bdf0988d6187233f40a3e49789231d159b
 
 
 if __name__ == '__main__':

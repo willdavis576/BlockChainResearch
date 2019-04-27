@@ -1,0 +1,20 @@
+Time Stamp for Block: 14:28:40 - 27/04/2019
+Station: Start production
+Order Number: 1304
+CarrierID: 2
+Product Code: 211
+Block Hash: 86b956c4dcab5332c9c00e2a8ca09b575fca438f55a4184e461a232a0e2d3275
+Previous Hash: 
+
+
+-------------------------------
+Time Stamp for Block: 14:28:40 - 27/04/2019
+Station: 1
+Order Number: 1304
+CarrierID: 2
+Product Code: 211
+Block Hash: e672d01b05decb665732be9129c82d9cbefd2f8b49d3d7009fcdf4322388cb89
+Previous Hash: 86b956c4dcab5332c9c00e2a8ca09b575fca438f55a4184e461a232a0e2d3275
+Temperature Reached (C): 37.1
+Heating Time(s): 33.5
+-------------------------------

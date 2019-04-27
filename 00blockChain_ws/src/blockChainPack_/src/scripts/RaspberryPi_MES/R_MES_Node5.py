@@ -12,12 +12,25 @@ from blockChainPack_.msg import finish
 
 nodeName = "NODE5"  ############### THIS IS WHERE YOU SPECIFY A NODE'S NAME #######################
 port = 4504
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 707126bdf0988d6187233f40a3e49789231d159b
 address = '172.21.4.151' #127.0.0.1
 lNodeToRewrite = "NODE6"
 dataDes1 = "Pressure (bar): "
 dataDes2 = "Force (N): "
 dataMag1 = 10
 dataMag2 = 10
+<<<<<<< HEAD
+=======
+=======
+address = '172.21.4.151' #127.0.0.1'
+lNodeToRewrite = "NODE6"
+dataDes1 = "Pressure (bar): "
+dataDes2 = "Force (N): "
+>>>>>>> 04495caef248ff88c82b4aada68a5c73c263b2d4
+>>>>>>> 707126bdf0988d6187233f40a3e49789231d159b
 
 Range = 200
 cRange = 5
@@ -282,7 +295,11 @@ def mainProg():
         print(block[orderNumber][tcpCarrierNumber][
             block[tcpOrderNumber][tcpCarrierNumber].index('') - 1].getBlockHash())
 
+<<<<<<< HEAD
         time.sleep(0.5)
+=======
+        time.sleep(0.1)
+>>>>>>> 707126bdf0988d6187233f40a3e49789231d159b
         print("sending message in gen1")
         sendMessage()
         pub.publish(message)
@@ -295,7 +312,11 @@ def mainProg():
         newGenesis = 0
 
     if newGenesis == 0:
+<<<<<<< HEAD
         time.sleep(0.3)
+=======
+        time.sleep(0.1)
+>>>>>>> 707126bdf0988d6187233f40a3e49789231d159b
         print("newgen = 0 " + tcpStationName)
         if tcpStationName in stationHistory[int(tcpCarrierNumber)] and tcpStationName == '2':
             print("is " + tcpStationName)
@@ -309,7 +330,11 @@ def mainProg():
             message.previousHash = ''
             message.data1 = ''
             message.data2 = ''
+<<<<<<< HEAD
             time.sleep(0.3)
+=======
+            time.sleep(0.1)
+>>>>>>> 707126bdf0988d6187233f40a3e49789231d159b
             pub.publish(message)
             dataFollowing = 0
             stationFinish = True
@@ -325,7 +350,11 @@ def mainProg():
             print("sending message in gen0")
             # print(block[orderNumber][tcpCarrierNumber][block[tcpOrderNumber][tcpCarrierNumber].index('') - 1])
             sendMessage()
+<<<<<<< HEAD
             time.sleep(0.3)
+=======
+            time.sleep(0.1)
+>>>>>>> 707126bdf0988d6187233f40a3e49789231d159b
             pub.publish(message)
             print(orderNumber, blockNumber)
             blockNumber = block[tcpOrderNumber][tcpCarrierNumber].index('')
@@ -950,8 +979,16 @@ def manual():
     global address
     global dataDes1
     global dataDes2
+<<<<<<< HEAD
     global dataMag1
     global dataMag2
+=======
+<<<<<<< HEAD
+    global dataMag1
+    global dataMag2
+=======
+>>>>>>> 04495caef248ff88c82b4aada68a5c73c263b2d4
+>>>>>>> 707126bdf0988d6187233f40a3e49789231d159b
 
     # Create a TCP/IP socket
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -1001,8 +1038,18 @@ def manual():
                                 tcpDays = data[22] + data[23]
                                 tcpMonths = data[25] + data[26]
                                 tcpYears = data[28] + data[29] + data[30] + data[31]
+<<<<<<< HEAD
                                 tcpData1 = dataDes1 + str(float(data[33] + data[34] + data[35]) / dataMag1)
                                 tcpData2 = dataDes2 + str(float(data[37] + data[38] + data[39]) / dataMag2)
+=======
+<<<<<<< HEAD
+                                tcpData1 = dataDes1 + str(float(data[33] + data[34] + data[35]) / dataMag1)
+                                tcpData2 = dataDes2 + str(float(data[37] + data[38] + data[39]) / dataMag2)
+=======
+                                tcpData1 = dataDes1 + str(float(data[33] + data[34] + data[35]) / 100)
+                                tcpData2 = dataDes2 + str(float(data[37] + data[38] + data[39]) / 10)
+>>>>>>> 04495caef248ff88c82b4aada68a5c73c263b2d4
+>>>>>>> 707126bdf0988d6187233f40a3e49789231d159b
                                 dataFollowing = 1
                                 mainProg()
                                 oldData = data

@@ -12,7 +12,15 @@ from blockChainPack_.msg import finish
 
 nodeName = "NODE6"  ############### THIS IS WHERE YOU SPECIFY A NODE'S NAME #######################
 port = 4505
+<<<<<<< HEAD
 address = '172.21.4.151' #127.0.0.1
+=======
+<<<<<<< HEAD
+address = '172.21.4.151' #127.0.0.1
+=======
+address = '127.0.0.1' #172.21.4.151
+>>>>>>> 04495caef248ff88c82b4aada68a5c73c263b2d4
+>>>>>>> 707126bdf0988d6187233f40a3e49789231d159b
 lNodeToRewrite = "NODE1"
 dataDes1 = "Temperature Reached (C): "
 dataDes2 = "Heating Time(s): "
@@ -282,7 +290,11 @@ def mainProg():
         print(block[orderNumber][tcpCarrierNumber][
             block[tcpOrderNumber][tcpCarrierNumber].index('') - 1].getBlockHash())
 
+<<<<<<< HEAD
         time.sleep(0.5)
+=======
+        time.sleep(0.1)
+>>>>>>> 707126bdf0988d6187233f40a3e49789231d159b
         print("sending message in gen1")
         sendMessage()
         pub.publish(message)
@@ -295,7 +307,11 @@ def mainProg():
         newGenesis = 0
 
     if newGenesis == 0:
+<<<<<<< HEAD
         time.sleep(0.3)
+=======
+        time.sleep(0.1)
+>>>>>>> 707126bdf0988d6187233f40a3e49789231d159b
         print("newgen = 0 " + tcpStationName)
         if tcpStationName in stationHistory[int(tcpCarrierNumber)] and tcpStationName == '2':
             print("is " + tcpStationName)
@@ -309,7 +325,11 @@ def mainProg():
             message.previousHash = ''
             message.data1 = ''
             message.data2 = ''
+<<<<<<< HEAD
             time.sleep(0.3)
+=======
+            time.sleep(0.1)
+>>>>>>> 707126bdf0988d6187233f40a3e49789231d159b
             pub.publish(message)
             dataFollowing = 0
             stationFinish = True
@@ -325,7 +345,11 @@ def mainProg():
             print("sending message in gen0")
             # print(block[orderNumber][tcpCarrierNumber][block[tcpOrderNumber][tcpCarrierNumber].index('') - 1])
             sendMessage()
+<<<<<<< HEAD
             time.sleep(0.3)
+=======
+            time.sleep(0.1)
+>>>>>>> 707126bdf0988d6187233f40a3e49789231d159b
             pub.publish(message)
             print(orderNumber, blockNumber)
             blockNumber = block[tcpOrderNumber][tcpCarrierNumber].index('')

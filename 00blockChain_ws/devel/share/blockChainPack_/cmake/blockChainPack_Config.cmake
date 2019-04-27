@@ -129,7 +129,11 @@ foreach(library ${libraries})
     set(lib_path "")
     set(lib "${library}-NOTFOUND")
     # since the path where the library is found is returned we have to iterate over the paths manually
+<<<<<<< HEAD
     foreach(path /home/pi/blockChainGit/00blockChain_ws/devel/lib;/home/pi/blockChainGit/00blockChain_ws/devel/lib;/opt/ros/kinetic/lib)
+=======
+    foreach(path /home/pi/blockChainGit/00blockChain_ws/devel/lib;/opt/ros/kinetic/lib)
+>>>>>>> 707126bdf0988d6187233f40a3e49789231d159b
       find_library(lib ${library}
         PATHS ${path}
         NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)
