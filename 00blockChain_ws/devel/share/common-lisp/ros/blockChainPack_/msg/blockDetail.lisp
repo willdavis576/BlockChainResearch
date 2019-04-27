@@ -46,6 +46,16 @@
     :reader previousHash
     :initarg :previousHash
     :type cl:string
+    :initform "")
+   (data1
+    :reader data1
+    :initarg :data1
+    :type cl:string
+    :initform "")
+   (data2
+    :reader data2
+    :initarg :data2
+    :type cl:string
     :initform ""))
 )
 
@@ -96,6 +106,16 @@
 (cl:defmethod previousHash-val ((m <blockDetail>))
   (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader blockChainPack_-msg:previousHash-val is deprecated.  Use blockChainPack_-msg:previousHash instead.")
   (previousHash m))
+
+(cl:ensure-generic-function 'data1-val :lambda-list '(m))
+(cl:defmethod data1-val ((m <blockDetail>))
+  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader blockChainPack_-msg:data1-val is deprecated.  Use blockChainPack_-msg:data1 instead.")
+  (data1 m))
+
+(cl:ensure-generic-function 'data2-val :lambda-list '(m))
+(cl:defmethod data2-val ((m <blockDetail>))
+  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader blockChainPack_-msg:data2-val is deprecated.  Use blockChainPack_-msg:data2 instead.")
+  (data2 m))
 (cl:defmethod roslisp-msg-protocol:serialize ((msg <blockDetail>) ostream)
   "Serializes a message object of type '<blockDetail>"
   (cl:let* ((signed (cl:slot-value msg 'blockNumber)) (unsigned (cl:if (cl:< signed 0) (cl:+ signed 18446744073709551616) signed)))
@@ -162,6 +182,18 @@
     (cl:write-byte (cl:ldb (cl:byte 8 16) __ros_str_len) ostream)
     (cl:write-byte (cl:ldb (cl:byte 8 24) __ros_str_len) ostream))
   (cl:map cl:nil #'(cl:lambda (c) (cl:write-byte (cl:char-code c) ostream)) (cl:slot-value msg 'previousHash))
+  (cl:let ((__ros_str_len (cl:length (cl:slot-value msg 'data1))))
+    (cl:write-byte (cl:ldb (cl:byte 8 0) __ros_str_len) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 8) __ros_str_len) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 16) __ros_str_len) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 24) __ros_str_len) ostream))
+  (cl:map cl:nil #'(cl:lambda (c) (cl:write-byte (cl:char-code c) ostream)) (cl:slot-value msg 'data1))
+  (cl:let ((__ros_str_len (cl:length (cl:slot-value msg 'data2))))
+    (cl:write-byte (cl:ldb (cl:byte 8 0) __ros_str_len) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 8) __ros_str_len) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 16) __ros_str_len) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 24) __ros_str_len) ostream))
+  (cl:map cl:nil #'(cl:lambda (c) (cl:write-byte (cl:char-code c) ostream)) (cl:slot-value msg 'data2))
 )
 (cl:defmethod roslisp-msg-protocol:deserialize ((msg <blockDetail>) istream)
   "Deserializes a message object of type '<blockDetail>"
@@ -237,6 +269,22 @@
       (cl:setf (cl:slot-value msg 'previousHash) (cl:make-string __ros_str_len))
       (cl:dotimes (__ros_str_idx __ros_str_len msg)
         (cl:setf (cl:char (cl:slot-value msg 'previousHash) __ros_str_idx) (cl:code-char (cl:read-byte istream)))))
+    (cl:let ((__ros_str_len 0))
+      (cl:setf (cl:ldb (cl:byte 8 0) __ros_str_len) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 8) __ros_str_len) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 16) __ros_str_len) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 24) __ros_str_len) (cl:read-byte istream))
+      (cl:setf (cl:slot-value msg 'data1) (cl:make-string __ros_str_len))
+      (cl:dotimes (__ros_str_idx __ros_str_len msg)
+        (cl:setf (cl:char (cl:slot-value msg 'data1) __ros_str_idx) (cl:code-char (cl:read-byte istream)))))
+    (cl:let ((__ros_str_len 0))
+      (cl:setf (cl:ldb (cl:byte 8 0) __ros_str_len) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 8) __ros_str_len) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 16) __ros_str_len) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 24) __ros_str_len) (cl:read-byte istream))
+      (cl:setf (cl:slot-value msg 'data2) (cl:make-string __ros_str_len))
+      (cl:dotimes (__ros_str_idx __ros_str_len msg)
+        (cl:setf (cl:char (cl:slot-value msg 'data2) __ros_str_idx) (cl:code-char (cl:read-byte istream)))))
   msg
 )
 (cl:defmethod roslisp-msg-protocol:ros-datatype ((msg (cl:eql '<blockDetail>)))
@@ -247,16 +295,16 @@
   "blockChainPack_/blockDetail")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql '<blockDetail>)))
   "Returns md5sum for a message object of type '<blockDetail>"
-  "5091a84f3e39f87dbd6a52f50fce01bf")
+  "eec3600f5db19bf506449d3adb47adae")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql 'blockDetail)))
   "Returns md5sum for a message object of type 'blockDetail"
-  "5091a84f3e39f87dbd6a52f50fce01bf")
+  "eec3600f5db19bf506449d3adb47adae")
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql '<blockDetail>)))
   "Returns full string definition for message of type '<blockDetail>"
-  (cl:format cl:nil "int64 blockNumber~%int64 orderNumber~%int64 carrierID~%string timeStamp~%string station~%int64 productCode~%string blockHash~%string previousHash~%~%~%"))
+  (cl:format cl:nil "int64 blockNumber~%int64 orderNumber~%int64 carrierID~%string timeStamp~%string station~%int64 productCode~%string blockHash~%string previousHash~%string data1~%string data2~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql 'blockDetail)))
   "Returns full string definition for message of type 'blockDetail"
-  (cl:format cl:nil "int64 blockNumber~%int64 orderNumber~%int64 carrierID~%string timeStamp~%string station~%int64 productCode~%string blockHash~%string previousHash~%~%~%"))
+  (cl:format cl:nil "int64 blockNumber~%int64 orderNumber~%int64 carrierID~%string timeStamp~%string station~%int64 productCode~%string blockHash~%string previousHash~%string data1~%string data2~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:serialization-length ((msg <blockDetail>))
   (cl:+ 0
      8
@@ -267,6 +315,8 @@
      8
      4 (cl:length (cl:slot-value msg 'blockHash))
      4 (cl:length (cl:slot-value msg 'previousHash))
+     4 (cl:length (cl:slot-value msg 'data1))
+     4 (cl:length (cl:slot-value msg 'data2))
 ))
 (cl:defmethod roslisp-msg-protocol:ros-message-to-list ((msg <blockDetail>))
   "Converts a ROS message object to a list"
@@ -279,4 +329,6 @@
     (cl:cons ':productCode (productCode msg))
     (cl:cons ':blockHash (blockHash msg))
     (cl:cons ':previousHash (previousHash msg))
+    (cl:cons ':data1 (data1 msg))
+    (cl:cons ':data2 (data2 msg))
 ))

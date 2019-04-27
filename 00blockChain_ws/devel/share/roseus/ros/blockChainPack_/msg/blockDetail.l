@@ -14,7 +14,7 @@
 
 (defclass blockChainPack_::blockDetail
   :super ros::object
-  :slots (_blockNumber _orderNumber _carrierID _timeStamp _station _productCode _blockHash _previousHash ))
+  :slots (_blockNumber _orderNumber _carrierID _timeStamp _station _productCode _blockHash _previousHash _data1 _data2 ))
 
 (defmethod blockChainPack_::blockDetail
   (:init
@@ -27,6 +27,8 @@
     ((:productCode __productCode) 0)
     ((:blockHash __blockHash) "")
     ((:previousHash __previousHash) "")
+    ((:data1 __data1) "")
+    ((:data2 __data2) "")
     )
    (send-super :init)
    (setq _blockNumber (round __blockNumber))
@@ -37,6 +39,8 @@
    (setq _productCode (round __productCode))
    (setq _blockHash (string __blockHash))
    (setq _previousHash (string __previousHash))
+   (setq _data1 (string __data1))
+   (setq _data2 (string __data2))
    self)
   (:blockNumber
    (&optional __blockNumber)
@@ -62,6 +66,12 @@
   (:previousHash
    (&optional __previousHash)
    (if __previousHash (setq _previousHash __previousHash)) _previousHash)
+  (:data1
+   (&optional __data1)
+   (if __data1 (setq _data1 __data1)) _data1)
+  (:data2
+   (&optional __data2)
+   (if __data2 (setq _data2 __data2)) _data2)
   (:serialization-length
    ()
    (+
@@ -81,6 +91,10 @@
     4 (length _blockHash)
     ;; string _previousHash
     4 (length _previousHash)
+    ;; string _data1
+    4 (length _data1)
+    ;; string _data2
+    4 (length _data2)
     ))
   (:serialize
    (&optional strm)
@@ -142,6 +156,10 @@
        (write-long (length _blockHash) s) (princ _blockHash s)
      ;; string _previousHash
        (write-long (length _previousHash) s) (princ _previousHash s)
+     ;; string _data1
+       (write-long (length _data1) s) (princ _data1 s)
+     ;; string _data2
+       (write-long (length _data2) s) (princ _data2 s)
      ;;
      (if (null strm) (get-output-stream-string s))))
   (:deserialize
@@ -202,11 +220,15 @@
      (let (n) (setq n (sys::peek buf ptr- :integer)) (incf ptr- 4) (setq _blockHash (subseq buf ptr- (+ ptr- n))) (incf ptr- n))
    ;; string _previousHash
      (let (n) (setq n (sys::peek buf ptr- :integer)) (incf ptr- 4) (setq _previousHash (subseq buf ptr- (+ ptr- n))) (incf ptr- n))
+   ;; string _data1
+     (let (n) (setq n (sys::peek buf ptr- :integer)) (incf ptr- 4) (setq _data1 (subseq buf ptr- (+ ptr- n))) (incf ptr- n))
+   ;; string _data2
+     (let (n) (setq n (sys::peek buf ptr- :integer)) (incf ptr- 4) (setq _data2 (subseq buf ptr- (+ ptr- n))) (incf ptr- n))
    ;;
    self)
   )
 
-(setf (get blockChainPack_::blockDetail :md5sum-) "5091a84f3e39f87dbd6a52f50fce01bf")
+(setf (get blockChainPack_::blockDetail :md5sum-) "eec3600f5db19bf506449d3adb47adae")
 (setf (get blockChainPack_::blockDetail :datatype-) "blockChainPack_/blockDetail")
 (setf (get blockChainPack_::blockDetail :definition-)
       "int64 blockNumber
@@ -217,11 +239,13 @@ string station
 int64 productCode
 string blockHash
 string previousHash
+string data1
+string data2
 
 ")
 
 
 
-(provide :blockChainPack_/blockDetail "5091a84f3e39f87dbd6a52f50fce01bf")
+(provide :blockChainPack_/blockDetail "eec3600f5db19bf506449d3adb47adae")
 
 

@@ -15,4 +15,8 @@
           BLOCKHASH
           PREVIOUSHASH-VAL
           PREVIOUSHASH
+          DATA1-VAL
+          DATA1
+          DATA2-VAL
+          DATA2
 ))

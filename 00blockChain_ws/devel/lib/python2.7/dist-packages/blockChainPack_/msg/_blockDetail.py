@@ -7,7 +7,7 @@ import struct
 
 
 class blockDetail(genpy.Message):
-  _md5sum = "5091a84f3e39f87dbd6a52f50fce01bf"
+  _md5sum = "eec3600f5db19bf506449d3adb47adae"
   _type = "blockChainPack_/blockDetail"
   _has_header = False #flag to mark the presence of a Header object
   _full_text = """int64 blockNumber
@@ -18,9 +18,11 @@ string station
 int64 productCode
 string blockHash
 string previousHash
+string data1
+string data2
 """
-  __slots__ = ['blockNumber','orderNumber','carrierID','timeStamp','station','productCode','blockHash','previousHash']
-  _slot_types = ['int64','int64','int64','string','string','int64','string','string']
+  __slots__ = ['blockNumber','orderNumber','carrierID','timeStamp','station','productCode','blockHash','previousHash','data1','data2']
+  _slot_types = ['int64','int64','int64','string','string','int64','string','string','string','string']
 
   def __init__(self, *args, **kwds):
     """
@@ -30,7 +32,7 @@ string previousHash
     changes.  You cannot mix in-order arguments and keyword arguments.
 
     The available fields are:
-       blockNumber,orderNumber,carrierID,timeStamp,station,productCode,blockHash,previousHash
+       blockNumber,orderNumber,carrierID,timeStamp,station,productCode,blockHash,previousHash,data1,data2
 
     :param args: complete set of field values, in .msg order
     :param kwds: use keyword arguments corresponding to message field names
@@ -55,6 +57,10 @@ string previousHash
         self.blockHash = ''
       if self.previousHash is None:
         self.previousHash = ''
+      if self.data1 is None:
+        self.data1 = ''
+      if self.data2 is None:
+        self.data2 = ''
     else:
       self.blockNumber = 0
       self.orderNumber = 0
@@ -64,6 +70,8 @@ string previousHash
       self.productCode = 0
       self.blockHash = ''
       self.previousHash = ''
+      self.data1 = ''
+      self.data2 = ''
 
   def _get_types(self):
     """
@@ -99,6 +107,18 @@ string previousHash
         length = len(_x)
       buff.write(struct.pack('<I%ss'%length, length, _x))
       _x = self.previousHash
+      length = len(_x)
+      if python3 or type(_x) == unicode:
+        _x = _x.encode('utf-8')
+        length = len(_x)
+      buff.write(struct.pack('<I%ss'%length, length, _x))
+      _x = self.data1
+      length = len(_x)
+      if python3 or type(_x) == unicode:
+        _x = _x.encode('utf-8')
+        length = len(_x)
+      buff.write(struct.pack('<I%ss'%length, length, _x))
+      _x = self.data2
       length = len(_x)
       if python3 or type(_x) == unicode:
         _x = _x.encode('utf-8')
@@ -157,6 +177,24 @@ string previousHash
         self.previousHash = str[start:end].decode('utf-8')
       else:
         self.previousHash = str[start:end]
+      start = end
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      start = end
+      end += length
+      if python3:
+        self.data1 = str[start:end].decode('utf-8')
+      else:
+        self.data1 = str[start:end]
+      start = end
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      start = end
+      end += length
+      if python3:
+        self.data2 = str[start:end].decode('utf-8')
+      else:
+        self.data2 = str[start:end]
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
@@ -191,6 +229,18 @@ string previousHash
         length = len(_x)
       buff.write(struct.pack('<I%ss'%length, length, _x))
       _x = self.previousHash
+      length = len(_x)
+      if python3 or type(_x) == unicode:
+        _x = _x.encode('utf-8')
+        length = len(_x)
+      buff.write(struct.pack('<I%ss'%length, length, _x))
+      _x = self.data1
+      length = len(_x)
+      if python3 or type(_x) == unicode:
+        _x = _x.encode('utf-8')
+        length = len(_x)
+      buff.write(struct.pack('<I%ss'%length, length, _x))
+      _x = self.data2
       length = len(_x)
       if python3 or type(_x) == unicode:
         _x = _x.encode('utf-8')
@@ -250,6 +300,24 @@ string previousHash
         self.previousHash = str[start:end].decode('utf-8')
       else:
         self.previousHash = str[start:end]
+      start = end
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      start = end
+      end += length
+      if python3:
+        self.data1 = str[start:end].decode('utf-8')
+      else:
+        self.data1 = str[start:end]
+      start = end
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      start = end
+      end += length
+      if python3:
+        self.data2 = str[start:end].decode('utf-8')
+      else:
+        self.data2 = str[start:end]
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill

@@ -6,3 +6,5 @@ string station
 int64 productCode
 string blockHash
 string previousHash
+string data1
+string data2

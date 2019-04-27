@@ -26,6 +26,8 @@ class blockDetail {
       this.productCode = null;
       this.blockHash = null;
       this.previousHash = null;
+      this.data1 = null;
+      this.data2 = null;
     }
     else {
       if (initObj.hasOwnProperty('blockNumber')) {
@@ -76,6 +78,18 @@ class blockDetail {
       else {
         this.previousHash = '';
       }
+      if (initObj.hasOwnProperty('data1')) {
+        this.data1 = initObj.data1
+      }
+      else {
+        this.data1 = '';
+      }
+      if (initObj.hasOwnProperty('data2')) {
+        this.data2 = initObj.data2
+      }
+      else {
+        this.data2 = '';
+      }
     }
   }
 
@@ -97,6 +111,10 @@ class blockDetail {
     bufferOffset = _serializer.string(obj.blockHash, buffer, bufferOffset);
     // Serialize message field [previousHash]
     bufferOffset = _serializer.string(obj.previousHash, buffer, bufferOffset);
+    // Serialize message field [data1]
+    bufferOffset = _serializer.string(obj.data1, buffer, bufferOffset);
+    // Serialize message field [data2]
+    bufferOffset = _serializer.string(obj.data2, buffer, bufferOffset);
     return bufferOffset;
   }
 
@@ -120,6 +138,10 @@ class blockDetail {
     data.blockHash = _deserializer.string(buffer, bufferOffset);
     // Deserialize message field [previousHash]
     data.previousHash = _deserializer.string(buffer, bufferOffset);
+    // Deserialize message field [data1]
+    data.data1 = _deserializer.string(buffer, bufferOffset);
+    // Deserialize message field [data2]
+    data.data2 = _deserializer.string(buffer, bufferOffset);
     return data;
   }
 
@@ -129,7 +151,9 @@ class blockDetail {
     length += object.station.length;
     length += object.blockHash.length;
     length += object.previousHash.length;
-    return length + 48;
+    length += object.data1.length;
+    length += object.data2.length;
+    return length + 56;
   }
 
   static datatype() {
@@ -139,7 +163,7 @@ class blockDetail {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return '5091a84f3e39f87dbd6a52f50fce01bf';
+    return 'eec3600f5db19bf506449d3adb47adae';
   }
 
   static messageDefinition() {
@@ -153,6 +177,8 @@ class blockDetail {
     int64 productCode
     string blockHash
     string previousHash
+    string data1
+    string data2
     
     `;
   }
@@ -217,6 +243,20 @@ class blockDetail {
     }
     else {
       resolved.previousHash = ''
+    }
+
+    if (msg.data1 !== undefined) {
+      resolved.data1 = msg.data1;
+    }
+    else {
+      resolved.data1 = ''
+    }
+
+    if (msg.data2 !== undefined) {
+      resolved.data2 = msg.data2;
+    }
+    else {
+      resolved.data2 = ''
     }
 
     return resolved;

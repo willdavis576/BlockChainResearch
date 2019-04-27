@@ -31,7 +31,9 @@ struct blockDetail_
     , station()
     , productCode(0)
     , blockHash()
-    , previousHash()  {
+    , previousHash()
+    , data1()
+    , data2()  {
     }
   blockDetail_(const ContainerAllocator& _alloc)
     : blockNumber(0)
@@ -41,7 +43,9 @@ struct blockDetail_
     , station(_alloc)
     , productCode(0)
     , blockHash(_alloc)
-    , previousHash(_alloc)  {
+    , previousHash(_alloc)
+    , data1(_alloc)
+    , data2(_alloc)  {
   (void)_alloc;
     }
 
@@ -70,6 +74,12 @@ struct blockDetail_
 
    typedef std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other >  _previousHash_type;
   _previousHash_type previousHash;
+
+   typedef std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other >  _data1_type;
+  _data1_type data1;
+
+   typedef std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other >  _data2_type;
+  _data2_type data2;
 
 
 
@@ -149,12 +159,12 @@ struct MD5Sum< ::blockChainPack_::blockDetail_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "5091a84f3e39f87dbd6a52f50fce01bf";
+    return "eec3600f5db19bf506449d3adb47adae";
   }
 
   static const char* value(const ::blockChainPack_::blockDetail_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0x5091a84f3e39f87dULL;
-  static const uint64_t static_value2 = 0xbd6a52f50fce01bfULL;
+  static const uint64_t static_value1 = 0xeec3600f5db19bf5ULL;
+  static const uint64_t static_value2 = 0x06449d3adb47adaeULL;
 };
 
 template<class ContainerAllocator>
@@ -181,6 +191,8 @@ string station\n\
 int64 productCode\n\
 string blockHash\n\
 string previousHash\n\
+string data1\n\
+string data2\n\
 ";
   }
 
@@ -207,6 +219,8 @@ namespace serialization
       stream.next(m.productCode);
       stream.next(m.blockHash);
       stream.next(m.previousHash);
+      stream.next(m.data1);
+      stream.next(m.data2);
     }
 
     ROS_DECLARE_ALLINONE_SERIALIZER
@@ -241,6 +255,10 @@ struct Printer< ::blockChainPack_::blockDetail_<ContainerAllocator> >
     Printer<std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other > >::stream(s, indent + "  ", v.blockHash);
     s << indent << "previousHash: ";
     Printer<std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other > >::stream(s, indent + "  ", v.previousHash);
+    s << indent << "data1: ";
+    Printer<std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other > >::stream(s, indent + "  ", v.data1);
+    s << indent << "data2: ";
+    Printer<std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other > >::stream(s, indent + "  ", v.data2);
   }
 };
 
