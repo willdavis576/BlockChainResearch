@@ -1,0 +1,40 @@
+****************** Blockchain.py ******************
+
+sends:
+	blocks
+	 - try make Node1Emitter.py part of this script.
+
+receives:
+	n/a
+
+
+****************** listener.py ********************
+
+sends:
+	n/a
+
+receives:
+	blocks
+
+****************** Node1Emitter.py **************** - try put this in the blockchain.py 
+sends:
+	nodeName
+
+receives:
+	n/a
+
+
+****************** authentication.py **************
+
+sends:
+	n/a - needs to find out what node has different information and auto-update the comprimised block
+
+receives:
+	nodesOnline (probs not needed)
+	blockhashes - needs a custom message: <NodeName>, <productNumber>, <blockHash>
+			NodeName can be used to create a 2D array, 1 dimension for the nodename and another
+				for each blockChain's final hash
+			product number can be used to deduce the current amount of blockchains produced
+			blockHash is the final hash of each blockChain
+
+			

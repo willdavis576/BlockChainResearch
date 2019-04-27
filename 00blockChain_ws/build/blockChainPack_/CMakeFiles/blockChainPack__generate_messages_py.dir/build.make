@@ -53,6 +53,7 @@ CMAKE_BINARY_DIR = /home/pi/blockChainGit/00blockChain_ws/build
 # Include the progress variables for this target.
 include blockChainPack_/CMakeFiles/blockChainPack__generate_messages_py.dir/progress.make
 
+<<<<<<< HEAD
 blockChainPack_/CMakeFiles/blockChainPack__generate_messages_py: /home/pi/blockChainGit/00blockChain_ws/devel/lib/python2.7/dist-packages/blockChainPack_/msg/_finish.py
 blockChainPack_/CMakeFiles/blockChainPack__generate_messages_py: /home/pi/blockChainGit/00blockChain_ws/devel/lib/python2.7/dist-packages/blockChainPack_/msg/_lastHash.py
 blockChainPack_/CMakeFiles/blockChainPack__generate_messages_py: /home/pi/blockChainGit/00blockChain_ws/devel/lib/python2.7/dist-packages/blockChainPack_/msg/_rewriteNode.py
@@ -102,6 +103,57 @@ blockChainPack__generate_messages_py: /home/pi/blockChainGit/00blockChain_ws/dev
 blockChainPack__generate_messages_py: /home/pi/blockChainGit/00blockChain_ws/devel/lib/python2.7/dist-packages/blockChainPack_/msg/_sim.py
 blockChainPack__generate_messages_py: /home/pi/blockChainGit/00blockChain_ws/devel/lib/python2.7/dist-packages/blockChainPack_/msg/_blockDetail.py
 blockChainPack__generate_messages_py: /home/pi/blockChainGit/00blockChain_ws/devel/lib/python2.7/dist-packages/blockChainPack_/msg/__init__.py
+=======
+blockChainPack_/CMakeFiles/blockChainPack__generate_messages_py: /home/ros/blockChainGit/00blockChain_ws/devel/lib/python2.7/dist-packages/blockChainPack_/msg/_lastHash.py
+blockChainPack_/CMakeFiles/blockChainPack__generate_messages_py: /home/ros/blockChainGit/00blockChain_ws/devel/lib/python2.7/dist-packages/blockChainPack_/msg/_blockDetail.py
+blockChainPack_/CMakeFiles/blockChainPack__generate_messages_py: /home/ros/blockChainGit/00blockChain_ws/devel/lib/python2.7/dist-packages/blockChainPack_/msg/_finish.py
+blockChainPack_/CMakeFiles/blockChainPack__generate_messages_py: /home/ros/blockChainGit/00blockChain_ws/devel/lib/python2.7/dist-packages/blockChainPack_/msg/_sim.py
+blockChainPack_/CMakeFiles/blockChainPack__generate_messages_py: /home/ros/blockChainGit/00blockChain_ws/devel/lib/python2.7/dist-packages/blockChainPack_/msg/_rewriteNode.py
+blockChainPack_/CMakeFiles/blockChainPack__generate_messages_py: /home/ros/blockChainGit/00blockChain_ws/devel/lib/python2.7/dist-packages/blockChainPack_/msg/__init__.py
+
+
+/home/ros/blockChainGit/00blockChain_ws/devel/lib/python2.7/dist-packages/blockChainPack_/msg/_lastHash.py: /opt/ros/kinetic/lib/genpy/genmsg_py.py
+/home/ros/blockChainGit/00blockChain_ws/devel/lib/python2.7/dist-packages/blockChainPack_/msg/_lastHash.py: /home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/lastHash.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/ros/blockChainGit/00blockChain_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating Python from MSG blockChainPack_/lastHash"
+	cd /home/ros/blockChainGit/00blockChain_ws/build/blockChainPack_ && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/lastHash.msg -IblockChainPack_:/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p blockChainPack_ -o /home/ros/blockChainGit/00blockChain_ws/devel/lib/python2.7/dist-packages/blockChainPack_/msg
+
+/home/ros/blockChainGit/00blockChain_ws/devel/lib/python2.7/dist-packages/blockChainPack_/msg/_blockDetail.py: /opt/ros/kinetic/lib/genpy/genmsg_py.py
+/home/ros/blockChainGit/00blockChain_ws/devel/lib/python2.7/dist-packages/blockChainPack_/msg/_blockDetail.py: /home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/blockDetail.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/ros/blockChainGit/00blockChain_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating Python from MSG blockChainPack_/blockDetail"
+	cd /home/ros/blockChainGit/00blockChain_ws/build/blockChainPack_ && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/blockDetail.msg -IblockChainPack_:/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p blockChainPack_ -o /home/ros/blockChainGit/00blockChain_ws/devel/lib/python2.7/dist-packages/blockChainPack_/msg
+
+/home/ros/blockChainGit/00blockChain_ws/devel/lib/python2.7/dist-packages/blockChainPack_/msg/_finish.py: /opt/ros/kinetic/lib/genpy/genmsg_py.py
+/home/ros/blockChainGit/00blockChain_ws/devel/lib/python2.7/dist-packages/blockChainPack_/msg/_finish.py: /home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/finish.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/ros/blockChainGit/00blockChain_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating Python from MSG blockChainPack_/finish"
+	cd /home/ros/blockChainGit/00blockChain_ws/build/blockChainPack_ && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/finish.msg -IblockChainPack_:/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p blockChainPack_ -o /home/ros/blockChainGit/00blockChain_ws/devel/lib/python2.7/dist-packages/blockChainPack_/msg
+
+/home/ros/blockChainGit/00blockChain_ws/devel/lib/python2.7/dist-packages/blockChainPack_/msg/_sim.py: /opt/ros/kinetic/lib/genpy/genmsg_py.py
+/home/ros/blockChainGit/00blockChain_ws/devel/lib/python2.7/dist-packages/blockChainPack_/msg/_sim.py: /home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/sim.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/ros/blockChainGit/00blockChain_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating Python from MSG blockChainPack_/sim"
+	cd /home/ros/blockChainGit/00blockChain_ws/build/blockChainPack_ && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/sim.msg -IblockChainPack_:/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p blockChainPack_ -o /home/ros/blockChainGit/00blockChain_ws/devel/lib/python2.7/dist-packages/blockChainPack_/msg
+
+/home/ros/blockChainGit/00blockChain_ws/devel/lib/python2.7/dist-packages/blockChainPack_/msg/_rewriteNode.py: /opt/ros/kinetic/lib/genpy/genmsg_py.py
+/home/ros/blockChainGit/00blockChain_ws/devel/lib/python2.7/dist-packages/blockChainPack_/msg/_rewriteNode.py: /home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/rewriteNode.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/ros/blockChainGit/00blockChain_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Generating Python from MSG blockChainPack_/rewriteNode"
+	cd /home/ros/blockChainGit/00blockChain_ws/build/blockChainPack_ && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/rewriteNode.msg -IblockChainPack_:/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p blockChainPack_ -o /home/ros/blockChainGit/00blockChain_ws/devel/lib/python2.7/dist-packages/blockChainPack_/msg
+
+/home/ros/blockChainGit/00blockChain_ws/devel/lib/python2.7/dist-packages/blockChainPack_/msg/__init__.py: /opt/ros/kinetic/lib/genpy/genmsg_py.py
+/home/ros/blockChainGit/00blockChain_ws/devel/lib/python2.7/dist-packages/blockChainPack_/msg/__init__.py: /home/ros/blockChainGit/00blockChain_ws/devel/lib/python2.7/dist-packages/blockChainPack_/msg/_lastHash.py
+/home/ros/blockChainGit/00blockChain_ws/devel/lib/python2.7/dist-packages/blockChainPack_/msg/__init__.py: /home/ros/blockChainGit/00blockChain_ws/devel/lib/python2.7/dist-packages/blockChainPack_/msg/_blockDetail.py
+/home/ros/blockChainGit/00blockChain_ws/devel/lib/python2.7/dist-packages/blockChainPack_/msg/__init__.py: /home/ros/blockChainGit/00blockChain_ws/devel/lib/python2.7/dist-packages/blockChainPack_/msg/_finish.py
+/home/ros/blockChainGit/00blockChain_ws/devel/lib/python2.7/dist-packages/blockChainPack_/msg/__init__.py: /home/ros/blockChainGit/00blockChain_ws/devel/lib/python2.7/dist-packages/blockChainPack_/msg/_sim.py
+/home/ros/blockChainGit/00blockChain_ws/devel/lib/python2.7/dist-packages/blockChainPack_/msg/__init__.py: /home/ros/blockChainGit/00blockChain_ws/devel/lib/python2.7/dist-packages/blockChainPack_/msg/_rewriteNode.py
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/ros/blockChainGit/00blockChain_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Generating Python msg __init__.py for blockChainPack_"
+	cd /home/ros/blockChainGit/00blockChain_ws/build/blockChainPack_ && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py -o /home/ros/blockChainGit/00blockChain_ws/devel/lib/python2.7/dist-packages/blockChainPack_/msg --initpy
+
+blockChainPack__generate_messages_py: blockChainPack_/CMakeFiles/blockChainPack__generate_messages_py
+blockChainPack__generate_messages_py: /home/ros/blockChainGit/00blockChain_ws/devel/lib/python2.7/dist-packages/blockChainPack_/msg/_lastHash.py
+blockChainPack__generate_messages_py: /home/ros/blockChainGit/00blockChain_ws/devel/lib/python2.7/dist-packages/blockChainPack_/msg/_blockDetail.py
+blockChainPack__generate_messages_py: /home/ros/blockChainGit/00blockChain_ws/devel/lib/python2.7/dist-packages/blockChainPack_/msg/_finish.py
+blockChainPack__generate_messages_py: /home/ros/blockChainGit/00blockChain_ws/devel/lib/python2.7/dist-packages/blockChainPack_/msg/_sim.py
+blockChainPack__generate_messages_py: /home/ros/blockChainGit/00blockChain_ws/devel/lib/python2.7/dist-packages/blockChainPack_/msg/_rewriteNode.py
+blockChainPack__generate_messages_py: /home/ros/blockChainGit/00blockChain_ws/devel/lib/python2.7/dist-packages/blockChainPack_/msg/__init__.py
+>>>>>>> 04495caef248ff88c82b4aada68a5c73c263b2d4
 blockChainPack__generate_messages_py: blockChainPack_/CMakeFiles/blockChainPack__generate_messages_py.dir/build.make
 
 .PHONY : blockChainPack__generate_messages_py

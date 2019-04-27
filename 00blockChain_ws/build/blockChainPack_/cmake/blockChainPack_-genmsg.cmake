@@ -17,7 +17,16 @@ add_custom_target(blockChainPack__generate_messages ALL)
 
 
 
+<<<<<<< HEAD
 get_filename_component(_filename "/home/pi/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/finish.msg" NAME_WE)
+=======
+get_filename_component(_filename "/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/lastHash.msg" NAME_WE)
+add_custom_target(_blockChainPack__generate_messages_check_deps_${_filename}
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "blockChainPack_" "/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/lastHash.msg" ""
+)
+
+get_filename_component(_filename "/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/blockDetail.msg" NAME_WE)
+>>>>>>> 04495caef248ff88c82b4aada68a5c73c263b2d4
 add_custom_target(_blockChainPack__generate_messages_check_deps_${_filename}
   COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "blockChainPack_" "/home/pi/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/finish.msg" ""
 )
@@ -42,6 +51,21 @@ add_custom_target(_blockChainPack__generate_messages_check_deps_${_filename}
   COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "blockChainPack_" "/home/pi/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/blockDetail.msg" ""
 )
 
+get_filename_component(_filename "/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/rewriteNode.msg" NAME_WE)
+add_custom_target(_blockChainPack__generate_messages_check_deps_${_filename}
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "blockChainPack_" "/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/rewriteNode.msg" ""
+)
+
+get_filename_component(_filename "/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/sim.msg" NAME_WE)
+add_custom_target(_blockChainPack__generate_messages_check_deps_${_filename}
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "blockChainPack_" "/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/sim.msg" ""
+)
+
+get_filename_component(_filename "/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/finish.msg" NAME_WE)
+add_custom_target(_blockChainPack__generate_messages_check_deps_${_filename}
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "blockChainPack_" "/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/finish.msg" ""
+)
+
 #
 #  langs = gencpp;geneus;genlisp;gennodejs;genpy
 #
@@ -49,12 +73,17 @@ add_custom_target(_blockChainPack__generate_messages_check_deps_${_filename}
 ### Section generating for lang: gencpp
 ### Generating Messages
 _generate_msg_cpp(blockChainPack_
+<<<<<<< HEAD
   "/home/pi/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/finish.msg"
+=======
+  "/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/lastHash.msg"
+>>>>>>> 04495caef248ff88c82b4aada68a5c73c263b2d4
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/blockChainPack_
 )
 _generate_msg_cpp(blockChainPack_
+<<<<<<< HEAD
   "/home/pi/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/lastHash.msg"
   "${MSG_I_FLAGS}"
   ""
@@ -74,6 +103,27 @@ _generate_msg_cpp(blockChainPack_
 )
 _generate_msg_cpp(blockChainPack_
   "/home/pi/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/blockDetail.msg"
+=======
+  "/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/blockDetail.msg"
+>>>>>>> 04495caef248ff88c82b4aada68a5c73c263b2d4
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/blockChainPack_
+)
+_generate_msg_cpp(blockChainPack_
+  "/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/finish.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/blockChainPack_
+)
+_generate_msg_cpp(blockChainPack_
+  "/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/sim.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/blockChainPack_
+)
+_generate_msg_cpp(blockChainPack_
+  "/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/rewriteNode.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/blockChainPack_
@@ -93,6 +143,7 @@ add_custom_target(blockChainPack__generate_messages_cpp
 add_dependencies(blockChainPack__generate_messages blockChainPack__generate_messages_cpp)
 
 # add dependencies to all check dependencies targets
+<<<<<<< HEAD
 get_filename_component(_filename "/home/pi/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/finish.msg" NAME_WE)
 add_dependencies(blockChainPack__generate_messages_cpp _blockChainPack__generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/pi/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/lastHash.msg" NAME_WE)
@@ -102,6 +153,17 @@ add_dependencies(blockChainPack__generate_messages_cpp _blockChainPack__generate
 get_filename_component(_filename "/home/pi/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/sim.msg" NAME_WE)
 add_dependencies(blockChainPack__generate_messages_cpp _blockChainPack__generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/pi/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/blockDetail.msg" NAME_WE)
+=======
+get_filename_component(_filename "/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/lastHash.msg" NAME_WE)
+add_dependencies(blockChainPack__generate_messages_cpp _blockChainPack__generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/blockDetail.msg" NAME_WE)
+>>>>>>> 04495caef248ff88c82b4aada68a5c73c263b2d4
+add_dependencies(blockChainPack__generate_messages_cpp _blockChainPack__generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/rewriteNode.msg" NAME_WE)
+add_dependencies(blockChainPack__generate_messages_cpp _blockChainPack__generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/sim.msg" NAME_WE)
+add_dependencies(blockChainPack__generate_messages_cpp _blockChainPack__generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/finish.msg" NAME_WE)
 add_dependencies(blockChainPack__generate_messages_cpp _blockChainPack__generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
@@ -114,12 +176,17 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS blockChainPack__generate_messages_c
 ### Section generating for lang: geneus
 ### Generating Messages
 _generate_msg_eus(blockChainPack_
+<<<<<<< HEAD
   "/home/pi/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/finish.msg"
+=======
+  "/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/lastHash.msg"
+>>>>>>> 04495caef248ff88c82b4aada68a5c73c263b2d4
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/blockChainPack_
 )
 _generate_msg_eus(blockChainPack_
+<<<<<<< HEAD
   "/home/pi/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/lastHash.msg"
   "${MSG_I_FLAGS}"
   ""
@@ -139,6 +206,27 @@ _generate_msg_eus(blockChainPack_
 )
 _generate_msg_eus(blockChainPack_
   "/home/pi/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/blockDetail.msg"
+=======
+  "/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/blockDetail.msg"
+>>>>>>> 04495caef248ff88c82b4aada68a5c73c263b2d4
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/blockChainPack_
+)
+_generate_msg_eus(blockChainPack_
+  "/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/finish.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/blockChainPack_
+)
+_generate_msg_eus(blockChainPack_
+  "/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/sim.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/blockChainPack_
+)
+_generate_msg_eus(blockChainPack_
+  "/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/rewriteNode.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/blockChainPack_
@@ -158,6 +246,7 @@ add_custom_target(blockChainPack__generate_messages_eus
 add_dependencies(blockChainPack__generate_messages blockChainPack__generate_messages_eus)
 
 # add dependencies to all check dependencies targets
+<<<<<<< HEAD
 get_filename_component(_filename "/home/pi/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/finish.msg" NAME_WE)
 add_dependencies(blockChainPack__generate_messages_eus _blockChainPack__generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/pi/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/lastHash.msg" NAME_WE)
@@ -167,6 +256,17 @@ add_dependencies(blockChainPack__generate_messages_eus _blockChainPack__generate
 get_filename_component(_filename "/home/pi/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/sim.msg" NAME_WE)
 add_dependencies(blockChainPack__generate_messages_eus _blockChainPack__generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/pi/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/blockDetail.msg" NAME_WE)
+=======
+get_filename_component(_filename "/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/lastHash.msg" NAME_WE)
+add_dependencies(blockChainPack__generate_messages_eus _blockChainPack__generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/blockDetail.msg" NAME_WE)
+>>>>>>> 04495caef248ff88c82b4aada68a5c73c263b2d4
+add_dependencies(blockChainPack__generate_messages_eus _blockChainPack__generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/rewriteNode.msg" NAME_WE)
+add_dependencies(blockChainPack__generate_messages_eus _blockChainPack__generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/sim.msg" NAME_WE)
+add_dependencies(blockChainPack__generate_messages_eus _blockChainPack__generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/finish.msg" NAME_WE)
 add_dependencies(blockChainPack__generate_messages_eus _blockChainPack__generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
@@ -179,12 +279,17 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS blockChainPack__generate_messages_e
 ### Section generating for lang: genlisp
 ### Generating Messages
 _generate_msg_lisp(blockChainPack_
+<<<<<<< HEAD
   "/home/pi/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/finish.msg"
+=======
+  "/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/lastHash.msg"
+>>>>>>> 04495caef248ff88c82b4aada68a5c73c263b2d4
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/blockChainPack_
 )
 _generate_msg_lisp(blockChainPack_
+<<<<<<< HEAD
   "/home/pi/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/lastHash.msg"
   "${MSG_I_FLAGS}"
   ""
@@ -204,6 +309,27 @@ _generate_msg_lisp(blockChainPack_
 )
 _generate_msg_lisp(blockChainPack_
   "/home/pi/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/blockDetail.msg"
+=======
+  "/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/blockDetail.msg"
+>>>>>>> 04495caef248ff88c82b4aada68a5c73c263b2d4
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/blockChainPack_
+)
+_generate_msg_lisp(blockChainPack_
+  "/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/finish.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/blockChainPack_
+)
+_generate_msg_lisp(blockChainPack_
+  "/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/sim.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/blockChainPack_
+)
+_generate_msg_lisp(blockChainPack_
+  "/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/rewriteNode.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/blockChainPack_
@@ -223,6 +349,7 @@ add_custom_target(blockChainPack__generate_messages_lisp
 add_dependencies(blockChainPack__generate_messages blockChainPack__generate_messages_lisp)
 
 # add dependencies to all check dependencies targets
+<<<<<<< HEAD
 get_filename_component(_filename "/home/pi/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/finish.msg" NAME_WE)
 add_dependencies(blockChainPack__generate_messages_lisp _blockChainPack__generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/pi/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/lastHash.msg" NAME_WE)
@@ -232,6 +359,17 @@ add_dependencies(blockChainPack__generate_messages_lisp _blockChainPack__generat
 get_filename_component(_filename "/home/pi/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/sim.msg" NAME_WE)
 add_dependencies(blockChainPack__generate_messages_lisp _blockChainPack__generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/pi/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/blockDetail.msg" NAME_WE)
+=======
+get_filename_component(_filename "/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/lastHash.msg" NAME_WE)
+add_dependencies(blockChainPack__generate_messages_lisp _blockChainPack__generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/blockDetail.msg" NAME_WE)
+>>>>>>> 04495caef248ff88c82b4aada68a5c73c263b2d4
+add_dependencies(blockChainPack__generate_messages_lisp _blockChainPack__generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/rewriteNode.msg" NAME_WE)
+add_dependencies(blockChainPack__generate_messages_lisp _blockChainPack__generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/sim.msg" NAME_WE)
+add_dependencies(blockChainPack__generate_messages_lisp _blockChainPack__generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/finish.msg" NAME_WE)
 add_dependencies(blockChainPack__generate_messages_lisp _blockChainPack__generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
@@ -244,12 +382,17 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS blockChainPack__generate_messages_l
 ### Section generating for lang: gennodejs
 ### Generating Messages
 _generate_msg_nodejs(blockChainPack_
+<<<<<<< HEAD
   "/home/pi/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/finish.msg"
+=======
+  "/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/lastHash.msg"
+>>>>>>> 04495caef248ff88c82b4aada68a5c73c263b2d4
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/blockChainPack_
 )
 _generate_msg_nodejs(blockChainPack_
+<<<<<<< HEAD
   "/home/pi/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/lastHash.msg"
   "${MSG_I_FLAGS}"
   ""
@@ -269,6 +412,27 @@ _generate_msg_nodejs(blockChainPack_
 )
 _generate_msg_nodejs(blockChainPack_
   "/home/pi/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/blockDetail.msg"
+=======
+  "/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/blockDetail.msg"
+>>>>>>> 04495caef248ff88c82b4aada68a5c73c263b2d4
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/blockChainPack_
+)
+_generate_msg_nodejs(blockChainPack_
+  "/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/finish.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/blockChainPack_
+)
+_generate_msg_nodejs(blockChainPack_
+  "/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/sim.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/blockChainPack_
+)
+_generate_msg_nodejs(blockChainPack_
+  "/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/rewriteNode.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/blockChainPack_
@@ -288,6 +452,7 @@ add_custom_target(blockChainPack__generate_messages_nodejs
 add_dependencies(blockChainPack__generate_messages blockChainPack__generate_messages_nodejs)
 
 # add dependencies to all check dependencies targets
+<<<<<<< HEAD
 get_filename_component(_filename "/home/pi/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/finish.msg" NAME_WE)
 add_dependencies(blockChainPack__generate_messages_nodejs _blockChainPack__generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/pi/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/lastHash.msg" NAME_WE)
@@ -297,6 +462,17 @@ add_dependencies(blockChainPack__generate_messages_nodejs _blockChainPack__gener
 get_filename_component(_filename "/home/pi/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/sim.msg" NAME_WE)
 add_dependencies(blockChainPack__generate_messages_nodejs _blockChainPack__generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/pi/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/blockDetail.msg" NAME_WE)
+=======
+get_filename_component(_filename "/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/lastHash.msg" NAME_WE)
+add_dependencies(blockChainPack__generate_messages_nodejs _blockChainPack__generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/blockDetail.msg" NAME_WE)
+>>>>>>> 04495caef248ff88c82b4aada68a5c73c263b2d4
+add_dependencies(blockChainPack__generate_messages_nodejs _blockChainPack__generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/rewriteNode.msg" NAME_WE)
+add_dependencies(blockChainPack__generate_messages_nodejs _blockChainPack__generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/sim.msg" NAME_WE)
+add_dependencies(blockChainPack__generate_messages_nodejs _blockChainPack__generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/finish.msg" NAME_WE)
 add_dependencies(blockChainPack__generate_messages_nodejs _blockChainPack__generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
@@ -309,12 +485,17 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS blockChainPack__generate_messages_n
 ### Section generating for lang: genpy
 ### Generating Messages
 _generate_msg_py(blockChainPack_
+<<<<<<< HEAD
   "/home/pi/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/finish.msg"
+=======
+  "/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/lastHash.msg"
+>>>>>>> 04495caef248ff88c82b4aada68a5c73c263b2d4
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/blockChainPack_
 )
 _generate_msg_py(blockChainPack_
+<<<<<<< HEAD
   "/home/pi/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/lastHash.msg"
   "${MSG_I_FLAGS}"
   ""
@@ -334,6 +515,27 @@ _generate_msg_py(blockChainPack_
 )
 _generate_msg_py(blockChainPack_
   "/home/pi/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/blockDetail.msg"
+=======
+  "/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/blockDetail.msg"
+>>>>>>> 04495caef248ff88c82b4aada68a5c73c263b2d4
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/blockChainPack_
+)
+_generate_msg_py(blockChainPack_
+  "/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/finish.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/blockChainPack_
+)
+_generate_msg_py(blockChainPack_
+  "/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/sim.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/blockChainPack_
+)
+_generate_msg_py(blockChainPack_
+  "/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/rewriteNode.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/blockChainPack_
@@ -353,6 +555,7 @@ add_custom_target(blockChainPack__generate_messages_py
 add_dependencies(blockChainPack__generate_messages blockChainPack__generate_messages_py)
 
 # add dependencies to all check dependencies targets
+<<<<<<< HEAD
 get_filename_component(_filename "/home/pi/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/finish.msg" NAME_WE)
 add_dependencies(blockChainPack__generate_messages_py _blockChainPack__generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/pi/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/lastHash.msg" NAME_WE)
@@ -362,6 +565,17 @@ add_dependencies(blockChainPack__generate_messages_py _blockChainPack__generate_
 get_filename_component(_filename "/home/pi/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/sim.msg" NAME_WE)
 add_dependencies(blockChainPack__generate_messages_py _blockChainPack__generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/pi/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/blockDetail.msg" NAME_WE)
+=======
+get_filename_component(_filename "/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/lastHash.msg" NAME_WE)
+add_dependencies(blockChainPack__generate_messages_py _blockChainPack__generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/blockDetail.msg" NAME_WE)
+>>>>>>> 04495caef248ff88c82b4aada68a5c73c263b2d4
+add_dependencies(blockChainPack__generate_messages_py _blockChainPack__generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/rewriteNode.msg" NAME_WE)
+add_dependencies(blockChainPack__generate_messages_py _blockChainPack__generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/sim.msg" NAME_WE)
+add_dependencies(blockChainPack__generate_messages_py _blockChainPack__generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/finish.msg" NAME_WE)
 add_dependencies(blockChainPack__generate_messages_py _blockChainPack__generate_messages_check_deps_${_filename})
 
 # target for backward compatibility

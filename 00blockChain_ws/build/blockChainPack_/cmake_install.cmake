@@ -32,6 +32,7 @@ if(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
   set(CMAKE_INSTALL_SO_NO_EXE "1")
 endif()
 
+<<<<<<< HEAD
 if("${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/blockChainPack_/msg" TYPE FILE FILES
     "/home/pi/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/blockDetail.msg"
@@ -39,6 +40,15 @@ if("${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMP
     "/home/pi/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/rewriteNode.msg"
     "/home/pi/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/finish.msg"
     "/home/pi/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/sim.msg"
+=======
+if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/blockChainPack_/msg" TYPE FILE FILES
+    "/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/blockDetail.msg"
+    "/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/lastHash.msg"
+    "/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/rewriteNode.msg"
+    "/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/finish.msg"
+    "/home/ros/blockChainGit/00blockChain_ws/src/blockChainPack_/msg/sim.msg"
+>>>>>>> 04495caef248ff88c82b4aada68a5c73c263b2d4
     )
 endif()
 

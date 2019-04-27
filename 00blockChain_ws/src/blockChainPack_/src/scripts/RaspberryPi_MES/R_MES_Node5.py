@@ -12,12 +12,19 @@ from blockChainPack_.msg import finish
 
 nodeName = "NODE5"  ############### THIS IS WHERE YOU SPECIFY A NODE'S NAME #######################
 port = 4504
+<<<<<<< HEAD
 address = '172.21.4.151' #127.0.0.1
 lNodeToRewrite = "NODE6"
 dataDes1 = "Pressure (bar): "
 dataDes2 = "Force (N): "
 dataMag1 = 10
 dataMag2 = 10
+=======
+address = '172.21.4.151' #127.0.0.1'
+lNodeToRewrite = "NODE6"
+dataDes1 = "Pressure (bar): "
+dataDes2 = "Force (N): "
+>>>>>>> 04495caef248ff88c82b4aada68a5c73c263b2d4
 
 Range = 200
 cRange = 5
@@ -950,8 +957,11 @@ def manual():
     global address
     global dataDes1
     global dataDes2
+<<<<<<< HEAD
     global dataMag1
     global dataMag2
+=======
+>>>>>>> 04495caef248ff88c82b4aada68a5c73c263b2d4
 
     # Create a TCP/IP socket
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -1001,8 +1011,13 @@ def manual():
                                 tcpDays = data[22] + data[23]
                                 tcpMonths = data[25] + data[26]
                                 tcpYears = data[28] + data[29] + data[30] + data[31]
+<<<<<<< HEAD
                                 tcpData1 = dataDes1 + str(float(data[33] + data[34] + data[35]) / dataMag1)
                                 tcpData2 = dataDes2 + str(float(data[37] + data[38] + data[39]) / dataMag2)
+=======
+                                tcpData1 = dataDes1 + str(float(data[33] + data[34] + data[35]) / 100)
+                                tcpData2 = dataDes2 + str(float(data[37] + data[38] + data[39]) / 10)
+>>>>>>> 04495caef248ff88c82b4aada68a5c73c263b2d4
                                 dataFollowing = 1
                                 mainProg()
                                 oldData = data

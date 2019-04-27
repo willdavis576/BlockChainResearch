@@ -12,7 +12,11 @@ from blockChainPack_.msg import finish
 
 nodeName = "NODE6"  ############### THIS IS WHERE YOU SPECIFY A NODE'S NAME #######################
 port = 4505
+<<<<<<< HEAD
 address = '172.21.4.151' #127.0.0.1
+=======
+address = '127.0.0.1' #172.21.4.151
+>>>>>>> 04495caef248ff88c82b4aada68a5c73c263b2d4
 lNodeToRewrite = "NODE1"
 dataDes1 = "Temperature Reached (C): "
 dataDes2 = "Heating Time(s): "
