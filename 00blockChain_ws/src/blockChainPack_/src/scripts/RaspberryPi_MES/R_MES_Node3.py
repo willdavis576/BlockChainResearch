@@ -2,18 +2,24 @@
 import hashlib, sys, random, rospy, threading, time, socket, os, glob
 from datetime import datetime
 from collections import Counter
+from shutil import copyfile
 from blockChainPack_.msg import blockDetail
 from blockChainPack_.msg import lastHash
 from blockChainPack_.msg import rewriteNode
 from blockChainPack_.msg import finish
+from std_msgs.msg import String
 
 # station, orderNumber, productCode, seconds, minutes, hours, days, months, years
 # productNubmer should now orderNumber
 
 nodeName = "NODE3"  ############### THIS IS WHERE YOU SPECIFY A NODE'S NAME #######################
 port = 4502
-address = '172.21.4.151'  # 127.0.0.1
+address = '172.21.4.153'  # 127.0.0.1
 lNodeToRewrite = "NODE4"
+dataDes1 = "No data available"
+dataDes2 = "No data available"
+dataMag1 = 10
+dataMag2 = 10
 
 Range = 200
 cRange = 5
@@ -72,6 +78,7 @@ print("82%")
 SOrderNumber = [[['' for _ in range(Range)] for _ in range(cRange)] for _ in range(Range)]
 print("91%")
 SCarrierNumber = [[['' for _ in range(Range)] for _ in range(cRange)] for _ in range(Range)]
+Sdata = [[['' for _ in range(Range)] for _ in range(cRange)] for _ in range(Range)]
 print("100%")
 print("Loading network..")
 Sblock = ''
@@ -93,6 +100,8 @@ tcpHours = 0
 tcpDays = 0
 tcpMonths = 0
 tcpYears = 0
+tcpData1 = 0
+tcpData2 = 0
 
 # Class
 seconds = 0
@@ -114,19 +123,24 @@ runYetLoc = [['' for _ in range(Range)] for _ in range(Range)]
 # authTrigger
 mostCommonHash = ''
 
+# camera
+camAddress = 0
+
 
 class blockChain:
 
     def __init__(self, previousHash, station, productCode, orderNumber, carrierID, seconds, minutes, hours, days,
-                 months, years):
+                 months, years, data1, data2):
         self.timeStamp = str(hours + ':' + minutes + ':' + seconds + ' - ' + days + '/' + months + '/' + years)
         self.productCode = productCode
         self.orderNumber = orderNumber
         self.carrierID = carrierID
         self.previousHash = previousHash
         self.station = station
+        self.data1 = data1
+        self.data2 = data2
         self.contains = hashlib.sha256(self.station.encode()).hexdigest() + previousHash + str(
-            self.timeStamp) + str(self.productCode) + str(self.orderNumber) + str(self.carrierID)
+            self.timeStamp) + str(self.productCode) + str(self.orderNumber) + str(self.carrierID) + str(data1) + str(data2)
         self.blockHash = hashlib.sha256(self.contains.encode()).hexdigest()
 
     def getTimeStamp(self):
@@ -150,9 +164,15 @@ class blockChain:
     def getCarrierID(self):
         return self.carrierID
 
+    def getData1(self):
+        return self.data1
+
+    def getData2(self):
+        return self.data2
+
 
 def blockUpdate(blockNumber, orderNumber, carrierID, station, productCode, seconds, minutes, hours, days, months,
-                years):
+                years, data1, data2):
     global SblockHash
 
     for i in range(blockNumber, blockNumber + 1):
@@ -161,7 +181,7 @@ def blockUpdate(blockNumber, orderNumber, carrierID, station, productCode, secon
             previousHash=SblockHash[tcpOrderNumber][tcpCarrierNumber][block[tcpOrderNumber][tcpCarrierNumber].index('') - 1],
             station=station,
             productCode=productCode, orderNumber=orderNumber, carrierID=carrierID, seconds=seconds, minutes=minutes,
-            hours=hours, days=days, months=months, years=years)
+            hours=hours, days=days, months=months, years=years, data1=data1, data2=data2)
         # print("blockUpdate")
         # print(SblockHash[1243][0])
         # print("blockUpdate previous hash" + SblockHash[tcpOrderNumber][blockNumber])
@@ -189,6 +209,10 @@ def sendMessage():
             block[tcpOrderNumber][tcpCarrierNumber].index('') - 1].getBlockHash()
         message.previousHash = block[orderNumber][tcpCarrierNumber][
             block[tcpOrderNumber][tcpCarrierNumber].index('') - 1].getPreviousHash()
+        message.data1 = block[orderNumber][tcpCarrierNumber][
+            block[tcpOrderNumber][tcpCarrierNumber].index('') - 1].getData1()
+        message.data2 = block[orderNumber][tcpCarrierNumber][
+            block[tcpOrderNumber][tcpCarrierNumber].index('') - 1].getData2()
         # print(block[orderNumber][block[orderNumber].index('') - 1].getPreviousHash())
 
     except:
@@ -257,13 +281,13 @@ def mainProg():
             hours=str(datetime.now())[11:13],
             days=str(datetime.now())[8:10],
             months=str(datetime.now())[5:7],
-            years=str(datetime.now())[0:4])
+            years=str(datetime.now())[0:4], data1='', data2='')
         orderNcarrierNumberList[tcpOrderNumber][tcpCarrierNumber] = 1
         print("genesis: ")
         print(block[orderNumber][tcpCarrierNumber][
             block[tcpOrderNumber][tcpCarrierNumber].index('') - 1].getBlockHash())
 
-        time.sleep(0.1)
+        time.sleep(0.5)
         print("sending message in gen1")
         sendMessage()
         pub.publish(message)
@@ -276,7 +300,7 @@ def mainProg():
         newGenesis = 0
 
     if newGenesis == 0:
-        time.sleep(0.1)
+        time.sleep(0.3)
         print("newgen = 0 " + tcpStationName)
         if tcpStationName in stationHistory[int(tcpCarrierNumber)] and tcpStationName == '2':
             print("is " + tcpStationName)
@@ -288,7 +312,9 @@ def mainProg():
             message.productCode = 0
             message.blockHash = ''
             message.previousHash = ''
-            time.sleep(0.1)
+            message.data1 = ''
+            message.data2 = ''
+            time.sleep(0.3)
             pub.publish(message)
             dataFollowing = 0
             stationFinish = True
@@ -300,11 +326,11 @@ def mainProg():
             blockUpdate(blockNumber=block[tcpOrderNumber][tcpCarrierNumber].index(''), orderNumber=tcpOrderNumber,
                         station=tcpStationName, carrierID=tcpCarrierNumber, productCode=tcpProductCode,
                         seconds=tcpSeconds, minutes=tcpMinutes, hours=tcpHours, days=tcpDays, months=tcpMonths,
-                        years=tcpYears)
+                        years=tcpYears, data1=tcpData1, data2=tcpData2)
             print("sending message in gen0")
             # print(block[orderNumber][tcpCarrierNumber][block[tcpOrderNumber][tcpCarrierNumber].index('') - 1])
             sendMessage()
-            time.sleep(0.1)
+            time.sleep(0.3)
             pub.publish(message)
             print(orderNumber, blockNumber)
             blockNumber = block[tcpOrderNumber][tcpCarrierNumber].index('')
@@ -320,6 +346,8 @@ def mainProg():
         newGenesis = 3
         dataFollowing = 0
         print("datafollowing3", dataFollowing)
+
+
 #
 #     print("datafollowing4", dataFollowing)
 # print("datafollowing5", dataFollowing)
@@ -395,6 +423,7 @@ def callback(data):
     global SblockHash
     global SblockPreviousHash
     global SCarrierNumber
+    global Sdata
 
     global SblockNumber
     global SOrderNumber
@@ -404,6 +433,8 @@ def callback(data):
 
     global stationHistory
     global Comp
+
+    global camAddress
 
     wipe = False
     print(data.station)
@@ -424,6 +455,16 @@ def callback(data):
                     "/home/pi/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + "/Product" + str(
                         data.orderNumber + 1264) + "C:" + str(
                         data.carrierID) + "Comp" + str(REcounter[int(data.carrierID)]) + ".txt")
+
+                # print("camAddress: ", camAddress)
+                # copyfile("/home/pi/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + "/Product" + str(
+                #     data.orderNumber + 1264) + "C:" + str(data.carrierID) + "Comp" + str(REcounter[int(data.carrierID)]) + ".txt",
+                #          "/home/pi/blockChainGit/00blockChain_ws/src/blockChainPack_/src/scripts/CompletedReceiptsQR/" + str(
+                #              camAddress) + "/" + "Product" + str(
+                #              data.orderNumber + 1264) + "C:" + str(data.carrierID) + "Comp" + str(
+                #              REcounter[int(data.carrierID)]) + ".txt")
+                # print("copied")
+
                 block[data.orderNumber][data.carrierID] = [''] * Range
                 SCarrierNumber[data.orderNumber][data.carrierID] = [''] * Range
                 SblockHash[data.orderNumber][data.carrierID] = [''] * Range
@@ -439,15 +480,16 @@ def callback(data):
     if data.station not in stationHistory[int(data.carrierID)]:
 
         orderNumber1 = data.orderNumber
-        data_to_print = "Time Stamp for Block: {0}\nStation: {1}\nOrder Number: {2}\nCarrierID: {3}\nProduct Code: {4}\nBlock Hash: {5}\nPrevious Hash: {6}".format(
+        data_to_print = "Time Stamp for Block: {0}\nStation: {1}\nOrder Number: {2}\nCarrierID: {3}\nProduct Code: {4}\nBlock Hash: {5}\nPrevious Hash: {6}\n{7}\n{8}".format(
             data.timeStamp, data.station, data.orderNumber + 1264, data.carrierID, data.productCode, data.blockHash,
-            data.previousHash)
+            data.previousHash, data.data1, data.data2)
         # print(SblockHash[orderNumber][0] == '')
         SblockTimeStamp[data.orderNumber][data.carrierID][data.blockNumber] = data.timeStamp
         SblockTrans[data.orderNumber][data.carrierID][data.blockNumber] = data.station
         SblockProductCode[data.orderNumber][data.carrierID][data.blockNumber] = data.productCode
         SblockHash[data.orderNumber][data.carrierID][data.blockNumber] = data.blockHash
         SblockPreviousHash[data.orderNumber][data.carrierID][data.blockNumber] = data.previousHash
+        Sdata[data.orderNumber][data.carrierID][data.blockNumber] = data.data1 + ' ' + data.data2
         SCarrierNumber[data.orderNumber][data.carrierID] = 1
 
         SblockNumber = data.blockNumber
@@ -485,7 +527,8 @@ def callback(data):
                                                                                    months=data.timeStamp[14] + data.timeStamp[15],
                                                                                    years=data.timeStamp[17] + data.timeStamp[18] +
                                                                                          data.timeStamp[19] +
-                                                                                         data.timeStamp[20])
+                                                                                         data.timeStamp[20], data1=data.data1,
+                                                                                   data2=data.data2)
 
         if stationHistory[int(data.carrierID)] != ['Start production', '1', '2', '3', '4', '5', '6']:
             print(data.station)
@@ -902,6 +945,22 @@ def rewriteNodes():
     print("finished")
 
 
+################################# camera #################################
+
+
+# def camera():
+#     rospy.Subscriber('cameraData', String, camCallBack)
+#     rospy.spin()
+#
+#
+# def camCallBack(data):
+#     global camAddress
+#
+#     # http://172.21.4.153:8000/2
+#     camRaw = data.data
+#     camAddress = camRaw[25]
+
+
 ############################### TCP Server ###############################
 
 
@@ -916,10 +975,16 @@ def manual():
     global tcpDays
     global tcpMonths
     global tcpYears
+    global tcpData1
+    global tcpData2
     global dataFollowing
     global oldData
     global port
     global address
+    global dataDes1
+    global dataDes2
+    global dataMag1
+    global dataMag2
 
     # Create a TCP/IP socket
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -946,19 +1011,19 @@ def manual():
 
             # Receive the data in small chunks and retransmit it
             while True:
-                data = connection.recv(32)
+                data = connection.recv(40)
 
                 if data:
 
                     if data == '                               ':
                         dataFollowing = 0
-                    if data != '                                ':
+                    if data != '                                        ':
                         # example: 1,1230, 211,48, 6,18,21, 3,2019
                         # print data
                         try:
                             # print(data)
                             if oldData != data:
-                                # print(data)
+                                print(data)
                                 tcpStationName = data[0]
                                 tcpOrderNumber = int(data[2] + data[3] + data[4] + data[5]) - 1264
                                 tcpCarrierNumber = int(data[7])
@@ -969,6 +1034,8 @@ def manual():
                                 tcpDays = data[22] + data[23]
                                 tcpMonths = data[25] + data[26]
                                 tcpYears = data[28] + data[29] + data[30] + data[31]
+                                tcpData1 = dataDes1 + str(float(data[33] + data[34] + data[35]) / dataMag1)
+                                tcpData2 = dataDes2 + str(float(data[37] + data[38] + data[39]) / dataMag2)
                                 dataFollowing = 1
                                 mainProg()
                                 oldData = data
@@ -1003,7 +1070,7 @@ if __name__ == '__main__':
         # p5 = threading.Thread(target=authTrigger, args=())
         # p6 = threading.Thread(target=recNewData, args=())
         p7 = threading.Thread(target=manual, args=())
-        # p8 = threading.Thread(target=finishListener, args=())
+        # p8 = threading.Thread(target=camera, args=())
 
         p1.daemon = True
         # p2.daemon = True

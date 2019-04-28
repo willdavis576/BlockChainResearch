@@ -25,23 +25,11 @@ struct rewriteNode_
 
   rewriteNode_()
     : arrayTransfer()
-    , fileName()
-    , logFile()
-    , logHash()
-    , fileOrArray()
-    , REcounter(0)
-    , carrier(0)
-    , done(0)  {
+    , fileOrArray()  {
     }
   rewriteNode_(const ContainerAllocator& _alloc)
     : arrayTransfer(_alloc)
-    , fileName(_alloc)
-    , logFile(_alloc)
-    , logHash(_alloc)
-    , fileOrArray(_alloc)
-    , REcounter(0)
-    , carrier(0)
-    , done(0)  {
+    , fileOrArray(_alloc)  {
   (void)_alloc;
     }
 
@@ -50,26 +38,8 @@ struct rewriteNode_
    typedef std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other >  _arrayTransfer_type;
   _arrayTransfer_type arrayTransfer;
 
-   typedef std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other >  _fileName_type;
-  _fileName_type fileName;
-
-   typedef std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other >  _logFile_type;
-  _logFile_type logFile;
-
-   typedef std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other >  _logHash_type;
-  _logHash_type logHash;
-
    typedef std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other >  _fileOrArray_type;
   _fileOrArray_type fileOrArray;
-
-   typedef int64_t _REcounter_type;
-  _REcounter_type REcounter;
-
-   typedef int64_t _carrier_type;
-  _carrier_type carrier;
-
-   typedef int64_t _done_type;
-  _done_type done;
 
 
 
@@ -149,12 +119,12 @@ struct MD5Sum< ::blockChainPack_::rewriteNode_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "085590d527d397fa9632b68bed17ef19";
+    return "50ee5140b974cb540cb9a0539068bb23";
   }
 
   static const char* value(const ::blockChainPack_::rewriteNode_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0x085590d527d397faULL;
-  static const uint64_t static_value2 = 0x9632b68bed17ef19ULL;
+  static const uint64_t static_value1 = 0x50ee5140b974cb54ULL;
+  static const uint64_t static_value2 = 0x0cb9a0539068bb23ULL;
 };
 
 template<class ContainerAllocator>
@@ -174,13 +144,8 @@ struct Definition< ::blockChainPack_::rewriteNode_<ContainerAllocator> >
   static const char* value()
   {
     return "string arrayTransfer\n\
-string fileName\n\
-string logFile\n\
-string logHash\n\
 string fileOrArray\n\
-int64 REcounter\n\
-int64 carrier\n\
-int64 done\n\
+\n\
 ";
   }
 
@@ -200,13 +165,7 @@ namespace serialization
     template<typename Stream, typename T> inline static void allInOne(Stream& stream, T m)
     {
       stream.next(m.arrayTransfer);
-      stream.next(m.fileName);
-      stream.next(m.logFile);
-      stream.next(m.logHash);
       stream.next(m.fileOrArray);
-      stream.next(m.REcounter);
-      stream.next(m.carrier);
-      stream.next(m.done);
     }
 
     ROS_DECLARE_ALLINONE_SERIALIZER
@@ -227,20 +186,8 @@ struct Printer< ::blockChainPack_::rewriteNode_<ContainerAllocator> >
   {
     s << indent << "arrayTransfer: ";
     Printer<std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other > >::stream(s, indent + "  ", v.arrayTransfer);
-    s << indent << "fileName: ";
-    Printer<std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other > >::stream(s, indent + "  ", v.fileName);
-    s << indent << "logFile: ";
-    Printer<std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other > >::stream(s, indent + "  ", v.logFile);
-    s << indent << "logHash: ";
-    Printer<std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other > >::stream(s, indent + "  ", v.logHash);
     s << indent << "fileOrArray: ";
     Printer<std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other > >::stream(s, indent + "  ", v.fileOrArray);
-    s << indent << "REcounter: ";
-    Printer<int64_t>::stream(s, indent + "  ", v.REcounter);
-    s << indent << "carrier: ";
-    Printer<int64_t>::stream(s, indent + "  ", v.carrier);
-    s << indent << "done: ";
-    Printer<int64_t>::stream(s, indent + "  ", v.done);
   }
 };
 

@@ -2,20 +2,24 @@
 import hashlib, sys, random, rospy, threading, time, socket, os, glob
 from datetime import datetime
 from collections import Counter
+from shutil import copyfile
 from blockChainPack_.msg import blockDetail
 from blockChainPack_.msg import lastHash
 from blockChainPack_.msg import rewriteNode
 from blockChainPack_.msg import finish
+from std_msgs.msg import String
 
 # station, orderNumber, productCode, seconds, minutes, hours, days, months, years
 # productNubmer should now orderNumber
 
 nodeName = "NODE5"  ############### THIS IS WHERE YOU SPECIFY A NODE'S NAME #######################
 port = 4504
-address = '172.21.4.151' #127.0.0.1'
+address = '172.21.4.151'  # 127.0.0.1
 lNodeToRewrite = "NODE6"
 dataDes1 = "Pressure (bar): "
 dataDes2 = "Force (N): "
+dataMag1 = 100
+dataMag2 = 10
 
 Range = 200
 cRange = 5
@@ -118,6 +122,9 @@ runYetLoc = [['' for _ in range(Range)] for _ in range(Range)]
 
 # authTrigger
 mostCommonHash = ''
+
+# camera
+camAddress = 0
 
 
 class blockChain:
@@ -280,7 +287,7 @@ def mainProg():
         print(block[orderNumber][tcpCarrierNumber][
             block[tcpOrderNumber][tcpCarrierNumber].index('') - 1].getBlockHash())
 
-        time.sleep(0.1)
+        time.sleep(0.5)
         print("sending message in gen1")
         sendMessage()
         pub.publish(message)
@@ -293,7 +300,7 @@ def mainProg():
         newGenesis = 0
 
     if newGenesis == 0:
-        time.sleep(0.1)
+        time.sleep(0.3)
         print("newgen = 0 " + tcpStationName)
         if tcpStationName in stationHistory[int(tcpCarrierNumber)] and tcpStationName == '2':
             print("is " + tcpStationName)
@@ -307,7 +314,7 @@ def mainProg():
             message.previousHash = ''
             message.data1 = ''
             message.data2 = ''
-            time.sleep(0.1)
+            time.sleep(0.3)
             pub.publish(message)
             dataFollowing = 0
             stationFinish = True
@@ -323,7 +330,7 @@ def mainProg():
             print("sending message in gen0")
             # print(block[orderNumber][tcpCarrierNumber][block[tcpOrderNumber][tcpCarrierNumber].index('') - 1])
             sendMessage()
-            time.sleep(0.1)
+            time.sleep(0.3)
             pub.publish(message)
             print(orderNumber, blockNumber)
             blockNumber = block[tcpOrderNumber][tcpCarrierNumber].index('')
@@ -427,6 +434,8 @@ def callback(data):
     global stationHistory
     global Comp
 
+    global camAddress
+
     wipe = False
     print(data.station)
     print(stationHistory)
@@ -446,6 +455,16 @@ def callback(data):
                     "/home/pi/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + "/Product" + str(
                         data.orderNumber + 1264) + "C:" + str(
                         data.carrierID) + "Comp" + str(REcounter[int(data.carrierID)]) + ".txt")
+
+                # print("camAddress: ", camAddress)
+                # copyfile("/home/pi/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + "/Product" + str(
+                #     data.orderNumber + 1264) + "C:" + str(data.carrierID) + "Comp" + str(REcounter[int(data.carrierID)]) + ".txt",
+                #          "/home/pi/blockChainGit/00blockChain_ws/src/blockChainPack_/src/scripts/CompletedReceiptsQR/" + str(
+                #              camAddress) + "/" + "Product" + str(
+                #              data.orderNumber + 1264) + "C:" + str(data.carrierID) + "Comp" + str(
+                #              REcounter[int(data.carrierID)]) + ".txt")
+                # print("copied")
+
                 block[data.orderNumber][data.carrierID] = [''] * Range
                 SCarrierNumber[data.orderNumber][data.carrierID] = [''] * Range
                 SblockHash[data.orderNumber][data.carrierID] = [''] * Range
@@ -926,6 +945,22 @@ def rewriteNodes():
     print("finished")
 
 
+################################# camera #################################
+
+
+# def camera():
+#     rospy.Subscriber('cameraData', String, camCallBack)
+#     rospy.spin()
+#
+#
+# def camCallBack(data):
+#     global camAddress
+#
+#     # http://172.21.4.153:8000/2
+#     camRaw = data.data
+#     camAddress = camRaw[25]
+
+
 ############################### TCP Server ###############################
 
 
@@ -948,6 +983,8 @@ def manual():
     global address
     global dataDes1
     global dataDes2
+    global dataMag1
+    global dataMag2
 
     # Create a TCP/IP socket
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -997,8 +1034,8 @@ def manual():
                                 tcpDays = data[22] + data[23]
                                 tcpMonths = data[25] + data[26]
                                 tcpYears = data[28] + data[29] + data[30] + data[31]
-                                tcpData1 = dataDes1 + str(float(data[33] + data[34] + data[35]) / 100)
-                                tcpData2 = dataDes2 + str(float(data[37] + data[38] + data[39]) / 10)
+                                tcpData1 = dataDes1 + str(float(data[33] + data[34] + data[35]) / dataMag1)
+                                tcpData2 = dataDes2 + str(float(data[37] + data[38] + data[39]) / dataMag2)
                                 dataFollowing = 1
                                 mainProg()
                                 oldData = data
@@ -1033,7 +1070,7 @@ if __name__ == '__main__':
         # p5 = threading.Thread(target=authTrigger, args=())
         # p6 = threading.Thread(target=recNewData, args=())
         p7 = threading.Thread(target=manual, args=())
-        # p8 = threading.Thread(target=finishListener, args=())
+        # p8 = threading.Thread(target=camera, args=())
 
         p1.daemon = True
         # p2.daemon = True

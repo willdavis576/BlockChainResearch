@@ -3,7 +3,7 @@ import hashlib, sys, random, rospy, threading, time, socket
 from datetime import datetime
 send = ''
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s.connect(('127.0.0.1', 4505))
+s.connect(('127.0.0.1', 4500))
 
 var = ''
 
@@ -22,7 +22,7 @@ def getData():
     order = 1304
 
     send = str(station) + ',' + str(order) + ',' + str(carrier) + ',' + str(product) + ',' + str(second) + ',' + str(
-        minute) + ',' + str(hour) + ',' + str(day) + ',' + str(month) + ',' + str(year) + ',' + str(371) + ',' + str(335)
+        minute) + ',' + str(hour) + ',' + str(day) + ',' + str(month) + ',' + str(year)# + ',' + str(371) + ',' + str(335)
 
     return send
 
@@ -31,7 +31,7 @@ def main():
     global var
     while (True):
         if var == '':
-            s.sendall('                                        ')
+            s.sendall('                                ')
             time.sleep(1)
 
 
@@ -42,7 +42,7 @@ def user():
     while (True):
         if var == "y":
             s.sendall(getData())
-            s.sendall('                                        ')
+            s.sendall('                                ')
             var = ''
 
 
