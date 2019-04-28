@@ -29,7 +29,10 @@ def main():
             sock.sendall('444;#RequestID=0;MClass=101;MNo=2;ErrorState=0;#PNo=' + productNumber + ';#CNo=' + customerNumber + ';#Aux1Int=' + quantity + ';\r')
             data = sock.recv(1024)
             sock.close()
-            print("Your payment has been accepted and your order has been placed")
+            print("Your payment has been accepted and your order has been placed.")
+            d = data.split(';')
+            orderNumber = str(d[6])[4:8]            
+	    print("Your order number is :" + str(orderNumber))
 
         except:
             print("Invailed order request")
