@@ -32,7 +32,7 @@ def main():
             print("Your payment has been accepted and your order has been placed.")
             d = data.split(';')
             orderNumber = str(d[6])[4:8]            
-	    print("Your order number is :" + str(orderNumber))
+	    print("Your order number is: " + str(orderNumber))
 
         except:
             print("Invailed order request")

@@ -1,9 +1,10 @@
 #! /usr/bin/python
-import hashlib, sys, random, rospy, threading, time, socket, os, glob
+import hashlib, sys, random, rospy, threading, time, socket, os, glob, rosnode
 from datetime import datetime
 from collections import Counter
 from blockChainPack_.msg import rewriteNode
 from std_msgs.msg import String
+from bondpy import bondpy
 Range = 200
 cRange = 4
 timestamp = [[['a' for _ in range(Range)] for _ in range(cRange)] for _ in range(Range)]
@@ -123,26 +124,67 @@ def main():
         #     message3.fileOrArray = "file"
         #     pub.publish(message3)
         #     time.sleep(0.1)
-    global SblockTimeStamp
-    global SblockTrans
-    global SblockProductCode
+    # global SblockTimeStamp
+    # global SblockTrans
+    # global SblockProductCode
+    # counter = 0
+    # strData = ''
 
-    for i in range(Range):
-        for j in range(cRange):
-            for z in range(Range):
-                if SblockTimeStamp[i][j][z] != '':
-                    strData = strData + str(i) + ',' + str(j) + ',' + str(z) + ',' + SblockTimeStamp[i][j][z] + ',' + str(
-                        SblockTrans[i][j][z]) + ',' + str(SblockProductCode[i][j][z] + '?')
+    # for i in range(20):
+    #     for j in range(4):
+    #         for z in range(20):
+    #             SblockTimeStamp[i][j][z] = str(datetime.now())
+    #             SblockProductCode[i][j][z] = 211
+    #             SblockTrans[i][j][z] = counter
+    #             if counter == 4:
+    #                 counter = 0
+    #             counter = counter + 1
+    #
+    # var = raw_input("ye?")
+    # if var == 'y':
+    #
+    #     for i in range(Range):
+    #         for j in range(cRange):
+    #             for z in range(Range):
+    #                 if SblockTimeStamp[i][j][z] != '':
+    #                     strData = strData + str(i) + ';' + str(j) + ';' + str(z) + ';' + str(SblockTimeStamp[i][j][z]) + ';' + str(SblockTrans[i][j][z]) + ';' + str(SblockProductCode[i][j][z]) + '?'
+    #
+    #
+    # arrayTransfer = strData
+    # print(strData)
+    #
+    # split = arrayTransfer.splt("?")
 
+    nodeList = ['Node1', 'Node2', 'Node3']
+    nodeONOFF = [0,0,0]
+    # # print(rosnode.get_node_names())
+    # print(rosnode.rosnode_ping_all())
+    #
+    # var = rosnode.rosnode_ping_all()
+    # print(var[0][0])
+    while not rospy.is_shutdown():
+        var = rosnode.rosnode_ping_all()
+        # print(len(var[0]))
+        for i in range(len(var[0])):
+            for j in range(1):
+                # print(str(var[j][i])[1:6])
+                if str(var[j][i])[1:6] in nodeList:
+                    nodeONOFF[nodeList.index(str(var[j][i])[1:6])] = 1
 
-    arrayTransfer = strData
+        if (len(var[1])) > 1:
+            for i in range(len(var[1])):
+                if (var[i])[1:6] in nodeList:
+                    nodeONOFF[nodeList.index(str(var[i])[1:6])] = 0
 
-    split = arrayTransfer.splt("?")
+        print(len(var[1]))
+        # print(str(var[1]))
+        if (len(var[1])) == 1:
+            print(str(var[1])[3:8])
+            if str(var[1])[3:8] in nodeList:
+                nodeONOFF[nodeList.index(str(var[1])[3:8])] = 0
 
-
-
-
-
+        print(nodeONOFF)
+        time.sleep(2)
 
 
 

@@ -1,5 +1,5 @@
 #! /usr/bin/python
-import hashlib, sys, random, rospy, threading, time, socket, os, glob
+import hashlib, sys, random, rospy, threading, time, socket, os, glob, rosnode
 from datetime import datetime
 from collections import Counter
 from blockChainPack_.msg import blockDetail
@@ -7,13 +7,14 @@ from blockChainPack_.msg import lastHash
 from blockChainPack_.msg import rewriteNode
 from blockChainPack_.msg import finish
 
+
 # station, orderNumber, productCode, seconds, minutes, hours, days, months, years
 # productNubmer should now orderNumber
 
-nodeName = "NODE1"  ############### THIS IS WHERE YOU SPECIFY A NODE'S NAME #######################
+nodeName = "Node1"  ############### THIS IS WHERE YOU SPECIFY A NODE'S NAME #######################
 port = 4500
 address = '127.0.0.1' #172.21.4.152
-lNodeToRewrite = "NODE2"
+lNodeToRewrite = "Node2"
 
 Range = 200
 cRange = 5
@@ -49,10 +50,10 @@ init = 0
 noGen = 0
 runYet = [['' for _ in range(Range)] for _ in range(Range)]
 Trigger = False
-nodeList = ['NODE1', 'NODE2', 'NODE3',
-            'NODE4', 'NODE5', 'NODE6']  ################# IF INCLUDING MORE NODES, EXTEND THIS ARRAY SIZE #######################
-nodeONOFF = [1, 0, 0, 0]  ################# IF INCLUDING MORE NODES, EXTEND THIS ARRAY SIZE #######################
-oldNodeONOFF = [0, 0, 0, 0]  ################# IF INCLUDING MORE NODES, EXTEND THIS ARRAY SIZE #######################
+nodeList = ['Node1', 'Node2', 'Node3',
+            'Node4', 'Node5', 'Node6']  ################# IF INCLUDING MORE NODES, EXTEND THIS ARRAY SIZE #######################
+nodeONOFF = [0, 0, 0, 0,0,0]  ################# IF INCLUDING MORE NODES, EXTEND THIS ARRAY SIZE #######################
+oldNodeONOFF = [0, 0, 0, 0,0,0]  ################# IF INCLUDING MORE NODES, EXTEND THIS ARRAY SIZE #######################
 node = ['' for _ in range(20)]
 print("29%")
 counter1 = 0;
@@ -453,6 +454,9 @@ def callback(data):
         SblockPreviousHash[data.orderNumber][data.carrierID][data.blockNumber] = data.previousHash
         SCarrierNumber[data.orderNumber][data.carrierID] = 1
 
+        print("RECEIVED DATA")
+        print(SblockTrans[data.orderNumber][data.carrierID][data.blockNumber], data.orderNumber, data.carrierID, data.blockNumber)
+
         SblockNumber = data.blockNumber
 
         # block[orderNumber][blockNumber] = blockChain(
@@ -521,9 +525,73 @@ def callback(data):
     emit = True
 
 
+
+
 def authentication():
     rospy.Subscriber('Last_Hash', lastHash, callbackAuth)
     rospy.spin()
+
+def nodesOnline():
+    global nodeONOFF
+    global nodeList
+
+
+    while not rospy.is_shutdown():
+        var = rosnode.rosnode_ping_all()
+        # print(len(var[0]))
+        for i in range(len(var[0])):
+            for j in range(1):
+                # print(str(var[j][i])[1:6])
+                if str(var[j][i])[1:6] in nodeList:
+                    nodeONOFF[nodeList.index(str(var[j][i])[1:6])] = 1
+
+        if (len(var[1])) > 1:
+            for i in range(len(var[1])):
+                if (var[i])[1:6] in nodeList:
+                    nodeONOFF[nodeList.index(str(var[i])[1:6])] = 0
+
+        # print(len(var[1]))
+        # print(str(var[1]))
+        if (len(var[1])) == 1:
+            # print(str(var[1])[3:8])
+            if str(var[1])[3:8] in nodeList:
+                nodeONOFF[nodeList.index(str(var[1])[3:8])] = 0
+
+        # print(nodeONOFF)
+        time.sleep(2)
+
+def nodeHacked1():
+    global Trigger
+    global nodeONOFF
+    global nodeList
+    global authOrderNumber
+    global mostCommonHash
+    global Trigger
+    global authOrderNumber
+    global node
+    global nodeToRewrite
+    global mostCommonHash
+    global nodeName
+    global nodeHacked
+    global lNodeToRewrite
+    global oldNodeHacked
+    global olderNodeHacked
+
+    counter = 0
+
+    while not rospy.is_shutdown():
+        if nodeHacked in nodeList and counter == 1:
+            if nodeHacked == oldNodeHacked and lNodeToRewrite == nodeHacked:
+                rewriteNodes()
+                counter = 0
+
+
+        if nodeHacked in nodeList and counter == 0:
+            oldNodeHacked = nodeHacked
+            counter = 1
+
+        time.sleep(2)
+
 
 
 def callbackAuth(data):
@@ -543,36 +611,19 @@ def callbackAuth(data):
     global oldNodeHacked
     global olderNodeHacked
 
-    if data.nodeName in nodeList:
-        nodeONOFF[nodeList.index(data.nodeName)] = 1  # filling in the online array
-        # print(data.nodeName + " is online!")
-    # for i in range(10): #10 being a max node amount - can be changed as the array size is 100
-
     name = data.nodeName
 
-    node[int(name[4]) - 1] = data.hash
-    mostCommonHash = Counter(node)
-    # print("finding node 4")
-    # print(node)
+    if name in nodeList:
+        if nodeONOFF[nodeList.index(name)] == 1:
+            node[int(name[4]) - 1] = data.hash
+            mostCommonHash = Counter(node)
 
-    time.sleep(1)
-
-    # print(mostCommonHash.most_common(3))
     try:
         nodeHacked = nodeList[(node.index(str(mostCommonHash.most_common(3)[2][0])))]
-        oldestNodeHacked = olderNodeHacked
-        olderNodeHacked = oldNodeHacked
-        oldNodeHacked = nodeHacked
-
-        time.sleep(5)
-
-        if oldestNodeHacked == nodeHacked and lNodeToRewrite == nodeHacked:
-            print(nodeHacked + " has been hacked")
-            rewriteNodes()
-
 
     except:
         print("all fine")
+
 
 
 def authTrigger():
@@ -648,7 +699,8 @@ def emitter():
             for i in range(len(SblockHash)):
                 for j in range(len(SblockHash[i])):
                     for z in range(len(SblockHash[i][j])):
-                        hashingArray = hashlib.sha256(hashingArray + str(fileNum) + SblockHash[i][j][z]).hexdigest()
+                        if SblockHash[i][j] != '':
+                            hashingArray = hashlib.sha256(hashingArray + str(fileNum) + SblockHash[i][j][z]).hexdigest()
 
 
             message2 = lastHash()
@@ -918,11 +970,12 @@ def rewriteNodes():
             for j in range(cRange):
                 for z in range(Range):
                     if SblockTimeStamp[i][j][z] != '':
-                        strData = strData + str(i) + ',' + str(j) + ',' + str(z) + ',' + SblockTimeStamp[i][j][z] + ',' + str(
-                            SblockTrans[i][j][z]) + ',' + str(SblockProductCode[i][j][z] + '?')
-
+                        strData = strData + str(SblockTimeStamp[i][j][z]) + ',' + str(SblockTrans[i][j][z]) + ',' + str(SblockProductCode[i][j][z]) + '?'
+    #
     except:
         print("live failed")
+
+
     message3.fileOrArray = 'array'
     message3.arrayTransfer = strData
     pub.publish(message3)
@@ -1029,40 +1082,40 @@ if __name__ == '__main__':
     rate = rospy.Rate(10)
     while not rospy.is_shutdown():
         p1 = threading.Thread(target=listener, args=())
-        # p2 = threading.Thread(target=hackedOneTime, args=())
+        p2 = threading.Thread(target=nodeHacked1, args=())
         p3 = threading.Thread(target=authentication, args=())
         p4 = threading.Thread(target=emitter, args=())
         p5 = threading.Thread(target=authTrigger, args=())
         p6 = threading.Thread(target=recNewData, args=())
         p7 = threading.Thread(target=manual, args=())
-        # p8 = threading.Thread(target=finishListener, args=())
+        p8 = threading.Thread(target=nodesOnline, args=())
 
         p1.daemon = True
-        # p2.daemon = True
+        p2.daemon = True
         p3.daemon = True
         p4.daemon = True
         p5.daemon = True
         p6.daemon = True
         p7.daemon = True
-        # p8.daemon = True
+        p8.daemon = True
 
         p1.start()
-        # p2.start()
+        p2.start()
         p3.start()
         p4.start()
         p5.start()
         p6.start()
         p7.start()
-        # p8.start()
+        p8.start()
 
         p1.join()
-        # p2.join()
+        p2.join()
         p3.join()
         p4.join()
         p5.join()
         p6.join()
         p7.join()
-        # p8.join()
+        p8.join()
 
 # each stage of the production line needs to log:
 
