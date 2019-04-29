@@ -534,6 +534,7 @@ def authentication():
 def nodesOnline():
     global nodeONOFF
     global nodeList
+    global node
 
     while not rospy.is_shutdown():
         var = rosnode.rosnode_ping_all()
@@ -555,9 +556,10 @@ def nodesOnline():
             # print(str(var[1])[3:8])
             if str(var[1])[3:8] in nodeList:
                 nodeONOFF[nodeList.index(str(var[1])[3:8])] = 0
+                node[int((str(var[1])[3:8])[4]) - 1] = ''
 
-        print(nodeONOFF)
-        print(nodeList)
+        # print(nodeONOFF)
+        # print(nodeList)
         time.sleep(2)
 
 
@@ -581,13 +583,20 @@ def nodeHacked1():
     counter = 0
 
     while not rospy.is_shutdown():
-        print("NODE " + str(nodeHacked) + "has been hacked")
-        if nodeHacked in nodeList and counter == 1:
-            if nodeHacked == oldNodeHacked and lNodeToRewrite == nodeHacked:
-                rewriteNodes()
-                counter = 0
 
-        if nodeHacked in nodeList and counter == 0:
+        if nodeHacked in nodeList:
+
+            if nodeHacked in nodeList and counter == 1 and nodeONOFF[int((str(nodeHacked))[4]) - 1] == 1:
+
+                if nodeHacked == oldNodeHacked and lNodeToRewrite == nodeHacked:
+                    print(str(nodeHacked) + " has been hacked")
+                    rewriteNodes()
+                    counter = 0
+
+                if nodeHacked != oldNodeHacked:
+                    counter = 0
+
+        if nodeHacked in nodeList and counter == 0 and nodeONOFF[int((str(nodeHacked))[4]) - 1] == 1:
             oldNodeHacked = nodeHacked
             counter = 1
 
@@ -622,40 +631,41 @@ def callbackAuth(data):
         nodeHacked = nodeList[(node.index(str(mostCommonHash.most_common(3)[2][0])))]
 
     except:
+        nodeHacked = ''
         print("all fine")
 
 
-def authTrigger():
-    global Trigger
-    global authOrderNumber
-    global node
-    global nodeToRewrite
-    global mostCommonHash
-    global nodeName
-    global nodeHacked
-    global lNodeToRewrite
-
-    # while not rospy.is_shutdown():
-    # time.sleep(1)
-    #
-    # # print(mostCommonHash.most_common(3))
-    # try:
-    #     nodeHacked = nodeList[(node.index(str(mostCommonHash.most_common(3)[2][0])))]
-    #     oldNodeHacked = nodeHacked
-    #     time.sleep(3)
-    #     nodeHacked = nodeList[(node.index(str(mostCommonHash.most_common(3)[2][0])))]
-    #     if oldNodeHacked == nodeHacked:
-    #         print(nodeHacked + " has been hacked")
-    #         nodeToRewrite = nodeList[(node.index(str(mostCommonHash.most_common(3)[2][0])))]
-    #
-    #         if nodeToRewrite == lNodeToRewrite:
-    #             print("Gonna rewrite this " + lNodeToRewrite)
-    #             rewriteNodes()
-    #
-    # except:
-    #     print("all fine")
-
-    rospy.spin()
+# def authTrigger():
+#     global Trigger
+#     global authOrderNumber
+#     global node
+#     global nodeToRewrite
+#     global mostCommonHash
+#     global nodeName
+#     global nodeHacked
+#     global lNodeToRewrite
+#
+#     # while not rospy.is_shutdown():
+#     # time.sleep(1)
+#     #
+#     # # print(mostCommonHash.most_common(3))
+#     # try:
+#     #     nodeHacked = nodeList[(node.index(str(mostCommonHash.most_common(3)[2][0])))]
+#     #     oldNodeHacked = nodeHacked
+#     #     time.sleep(3)
+#     #     nodeHacked = nodeList[(node.index(str(mostCommonHash.most_common(3)[2][0])))]
+#     #     if oldNodeHacked == nodeHacked:
+#     #         print(nodeHacked + " has been hacked")
+#     #         nodeToRewrite = nodeList[(node.index(str(mostCommonHash.most_common(3)[2][0])))]
+#     #
+#     #         if nodeToRewrite == lNodeToRewrite:
+#     #             print("Gonna rewrite this " + lNodeToRewrite)
+#     #             rewriteNodes()
+#     #
+#     # except:
+#     #     print("all fine")
+#
+#     rospy.spin()
 
 
 def emitter():
@@ -757,16 +767,19 @@ def callbackRecData(data):
                     f.write(str(data.arrayTransfer[25:len(data.arrayTransfer)]))
                     f.close()
 
-        if data.fileOrArray == "array":
+        if data.fileOrArray == "wipe" and data.arrayTransfer == '':
 
             try:
-                if Rdone == 0 and nodeHacked == nodeName:
+                if nodeHacked == nodeName:
                     print("rewriting")
                     reInit()
-                    Rdone = 1
+
 
             except:
                 print("init wipe didn't work")
+
+        if data.fileOrArray == "array":
+
 
             split = data.arrayTransfer.split("?")
 
@@ -779,6 +792,7 @@ def callbackRecData(data):
                     SblockTimeStamp[order][carrier][block] = split2[3]
                     SblockTrans[order][carrier][block] = split2[4]
                     SblockProductCode[order][carrier][block] = split2[5]
+                    SblockPreviousHash[order][carrier][block] = split2[7]
                 except:
                     ye = "man"
 
@@ -1117,7 +1131,7 @@ def rewriteNodes():
     log = ''
 
     os.chdir("/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName)
-    print("open")
+    # print("open")
     for i in glob.glob("*.txt"):
         if "Comp" in i:
             fileNames[counter] = i
@@ -1126,50 +1140,57 @@ def rewriteNodes():
             counter = counter + 1
 
     fileNum = fileNames.index('')
-    print(fileNum)
+    # print(fileNum)
 
-    for i in range(fileNum):
-        print(fileNames[i])
-        f = open(fileNames[i] + ".txt", "r")
-        for j in range(32):
-            logHash = logHash + f.readline()
+    if fileNum > 0:
+        for i in range(fileNum):
+            print(fileNames[i])
+            f = open(fileNames[i] + ".txt", "r")
+            for j in range(32):
+                logHash = logHash + f.readline()
 
-        f.close()
-        log = logHash
-        message3.arrayTransfer = str(fileNum * 10) + fileNames[i] + '.txt' + log
-        message3.fileOrArray = "file"
-        pub.publish(message3)
-        print(log)
+            f.close()
+            log = logHash
+            message3.arrayTransfer = str(fileNum * 10) + fileNames[i] + '.txt' + log
+            message3.fileOrArray = "file"
+            pub.publish(message3)
+            print(log)
 
-        print("finish")
+    print("finish")
+    print("wipe")
+    message3.fileOrArray = 'wipe'
+    message3.arrayTransfer = ''
+    time.sleep(3)
 
     ########### Live Array Transfer ###########
     print("live")
-    try:
-        for i in range(Range):
-            for j in range(cRange):
-                for z in range(Range):
-                    if SblockTimeStamp[i][j][z] != '':
-                        strData = strData + str(SblockTimeStamp[i][j][z]) + ',' + str(SblockTrans[i][j][z]) + ',' + str(
-                            SblockProductCode[i][j][z]) + str(SblockHash[i][j][z]) + str(SblockPreviousHash[i][j][z]) + str(SblockNumber) + '?'
+    print(stationHistory)
+    # try:
+    for i in range(Range):
+        for j in range(cRange):
+            for z in range(Range):
+                if SblockTimeStamp[i][j][z] != '':
+                    if z < 7:
+                        if stationHistory[j][z] != '':
+                            strData = strData + str(SblockTimeStamp[i][j][z]) + ';' + str(SblockTrans[i][j][z]) + ';' + str(
+                                SblockProductCode[i][j][z]) + ';' + str(SblockPreviousHash[i][j][z]) + ';' + stationHistory[j][z] + '?'
+                        if stationHistory[j][z] == '':
+                            strData = strData + str(SblockTimeStamp[i][j][z]) + ';' + str(SblockTrans[i][j][z]) + ';' + str(
+                                SblockProductCode[i][j][z]) + ';' + str(SblockPreviousHash[i][j][z]) + '?'
     #
-    except:
-        print("live failed")
+    # except:
+    #     print("live failed")
 
-    # station = [[['' for _ in range(Range)] for _ in range(cRange)] for _ in range(Range)]
-    # block = [[['' for _ in range(Range)] for _ in range(cRange)] for _ in range(Range)]
-    # orderNcarrierNumberList = [['' for _ in range(cRange)] for _ in range(Range)]
-    # runYet = [['' for _ in range(Range)] for _ in range(Range)]
-    # node = ['' for _ in range(20)]
-    SblockTimeStamp = [[['' for _ in range(Range)] for _ in range(cRange)] for _ in range(Range)]
-    SblockTrans = [[['' for _ in range(Range)] for _ in range(cRange)] for _ in range(Range)]
-    SblockProductCode = [[['' for _ in range(Range)] for _ in range(cRange)] for _ in range(Range)]
-    SblockHash = [[['' for _ in range(Range)] for _ in range(cRange)] for _ in range(Range)]
-    SblockPreviousHash = [[['' for _ in range(Range)] for _ in range(cRange)] for _ in range(Range)]
-    SblockNumber = [[['' for _ in range(Range)] for _ in range(cRange)] for _ in range(Range)]
+
+    # SblockTimeStamp = [[['' for _ in range(Range)] for _ in range(cRange)] for _ in range(Range)]
+    # SblockTrans = [[['' for _ in range(Range)] for _ in range(cRange)] for _ in range(Range)]
+    # SblockProductCode = [[['' for _ in range(Range)] for _ in range(cRange)] for _ in range(Range)]
+    # SblockHash = [[['' for _ in range(Range)] for _ in range(cRange)] for _ in range(Range)]
+    # SblockPreviousHash = [[['' for _ in range(Range)] for _ in range(cRange)] for _ in range(Range)]
+    # SblockNumber = [[['' for _ in range(Range)] for _ in range(cRange)] for _ in range(Range)]
     # SOrderNumber = [[['' for _ in range(Range)] for _ in range(cRange)] for _ in range(Range)]
     # SCarrierNumber = [[['' for _ in range(Range)] for _ in range(cRange)] for _ in range(Range)]
-    # stationHistory = [['' for _ in range(7)] for _ in range(5)]
+    #stationHistory = [['' for _ in range(7)] for _ in range(5)]
     # runYetLoc = [['' for _ in range(Range)] for _ in range(Range)]
 
     message3.fileOrArray = 'array'
@@ -1178,6 +1199,13 @@ def rewriteNodes():
     rate.sleep()
 
     print("finished")
+
+def hackedOneTime():
+    global block
+
+    time.sleep(20)
+    print("hacked")
+    SblockHash[0][0][0] = "hello there"
 
 
 ############################### TCP Server ###############################
@@ -1278,16 +1306,17 @@ if __name__ == '__main__':
         p2 = threading.Thread(target=nodeHacked1, args=())
         p3 = threading.Thread(target=authentication, args=())
         p4 = threading.Thread(target=emitter, args=())
-        p5 = threading.Thread(target=authTrigger, args=())
+        # p5 = threading.Thread(target=hackedOneTime, args=())
         p6 = threading.Thread(target=recNewData, args=())
         p7 = threading.Thread(target=manual, args=())
         p8 = threading.Thread(target=nodesOnline, args=())
+
 
         p1.daemon = True
         p2.daemon = True
         p3.daemon = True
         p4.daemon = True
-        p5.daemon = True
+        # p5.daemon = True
         p6.daemon = True
         p7.daemon = True
         p8.daemon = True
@@ -1296,7 +1325,7 @@ if __name__ == '__main__':
         p2.start()
         p3.start()
         p4.start()
-        p5.start()
+        # p5.start()
         p6.start()
         p7.start()
         p8.start()
@@ -1305,7 +1334,7 @@ if __name__ == '__main__':
         p2.join()
         p3.join()
         p4.join()
-        p5.join()
+        # p5.join()
         p6.join()
         p7.join()
         p8.join()
