@@ -1160,7 +1160,8 @@ def rewriteNodes():
     print("wipe")
     message3.fileOrArray = 'wipe'
     message3.arrayTransfer = ''
-    time.sleep(3)
+    pub.publish(message3)
+    time.sleep(5)
 
     ########### Live Array Transfer ###########
     print("live")
@@ -1172,10 +1173,10 @@ def rewriteNodes():
                 if SblockTimeStamp[i][j][z] != '':
                     if z < 7:
                         if stationHistory[j][z] != '':
-                            strData = strData + str(SblockTimeStamp[i][j][z]) + ';' + str(SblockTrans[i][j][z]) + ';' + str(
+                            strData = strData + str(i) + ';' + str(j) + ';' + str(z) + ';' + str(SblockTimeStamp[i][j][z]) + ';' + str(SblockTrans[i][j][z]) + ';' + str(
                                 SblockProductCode[i][j][z]) + ';' + str(SblockPreviousHash[i][j][z]) + ';' + stationHistory[j][z] + '?'
                         if stationHistory[j][z] == '':
-                            strData = strData + str(SblockTimeStamp[i][j][z]) + ';' + str(SblockTrans[i][j][z]) + ';' + str(
+                            strData = strData + str(i) + ';' + str(j) + ';' + str(z) + ';' + str(SblockTimeStamp[i][j][z]) + ';' + str(SblockTrans[i][j][z]) + ';' + str(
                                 SblockProductCode[i][j][z]) + ';' + str(SblockPreviousHash[i][j][z]) + '?'
     #
     # except:
@@ -1196,6 +1197,7 @@ def rewriteNodes():
     message3.fileOrArray = 'array'
     message3.arrayTransfer = strData
     pub.publish(message3)
+    time.sleep(3)
     rate.sleep()
 
     print("finished")

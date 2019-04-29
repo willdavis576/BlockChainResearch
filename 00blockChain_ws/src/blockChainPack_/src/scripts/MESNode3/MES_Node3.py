@@ -116,6 +116,9 @@ runYetLoc = [['' for _ in range(Range)] for _ in range(Range)]
 # authTrigger
 mostCommonHash = ''
 
+#Not reInitable
+wiped = False
+
 
 class blockChain:
 
@@ -735,6 +738,7 @@ def callbackRecData(data):
     global REcounter
     global runYetLoc
     global logHash
+    global wiped
 
     # 32,3,1,18:54:01 - 19/03/2019,1,211
     # 32,3,0,09:57:40 - 06/04/2019,Start production,211
@@ -749,6 +753,10 @@ def callbackRecData(data):
     #     f = open("/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + '/' + data.fileName, "a")
     #     f.write(str(data.logFile))
     #     f.close() int(int(whole[0:2]) / 10
+
+    if wiped == True:
+        nodeHacked = nodeName
+
     if nodeHacked == nodeName:
         if data.fileOrArray == "file":
             for i in range(int(int(data.arrayTransfer[0] + data.arrayTransfer[1]) / 10)):
@@ -765,9 +773,10 @@ def callbackRecData(data):
                     f.close()
 
         if data.fileOrArray == "wipe":
-            if nodeHacked == nodeName:
-                print("rewriting")
-                reInit()
+            print("rewrite")
+            wiped = True
+            reInit()
+            print("reInited")
 
 
 
@@ -785,11 +794,26 @@ def callbackRecData(data):
                     SblockTimeStamp[order][carrier][block] = split2[3]
                     SblockTrans[order][carrier][block] = split2[4]
                     SblockProductCode[order][carrier][block] = split2[5]
-                    SblockPreviousHash[order][carrier][block] = split2[7]
+                    SblockPreviousHash[order][carrier][block] = split2[6]
+                    if block < 7:
+                        stationHistory[carrier][block] = split2[7]
                 except:
                     ye = "man"
 
-                emit = True
+            # emit = True
+
+            # ['32', '1', '0', '15:10:00 - 29/04/2019', 'Start production', '211', '', 'Start production']
+            # ['32', '1', '1', '18:54:01 - 19/03/2019', '1', '211',
+            #  '993ea120bfb6ab1f5d1a3410e6f0c05aae970d7007877f66df39ec11ecce6332', '1']
+            # ['32', '2', '0', '15:10:01 - 29/04/2019', 'Start production', '211', '', 'Start production']
+            # ['32', '2', '1', '18:54:01 - 19/03/2019', '1', '211',
+            #  'bf55d5d88256a99a936fe1983eed6e8bb619abd754afa71e7ed84697743b33de', '1']
+            # ['32', '3', '0', '15:10:02 - 29/04/2019', 'Start production', '211', '', 'Start production']
+            # ['32', '3', '1', '18:54:01 - 19/03/2019', '1', '211',
+            #  '9c72e9f25d77f82418959b0e47c6f020b69538f4dafca1a410ebf9c0c4e5586a', '1']
+            # ['32', '4', '0', '15:10:03 - 29/04/2019', 'Start production', '211', '', 'Start production']
+            # ['32', '4', '1', '18:54:01 - 19/03/2019', '1', '211',
+            #  'a03e3ba5bf6c8cbff7d7fc6614e22389a54639b2482417dd74e765ac76778625', '1']
 
             #
             #     dataSplit = split[i]
@@ -995,13 +1019,9 @@ def reInit():
     dataFollowing = 0
     orderNumber = 0
     station = [[['' for _ in range(Range)] for _ in range(cRange)] for _ in range(Range)]
-    print("8%")
     productCode = [''] * Range
     block = [[['' for _ in range(Range)] for _ in range(cRange)] for _ in range(Range)]
-    print("16%")
     blockNumber = 0
-    orderNcarrierNumberList = [['' for _ in range(cRange)] for _ in range(Range)]
-    print("24%")
     buildBlock = 0
     oldData = ''
     emit = False
@@ -1029,26 +1049,16 @@ def reInit():
     nodeONOFF = [0, 0, 0, 0, 0, 0]  ################# IF INCLUDING MORE NODES, EXTEND THIS ARRAY SIZE #######################
     oldNodeONOFF = [0, 0, 0, 0, 0, 0]  ################# IF INCLUDING MORE NODES, EXTEND THIS ARRAY SIZE #######################
     node = ['' for _ in range(20)]
-    print("29%")
     counter1 = 0;
 
     SblockTimeStamp = [[['' for _ in range(Range)] for _ in range(cRange)] for _ in range(Range)]
-    print("37%")
     SblockTrans = [[['' for _ in range(Range)] for _ in range(cRange)] for _ in range(Range)]
-    print("46%")
     SblockProductCode = [[['' for _ in range(Range)] for _ in range(cRange)] for _ in range(Range)]
-    print("55%")
     SblockHash = [[['' for _ in range(Range)] for _ in range(cRange)] for _ in range(Range)]
-    print("64%")
     SblockPreviousHash = [[['' for _ in range(Range)] for _ in range(cRange)] for _ in range(Range)]
-    print("73%")
     SblockNumber = [[['' for _ in range(Range)] for _ in range(cRange)] for _ in range(Range)]
-    print("82%")
     SOrderNumber = [[['' for _ in range(Range)] for _ in range(cRange)] for _ in range(Range)]
-    print("91%")
     SCarrierNumber = [[['' for _ in range(Range)] for _ in range(cRange)] for _ in range(Range)]
-    print("100%")
-    print("Loading network..")
     Sblock = ''
     authOrderNumber = 0
     blockString = ''
