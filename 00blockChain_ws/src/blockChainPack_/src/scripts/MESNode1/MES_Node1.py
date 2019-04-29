@@ -455,8 +455,8 @@ def callback(data):
         SblockPreviousHash[data.orderNumber][data.carrierID][data.blockNumber] = data.previousHash
         SCarrierNumber[data.orderNumber][data.carrierID] = 1
 
-        print("RECEIVED DATA")
-        print(SblockTrans[data.orderNumber][data.carrierID][data.blockNumber], data.orderNumber, data.carrierID, data.blockNumber)
+        # print("RECEIVED DATA")
+        # print(SblockTrans[data.orderNumber][data.carrierID][data.blockNumber], data.orderNumber, data.carrierID, data.blockNumber)
 
         SblockNumber = data.blockNumber
 
@@ -520,7 +520,7 @@ def callback(data):
 
     if wipe == True:
         stationHistory[int(data.carrierID)] = [''] * 7
-        print(stationHistory)
+        # print(stationHistory)
         wipe = False
 
     emit = True
@@ -534,6 +534,7 @@ def authentication():
 def nodesOnline():
     global nodeONOFF
     global nodeList
+    global node
 
     while not rospy.is_shutdown():
         var = rosnode.rosnode_ping_all()
@@ -555,9 +556,10 @@ def nodesOnline():
             # print(str(var[1])[3:8])
             if str(var[1])[3:8] in nodeList:
                 nodeONOFF[nodeList.index(str(var[1])[3:8])] = 0
+                node[int((str(var[1])[3:8])[4]) - 1] = ''
 
-        print(nodeONOFF)
-        print(nodeList)
+        # print(nodeONOFF)
+        # print(nodeList)
         time.sleep(2)
 
 
@@ -581,13 +583,20 @@ def nodeHacked1():
     counter = 0
 
     while not rospy.is_shutdown():
-        if nodeHacked in nodeList and counter == 1 and int(str(nodeHacked)[4]) in nodeONOFF:
-            if nodeHacked == oldNodeHacked and lNodeToRewrite == nodeHacked:
-                print("NODE " + str(nodeHacked) + "has been hacked")
-                rewriteNodes()
-                counter = 0
 
-        if nodeHacked in nodeList and counter == 0 and int(str(nodeHacked)[4]) in nodeONOFF:
+        if nodeHacked in nodeList:
+
+            if nodeHacked in nodeList and counter == 1 and nodeONOFF[int((str(nodeHacked))[4]) - 1] == 1:
+
+                if nodeHacked == oldNodeHacked and lNodeToRewrite == nodeHacked:
+                    print(str(nodeHacked) + " has been hacked")
+                    # rewriteNodes()
+                    counter = 0
+
+                if nodeHacked != oldNodeHacked:
+                    counter = 0
+
+        if nodeHacked in nodeList and counter == 0 and nodeONOFF[int((str(nodeHacked))[4]) - 1] == 1:
             oldNodeHacked = nodeHacked
             counter = 1
 
@@ -622,6 +631,7 @@ def callbackAuth(data):
         nodeHacked = nodeList[(node.index(str(mostCommonHash.most_common(3)[2][0])))]
 
     except:
+        nodeHacked = ''
         print("all fine")
 
 
@@ -693,6 +703,7 @@ def emitter():
         counter2 = 0
         fileNum = fileAmount.index('')
         hashingArray = ''
+        # print("fileNum ", fileNum)
 
         if emit == True:
             for i in range(len(SblockHash)):
@@ -701,12 +712,16 @@ def emitter():
                         if SblockHash[i][j] != '':
                             hashingArray = hashlib.sha256(hashingArray + SblockHash[i][j][z]).hexdigest()
 
+            # print(hashingArray)
             message2 = lastHash()
             message2.hash = hashingArray
             message2.nodeName = nodeName
             pub.publish(message2)
             hashingArray = ''
             time.sleep(1)
+
+
+
     rate.sleep()
 
 
@@ -758,16 +773,19 @@ def callbackRecData(data):
                     f.write(str(data.arrayTransfer[25:len(data.arrayTransfer)]))
                     f.close()
 
-        if data.fileOrArray == "array":
+        if data.fileOrArray == "wipe" and data.arrayTransfer == '':
 
             try:
-                if Rdone == 0 and nodeHacked == nodeName:
+                if nodeHacked == nodeName:
                     print("rewriting")
                     reInit()
-                    Rdone = 1
+
 
             except:
                 print("init wipe didn't work")
+
+        if data.fileOrArray == "array":
+
 
             split = data.arrayTransfer.split("?")
 
@@ -1119,7 +1137,7 @@ def rewriteNodes():
     log = ''
 
     os.chdir("/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName)
-    print("open")
+    # print("open")
     for i in glob.glob("*.txt"):
         if "Comp" in i:
             fileNames[counter] = i
@@ -1128,39 +1146,49 @@ def rewriteNodes():
             counter = counter + 1
 
     fileNum = fileNames.index('')
-    print(fileNum)
+    # print(fileNum)
 
-    for i in range(fileNum):
-        print(fileNames[i])
-        f = open(fileNames[i] + ".txt", "r")
-        for j in range(32):
-            logHash = logHash + f.readline()
+    if fileNum > 0:
+        for i in range(fileNum):
+            print(fileNames[i])
+            f = open(fileNames[i] + ".txt", "r")
+            for j in range(32):
+                logHash = logHash + f.readline()
 
-        f.close()
-        log = logHash
-        message3.arrayTransfer = str(fileNum * 10) + fileNames[i] + '.txt' + log
-        message3.fileOrArray = "file"
-        pub.publish(message3)
-        print(log)
+            f.close()
+            log = logHash
+            message3.arrayTransfer = str(fileNum * 10) + fileNames[i] + '.txt' + log
+            message3.fileOrArray = "file"
+            pub.publish(message3)
+            print(log)
 
-        print("finish")
+    print("finish")
+    print("wipe")
+
+
+    message3.fileOrArray = 'wipe'
+    message3.arrayTransfer = ''
+    pub.publish(message3)
+    time.sleep(5)
 
     ########### Live Array Transfer ###########
     print("live")
-    try:
-        for i in range(Range):
-            for j in range(cRange):
-                for z in range(Range):
-                    if SblockTimeStamp[i][j][z] != '':
-                        if stationHistory[i][j] != '':
-                            strData = strData + str(SblockTimeStamp[i][j][z]) + ';' + str(SblockTrans[i][j][z]) + ';' + str(
-                                SblockProductCode[i][j][z]) + ';' + str(SblockPreviousHash[i][j][z]) + ';' + stationHistory[i][j] + '?'
-                        if stationHistory[i][j] == '':
-                            strData = strData + str(SblockTimeStamp[i][j][z]) + ';' + str(SblockTrans[i][j][z]) + ';' + str(
+    print(stationHistory)
+    # try:
+    for i in range(Range):
+        for j in range(cRange):
+            for z in range(Range):
+                if SblockTimeStamp[i][j][z] != '':
+                    if z < 7:
+                        if stationHistory[j][z] != '':
+                            strData = strData + str(i) + ';' + str(j) + ';' + str(z) + ';' + str(SblockTimeStamp[i][j][z]) + ';' + str(SblockTrans[i][j][z]) + ';' + str(
+                                SblockProductCode[i][j][z]) + ';' + str(SblockPreviousHash[i][j][z]) + ';' + stationHistory[j][z] + '?'
+                        if stationHistory[j][z] == '':
+                            strData = strData + str(i) + ';' + str(j) + ';' + str(z) + ';' + str(SblockTimeStamp[i][j][z]) + ';' + str(SblockTrans[i][j][z]) + ';' + str(
                                 SblockProductCode[i][j][z]) + ';' + str(SblockPreviousHash[i][j][z]) + '?'
     #
-    except:
-        print("live failed")
+    # except:
+    #     print("live failed")
 
 
     # SblockTimeStamp = [[['' for _ in range(Range)] for _ in range(cRange)] for _ in range(Range)]
@@ -1177,6 +1205,7 @@ def rewriteNodes():
     message3.fileOrArray = 'array'
     message3.arrayTransfer = strData
     pub.publish(message3)
+    time.sleep(3)
     rate.sleep()
 
     print("finished")

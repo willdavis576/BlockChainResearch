@@ -708,7 +708,7 @@ def emitter():
                 for j in range(len(SblockHash[i])):
                     for z in range(len(SblockHash[i][j])):
                         if SblockHash[i][j] != '':
-                            hashingArray = hashlib.sha256(hashingArray + str(fileNum) + SblockHash[i][j][z]).hexdigest()
+                            hashingArray = hashlib.sha256(hashingArray + SblockHash[i][j][z]).hexdigest()
 
             message2 = lastHash()
             message2.hash = hashingArray
@@ -740,6 +740,7 @@ def callbackRecData(data):
     global logHash
     global wiped
     global blockChain
+    global emit
 
     # 32,3,1,18:54:01 - 19/03/2019,1,211
     # 32,3,0,09:57:40 - 06/04/2019,Start production,211
@@ -856,7 +857,7 @@ def callbackRecData(data):
 
 
                         SblockHash[order][carrier][blockNo] = block[order][carrier][blockNo].getBlockHash()
-               
+
 
 
                         data_to_print = "Time Stamp for Block: {0}\nStation: {1}\nOrder Number: {2}\nCarrierID: {3}\nProduct Code: {4}\nBlock Hash: {5}\nPrevious Hash: {6}".format(
@@ -916,6 +917,7 @@ def callbackRecData(data):
                             hashingArray = hashlib.sha256(hashingArray + SblockHash[i][j][z]).hexdigest()
 
             print(hashingArray)
+            emit = True
 
             # emit = True
 

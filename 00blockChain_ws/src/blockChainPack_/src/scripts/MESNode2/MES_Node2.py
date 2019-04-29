@@ -1164,16 +1164,7 @@ def rewriteNodes():
 
     print("finish")
     print("wipe")
-    order = 32
-    carrier = 1
-    blockNo = 0
-    print(block[order][carrier][blockNo].getBlockHash())
-    print(block[order][carrier][blockNo].getTimeStamp())
-    print(block[order][carrier][blockNo].getPreviousHash())
-    print(block[order][carrier][blockNo].getStation())
-    print(block[order][carrier][blockNo].getProductCode())
-    print(block[order][carrier][blockNo].getOrderNumber())
-    print(block[order][carrier][blockNo].getCarrierID())
+
 
     message3.fileOrArray = 'wipe'
     message3.arrayTransfer = ''
