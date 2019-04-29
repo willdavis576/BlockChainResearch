@@ -787,7 +787,7 @@ def callbackRecData(data):
             for i in range(len(split)):
                 try:
                     split2 = split[i].split(';')
-                    print(split2)
+                    # print(split2[3])
                     order = int(split2[0])
                     carrier = int(split2[1])
                     block = int(split2[2])
@@ -797,12 +797,29 @@ def callbackRecData(data):
                     SblockPreviousHash[order][carrier][block] = split2[6]
                     if block < 7:
                         stationHistory[carrier][block] = split2[7]
+
+
+                    dHour = str(SblockTimeStamp[order][carrier][block].split(':')[0])
+                    dMinute = str(SblockTimeStamp[order][carrier][block].split(':')[1])
+                    dSecond = str(SblockTimeStamp[order][carrier][block].split(':')[2])[0:1]
+                    dDay = str(str(SblockTimeStamp[order][carrier][block].split(':')[2])[5:15]).split('/')[0]
+                    dMonth = str(str(SblockTimeStamp[order][carrier][block].split(':')[2])[5:15]).split('/')[1]
+                    dYear = str(str(SblockTimeStamp[order][carrier][block].split(':')[2])[5:15]).split('/')[2]
+                    dStation = SblockTrans[order][carrier][block]
+                    dProductCode = SblockProductCode[order][carrier][block]
+
+                    print(str(str(SblockTimeStamp[order][carrier][block].split(':')[2])[5:15]).split('/'))
+                    print(dSecond, dYear)
+
+
                 except:
                     ye = "man"
 
+
+
             # emit = True
 
-            # ['32', '1', '0', '15:10:00 - 29/04/2019', 'Start production', '211', '', 'Start production']
+            # ['32', '1', '0', '15:10:00-29/04/2019', 'Start production', '211', '', 'Start production']
             # ['32', '1', '1', '18:54:01 - 19/03/2019', '1', '211',
             #  '993ea120bfb6ab1f5d1a3410e6f0c05aae970d7007877f66df39ec11ecce6332', '1']
             # ['32', '2', '0', '15:10:01 - 29/04/2019', 'Start production', '211', '', 'Start production']
@@ -815,9 +832,9 @@ def callbackRecData(data):
             # ['32', '4', '1', '18:54:01 - 19/03/2019', '1', '211',
             #  'a03e3ba5bf6c8cbff7d7fc6614e22389a54639b2482417dd74e765ac76778625', '1']
 
-            #
-            #     dataSplit = split[i]
-            #
+            # for i in range ()
+
+
             #     dOrder = int(dataSplit[0])
             #     dCarrier = int(dataSplit[1])
             #     dBlock = int(dataSplit[2])
