@@ -5,14 +5,15 @@ from collections import Counter
 from blockChainPack_.msg import rewriteNode
 from std_msgs.msg import String
 from bondpy import bondpy
+
 Range = 200
-cRange = 4
+cRange = 5
 timestamp = [[['a' for _ in range(Range)] for _ in range(cRange)] for _ in range(Range)]
-SblockTimeStamp = [[['a' for _ in range(Range)] for _ in range(cRange)] for _ in range(Range)]
-SblockTrans = [[['b' for _ in range(Range)] for _ in range(cRange)] for _ in range(Range)]
-SblockProductCode = [[['c' for _ in range(Range)] for _ in range(cRange)] for _ in range(Range)]
-
-
+SblockTimeStamp = [[['' for _ in range(Range)] for _ in range(cRange)] for _ in range(Range)]
+SblockTrans = [[['' for _ in range(Range)] for _ in range(cRange)] for _ in range(Range)]
+SblockProductCode = [[['' for _ in range(Range)] for _ in range(cRange)] for _ in range(Range)]
+block = [[['' for _ in range(Range)] for _ in range(cRange)] for _ in range(Range)]
+block2 = [[['' for _ in range(Range)] for _ in range(cRange)] for _ in range(Range)]
 
 
 class blockChain:
@@ -64,7 +65,6 @@ def main():
     #
     #     pub.publish((string))
 
-
     # fileNames = [''] * 200
     # REcounter = [''] * 200
     # counter = 0
@@ -110,82 +110,135 @@ def main():
     #     print(int(int(whole[0:2]) / 10))
     #     f.close()
 
-
-        # f = open(fileNames[i] + ".txt", "r")
-        # for z in range(32):
-        #     message3 = rewriteNode()
-        #     time.sleep(0.1)
-        #     message3.REcounter = REcounter[i]
-        #     message3.fileName = fileNames[i]
-        #     message3.logFile = f.readline()
-        #     message3.done = 0
-        #     # message3.arrayTransfer = ''
-        #     message3.logHash = logHash
-        #     message3.fileOrArray = "file"
-        #     pub.publish(message3)
-        #     time.sleep(0.1)
-    # global SblockTimeStamp
-    # global SblockTrans
-    # global SblockProductCode
-    # counter = 0
-    # strData = ''
-
+    # f = open(fileNames[i] + ".txt", "r")
+    # for z in range(32):
+    #     message3 = rewriteNode()
+    #     time.sleep(0.1)
+    #     message3.REcounter = REcounter[i]
+    #     message3.fileName = fileNames[i]
+    #     message3.logFile = f.readline()
+    #     message3.done = 0
+    #     # message3.arrayTransfer = ''
+    #     message3.logHash = logHash
+    #     message3.fileOrArray = "file"
+    #     pub.publish(message3)
+    #     time.sleep(0.1)
+    global SblockTimeStamp
+    global SblockTrans
+    global SblockProductCode
+    counter = 0
+    strData = ''
+    #
     # for i in range(20):
     #     for j in range(4):
     #         for z in range(20):
-    #             SblockTimeStamp[i][j][z] = str(datetime.now())
-    #             SblockProductCode[i][j][z] = 211
-    #             SblockTrans[i][j][z] = counter
-    #             if counter == 4:
-    #                 counter = 0
-    #             counter = counter + 1
-    #
+    #             if j != 0:
+    #                 SblockTimeStamp[i][j+1][z] = str(datetime.now())
+    #                 SblockProductCode[i][j+1][z] = 211
+    #                 SblockTrans[i][j+1][z] = counter
+    #                 if counter == 4:
+    #                     counter = 0
+    #                 counter = counter + 1
+    # #
     # var = raw_input("ye?")
     # if var == 'y':
-    #
+    #     hashing = ''
     #     for i in range(Range):
-    #         for j in range(cRange):
+    #         for j in range(4):
     #             for z in range(Range):
-    #                 if SblockTimeStamp[i][j][z] != '':
-    #                     strData = strData + str(i) + ';' + str(j) + ';' + str(z) + ';' + str(SblockTimeStamp[i][j][z]) + ';' + str(SblockTrans[i][j][z]) + ';' + str(SblockProductCode[i][j][z]) + '?'
-    #
+    #                 if SblockTimeStamp[i][j+1][z] != '':
+    #                     if j != 0:
+    #                         strData = strData + str(i) + ';' + str(j+1) + ';' + str(z) + ';' + str(SblockTimeStamp[i][j+1][z]) + ';' + str(SblockTrans[i][j+1][z]) + ';' + str(SblockProductCode[i][j+1][z]) + '?'
+    #                         hashing = hashlib.sha256(hashing + str(i) + ';' + str(j+1) + ';' + str(z) + ';' + str(SblockTimeStamp[i][j+1][z]) + ';' + str(SblockTrans[i][j+1][z]) + ';' + str(SblockProductCode[i][j+1][z]) + '?').hexdigest()
     #
     # arrayTransfer = strData
-    # print(strData)
+    # print(hashing)
+    # hashing = ''
     #
-    # split = arrayTransfer.splt("?")
+    # #0;2;0;2019-04-29 00:22:56.699160;0;211
+    #
+    # split = arrayTransfer.split("?")
+    #
+    # for i in range (len(split)):
+    #     try:
+    #         split2 = split[i].split(';')
+    #         order = int(split2[0])
+    #         carrier = int(split2[1])
+    #         block = int(split2[2])
+    #         SblockTimeStamp[order][carrier][block] = split2[3]
+    #         SblockTrans[order][carrier][block] = split2[4]
+    #         SblockProductCode[order][carrier][block] = split2[5]
+    #     except:
+    #         ye = "man"
+    #
+    #
+    #
+    #
+    #
+    # for i in range(Range):
+    #     for j in range(4):
+    #         for z in range(Range):
+    #             if SblockTimeStamp[i][j + 1][z] != '':
+    #                 if j != 0:
+    #                     strData = strData + str(i) + ';' + str(j + 1) + ';' + str(z) + ';' + str(
+    #                         SblockTimeStamp[i][j + 1][z]) + ';' + str(SblockTrans[i][j + 1][z]) + ';' + str(
+    #                         SblockProductCode[i][j + 1][z]) + '?'
+    #                     hashing = hashlib.sha256(hashing + str(i) + ';' + str(j + 1) + ';' + str(z) + ';' + str(
+    #                         SblockTimeStamp[i][j + 1][z]) + ';' + str(SblockTrans[i][j + 1][z]) + ';' + str(
+    #                         SblockProductCode[i][j + 1][z]) + '?').hexdigest()
 
-    nodeList = ['Node1', 'Node2', 'Node3']
-    nodeONOFF = [0,0,0]
-    # # print(rosnode.get_node_names())
-    # print(rosnode.rosnode_ping_all())
+    # print(hashing)
+    # nodeList = ['Node1', 'Node2', 'Node3']
+    # nodeONOFF = [0,0,0]
+    # # # print(rosnode.get_node_names())
+    # # print(rosnode.rosnode_ping_all())
+    # #
+    # # var = rosnode.rosnode_ping_all()
+    # # print(var[0][0])
+    # while not rospy.is_shutdown():
+    #     var = rosnode.rosnode_ping_all()
+    #     # print(len(var[0]))
+    #     for i in range(len(var[0])):
+    #         for j in range(1):
+    #             # print(str(var[j][i])[1:6])
+    #             if str(var[j][i])[1:6] in nodeList:
+    #                 nodeONOFF[nodeList.index(str(var[j][i])[1:6])] = 1
     #
-    # var = rosnode.rosnode_ping_all()
-    # print(var[0][0])
+    #     if (len(var[1])) > 1:
+    #         for i in range(len(var[1])):
+    #             if (var[i])[1:6] in nodeList:
+    #                 nodeONOFF[nodeList.index(str(var[i])[1:6])] = 0
+    #
+    #     print(len(var[1]))
+    #     # print(str(var[1]))
+    #     if (len(var[1])) == 1:
+    #         print(str(var[1])[3:8])
+    #         if str(var[1])[3:8] in nodeList:
+    #             nodeONOFF[nodeList.index(str(var[1])[3:8])] = 0
+    #
+    #     print(nodeONOFF)
+    #     time.sleep(2)
+
+    block[2][4][0] = blockChain(previousHash='',
+                                station="1",
+                                productCode="211",
+                                orderNumber="2",
+                                carrierID="4",
+                                seconds="10",
+                                minutes="10",
+                                hours="18",
+                                days="27",
+                                months="03",
+                                years="2019")
+    print("ye")
+    print(block[2][4][0])
+    print(block[2][4][0].getBlockHash())
+    block2[2][4][0] = block[2][4][0]
+
+    print(block2[2][4][0].getBlockHash())
+
     while not rospy.is_shutdown():
-        var = rosnode.rosnode_ping_all()
-        # print(len(var[0]))
-        for i in range(len(var[0])):
-            for j in range(1):
-                # print(str(var[j][i])[1:6])
-                if str(var[j][i])[1:6] in nodeList:
-                    nodeONOFF[nodeList.index(str(var[j][i])[1:6])] = 1
-
-        if (len(var[1])) > 1:
-            for i in range(len(var[1])):
-                if (var[i])[1:6] in nodeList:
-                    nodeONOFF[nodeList.index(str(var[i])[1:6])] = 0
-
-        print(len(var[1]))
-        # print(str(var[1]))
-        if (len(var[1])) == 1:
-            print(str(var[1])[3:8])
-            if str(var[1])[3:8] in nodeList:
-                nodeONOFF[nodeList.index(str(var[1])[3:8])] = 0
-
-        print(nodeONOFF)
-        time.sleep(2)
-
+        pub.publish(block[2][4][0])
 
 
 if __name__ == '__main__':
