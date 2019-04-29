@@ -455,8 +455,8 @@ def callback(data):
         SblockPreviousHash[data.orderNumber][data.carrierID][data.blockNumber] = data.previousHash
         SCarrierNumber[data.orderNumber][data.carrierID] = 1
 
-        print("RECEIVED DATA")
-        print(SblockTrans[data.orderNumber][data.carrierID][data.blockNumber], data.orderNumber, data.carrierID, data.blockNumber)
+        # print("RECEIVED DATA")
+        # print(SblockTrans[data.orderNumber][data.carrierID][data.blockNumber], data.orderNumber, data.carrierID, data.blockNumber)
 
         SblockNumber = data.blockNumber
 
@@ -520,7 +520,7 @@ def callback(data):
 
     if wipe == True:
         stationHistory[int(data.carrierID)] = [''] * 7
-        print(stationHistory)
+        # print(stationHistory)
         wipe = False
 
     emit = True
@@ -702,20 +702,26 @@ def emitter():
         counter = 0
         counter2 = 0
         fileNum = fileAmount.index('')
+        hashingArray = ''
+        # print("fileNum ", fileNum)
 
         if emit == True:
             for i in range(len(SblockHash)):
                 for j in range(len(SblockHash[i])):
                     for z in range(len(SblockHash[i][j])):
                         if SblockHash[i][j] != '':
-                            hashingArray = hashlib.sha256(hashingArray + str(fileNum) + SblockHash[i][j][z]).hexdigest()
+                            hashingArray = hashlib.sha256(hashingArray + SblockHash[i][j][z]).hexdigest()
 
+            # print(hashingArray)
             message2 = lastHash()
             message2.hash = hashingArray
             message2.nodeName = nodeName
             pub.publish(message2)
             hashingArray = ''
             time.sleep(1)
+
+
+
     rate.sleep()
 
 
@@ -1158,6 +1164,17 @@ def rewriteNodes():
 
     print("finish")
     print("wipe")
+    order = 32
+    carrier = 1
+    blockNo = 0
+    print(block[order][carrier][blockNo].getBlockHash())
+    print(block[order][carrier][blockNo].getTimeStamp())
+    print(block[order][carrier][blockNo].getPreviousHash())
+    print(block[order][carrier][blockNo].getStation())
+    print(block[order][carrier][blockNo].getProductCode())
+    print(block[order][carrier][blockNo].getOrderNumber())
+    print(block[order][carrier][blockNo].getCarrierID())
+
     message3.fileOrArray = 'wipe'
     message3.arrayTransfer = ''
     pub.publish(message3)
