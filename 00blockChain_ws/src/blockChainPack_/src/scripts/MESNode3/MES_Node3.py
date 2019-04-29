@@ -812,14 +812,6 @@ def callbackRecData(data):
                     dStation = str((SblockTrans[order][carrier][blockNo]))
                     dProductCode = int(SblockProductCode[order][carrier][blockNo])
 
-                    # print("dSecond", dSecond)
-                    # print((SblockTimeStamp[order][carrier][blockNo].split(':')[2]))
-
-                    # "32;1;0;19:16:51 - 29/04/2019;Start production;211;;Start production?32;1;1;18:54:01\
-                    #   \ - 19/03/2019;1;211;999cb0c9964525c9ae4f08a8171fd8d7f4409a6d3c3270dac622904af8f0d118;1?32;2;0;19:16:53\
-                    #   \ - 29/04/2019;Start production;211;;Start production?32;2;1;18:54:01 - 19/03/2019;1;211;0943a3ca2ec384c3bc9fbde98e8970c8eee0c76e489e62a4daf2e000c1d8c5dc;1?32;3;0;19:16:55\
-                    #   \ - 29/04/2019;Start production;211;;Start production?32;3;1;18:54:01 - 19/03/2019;1;211;264e40788b69010fcd1955fa4b092080b2a8a17c6d04699a89ef281c2cd79d2e;1?32;4;0;19:16:57\
-                    #   \ - 29/04/2019;Start production;211;;Start production?32;4;1;18:54:01 - 19/03/2019;1;211;1e4f3a5df969520dbff38cac665e75d932d7047a8beaf11e172c04b2f148ef90;1?"
 
                     if dStation == "Start production":
                         stationHistory[int(carrier)][0] = str(dStation)
@@ -839,9 +831,10 @@ def callbackRecData(data):
                         SblockHash[order][carrier][blockNo] = block[order][carrier][blockNo].getBlockHash()
 
 
-                        data_to_print = "Time Stamp for Block: {0}\nStation: {1}\nOrder Number: {2}\nCarrierID: {3}\nProduct Code: {4}\nBlock Hash: {5}\nPrevious Hash: ".format(
+
+                        data_to_print = "Time Stamp for Block: {0}\nStation: {1}\nOrder Number: {2}\nCarrierID: {3}\nProduct Code: {4}\nBlock Hash: {5}\nPrevious Hash: {6}".format(
                             SblockTimeStamp[order][carrier][blockNo], dStation, int(order) + 1264, carrier, int(dProductCode),
-                            SblockHash[order][carrier][blockNo])
+                            SblockHash[order][carrier][blockNo], '')
 
                     if dStation != "Start production":
                         stationHistory[int(carrier)][int(dStation)] = str(dStation)
@@ -849,7 +842,7 @@ def callbackRecData(data):
                         # print(data.SblockTimeStamp)
                         block[int(order)][int(carrier)][int(blockNo)] = blockChain(
                             previousHash=block[int(order)][int(carrier)][int(blockNo) - 1].getBlockHash(),
-                            station='',
+                            station=dStation,
                             productCode=dProductCode,
                             orderNumber=order,
                             carrierID=carrier,
@@ -860,17 +853,11 @@ def callbackRecData(data):
                             months=dMonth,
                             years=dYear)
 
-                        print(block[order][carrier][blockNo].getBlockHash())
-                        print(block[order][carrier][blockNo].getTimeStamp())
-                        print(block[order][carrier][blockNo].getPreviousHash())
-                        print(block[order][carrier][blockNo].getStation())
-                        print(block[order][carrier][blockNo].getProductCode())
-                        print(block[order][carrier][blockNo].getOrderNumber())
-                        print(block[order][carrier][blockNo].getCarrierID())
-                        print("sd" , SblockTimeStamp[order][carrier][blockNo])
 
 
                         SblockHash[order][carrier][blockNo] = block[order][carrier][blockNo].getBlockHash()
+               
+
 
                         data_to_print = "Time Stamp for Block: {0}\nStation: {1}\nOrder Number: {2}\nCarrierID: {3}\nProduct Code: {4}\nBlock Hash: {5}\nPrevious Hash: {6}".format(
                             SblockTimeStamp[order][carrier][blockNo], dStation, int(order) + 1264, carrier, int(dProductCode),
