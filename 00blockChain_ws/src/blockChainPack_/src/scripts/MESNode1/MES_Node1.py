@@ -710,7 +710,7 @@ def emitter():
                 for j in range(len(SblockHash[i])):
                     for z in range(len(SblockHash[i][j])):
                         if SblockHash[i][j] != '':
-                            hashingArray = hashlib.sha256(hashingArray + SblockHash[i][j][z]).hexdigest()
+                            hashingArray = hashlib.sha256(hashingArray + str(fileNum)+ SblockHash[i][j][z]).hexdigest()
 
             # print(hashingArray)
             message2 = lastHash()
