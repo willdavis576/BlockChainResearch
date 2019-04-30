@@ -1,5 +1,5 @@
 #! /usr/bin/python
-import hashlib, sys, random, rospy, threading, time, socket, os, glob, rosnode
+import hashlib, sys, random, rospy, threading, time, socket, os, glob, rosnode, shutil
 from datetime import datetime
 from collections import Counter
 from shutil import copyfile
@@ -25,7 +25,7 @@ dataDes1 = "No data available"
 dataDes2 = "No data available"
 dataMag1 = 10
 dataMag2 = 10
-rewriteStart = False
+
 Range = 200
 cRange = 5
 itemNumber = 0
@@ -61,7 +61,7 @@ noGen = 0
 runYet = [['' for _ in range(Range)] for _ in range(Range)]
 Trigger = False
 nodeList = ['Node1', 'Node2', 'Node3',
-            'Node4', 'Node5', 'Node6']   ################# IF INCLUDING MORE NODES, EXTEND THIS ARRAY SIZE #######################
+            'Node4', 'Node5', 'Node6']  ################# IF INCLUDING MORE NODES, EXTEND THIS ARRAY SIZE #######################
 nodeONOFF = [1, 0, 0, 0]  ################# IF INCLUDING MORE NODES, EXTEND THIS ARRAY SIZE #######################
 oldNodeONOFF = [0, 0, 0, 0]  ################# IF INCLUDING MORE NODES, EXTEND THIS ARRAY SIZE #######################
 node = ['' for _ in range(20)]
@@ -121,6 +121,7 @@ hashingArray = ''
 
 # Rewrite
 nodeToRewrite = 10
+rewriteStart = False
 Rdone = 0
 logHash = ''
 runYetLoc = [['' for _ in range(Range)] for _ in range(Range)]
@@ -503,11 +504,6 @@ def callback(data):
                                                                                          data.timeStamp[20], data1=data.data1,
                                                                                    data2=data.data2)
 
-        print("get aux data1: ", block[data.orderNumber][data.carrierID][data.blockNumber].getData1())
-        print("get aux data2: ", block[data.orderNumber][data.carrierID][data.blockNumber].getData2())
-
-
-
         if stationHistory[int(data.carrierID)] != ['Start production', '1', '2', '3', '4', '5', '6']:
             print(data.station)
             if data.station != 'Start production':
@@ -726,10 +722,30 @@ def callbackRecData(data):
     if wiped == True:
         nodeHacked = nodeName
 
+        # "10Product1296C:1Comp0.txtTime Stamp for Block: 16:39:36 - 30/04/2019\nStation: Start\
+        #   \ production\nOrder Number: 1296\nCarrierID: 1\nProduct Code: 211\nBlock Hash: 875ff8d66e8d0c939fed122c911b321abf45a246601630b2461bd5b7adde3d84\n\
+        #   Previous Hash: \n\n\n-------------------------------\nTime Stamp for Block: 18:54:01\
+        #   \ - 19/03/2019\nStation: 1\nOrder Number: 1296\nCarrierID: 1\nProduct Code: 211\n\
+        #   Block Hash: adde670c108ac38eec8c7cf00113c5d979605b720076c78f839956c769bfdf79\nPrevious\
+        #   \ Hash: 875ff8d66e8d0c939fed122c911b321abf45a246601630b2461bd5b7adde3d84\nNo data\
+        #   \ available\nNo data available\n-------------------------------\nTime Stamp for\
+        #   \ Block: 18:54:01 - 19/03/2019\nStation: 2\nOrder Number: 1296\nCarrierID: 1\nProduct\
+        #   \ Code: 211\nBlock Hash: af31c758964b5f285b61f325ede12b6fa6762e6a8d21358d90979e9af24c2cc3\n\
+        #   Previous Hash: adde670c108ac38eec8c7cf00113c5d979605b720076c78f839956c769bfdf79\n\
+        #   No data available0.0\nNo data available0.0\n-------------------------------\n"
+
     if nodeHacked == nodeName:
         if data.fileOrArray == "file":
+            runYetLoc = 0
+            print("first bit")
+            print(int(int(data.arrayTransfer[0] + data.arrayTransfer[1]) / 10))
             for i in range(int(int(data.arrayTransfer[0] + data.arrayTransfer[1]) / 10)):
+                print("messing")
                 if nodeHacked == nodeName and runYetLoc == 0 and data.fileOrArray == "file":
+                    print("in here")
+                    shutil.rmtree("/home/" + device + "/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName)
+                    os.mkdir("/home/" + device + "/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName)
+
                     f = open(
                         "/home/" + device + "/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + '/' + data.arrayTransfer[
                                                                                                               2:25],
@@ -738,6 +754,7 @@ def callbackRecData(data):
                     runYetLoc = 1
 
                 if nodeHacked == nodeName and runYetLoc == 1 and data.fileOrArray == "file":
+                    print("now in here")
                     f = open(
                         "/home/" + device + "/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + '/' + data.arrayTransfer[
                                                                                                               2:25],
@@ -747,9 +764,9 @@ def callbackRecData(data):
 
         if data.fileOrArray == "wipe":
             print("rewrite")
-            wiped = True
             reInit()
             print("reInited")
+            wiped = True
 
         if data.fileOrArray == 'array' and data.arrayTransfer != '':
 
@@ -808,7 +825,7 @@ def callbackRecData(data):
 
                     if dStation != "Start production":
                         stationHistory[int(carrier)][int(dStation)] = str(dStation)
-                        print("2")
+
                         # print(data.SblockTimeStamp)
                         block[int(order)][int(carrier)][int(blockNo)] = blockChain(
                             previousHash=block[int(order)][int(carrier)][int(blockNo) - 1].getBlockHash(),
@@ -821,8 +838,8 @@ def callbackRecData(data):
                             hours=dHour,
                             days=dDay,
                             months=dMonth,
-                            years=dYear, data1=Sdata[order][carrier][blockNo].split(' ')[0],
-                            data2=Sdata[order][carrier][blockNo].split(' ')[1])
+                            years=dYear, data1=Sdata[order][carrier][blockNo].split('&')[0],
+                            data2=Sdata[order][carrier][blockNo].split('&')[1])
 
                         SblockHash[order][carrier][blockNo] = block[order][carrier][blockNo].getBlockHash()
 
@@ -830,7 +847,7 @@ def callbackRecData(data):
                             SblockTimeStamp[order][carrier][blockNo], dStation, int(order) + 1264, carrier, int(dProductCode),
                             SblockHash[order][carrier][blockNo],
                             block[int(order)][int(carrier)][int(blockNo) - 1].getBlockHash(),
-                            Sdata[order][carrier][block].split(' ')[0], Sdata[order][carrier][block].split(' ')[1])
+                            Sdata[order][carrier][blockNo].split('&')[0], Sdata[order][carrier][blockNo].split('&')[1])
 
                     if runYet[int(order)][int(carrier)] == '':
                         f = open("/home/" + device + "/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + "/Product" + str(
@@ -854,17 +871,14 @@ def callbackRecData(data):
 
             os.chdir("/home/" + device + "/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName)
             for i in glob.glob("*.txt"):
-                fileAmount[c2] = i
                 if "Comp" in i:
                     fileNames[c] = i
-                    fileNames[c] = fileNames[c].replace(".txt", "")
-
                     c = c + 1
-                c2 = c2 + 1
+
 
             c = 0
-            c2 = 0
-            fileNum = fileAmount.index('')
+
+            fileNum = fileNames.index('')
             hashingArray = ''
             print("fileNum ", fileNum)
 
@@ -955,6 +969,7 @@ def reInit():
     global tcpData1
     global tcpData2
     global camAddress
+    global rewriteStart
 
     Range = 200
     cRange = 5
@@ -962,10 +977,10 @@ def reInit():
     dataFollowing = 0
     orderNumber = 0
     station = [[['' for _ in range(Range)] for _ in range(cRange)] for _ in range(Range)]
-
+    rewriteStart = False
     productCode = [''] * Range
     block = [[['' for _ in range(Range)] for _ in range(cRange)] for _ in range(Range)]
-    rewriteStart = False
+
     blockNumber = 0
     orderNcarrierNumberList = [['' for _ in range(cRange)] for _ in range(Range)]
 
@@ -1092,8 +1107,6 @@ def rewriteNodes():
         print("rewrite commence")
         message3 = rewriteNode()
 
-
-
         fileNames = [''] * 200
         REcounter = [''] * 200
         counter = 0
@@ -1125,9 +1138,7 @@ def rewriteNodes():
             pubRewrite.publish(message3)
             print(log)
 
-
         print("finish")
-
 
         print("wipe")
 
@@ -1136,9 +1147,6 @@ def rewriteNodes():
         message3.arrayTransfer = "0"
         pubRewrite.publish(message3)
         time.sleep(5)
-
-
-
 
         ########### Live Array Transfer ###########
         print("live")
@@ -1157,7 +1165,8 @@ def rewriteNodes():
                             if stationHistory[j][z] == '':
                                 strData = strData + str(i) + ';' + str(j) + ';' + str(z) + ';' + str(
                                     SblockTimeStamp[i][j][z]) + ';' + str(SblockTrans[i][j][z]) + ';' + str(
-                                    SblockProductCode[i][j][z]) + ';' + str(SblockPreviousHash[i][j][z]) + ';' + Sdata[i][j][z] + '?'
+                                    SblockProductCode[i][j][z]) + ';' + str(SblockPreviousHash[i][j][z]) + ';' + Sdata[i][j][
+                                              z] + '?'
 
         print("done for loop")
 
@@ -1169,8 +1178,6 @@ def rewriteNodes():
         rewriteStart = False
 
 
-
-
 def hackedOneTime():
     global block
     global wannaBeHacked
@@ -1178,6 +1185,7 @@ def hackedOneTime():
         time.sleep(10)
         print("hacked")
         SblockHash[0][0][0] = "hello there"
+
 
 ################################# camera #################################
 

@@ -15,7 +15,7 @@ from std_msgs.msg import String
 device = 'ros'
 nodeName = "Node3"  ############### THIS IS WHERE YOU SPECIFY A NODE'S NAME #######################
 port = 4502
-lNodeToRewrite = "Node4"
+lNodeToRewrite = "Node1"
 if device == 'ros':
     address = '127.0.0.1'
 if device == 'pi':
@@ -121,6 +121,7 @@ hashingArray = ''
 
 # Rewrite
 nodeToRewrite = 10
+rewriteStart = False
 Rdone = 0
 logHash = ''
 runYetLoc = [['' for _ in range(Range)] for _ in range(Range)]
@@ -668,18 +669,20 @@ def nodeHacked1():
     global lNodeToRewrite
     global oldNodeHacked
     global olderNodeHacked
+    global rewriteStart
 
     counter = 0
 
     while not rospy.is_shutdown():
-
         if nodeHacked in nodeList:
-
             if nodeHacked in nodeList and counter == 1 and nodeONOFF[int((str(nodeHacked))[4]) - 1] == 1:
-
                 if nodeHacked == oldNodeHacked and lNodeToRewrite == nodeHacked:
                     print(str(nodeHacked) + " has been hacked")
-                    rewriteNodes()
+                    print("rewritestart :", rewriteStart)
+                    if rewriteStart == False:
+                        rewriteNodes()
+                        rewriteStart = True
+
                     counter = 0
 
                 if nodeHacked != oldNodeHacked:
@@ -966,6 +969,7 @@ def reInit():
     global tcpData1
     global tcpData2
     global camAddress
+    global rewriteStart
 
     Range = 200
     cRange = 5
@@ -973,7 +977,7 @@ def reInit():
     dataFollowing = 0
     orderNumber = 0
     station = [[['' for _ in range(Range)] for _ in range(cRange)] for _ in range(Range)]
-
+    rewriteStart = False
     productCode = [''] * Range
     block = [[['' for _ in range(Range)] for _ in range(cRange)] for _ in range(Range)]
 
@@ -1087,85 +1091,91 @@ def rewriteNodes():
     global nodeToRewrite
     global nodeName
     global device
-
-    # rewrite NODE(nodeNumber)
-    pub = rospy.Publisher('Rewrite', rewriteNode, queue_size=100)
-
-    # if nodeNumber == int(nodeName[4]) + 1 :
-    # this node will rewrite the hacked node
-
-    ########### Log file transfer ###########
-
-    strData = ''
-
-    print("rewrite commence")
-    message3 = rewriteNode()
-
-    fileNames = [''] * 200
-    REcounter = [''] * 200
-    counter = 0
-    counter2 = 0
-    logHash = ''
-    log = ''
-
-    os.chdir("/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName)
-    # print("open")
-    for i in glob.glob("*.txt"):
-        if "Comp" in i:
-            fileNames[counter] = i
-            counter = counter + 1
-
-    fileNum = fileNames.index('')
-    # print(fileNum)
-
-    if fileNum > 0:
-        for i in range(fileNum):
-            print(fileNames[i])
-            f = open(fileNames[i], "r")
-            for j in range(32):
-                logHash = logHash + f.readline()
-
-            f.close()
-            log = logHash
-        message3.arrayTransfer = str(fileNum * 10) + fileNames[i] + '.txt' + log
-        message3.fileOrArray = "file"
-        pub.publish(message3)
-        print(log)
-
-    print("finish")
-    print("wipe")
-
-    message3.fileOrArray = 'wipe'
-    message3.arrayTransfer = ''
-    pub.publish(message3)
+    global rewriteStart
+    pubRewrite = rospy.Publisher('Rewrite', rewriteNode, queue_size=100)
     time.sleep(5)
 
-    ########### Live Array Transfer ###########
-    print("live")
-    print(stationHistory)
+    if rewriteStart == True:
+        counter = 0
+        # if nodeNumber == int(nodeName[4]) + 1 :
+        # this node will rewrite the hacked node
 
-    for i in range(Range):
-        for j in range(cRange):
-            for z in range(Range):
-                if SblockTimeStamp[i][j][z] != '':
-                    if z < 7:
-                        if stationHistory[j][z] != '':
-                            strData = strData + str(i) + ';' + str(j) + ';' + str(z) + ';' + str(
-                                SblockTimeStamp[i][j][z]) + ';' + str(SblockTrans[i][j][z]) + ';' + str(
-                                SblockProductCode[i][j][z]) + ';' + str(SblockPreviousHash[i][j][z]) + ';' + Sdata[i][j][
-                                          z] + ';' + stationHistory[j][z] + '?'
-                        if stationHistory[j][z] == '':
-                            strData = strData + str(i) + ';' + str(j) + ';' + str(z) + ';' + str(
-                                SblockTimeStamp[i][j][z]) + ';' + str(SblockTrans[i][j][z]) + ';' + str(
-                                SblockProductCode[i][j][z]) + ';' + str(SblockPreviousHash[i][j][z]) + ';' + Sdata[i][j][z] + '?'
+        ########### Log file transfer ###########
 
-    message3.fileOrArray = 'array'
-    message3.arrayTransfer = strData
-    pub.publish(message3)
-    time.sleep(3)
-    rate.sleep()
+        strData = ''
 
-    print("finished")
+        print("rewrite commence")
+        message3 = rewriteNode()
+
+        fileNames = [''] * 200
+        REcounter = [''] * 200
+        counter = 0
+        counter2 = 0
+        logHash = ''
+        log = ''
+
+        os.chdir("/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName)
+        # print("open")
+        for i in glob.glob("*.txt"):
+            if "Comp" in i:
+                fileNames[counter] = i
+                counter = counter + 1
+
+        fileNum = fileNames.index('')
+        # print(fileNum)
+
+        if fileNum > 0:
+            for i in range(fileNum):
+                print(fileNames[i])
+                f = open(fileNames[i], "r")
+                for j in range(32):
+                    logHash = logHash + f.readline()
+
+                f.close()
+                log = logHash
+            message3.arrayTransfer = str(fileNum * 10) + fileNames[i] + log
+            message3.fileOrArray = "file"
+            pubRewrite.publish(message3)
+            print(log)
+
+        print("finish")
+
+        print("wipe")
+
+        time.sleep(4)
+        message3.fileOrArray = "wipe"
+        message3.arrayTransfer = "0"
+        pubRewrite.publish(message3)
+        time.sleep(5)
+
+        ########### Live Array Transfer ###########
+        print("live")
+        print(stationHistory)
+
+        for i in range(Range):
+            for j in range(cRange):
+                for z in range(Range):
+                    if SblockTimeStamp[i][j][z] != '':
+                        if z < 7:
+                            if stationHistory[j][z] != '':
+                                strData = strData + str(i) + ';' + str(j) + ';' + str(z) + ';' + str(
+                                    SblockTimeStamp[i][j][z]) + ';' + str(SblockTrans[i][j][z]) + ';' + str(
+                                    SblockProductCode[i][j][z]) + ';' + str(SblockPreviousHash[i][j][z]) + ';' + Sdata[i][j][
+                                              z] + ';' + stationHistory[j][z] + '?'
+                            if stationHistory[j][z] == '':
+                                strData = strData + str(i) + ';' + str(j) + ';' + str(z) + ';' + str(
+                                    SblockTimeStamp[i][j][z]) + ';' + str(SblockTrans[i][j][z]) + ';' + str(
+                                    SblockProductCode[i][j][z]) + ';' + str(SblockPreviousHash[i][j][z]) + ';' + Sdata[i][j][
+                                              z] + '?'
+
+        print("done for loop")
+
+        message3.fileOrArray = "array"
+        message3.arrayTransfer = strData
+        pubRewrite.publish(message3)
+        print("sent")
+        time.sleep(3)
+        rewriteStart = False
 
 
 def hackedOneTime():
