@@ -682,6 +682,7 @@ def nodeHacked1():
             if nodeHacked in nodeList and counter == 1 and nodeONOFF[int((str(nodeHacked))[4]) - 1] == 1:
                 if nodeHacked == oldNodeHacked and lNodeToRewrite == nodeHacked:
                     print(str(nodeHacked) + " has been hacked")
+                    print("rewritestart :", rewriteStart)
                     if rewriteStart == False:
                         rewriteNodes()
                         rewriteStart = True
@@ -1076,10 +1077,9 @@ def rewriteNodes():
     global nodeName
     global device
     global rewriteStart
-
-    # rewrite NODE(nodeNumber)
-    pub = rospy.Publisher('Rewrite', rewriteNode, queue_size=100)
+    pubRewrite = rospy.Publisher('Rewrite', rewriteNode, queue_size=100)
     time.sleep(5)
+
     if rewriteStart == True:
         counter = 0
         # if nodeNumber == int(nodeName[4]) + 1 :
@@ -1090,7 +1090,7 @@ def rewriteNodes():
         strData = ''
 
         print("rewrite commence")
-        message10 = rewriteNode()
+        message3 = rewriteNode()
 
 
 
@@ -1101,13 +1101,11 @@ def rewriteNodes():
         logHash = ''
         log = ''
 
-        os.chdir("/home/" + device + "/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName)
+        os.chdir("/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName)
         # print("open")
         for i in glob.glob("*.txt"):
             if "Comp" in i:
                 fileNames[counter] = i
-                fileNames[counter] = fileNames[counter].replace(".txt", "")
-                REcounter[counter] = int(str(fileNames[counter])[18])
                 counter = counter + 1
 
         fileNum = fileNames.index('')
@@ -1116,16 +1114,16 @@ def rewriteNodes():
         if fileNum > 0:
             for i in range(fileNum):
                 print(fileNames[i])
-                f = open(fileNames[i] + ".txt", "r")
+                f = open(fileNames[i], "r")
                 for j in range(32):
                     logHash = logHash + f.readline()
 
                 f.close()
                 log = logHash
-                message10.arrayTransfer = str(fileNum * 10) + fileNames[i] + '.txt' + log
-                message10.fileOrArray = "file"
-                pub.publish(message10)
-                print(log)
+            message3.arrayTransfer = str(fileNum * 10) + fileNames[i] + log
+            message3.fileOrArray = "file"
+            pubRewrite.publish(message3)
+            print(log)
 
 
         print("finish")
@@ -1133,10 +1131,10 @@ def rewriteNodes():
 
         print("wipe")
 
-
-        message10.fileOrArray = "wipe"
-        message10.arrayTransfer = "0"
-        pub.publish(message10)
+        time.sleep(4)
+        message3.fileOrArray = "wipe"
+        message3.arrayTransfer = "0"
+        pubRewrite.publish(message3)
         time.sleep(5)
 
 
@@ -1163,11 +1161,12 @@ def rewriteNodes():
 
         print("done for loop")
 
-        message10.fileOrArray = "array"
-        message10.arrayTransfer = strData
-        pub.publish(message10)
+        message3.fileOrArray = "array"
+        message3.arrayTransfer = strData
+        pubRewrite.publish(message3)
         print("sent")
         time.sleep(3)
+        rewriteStart = False
 
 
 
@@ -1268,8 +1267,12 @@ def manual():
                                 tcpDays = data[22] + data[23]
                                 tcpMonths = data[25] + data[26]
                                 tcpYears = data[28] + data[29] + data[30] + data[31]
-                                tcpData1 = dataDes1 + str(float(data[33] + data[34] + data[35]) / dataMag1)
-                                tcpData2 = dataDes2 + str(float(data[37] + data[38] + data[39]) / dataMag2)
+                                if (data[33] + data[34] + data[35]) != '000':
+                                    tcpData1 = dataDes1 + str(float(data[33] + data[34] + data[35]) / dataMag1)
+                                    tcpData2 = dataDes2 + str(float(data[37] + data[38] + data[39]) / dataMag2)
+                                if (data[33] + data[34] + data[35]) == '000':
+                                    tcpData1 = dataDes1
+                                    tcpData2 = dataDes2
                                 dataFollowing = 1
                                 mainProg()
                                 oldData = data

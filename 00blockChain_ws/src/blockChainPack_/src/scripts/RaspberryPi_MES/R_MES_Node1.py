@@ -1090,13 +1090,11 @@ def rewriteNodes():
     logHash = ''
     log = ''
 
-    os.chdir("/home/" + device + "/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName)
+    os.chdir("/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName)
     # print("open")
     for i in glob.glob("*.txt"):
         if "Comp" in i:
             fileNames[counter] = i
-            fileNames[counter] = fileNames[counter].replace(".txt", "")
-            REcounter[counter] = int(str(fileNames[counter])[18])
             counter = counter + 1
 
     fileNum = fileNames.index('')
@@ -1105,16 +1103,16 @@ def rewriteNodes():
     if fileNum > 0:
         for i in range(fileNum):
             print(fileNames[i])
-            f = open(fileNames[i] + ".txt", "r")
+            f = open(fileNames[i], "r")
             for j in range(32):
                 logHash = logHash + f.readline()
 
             f.close()
             log = logHash
-            message3.arrayTransfer = str(fileNum * 10) + fileNames[i] + '.txt' + log
-            message3.fileOrArray = "file"
-            pub.publish(message3)
-            print(log)
+        message3.arrayTransfer = str(fileNum * 10) + fileNames[i] + '.txt' + log
+        message3.fileOrArray = "file"
+        pub.publish(message3)
+        print(log)
 
     print("finish")
     print("wipe")

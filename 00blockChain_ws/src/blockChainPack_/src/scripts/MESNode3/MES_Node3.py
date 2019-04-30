@@ -1120,8 +1120,6 @@ def rewriteNodes():
     for i in glob.glob("*.txt"):
         if "Comp" in i:
             fileNames[counter] = i
-            fileNames[counter] = fileNames[counter].replace(".txt", "")
-            REcounter[counter] = int(str(fileNames[counter])[18])
             counter = counter + 1
 
     fileNum = fileNames.index('')
@@ -1136,10 +1134,10 @@ def rewriteNodes():
 
             f.close()
             log = logHash
-            message3.arrayTransfer = str(fileNum * 10) + fileNames[i] + '.txt' + log
-            message3.fileOrArray = "file"
-            pub.publish(message3)
-            print(log)
+        message3.arrayTransfer = str(fileNum * 10) + fileNames[i] + '.txt' + log
+        message3.fileOrArray = "file"
+        pub.publish(message3)
+        print(log)
 
     print("finish")
     print("wipe")
