@@ -12,7 +12,7 @@ from std_msgs.msg import String
 # station, orderNumber, productCode, seconds, minutes, hours, days, months, years
 # productNubmer should now orderNumber
 
-device = 'ros'
+device = 'pi'
 nodeName = "Node2"  ############### THIS IS WHERE YOU SPECIFY A NODE'S NAME #######################
 port = 4501
 lNodeToRewrite = "Node3"
@@ -626,6 +626,7 @@ def emitter():
 def nodesOnline():
     global nodeONOFF
     global nodeList
+
 
     while not rospy.is_shutdown():
         var = rosnode.rosnode_ping_all()

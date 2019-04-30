@@ -12,10 +12,10 @@ from std_msgs.msg import String
 # station, orderNumber, productCode, seconds, minutes, hours, days, months, years
 # productNubmer should now orderNumber
 
-device = 'ros'
+device = 'pi'
 nodeName = "Node3"  ############### THIS IS WHERE YOU SPECIFY A NODE'S NAME #######################
 port = 4502
-lNodeToRewrite = "Node1"
+lNodeToRewrite = "Node4"
 if device == 'ros':
     address = '127.0.0.1'
 if device == 'pi':
