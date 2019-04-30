@@ -25,7 +25,7 @@ dataDes1 = "No data available"
 dataDes2 = "No data available"
 dataMag1 = 10
 dataMag2 = 10
-
+rewriteStart = False
 Range = 200
 cRange = 5
 itemNumber = 0
@@ -673,6 +673,7 @@ def nodeHacked1():
     global lNodeToRewrite
     global oldNodeHacked
     global olderNodeHacked
+    global rewriteStart
 
     counter = 0
 
@@ -681,7 +682,10 @@ def nodeHacked1():
             if nodeHacked in nodeList and counter == 1 and nodeONOFF[int((str(nodeHacked))[4]) - 1] == 1:
                 if nodeHacked == oldNodeHacked and lNodeToRewrite == nodeHacked:
                     print(str(nodeHacked) + " has been hacked")
-                    rewriteNodes()
+                    if rewriteStart == False:
+                        rewriteNodes()
+                        rewriteStart = True
+
                     counter = 0
 
                 if nodeHacked != oldNodeHacked:
@@ -960,7 +964,7 @@ def reInit():
 
     productCode = [''] * Range
     block = [[['' for _ in range(Range)] for _ in range(cRange)] for _ in range(Range)]
-
+    rewriteStart = False
     blockNumber = 0
     orderNcarrierNumberList = [['' for _ in range(cRange)] for _ in range(Range)]
 
@@ -1071,94 +1075,108 @@ def rewriteNodes():
     global nodeToRewrite
     global nodeName
     global device
+    global rewriteStart
 
     # rewrite NODE(nodeNumber)
     pub = rospy.Publisher('Rewrite', rewriteNode, queue_size=100)
-
-    # if nodeNumber == int(nodeName[4]) + 1 :
-    # this node will rewrite the hacked node
-
-    ########### Log file transfer ###########
-
-    strData = ''
-
-    print("rewrite commence")
-    message3 = rewriteNode()
-
-    fileNames = [''] * 200
-    REcounter = [''] * 200
-    counter = 0
-    counter2 = 0
-    logHash = ''
-    log = ''
-
-    os.chdir("/home/" + device + "/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName)
-    # print("open")
-    for i in glob.glob("*.txt"):
-        if "Comp" in i:
-            fileNames[counter] = i
-            fileNames[counter] = fileNames[counter].replace(".txt", "")
-            REcounter[counter] = int(str(fileNames[counter])[18])
-            counter = counter + 1
-
-    fileNum = fileNames.index('')
-    # print(fileNum)
-
-    if fileNum > 0:
-        for i in range(fileNum):
-            print(fileNames[i])
-            f = open(fileNames[i] + ".txt", "r")
-            for j in range(32):
-                logHash = logHash + f.readline()
-
-            f.close()
-            log = logHash
-            message3.arrayTransfer = str(fileNum * 10) + fileNames[i] + '.txt' + log
-            message3.fileOrArray = "file"
-            pub.publish(message3)
-            print(log)
-
-    print("finish")
-    print("wipe")
-
-    message3.fileOrArray = 'wipe'
-    message3.arrayTransfer = ''
-    pub.publish(message3)
     time.sleep(5)
+    if rewriteStart == True:
+        counter = 0
+        # if nodeNumber == int(nodeName[4]) + 1 :
+        # this node will rewrite the hacked node
 
-    ########### Live Array Transfer ###########
-    print("live")
-    print(stationHistory)
+        ########### Log file transfer ###########
 
-    for i in range(Range):
-        for j in range(cRange):
-            for z in range(Range):
-                if SblockTimeStamp[i][j][z] != '':
-                    if z < 7:
-                        if stationHistory[j][z] != '':
-                            strData = strData + str(i) + ';' + str(j) + ';' + str(z) + ';' + str(
-                                SblockTimeStamp[i][j][z]) + ';' + str(SblockTrans[i][j][z]) + ';' + str(
-                                SblockProductCode[i][j][z]) + ';' + str(SblockPreviousHash[i][j][z]) + ';' + Sdata[i][j][
-                                          z] + ';' + stationHistory[j][z] + '?'
-                        if stationHistory[j][z] == '':
-                            strData = strData + str(i) + ';' + str(j) + ';' + str(z) + ';' + str(
-                                SblockTimeStamp[i][j][z]) + ';' + str(SblockTrans[i][j][z]) + ';' + str(
-                                SblockProductCode[i][j][z]) + ';' + str(SblockPreviousHash[i][j][z]) + ';' + Sdata[i][j][z] + '?'
+        strData = ''
 
-    message3.fileOrArray = 'array'
-    message3.arrayTransfer = strData
-    pub.publish(message3)
-    time.sleep(3)
-    rate.sleep()
+        print("rewrite commence")
+        message10 = rewriteNode()
 
-    print("finished")
+
+
+        fileNames = [''] * 200
+        REcounter = [''] * 200
+        counter = 0
+        counter2 = 0
+        logHash = ''
+        log = ''
+
+        os.chdir("/home/" + device + "/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName)
+        # print("open")
+        for i in glob.glob("*.txt"):
+            if "Comp" in i:
+                fileNames[counter] = i
+                fileNames[counter] = fileNames[counter].replace(".txt", "")
+                REcounter[counter] = int(str(fileNames[counter])[18])
+                counter = counter + 1
+
+        fileNum = fileNames.index('')
+        # print(fileNum)
+
+        if fileNum > 0:
+            for i in range(fileNum):
+                print(fileNames[i])
+                f = open(fileNames[i] + ".txt", "r")
+                for j in range(32):
+                    logHash = logHash + f.readline()
+
+                f.close()
+                log = logHash
+                message10.arrayTransfer = str(fileNum * 10) + fileNames[i] + '.txt' + log
+                message10.fileOrArray = "file"
+                pub.publish(message10)
+                print(log)
+
+
+        print("finish")
+
+
+        print("wipe")
+
+
+        message10.fileOrArray = "wipe"
+        message10.arrayTransfer = "0"
+        pub.publish(message10)
+        time.sleep(5)
+
+
+
+
+        ########### Live Array Transfer ###########
+        print("live")
+        print(stationHistory)
+
+        for i in range(Range):
+            for j in range(cRange):
+                for z in range(Range):
+                    if SblockTimeStamp[i][j][z] != '':
+                        if z < 7:
+                            if stationHistory[j][z] != '':
+                                strData = strData + str(i) + ';' + str(j) + ';' + str(z) + ';' + str(
+                                    SblockTimeStamp[i][j][z]) + ';' + str(SblockTrans[i][j][z]) + ';' + str(
+                                    SblockProductCode[i][j][z]) + ';' + str(SblockPreviousHash[i][j][z]) + ';' + Sdata[i][j][
+                                              z] + ';' + stationHistory[j][z] + '?'
+                            if stationHistory[j][z] == '':
+                                strData = strData + str(i) + ';' + str(j) + ';' + str(z) + ';' + str(
+                                    SblockTimeStamp[i][j][z]) + ';' + str(SblockTrans[i][j][z]) + ';' + str(
+                                    SblockProductCode[i][j][z]) + ';' + str(SblockPreviousHash[i][j][z]) + ';' + Sdata[i][j][z] + '?'
+
+        print("done for loop")
+
+        message10.fileOrArray = "array"
+        message10.arrayTransfer = strData
+        pub.publish(message10)
+        print("sent")
+        time.sleep(3)
+
+
 
 
 def hackedOneTime():
     global block
     global wannaBeHacked
     if wannaBeHacked == True:
-        time.sleep(20)
+        time.sleep(10)
         print("hacked")
         SblockHash[0][0][0] = "hello there"
 

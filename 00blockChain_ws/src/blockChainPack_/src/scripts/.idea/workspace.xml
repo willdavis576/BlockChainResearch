@@ -2,9 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d548811d-0aca-477e-bfa2-a5ed9f109e3c" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/../../../../Receipts/MES_Node1/Product1296C:1.txt" afterPath="$PROJECT_DIR$/../../../../Receipts/MES_Node1/Product1296C:1.txt" />
+      <change beforePath="$PROJECT_DIR$/../../../../Receipts/MES_Node1/Product1296C:2.txt" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/../../../../Receipts/MES_Node1/Product1296C:3.txt" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/../../../../Receipts/MES_Node1/Product1296C:4.txt" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/../../../../Receipts/MES_Node2/Product1296C:1.txt" afterPath="$PROJECT_DIR$/../../../../Receipts/MES_Node2/Product1296C:1.txt" />
+      <change beforePath="$PROJECT_DIR$/../../../../Receipts/MES_Node2/Product1296C:2.txt" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/../../../../Receipts/MES_Node2/Product1296C:3.txt" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/../../../../Receipts/MES_Node2/Product1296C:4.txt" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/../../../../Receipts/MES_Node3/Product1296C:1.txt" afterPath="$PROJECT_DIR$/../../../../Receipts/MES_Node3/Product1296C:1.txt" />
+      <change beforePath="$PROJECT_DIR$/../../../../Receipts/MES_Node3/Product1296C:2.txt" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/../../../../Receipts/MES_Node3/Product1296C:3.txt" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/../../../../Receipts/MES_Node3/Product1296C:4.txt" afterPath="" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/PLC Sim/SimNode1.py" afterPath="$PROJECT_DIR$/PLC Sim/SimNode1.py" />
-      <change beforePath="$PROJECT_DIR$/RaspberryPi_MES/R_MES_Node1.py" afterPath="$PROJECT_DIR$/RaspberryPi_MES/R_MES_Node1.py" />
       <change beforePath="$PROJECT_DIR$/RaspberryPi_MES/R_MES_Node2.py" afterPath="$PROJECT_DIR$/RaspberryPi_MES/R_MES_Node2.py" />
       <change beforePath="$PROJECT_DIR$/RaspberryPi_MES/R_MES_Node3.py" afterPath="$PROJECT_DIR$/RaspberryPi_MES/R_MES_Node3.py" />
     </list>
@@ -20,8 +31,8 @@
       <file leaf-file-name="MES_Node1.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MESNode1/MES_Node1.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
-              <caret line="775" column="36" lean-forward="false" selection-start-line="775" selection-start-column="36" selection-end-line="775" selection-end-column="36" />
+            <state relative-caret-position="361">
+              <caret line="793" column="48" lean-forward="true" selection-start-line="793" selection-start-column="48" selection-end-line="793" selection-end-column="48" />
               <folding>
                 <element signature="e#19#97#0" expanded="true" />
                 <element signature="e#13436#20750#0" expanded="false" />
@@ -40,8 +51,8 @@
       <file leaf-file-name="MES_Node2.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MESNode2/MES_Node2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="19">
-              <caret line="736" column="16" lean-forward="false" selection-start-line="736" selection-start-column="16" selection-end-line="736" selection-end-column="16" />
+            <state relative-caret-position="570">
+              <caret line="1178" column="16" lean-forward="true" selection-start-line="1178" selection-start-column="16" selection-end-line="1178" selection-end-column="16" />
               <folding>
                 <element signature="e#19#97#0" expanded="true" />
                 <element signature="e#23597#23617#0" expanded="false" />
@@ -55,7 +66,7 @@
       <file leaf-file-name="MES_Node3.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MESNode3/MES_Node3.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="269">
+            <state relative-caret-position="2128">
               <caret line="118" column="0" lean-forward="false" selection-start-line="118" selection-start-column="0" selection-end-line="119" selection-end-column="13" />
               <folding>
                 <element signature="e#19#97#0" expanded="true" />
@@ -85,8 +96,8 @@
       <file leaf-file-name="R_MES_Node1.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/RaspberryPi_MES/R_MES_Node1.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="9288">
-              <caret line="1255" column="55" lean-forward="true" selection-start-line="1255" selection-start-column="55" selection-end-line="1255" selection-end-column="55" />
+            <state relative-caret-position="1639">
+              <caret line="1233" column="41" lean-forward="true" selection-start-line="1233" selection-start-column="41" selection-end-line="1233" selection-end-column="41" />
               <folding>
                 <element signature="e#19#97#0" expanded="true" />
                 <element signature="e#5983#7627#0" expanded="false" />
@@ -105,18 +116,19 @@
       <file leaf-file-name="R_MES_Node2.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/RaspberryPi_MES/R_MES_Node2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="517" column="0" lean-forward="true" selection-start-line="517" selection-start-column="0" selection-end-line="517" selection-end-column="0" />
+            <state relative-caret-position="366">
+              <caret line="1138" column="11" lean-forward="false" selection-start-line="1138" selection-start-column="11" selection-end-line="1138" selection-end-column="11" />
               <folding>
                 <element signature="e#19#97#0" expanded="true" />
-                <element signature="e#5984#7628#0" expanded="false" />
-                <element signature="e#12738#12962#0" expanded="false" />
-                <element signature="e#21619#22310#0" expanded="false" />
-                <element signature="e#22332#23847#0" expanded="false" />
-                <element signature="e#23873#24750#0" expanded="false" />
-                <element signature="e#25818#25892#0" expanded="false" />
-                <element signature="e#25926#34825#0" expanded="false" />
-                <element signature="e#34846#39426#0" expanded="false" />
+                <element signature="e#6004#7648#0" expanded="false" />
+                <element signature="e#7671#12516#0" expanded="false" />
+                <element signature="e#12758#12982#0" expanded="false" />
+                <element signature="e#13009#21509#0" expanded="false" />
+                <element signature="e#21639#22330#0" expanded="false" />
+                <element signature="e#23893#24770#0" expanded="false" />
+                <element signature="e#25957#26031#0" expanded="false" />
+                <element signature="e#26065#34964#0" expanded="false" />
+                <element signature="e#34985#39589#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -125,8 +137,8 @@
       <file leaf-file-name="R_MES_Node3.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/RaspberryPi_MES/R_MES_Node3.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1738">
-              <caret line="498" column="78" lean-forward="true" selection-start-line="498" selection-start-column="78" selection-end-line="498" selection-end-column="78" />
+            <state relative-caret-position="1843">
+              <caret line="1165" column="20" lean-forward="true" selection-start-line="1165" selection-start-column="20" selection-end-line="1165" selection-end-column="20" />
               <folding>
                 <element signature="e#19#105#0" expanded="true" />
                 <element signature="e#5991#7635#0" expanded="false" />
@@ -136,7 +148,7 @@
                 <element signature="e#23670#24547#0" expanded="false" />
                 <element signature="e#24573#25593#0" expanded="false" />
                 <element signature="e#25618#25692#0" expanded="false" />
-                <element signature="e#35176#39740#0" expanded="false" />
+                <element signature="e#35191#39755#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -145,8 +157,8 @@
       <file leaf-file-name="R_MES_Node5.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/RaspberryPi_MES/R_MES_Node5.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-14689">
-              <caret line="19" column="24" lean-forward="true" selection-start-line="19" selection-start-column="24" selection-end-line="19" selection-end-column="24" />
+            <state relative-caret-position="209">
+              <caret line="19" column="24" lean-forward="false" selection-start-line="19" selection-start-column="24" selection-end-line="19" selection-end-column="24" />
               <folding>
                 <element signature="e#19#97#0" expanded="true" />
                 <element signature="e#5852#7496#0" expanded="false" />
@@ -167,7 +179,7 @@
         <entry file="file://$PROJECT_DIR$/RaspberryPi_MES/R_MES_Node6.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="304">
-              <caret line="24" column="10" lean-forward="true" selection-start-line="24" selection-start-column="10" selection-end-line="24" selection-end-column="10" />
+              <caret line="24" column="10" lean-forward="false" selection-start-line="24" selection-start-column="10" selection-end-line="24" selection-end-column="10" />
               <folding>
                 <element signature="e#19#97#0" expanded="true" />
                 <element signature="e#5866#7510#0" expanded="false" />
@@ -187,8 +199,8 @@
       <file leaf-file-name="SimNode1.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/PLC Sim/SimNode1.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="551">
-              <caret line="29" column="10" lean-forward="true" selection-start-line="29" selection-start-column="10" selection-end-line="29" selection-end-column="10" />
+            <state relative-caret-position="437">
+              <caret line="23" column="50" lean-forward="true" selection-start-line="23" selection-start-column="50" selection-end-line="23" selection-end-column="50" />
               <folding />
             </state>
           </provider>
@@ -206,8 +218,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>decode(</find>
-      <find>stationFinish</find>
       <find>orderNcarrierNumberList</find>
       <find>tcpordernumber</find>
       <find>data.orderNumer</find>
@@ -235,6 +245,8 @@
       <find>all fine</find>
       <find>callbackauth</find>
       <find>wiped</find>
+      <find>rewriteNodes()</find>
+      <find>rewriteStart</find>
       <find>reinit</find>
     </findStrings>
   </component>
@@ -290,9 +302,9 @@
         <option value="$PROJECT_DIR$/RaspberryPi_MES/R_MES_Node4.py" />
         <option value="$PROJECT_DIR$/RaspberryPi_MES/R_MES_Node5.py" />
         <option value="$PROJECT_DIR$/RaspberryPi_MES/R_MES_Node6.py" />
-        <option value="$PROJECT_DIR$/PLC Sim/SimNode1.py" />
         <option value="$PROJECT_DIR$/RaspberryPi_MES/R_MES_Node1.py" />
         <option value="$PROJECT_DIR$/FileWipe.py" />
+        <option value="$PROJECT_DIR$/PLC Sim/SimNode1.py" />
         <option value="$PROJECT_DIR$/RaspberryPi_MES/R_MES_Node2.py" />
         <option value="$PROJECT_DIR$/RaspberryPi_MES/R_MES_Node3.py" />
       </list>
@@ -408,19 +420,19 @@
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23655914" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.028571429" sideWeight="0.5018929" order="0" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32959184" sideWeight="0.49810708" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32969034" sideWeight="0.49866667" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32969034" sideWeight="0.49866667" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.03217972" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.03217972" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32959184" sideWeight="0.49810708" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -649,7 +661,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="13528">
           <caret line="718" column="0" lean-forward="false" selection-start-line="718" selection-start-column="0" selection-end-line="724" selection-end-column="39" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -664,7 +675,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1273">
           <caret line="67" column="19" lean-forward="false" selection-start-line="67" selection-start-column="19" selection-end-line="67" selection-end-column="19" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -672,10 +682,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="152">
           <caret line="13" column="59" lean-forward="false" selection-start-line="13" selection-start-column="59" selection-end-line="13" selection-end-column="59" />
-          <folding>
-            <element signature="e#19#97#0" expanded="false" />
-            <element signature="e#2062#2094#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -697,25 +703,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="171">
           <caret line="17" column="23" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="1421" selection-end-column="0" />
-          <folding>
-            <element signature="e#19#97#0" expanded="false" />
-            <element signature="e#5858#7502#0" expanded="false" />
-            <element signature="e#7525#12370#0" expanded="false" />
-            <element signature="e#12373#12374#0" expanded="false" />
-            <element signature="e#14048#14272#0" expanded="false" />
-            <element signature="e#25503#26523#0" expanded="false" />
-            <element signature="e#26548#26622#0" expanded="false" />
-            <element signature="e#26971#27007#0" expanded="false" />
-            <element signature="e#35890#40470#0" expanded="false" />
-            <element signature="e#43557#43649#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/RaspberryPi_MES/R_MES_Node6.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="304">
-          <caret line="24" column="10" lean-forward="true" selection-start-line="24" selection-start-column="10" selection-end-line="24" selection-end-column="10" />
+          <caret line="24" column="10" lean-forward="false" selection-start-line="24" selection-start-column="10" selection-end-line="24" selection-end-column="10" />
           <folding>
             <element signature="e#19#97#0" expanded="true" />
             <element signature="e#5866#7510#0" expanded="false" />
@@ -733,8 +727,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/RaspberryPi_MES/R_MES_Node5.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-14689">
-          <caret line="19" column="24" lean-forward="true" selection-start-line="19" selection-start-column="24" selection-end-line="19" selection-end-column="24" />
+        <state relative-caret-position="209">
+          <caret line="19" column="24" lean-forward="false" selection-start-line="19" selection-start-column="24" selection-end-line="19" selection-end-column="24" />
           <folding>
             <element signature="e#19#97#0" expanded="true" />
             <element signature="e#5852#7496#0" expanded="false" />
@@ -750,40 +744,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MESNode1/MES_Node1.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="775" column="36" lean-forward="false" selection-start-line="775" selection-start-column="36" selection-end-line="775" selection-end-column="36" />
-          <folding>
-            <element signature="e#19#97#0" expanded="true" />
-            <element signature="e#13436#20750#0" expanded="false" />
-            <element signature="e#20875#21826#0" expanded="false" />
-            <element signature="e#21852#22874#0" expanded="false" />
-            <element signature="e#23599#23619#0" expanded="false" />
-            <element signature="e#24646#26286#0" expanded="false" />
-            <element signature="e#26679#26715#0" expanded="false" />
-            <element signature="e#29188#29189#0" expanded="false" />
-            <element signature="e#36595#41199#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MESNode2/MES_Node2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="736" column="16" lean-forward="false" selection-start-line="736" selection-start-column="16" selection-end-line="736" selection-end-column="16" />
-          <folding>
-            <element signature="e#19#97#0" expanded="true" />
-            <element signature="e#23597#23617#0" expanded="false" />
-            <element signature="e#24644#26285#0" expanded="false" />
-            <element signature="e#35353#39957#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/MESNode3/MES_Node3.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="269">
+        <state relative-caret-position="2128">
           <caret line="118" column="0" lean-forward="false" selection-start-line="118" selection-start-column="0" selection-end-line="119" selection-end-column="13" />
           <folding>
             <element signature="e#19#97#0" expanded="true" />
@@ -813,22 +776,52 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="114">
           <caret line="6" column="8" lean-forward="true" selection-start-line="6" selection-start-column="8" selection-end-line="7" selection-end-column="90" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/PLC Sim/SimNode1.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="551">
-          <caret line="29" column="10" lean-forward="true" selection-start-line="29" selection-start-column="10" selection-end-line="29" selection-end-column="10" />
+        <state relative-caret-position="437">
+          <caret line="23" column="50" lean-forward="true" selection-start-line="23" selection-start-column="50" selection-end-line="23" selection-end-column="50" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MESNode1/MES_Node1.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="361">
+          <caret line="793" column="48" lean-forward="true" selection-start-line="793" selection-start-column="48" selection-end-line="793" selection-end-column="48" />
+          <folding>
+            <element signature="e#19#97#0" expanded="true" />
+            <element signature="e#13436#20750#0" expanded="false" />
+            <element signature="e#20875#21826#0" expanded="false" />
+            <element signature="e#21852#22874#0" expanded="false" />
+            <element signature="e#23599#23619#0" expanded="false" />
+            <element signature="e#24646#26286#0" expanded="false" />
+            <element signature="e#26679#26715#0" expanded="false" />
+            <element signature="e#29188#29189#0" expanded="false" />
+            <element signature="e#36595#41199#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MESNode2/MES_Node2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="570">
+          <caret line="1178" column="16" lean-forward="true" selection-start-line="1178" selection-start-column="16" selection-end-line="1178" selection-end-column="16" />
+          <folding>
+            <element signature="e#19#97#0" expanded="true" />
+            <element signature="e#23597#23617#0" expanded="false" />
+            <element signature="e#24644#26285#0" expanded="false" />
+            <element signature="e#35353#39957#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/RaspberryPi_MES/R_MES_Node1.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="9288">
-          <caret line="1255" column="55" lean-forward="true" selection-start-line="1255" selection-start-column="55" selection-end-line="1255" selection-end-column="55" />
+        <state relative-caret-position="1639">
+          <caret line="1233" column="41" lean-forward="true" selection-start-line="1233" selection-start-column="41" selection-end-line="1233" selection-end-column="41" />
           <folding>
             <element signature="e#19#97#0" expanded="true" />
             <element signature="e#5983#7627#0" expanded="false" />
@@ -845,26 +838,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/RaspberryPi_MES/R_MES_Node2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="517" column="0" lean-forward="true" selection-start-line="517" selection-start-column="0" selection-end-line="517" selection-end-column="0" />
+        <state relative-caret-position="366">
+          <caret line="1138" column="11" lean-forward="false" selection-start-line="1138" selection-start-column="11" selection-end-line="1138" selection-end-column="11" />
           <folding>
             <element signature="e#19#97#0" expanded="true" />
-            <element signature="e#5984#7628#0" expanded="false" />
-            <element signature="e#12738#12962#0" expanded="false" />
-            <element signature="e#21619#22310#0" expanded="false" />
-            <element signature="e#22332#23847#0" expanded="false" />
-            <element signature="e#23873#24750#0" expanded="false" />
-            <element signature="e#25818#25892#0" expanded="false" />
-            <element signature="e#25926#34825#0" expanded="false" />
-            <element signature="e#34846#39426#0" expanded="false" />
+            <element signature="e#6004#7648#0" expanded="false" />
+            <element signature="e#7671#12516#0" expanded="false" />
+            <element signature="e#12758#12982#0" expanded="false" />
+            <element signature="e#13009#21509#0" expanded="false" />
+            <element signature="e#21639#22330#0" expanded="false" />
+            <element signature="e#23893#24770#0" expanded="false" />
+            <element signature="e#25957#26031#0" expanded="false" />
+            <element signature="e#26065#34964#0" expanded="false" />
+            <element signature="e#34985#39589#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/RaspberryPi_MES/R_MES_Node3.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1738">
-          <caret line="498" column="78" lean-forward="true" selection-start-line="498" selection-start-column="78" selection-end-line="498" selection-end-column="78" />
+        <state relative-caret-position="1843">
+          <caret line="1165" column="20" lean-forward="true" selection-start-line="1165" selection-start-column="20" selection-end-line="1165" selection-end-column="20" />
           <folding>
             <element signature="e#19#105#0" expanded="true" />
             <element signature="e#5991#7635#0" expanded="false" />
@@ -874,7 +868,7 @@
             <element signature="e#23670#24547#0" expanded="false" />
             <element signature="e#24573#25593#0" expanded="false" />
             <element signature="e#25618#25692#0" expanded="false" />
-            <element signature="e#35176#39740#0" expanded="false" />
+            <element signature="e#35191#39755#0" expanded="false" />
           </folding>
         </state>
       </provider>

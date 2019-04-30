@@ -722,6 +722,7 @@ def callbackRecData(data):
     if nodeHacked == nodeName:
         if data.fileOrArray == "file":
             for i in range(int(int(data.arrayTransfer[0] + data.arrayTransfer[1]) / 10)):
+                print("messing")
                 if nodeHacked == nodeName and runYetLoc == 0 and data.fileOrArray == "file":
                     f = open(
                         "/home/" + device + "/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + '/' + data.arrayTransfer[
@@ -770,6 +771,8 @@ def callbackRecData(data):
                     print("rewrite didn't work")
                     didntWork = True
 
+                print("under except")
+
                 if didntWork == False:
                     dHour = str(SblockTimeStamp[order][carrier][blockNo].split(':')[0])
                     dMinute = str(SblockTimeStamp[order][carrier][blockNo].split(':')[1])
@@ -781,6 +784,7 @@ def callbackRecData(data):
                     dProductCode = int(SblockProductCode[order][carrier][blockNo])
 
                     if dStation == "Start production":
+                        print("1")
                         stationHistory[int(carrier)][0] = str(dStation)
                         # print(data.SblockTimeStamp)
                         block[int(order)][int(carrier)][int(blockNo)] = blockChain(previousHash='',
@@ -822,8 +826,6 @@ def callbackRecData(data):
                             data2=Sdata[order][carrier][blockNo].split('&')[1])
 
                         SblockHash[order][carrier][blockNo] = block[order][carrier][blockNo].getBlockHash()
-                        print("get aux data1: ", block[order][carrier][blockNo].getData1())
-                        print("get aux data2: ", block[order][carrier][blockNo].getData2())
 
 
                         data_to_print = "Time Stamp for Block: {0}\nStation: {1}\nOrder Number: {2}\nCarrierID: {3}\nProduct Code: {4}\nBlock Hash: {5}\nPrevious Hash: {6}\n{7}\n{8}".format(
@@ -832,6 +834,7 @@ def callbackRecData(data):
                             block[int(order)][int(carrier)][int(blockNo) - 1].getBlockHash(),
                             Sdata[order][carrier][blockNo].split('&')[0], Sdata[order][carrier][blockNo].split('&')[1])
 
+                    print("above file creation")
                     if runYet[int(order)][int(carrier)] == '':
                         f = open("/home/" + device + "/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + "/Product" + str(
                             int(order) + 1264) + "C:" + str(
@@ -839,7 +842,9 @@ def callbackRecData(data):
                         f.close()
                         runYet[int(order)][int(carrier)] = "1"
 
+
                     if runYet[int(order)][int(carrier)] == "1":
+                        print("printing")
                         f = open("/home/" + device + "/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + "/Product" + str(
                             int(order) + 1264) + "C:" + str(
                             int(carrier)) + ".txt", "a")
@@ -1162,7 +1167,7 @@ def hackedOneTime():
     global block
     global wannaBeHacked
     if wannaBeHacked == True:
-        time.sleep(20)
+        time.sleep(10)
         print("hacked")
         SblockHash[0][0][0] = "hello there"
 

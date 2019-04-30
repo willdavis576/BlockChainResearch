@@ -10,7 +10,7 @@ def main():
     global recData
 
 
-    for i in range(4):
+    for i in range(1):
         s.sendall('1' + ',1296,' + str(i + 1) + ',211,01,54,18,19,03,2019,000,000')
         print(str('1') + ',1296,' + str(i + 1) + ',211,01,54,18,19,03,2019,000,000')
         s.sendall('                                       ')
