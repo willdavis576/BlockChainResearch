@@ -12,10 +12,15 @@ from std_msgs.msg import String
 # station, orderNumber, productCode, seconds, minutes, hours, days, months, years
 # productNubmer should now orderNumber
 
-nodeName = "NODE2"  ############### THIS IS WHERE YOU SPECIFY A NODE'S NAME #######################
+device = 'ros'
+nodeName = "Node2"  ############### THIS IS WHERE YOU SPECIFY A NODE'S NAME #######################
 port = 4501
-address = '172.21.4.153'  # 127.0.0.1
-lNodeToRewrite = "NODE3"
+lNodeToRewrite = "Node3"
+if device == 'ros':
+    address = '127.0.0.1'
+if device == 'pi':
+    address = '172.21.4.153'
+wannaBeHacked = False
 dataDes1 = "No data available"
 dataDes2 = "No data available"
 dataMag1 = 10
@@ -55,8 +60,8 @@ init = 0
 noGen = 0
 runYet = [['' for _ in range(Range)] for _ in range(Range)]
 Trigger = False
-nodeList = ['NODE1', 'NODE2', 'NODE3',
-            'NODE4', 'NODE5', 'NODE6']  ################# IF INCLUDING MORE NODES, EXTEND THIS ARRAY SIZE #######################
+nodeList = ['Node1', 'Node2', 'Node3',
+            'Node4', 'Node5', 'Node6']   ################# IF INCLUDING MORE NODES, EXTEND THIS ARRAY SIZE #######################
 nodeONOFF = [1, 0, 0, 0]  ################# IF INCLUDING MORE NODES, EXTEND THIS ARRAY SIZE #######################
 oldNodeONOFF = [0, 0, 0, 0]  ################# IF INCLUDING MORE NODES, EXTEND THIS ARRAY SIZE #######################
 node = ['' for _ in range(20)]
@@ -125,6 +130,9 @@ mostCommonHash = ''
 
 # camera
 camAddress = 0
+
+# Not reInitable
+wiped = False
 
 
 class blockChain:
@@ -348,45 +356,6 @@ def mainProg():
         print("datafollowing3", dataFollowing)
 
 
-#
-#     print("datafollowing4", dataFollowing)
-# print("datafollowing5", dataFollowing)
-
-# stationHistory[int(tcpCarrierNumber)][int(tcpStationName)] = tcpStationName
-# print(stationHistory)
-
-# if stationHistory[int(tcpCarrierNumber)] == ['Start production', '1', '2', '3']:
-#
-#     message4 = finish()
-#     message4.counter = REcounter
-# #     message4.carrierID = int(tcpCarrierNumber)
-# #     message4.order = int(tcpOrderNumber)
-#     pub2.publish(message4)
-#
-#     time.sleep(0.2)
-#
-#     os.rename(
-#         "/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + "/Product" + str(tcpOrderNumber + 1264) + "C:" + str(
-#         tcpCarrierNumber) + ".txt", "/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + "/Product" + str(tcpOrderNumber + 1264) + "C:" + str(
-#     tcpCarrierNumber) + "Comp" + str(REcounter) + ".txt")
-#     print("Carrier ready for next product")
-#
-#     REcounter = REcounter + 1
-#
-#     # print("2")
-#     # print(tcpStationName)
-#     # if Comp == True:  # means the product is finished
-#     block[tcpOrderNumber][tcpCarrierNumber] = [''] * Range
-#     SCarrierNumber[tcpOrderNumber][tcpCarrierNumber] = [''] * Range
-#     stationHistory[int(tcpCarrierNumber)] = [''] * 4
-#     runYet[tcpOrderNumber][tcpCarrierNumber] = ''
-
-# Comp = False
-
-
-# if the order number doesn't exist in the array then create genesis block. If it does, then continue where the system left off.
-
-
 def listener():
     rospy.Subscriber('publishingBlockStream', blockDetail, callback)
     rospy.spin()
@@ -436,6 +405,8 @@ def callback(data):
 
     global camAddress
 
+    global device
+
     wipe = False
     print(data.station)
     print(stationHistory)
@@ -449,21 +420,23 @@ def callback(data):
                 print("call back 3")
 
                 os.rename(
-                    "/home/pi/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + "/Product" + str(
+                    "/home/" + device + "/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + "/Product" + str(
                         data.orderNumber + 1264) + "C:" + str(
                         data.carrierID) + ".txt",
-                    "/home/pi/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + "/Product" + str(
+                    "/home/" + device + "/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + "/Product" + str(
                         data.orderNumber + 1264) + "C:" + str(
                         data.carrierID) + "Comp" + str(REcounter[int(data.carrierID)]) + ".txt")
 
-                # print("camAddress: ", camAddress)
-                # copyfile("/home/pi/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + "/Product" + str(
-                #     data.orderNumber + 1264) + "C:" + str(data.carrierID) + "Comp" + str(REcounter[int(data.carrierID)]) + ".txt",
-                #          "/home/pi/blockChainGit/00blockChain_ws/src/blockChainPack_/src/scripts/CompletedReceiptsQR/" + str(
-                #              camAddress) + "/" + "Product" + str(
-                #              data.orderNumber + 1264) + "C:" + str(data.carrierID) + "Comp" + str(
-                #              REcounter[int(data.carrierID)]) + ".txt")
-                # print("copied")
+                if nodeName == 'Node2':
+                    print("camAddress: ", camAddress)
+                    copyfile("/home/" + device + "/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + "/Product" + str(
+                        data.orderNumber + 1264) + "C:" + str(data.carrierID) + "Comp" + str(
+                        REcounter[int(data.carrierID)]) + ".txt",
+                             "/home/" + device + "/blockChainGit/00blockChain_ws/src/blockChainPack_/src/scripts/CompletedReceiptsQR/" + str(
+                                 camAddress) + "/" + "Product" + str(
+                                 data.orderNumber + 1264) + "C:" + str(data.carrierID) + "Comp" + str(
+                                 REcounter[int(data.carrierID)]) + ".txt")
+                    print("copied")
 
                 block[data.orderNumber][data.carrierID] = [''] * Range
                 SCarrierNumber[data.orderNumber][data.carrierID] = [''] * Range
@@ -489,7 +462,7 @@ def callback(data):
         SblockProductCode[data.orderNumber][data.carrierID][data.blockNumber] = data.productCode
         SblockHash[data.orderNumber][data.carrierID][data.blockNumber] = data.blockHash
         SblockPreviousHash[data.orderNumber][data.carrierID][data.blockNumber] = data.previousHash
-        Sdata[data.orderNumber][data.carrierID][data.blockNumber] = data.data1 + ' ' + data.data2
+        Sdata[data.orderNumber][data.carrierID][data.blockNumber] = data.data1 + '&' + data.data2
         SCarrierNumber[data.orderNumber][data.carrierID] = 1
 
         SblockNumber = data.blockNumber
@@ -530,6 +503,11 @@ def callback(data):
                                                                                          data.timeStamp[20], data1=data.data1,
                                                                                    data2=data.data2)
 
+        print("get aux data1: ", block[data.orderNumber][data.carrierID][data.blockNumber].getData1())
+        print("get aux data2: ", block[data.orderNumber][data.carrierID][data.blockNumber].getData2())
+
+
+
         if stationHistory[int(data.carrierID)] != ['Start production', '1', '2', '3', '4', '5', '6']:
             print(data.station)
             if data.station != 'Start production':
@@ -539,14 +517,14 @@ def callback(data):
                 stationHistory[int(data.carrierID)][0] = str(data.station)
 
             if runYet[data.orderNumber][data.carrierID] == '':
-                f = open("/home/pi/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + "/Product" + str(
+                f = open("/home/" + device + "/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + "/Product" + str(
                     data.orderNumber + 1264) + "C:" + str(
                     data.carrierID) + ".txt", "w")
                 f.close()
                 runYet[data.orderNumber][data.carrierID] = "1"
 
             if runYet[data.orderNumber][data.carrierID] == "1":
-                f = open("/home/pi/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + "/Product" + str(
+                f = open("/home/" + device + "/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + "/Product" + str(
                     data.orderNumber + 1264) + "C:" + str(
                     data.carrierID) + ".txt", "a")
                 f.write(str(data_to_print))
@@ -572,18 +550,30 @@ def callbackAuth(data):
     global nodeList
     global authOrderNumber
     global mostCommonHash
-
-    if data.nodeName in nodeList:
-        nodeONOFF[nodeList.index(data.nodeName)] = 1  # filling in the online array
-        # print(data.nodeName + " is online!")
-    # for i in range(10): #10 being a max node amount - can be changed as the array size is 100
+    global Trigger
+    global authOrderNumber
+    global node
+    global nodeToRewrite
+    global mostCommonHash
+    global nodeName
+    global nodeHacked
+    global lNodeToRewrite
+    global oldNodeHacked
+    global olderNodeHacked
 
     name = data.nodeName
 
-    node[int(name[4]) - 1] = data.hash
-    mostCommonHash = Counter(node)
-    # print("finding node 4")
-    # print(node)
+    if name in nodeList:
+        if nodeONOFF[nodeList.index(name)] == 1:
+            node[int(name[4]) - 1] = data.hash
+            mostCommonHash = Counter(node)
+
+    try:
+        nodeHacked = nodeList[(node.index(str(mostCommonHash.most_common(3)[2][0])))]
+
+    except:
+        nodeHacked = ''
+        print("all fine")
 
 
 def emitter():
@@ -595,6 +585,7 @@ def emitter():
     global hashingArray
     global emit
     global nodeName
+    global device
 
     pub = rospy.Publisher('Last_Hash', lastHash, queue_size=100)
 
@@ -607,7 +598,7 @@ def emitter():
 
     while not rospy.is_shutdown():  # THIS IS PROBABLY A CPU POWER DRAINER
 
-        os.chdir("/home/pi/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName)
+        os.chdir("/home/" + device + "/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName)
         for i in glob.glob("*.txt"):
             fileAmount[counter2] = i
             if "Comp" in i:
@@ -686,11 +677,8 @@ def nodeHacked1():
     counter = 0
 
     while not rospy.is_shutdown():
-
         if nodeHacked in nodeList:
-
             if nodeHacked in nodeList and counter == 1 and nodeONOFF[int((str(nodeHacked))[4]) - 1] == 1:
-
                 if nodeHacked == oldNodeHacked and lNodeToRewrite == nodeHacked:
                     print(str(nodeHacked) + " has been hacked")
                     rewriteNodes()
@@ -728,20 +716,7 @@ def callbackRecData(data):
     global wiped
     global blockChain
     global emit
-
-    # 32,3,1,18:54:01 - 19/03/2019,1,211
-    # 32,3,0,09:57:40 - 06/04/2019,Start production,211
-    # if nodeHacked == nodeName and runYetLoc == 0 and data.fileOrArray == "file":
-    #     REcounter = [0] * Range
-    #     REcounter[data.carrier] = data.REcounter
-    #     f = open("/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + '/' + data.fileName, "w")
-    #     f.close()
-    #     runYetLoc = 1
-    #
-    # if nodeHacked == nodeName and runYetLoc == 1 and data.fileOrArray == "file":
-    #     f = open("/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + '/' + data.fileName, "a")
-    #     f.write(str(data.logFile))
-    #     f.close() int(int(whole[0:2]) / 10
+    global device
 
     if wiped == True:
         nodeHacked = nodeName
@@ -750,14 +725,18 @@ def callbackRecData(data):
         if data.fileOrArray == "file":
             for i in range(int(int(data.arrayTransfer[0] + data.arrayTransfer[1]) / 10)):
                 if nodeHacked == nodeName and runYetLoc == 0 and data.fileOrArray == "file":
-                    f = open("/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + '/' + data.arrayTransfer[2:25],
-                             "w")
+                    f = open(
+                        "/home/" + device + "/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + '/' + data.arrayTransfer[
+                                                                                                              2:25],
+                        "w")
                     f.close()
                     runYetLoc = 1
 
                 if nodeHacked == nodeName and runYetLoc == 1 and data.fileOrArray == "file":
-                    f = open("/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + '/' + data.arrayTransfer[2:25],
-                             "a")
+                    f = open(
+                        "/home/" + device + "/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + '/' + data.arrayTransfer[
+                                                                                                              2:25],
+                        "a")
                     f.write(str(data.arrayTransfer[25:len(data.arrayTransfer)]))
                     f.close()
 
@@ -837,24 +816,26 @@ def callbackRecData(data):
                             hours=dHour,
                             days=dDay,
                             months=dMonth,
-                            years=dYear, data1=Sdata[order][carrier][block].split(' ')[0], data2=Sdata[order][carrier][block].split(' ')[1])
+                            years=dYear, data1=Sdata[order][carrier][blockNo].split(' ')[0],
+                            data2=Sdata[order][carrier][blockNo].split(' ')[1])
 
                         SblockHash[order][carrier][blockNo] = block[order][carrier][blockNo].getBlockHash()
 
                         data_to_print = "Time Stamp for Block: {0}\nStation: {1}\nOrder Number: {2}\nCarrierID: {3}\nProduct Code: {4}\nBlock Hash: {5}\nPrevious Hash: {6}\n{7}\n{8}".format(
                             SblockTimeStamp[order][carrier][blockNo], dStation, int(order) + 1264, carrier, int(dProductCode),
                             SblockHash[order][carrier][blockNo],
-                            block[int(order)][int(carrier)][int(blockNo) - 1].getBlockHash(), Sdata[order][carrier][block].split(' ')[0], Sdata[order][carrier][block].split(' ')[1])
+                            block[int(order)][int(carrier)][int(blockNo) - 1].getBlockHash(),
+                            Sdata[order][carrier][block].split(' ')[0], Sdata[order][carrier][block].split(' ')[1])
 
                     if runYet[int(order)][int(carrier)] == '':
-                        f = open("/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + "/Product" + str(
+                        f = open("/home/" + device + "/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + "/Product" + str(
                             int(order) + 1264) + "C:" + str(
                             int(carrier)) + ".txt", "w")
                         f.close()
                         runYet[int(order)][int(carrier)] = "1"
 
                     if runYet[int(order)][int(carrier)] == "1":
-                        f = open("/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + "/Product" + str(
+                        f = open("/home/" + device + "/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + "/Product" + str(
                             int(order) + 1264) + "C:" + str(
                             int(carrier)) + ".txt", "a")
                         f.write(str(data_to_print))
@@ -866,7 +847,7 @@ def callbackRecData(data):
             c = 0
             c2 = 0
 
-            os.chdir("/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName)
+            os.chdir("/home/" + device + "/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName)
             for i in glob.glob("*.txt"):
                 fileAmount[c2] = i
                 if "Comp" in i:
@@ -1004,9 +985,9 @@ def reInit():
     noGen = 0
     runYet = [['' for _ in range(Range)] for _ in range(Range)]
     Trigger = False
-    nodeList = ['NODE1', 'NODE2', 'NODE3',
-                'NODE4', 'NODE5',
-                'NODE6']  ################# IF INCLUDING MORE NODES, EXTEND THIS ARRAY SIZE #######################
+    nodeList = ['Node1', 'Node2', 'Node3',
+                'Node4', 'Node5',
+                'Node6']  ################# IF INCLUDING MORE NODES, EXTEND THIS ARRAY SIZE #######################
     nodeONOFF = [1, 0, 0, 0]  ################# IF INCLUDING MORE NODES, EXTEND THIS ARRAY SIZE #######################
     oldNodeONOFF = [0, 0, 0, 0]  ################# IF INCLUDING MORE NODES, EXTEND THIS ARRAY SIZE #######################
     node = ['' for _ in range(20)]
@@ -1089,6 +1070,7 @@ def rewriteNodes():
     global cRange
     global nodeToRewrite
     global nodeName
+    global device
 
     # rewrite NODE(nodeNumber)
     pub = rospy.Publisher('Rewrite', rewriteNode, queue_size=100)
@@ -1110,7 +1092,7 @@ def rewriteNodes():
     logHash = ''
     log = ''
 
-    os.chdir("/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName)
+    os.chdir("/home/" + device + "/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName)
     # print("open")
     for i in glob.glob("*.txt"):
         if "Comp" in i:
@@ -1174,26 +1156,25 @@ def rewriteNodes():
 
 def hackedOneTime():
     global block
-
-    time.sleep(20)
-    print("hacked")
-    SblockHash[0][0][0] = "hello there"
-
+    global wannaBeHacked
+    if wannaBeHacked == True:
+        time.sleep(20)
+        print("hacked")
+        SblockHash[0][0][0] = "hello there"
 
 ################################# camera #################################
 
+def camera():
+    rospy.Subscriber('cameraData', String, camCallBack)
+    rospy.spin()
 
-# def camera():
-#     rospy.Subscriber('cameraData', String, camCallBack)
-#     rospy.spin()
-#
-#
-# def camCallBack(data):
-#     global camAddress
-#
-#     # http://172.21.4.153:8000/2
-#     camRaw = data.data
-#     camAddress = camRaw[25]
+
+def camCallBack(data):
+    global camAddress
+    if nodeName == 'Node2' and device == 'pi':
+        # http://172.21.4.153:8000/2
+        camRaw = data.data
+        camAddress = camRaw[25]
 
 
 ############################### TCP Server ###############################
@@ -1306,7 +1287,8 @@ if __name__ == '__main__':
         p6 = threading.Thread(target=recNewData, args=())
         p7 = threading.Thread(target=manual, args=())
         p8 = threading.Thread(target=nodesOnline, args=())
-        # p9 = threading.Thread(target=camera, args=())
+        p9 = threading.Thread(target=camera, args=())
+        p10 = threading.Thread(target=nodeHacked1, args=())
 
         p1.daemon = True
         p2.daemon = True
@@ -1316,6 +1298,8 @@ if __name__ == '__main__':
         p6.daemon = True
         p7.daemon = True
         p8.daemon = True
+        p9.daemon = True
+        p10.daemon = True
 
         p1.start()
         p2.start()
@@ -1325,6 +1309,8 @@ if __name__ == '__main__':
         p6.start()
         p7.start()
         p8.start()
+        p9.start()
+        p10.start()
 
         p1.join()
         p2.join()
@@ -1334,6 +1320,8 @@ if __name__ == '__main__':
         p6.join()
         p7.join()
         p8.join()
+        p9.join()
+        p10.join()
 
 # each stage of the production line needs to log:
 
