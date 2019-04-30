@@ -12,7 +12,7 @@ from std_msgs.msg import String
 # station, orderNumber, productCode, seconds, minutes, hours, days, months, years
 # productNubmer should now orderNumber
 
-device = 'pi'
+device = 'ros'
 nodeName = "Node1"  ############### THIS IS WHERE YOU SPECIFY A NODE'S NAME #######################
 port = 4500
 lNodeToRewrite = "Node2"
@@ -62,8 +62,8 @@ runYet = [['' for _ in range(Range)] for _ in range(Range)]
 Trigger = False
 nodeList = ['Node1', 'Node2', 'Node3',
             'Node4', 'Node5', 'Node6']  ################# IF INCLUDING MORE NODES, EXTEND THIS ARRAY SIZE #######################
-nodeONOFF = [1, 0, 0, 0]  ################# IF INCLUDING MORE NODES, EXTEND THIS ARRAY SIZE #######################
-oldNodeONOFF = [0, 0, 0, 0]  ################# IF INCLUDING MORE NODES, EXTEND THIS ARRAY SIZE #######################
+nodeONOFF = [0, 0, 0, 0, 0, 0, 0]  ################# IF INCLUDING MORE NODES, EXTEND THIS ARRAY SIZE #######################
+oldNodeONOFF = [0, 0, 0, 0, 0, 0, 0]  ################# IF INCLUDING MORE NODES, EXTEND THIS ARRAY SIZE #######################
 node = ['' for _ in range(20)]
 print("29%")
 counter1 = 0;
@@ -629,7 +629,6 @@ def nodesOnline():
 
     while not rospy.is_shutdown():
         var = rosnode.rosnode_ping_all()
-        # print(len(var[0]))
         for i in range(len(var[0])):
             for j in range(1):
                 # print(str(var[j][i])[1:6])
@@ -875,7 +874,6 @@ def callbackRecData(data):
                     fileNames[c] = i
                     c = c + 1
 
-
             c = 0
 
             fileNum = fileNames.index('')
@@ -1008,8 +1006,9 @@ def reInit():
     nodeList = ['Node1', 'Node2', 'Node3',
                 'Node4', 'Node5',
                 'Node6']  ################# IF INCLUDING MORE NODES, EXTEND THIS ARRAY SIZE #######################
-    nodeONOFF = [1, 0, 0, 0]  ################# IF INCLUDING MORE NODES, EXTEND THIS ARRAY SIZE #######################
-    oldNodeONOFF = [0, 0, 0, 0]  ################# IF INCLUDING MORE NODES, EXTEND THIS ARRAY SIZE #######################
+    nodeONOFF = [0, 0, 0, 0, 0, 0, 0]  ################# IF INCLUDING MORE NODES, EXTEND THIS ARRAY SIZE #######################
+    oldNodeONOFF = [0, 0, 0, 0, 0, 0,
+                    0]  ################# IF INCLUDING MORE NODES, EXTEND THIS ARRAY SIZE #######################
     node = ['' for _ in range(20)]
 
     counter1 = 0;
@@ -1114,7 +1113,7 @@ def rewriteNodes():
         logHash = ''
         log = ''
 
-        os.chdir("/home/ros/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName)
+        os.chdir("/home/" + device + "/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName)
         # print("open")
         for i in glob.glob("*.txt"):
             if "Comp" in i:
