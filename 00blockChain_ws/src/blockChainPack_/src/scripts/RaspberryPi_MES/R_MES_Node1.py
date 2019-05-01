@@ -12,7 +12,7 @@ from std_msgs.msg import String
 # station, orderNumber, productCode, seconds, minutes, hours, days, months, years
 # productNubmer should now orderNumber
 simulation = False
-device = 'ros'
+device = 'pi'
 nodeName = "Node1"  ############### THIS IS WHERE YOU SPECIFY A NODE'S NAME #######################
 port = 4500
 lNodeToRewrite = "Node2"

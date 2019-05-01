@@ -12,7 +12,7 @@ from std_msgs.msg import String
 # station, orderNumber, productCode, seconds, minutes, hours, days, months, years
 # productNubmer should now orderNumber
 simulation = False
-device = 'ros'
+device = 'pi'
 nodeName = "Node5"  ############### THIS IS WHERE YOU SPECIFY A NODE'S NAME #######################
 port = 4504
 lNodeToRewrite = "Node6"
@@ -22,7 +22,7 @@ if device == 'ros' and simulation == False:
     address = '172.21.4.174'
 if device == 'pi':
     address = '172.21.4.151'
-wannaBeHacked = True
+wannaBeHacked = False
 dataDes1 = "Pressure (bar): "
 dataDes2 = "Force (N): "
 dataMag1 = 100
