@@ -11,13 +11,15 @@ from std_msgs.msg import String
 
 # station, orderNumber, productCode, seconds, minutes, hours, days, months, years
 # productNubmer should now orderNumber
-
+simulation = False
 device = 'pi'
 nodeName = "Node1"  ############### THIS IS WHERE YOU SPECIFY A NODE'S NAME #######################
 port = 4500
 lNodeToRewrite = "Node2"
-if device == 'ros':
+if device == 'ros' and simulation == True:
     address = '127.0.0.1'
+if device == 'ros' and simulation == False:
+    address = '172.21.4.174'
 if device == 'pi':
     address = '172.21.4.153'
 wannaBeHacked = False
@@ -46,7 +48,7 @@ Comp = False
 fCarrier = 0
 fOrder = 0
 dCounter = 0
-
+pubRewrite = rospy.Publisher('Rewrite', rewriteNode, queue_size=100)
 serialNumberNum = 0
 serialNumberStr = 'PRODUCT'
 oldinfo = ''
@@ -614,12 +616,17 @@ def emitter():
                     for z in range(len(SblockHash[i][j])):
                         hashingArray = hashlib.sha256(hashingArray + str(fileNum) + SblockHash[i][j][z]).hexdigest()
 
+            var = datetime.now()
+            clock = int(float(str(var).split(':')[2]))
+            time.sleep(5 - (clock % 5))
             message2 = lastHash()
             message2.hash = hashingArray
             message2.nodeName = nodeName
             pub.publish(message2)
             hashingArray = ''
-            time.sleep(1)
+
+
+
     rate.sleep()
 
 
@@ -669,18 +676,31 @@ def nodeHacked1():
     global oldNodeHacked
     global olderNodeHacked
     global rewriteStart
+    global pubRewrite
+    
 
     counter = 0
 
     while not rospy.is_shutdown():
         if nodeHacked in nodeList:
             if nodeHacked in nodeList and counter == 1 and nodeONOFF[int((str(nodeHacked))[4]) - 1] == 1:
+                var = datetime.now()
+                clock = int(float(str(var).split(':')[2]))
+                time.sleep(5 - (clock % 5) + 1)
+                print(str(nodeHacked) + " has been hacked")
+		var = datetime.now()
+                clock = int(float(str(var).split(':')[2])) + 1
+                time.sleep(5 - (clock % 5) + 1)
                 if nodeHacked == oldNodeHacked and lNodeToRewrite == nodeHacked:
-                    print(str(nodeHacked) + " has been hacked")
                     print("rewritestart :", rewriteStart)
                     if rewriteStart == False:
-                        rewriteNodes()
                         rewriteStart = True
+                        rewriteNodes()
+                        print(rewriteStart)
+
+                    if rewriteStart == True:
+                        time.sleep(25)
+                        rewriteStart = False
 
                     counter = 0
 
@@ -744,7 +764,7 @@ def callbackRecData(data):
                     print("in here")
                     shutil.rmtree("/home/" + device + "/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName)
                     os.mkdir("/home/" + device + "/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName)
-
+                    time.sleep(0.1)
                     f = open(
                         "/home/" + device + "/blockChainGit/00blockChain_ws/Receipts/MES_" + nodeName + '/' + data.arrayTransfer[
                                                                                                               2:25],
@@ -1091,8 +1111,9 @@ def rewriteNodes():
     global nodeName
     global device
     global rewriteStart
-    pubRewrite = rospy.Publisher('Rewrite', rewriteNode, queue_size=100)
-    time.sleep(5)
+    global pubRewrite
+   #pubRewrite = rospy.Publisher('Rewrite', rewriteNode, queue_size=100)
+  #  time.sleep(10)
 
     if rewriteStart == True:
         counter = 0
@@ -1127,7 +1148,7 @@ def rewriteNodes():
             for i in range(fileNum):
                 print(fileNames[i])
                 f = open(fileNames[i], "r")
-                for j in range(32):
+                for j in range(70):
                     logHash = logHash + f.readline()
 
                 f.close()
@@ -1227,19 +1248,21 @@ def manual():
     global dataMag2
 
     # Create a TCP/IP socket
+    socket.setdefaulttimeout(30000)
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     # Then bind() is used to associate the socket with the server address. In this case, the address is localhost, referring to the current server, and the port number is 10000.
 
     # Bind the socket to the port
     server_address = (address, port)
     print sys.stderr, 'starting up on %s port %s' % server_address
+
     sock.bind(server_address)
     # Calling listen() puts the socket into server mode, and accept() waits for an incoming connection.
 
     # Listen for incoming connections
     sock.listen(1)
 
-    while True:
+    while not rospy.is_shutdown():
         # Wait for a connection
         print >> sys.stderr, 'waiting for a connection'
         connection, client_address = sock.accept()
@@ -1250,7 +1273,7 @@ def manual():
             print >> sys.stderr, 'connection from', client_address
 
             # Receive the data in small chunks and retransmit it
-            while True:
+            while not rospy.is_shutdown():
                 data = connection.recv(40)
 
                 if data:
@@ -1295,7 +1318,7 @@ def manual():
                 else:
                     print >> sys.stderr, 'no more data from', client_address
                     dataFollowing = 0
-                    break
+                   # break
 
 
         finally:
@@ -1316,7 +1339,7 @@ if __name__ == '__main__':
         p7 = threading.Thread(target=manual, args=())
         p8 = threading.Thread(target=nodesOnline, args=())
         p9 = threading.Thread(target=camera, args=())
-        p10 = threading.Thread(target=nodeHacked1, args=())
+
 
         p1.daemon = True
         p2.daemon = True
@@ -1327,7 +1350,7 @@ if __name__ == '__main__':
         p7.daemon = True
         p8.daemon = True
         p9.daemon = True
-        p10.daemon = True
+
 
         p1.start()
         p2.start()
@@ -1338,7 +1361,7 @@ if __name__ == '__main__':
         p7.start()
         p8.start()
         p9.start()
-        p10.start()
+
 
         p1.join()
         p2.join()
@@ -1349,7 +1372,7 @@ if __name__ == '__main__':
         p7.join()
         p8.join()
         p9.join()
-        p10.join()
+
 
 # each stage of the production line needs to log:
 
