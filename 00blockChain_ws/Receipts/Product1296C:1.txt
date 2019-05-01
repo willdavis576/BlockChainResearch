@@ -1,16 +1,124 @@
-Time Stamp for Block: 18:19:20 - 29/04/2019
-Station: Start production
-Order Number: 1296
-CarrierID: 1
-Product Code: 211
-Block Hash: 
-Previous Hash: 
--------------------------------
-Time Stamp for Block: 18:54:01 - 19/03/2019
-Station: 1
-Order Number: 1296
-CarrierID: 1
-Product Code: 211
-Block Hash: 
-Previous Hash: 
--------------------------------
+---
+nodeName: "Node4"
+hash: "af8785f1229966f86260b8ecf6fc6ce2ad1624475f114ff1d1d7090088d48078"
+---
+nodeName: "Node4"
+hash: "3df9af4c13b3ec0aca4fd36a2a128aaa27475e604327124408f27dd7af1e5585"
+
+
+---
+nodeName: "Node3"
+hash: "af8785f1229966f86260b8ecf6fc6ce2ad1624475f114ff1d1d7090088d48078"
+
+nodeName: "Node3"
+hash: "af8785f1229966f86260b8ecf6fc6ce2ad1624475f114ff1d1d7090088d48078"
+---
+
+
+---
+nodeName: "Node1"
+hash: "af8785f1229966f86260b8ecf6fc6ce2ad1624475f114ff1d1d7090088d48078"
+nodeName: "Node1"
+hash: "271d0bf3eddaa3f7cc7ba921f58e8b3d957bf900bf93945bb272a7dbce914a24"
+
+
+
+nodeName: "Node2"
+hash: "271d0bf3eddaa3f7cc7ba921f58e8b3d957bf900bf93945bb272a7dbce914a24"
+---
+nodeName: "Node2"
+hash: "af8785f1229966f86260b8ecf6fc6ce2ad1624475f114ff1d1d7090088d48078"
+---
+
+
+nodeName: "Node5"
+hash: "271d0bf3eddaa3f7cc7ba921f58e8b3d957bf900bf93945bb272a7dbce914a24"
+---
+nodeName: "Node5"
+hash: "3df9af4c13b3ec0aca4fd36a2a128aaa27475e604327124408f27dd7af1e5585"
+---
+
+
+---
+nodeName: "Node6"
+hash: "271d0bf3eddaa3f7cc7ba921f58e8b3d957bf900bf93945bb272a7dbce914a24"
+---
+
+
+nodeName: "Node5"
+hash: "271d0bf3eddaa3f7cc7ba921f58e8b3d957bf900bf93945bb272a7dbce914a24"
+---
+nodeName: "Node2"
+hash: "af8785f1229966f86260b8ecf6fc6ce2ad1624475f114ff1d1d7090088d48078"
+---
+nodeName: "Node4"
+hash: "af8785f1229966f86260b8ecf6fc6ce2ad1624475f114ff1d1d7090088d48078"
+---
+nodeName: "Node2"
+hash: "271d0bf3eddaa3f7cc7ba921f58e8b3d957bf900bf93945bb272a7dbce914a24"
+---
+nodeName: "Node6"
+hash: "271d0bf3eddaa3f7cc7ba921f58e8b3d957bf900bf93945bb272a7dbce914a24"
+---
+nodeName: "Node3"
+hash: "af8785f1229966f86260b8ecf6fc6ce2ad1624475f114ff1d1d7090088d48078"
+---
+nodeName: "Node1"
+hash: "af8785f1229966f86260b8ecf6fc6ce2ad1624475f114ff1d1d7090088d48078"
+---
+nodeName: "Node5"
+hash: "271d0bf3eddaa3f7cc7ba921f58e8b3d957bf900bf93945bb272a7dbce914a24"
+---
+nodeName: "Node5"
+hash: "3df9af4c13b3ec0aca4fd36a2a128aaa27475e604327124408f27dd7af1e5585"
+---
+nodeName: "Node1"
+hash: "271d0bf3eddaa3f7cc7ba921f58e8b3d957bf900bf93945bb272a7dbce914a24"
+---
+nodeName: "Node3"
+hash: "af8785f1229966f86260b8ecf6fc6ce2ad1624475f114ff1d1d7090088d48078"
+---
+nodeName: "Node2"
+hash: "271d0bf3eddaa3f7cc7ba921f58e8b3d957bf900bf93945bb272a7dbce914a24"
+---
+nodeName: "Node6"
+hash: "271d0bf3eddaa3f7cc7ba921f58e8b3d957bf900bf93945bb272a7dbce914a24"
+---
+nodeName: "Node4"
+hash: "af8785f1229966f86260b8ecf6fc6ce2ad1624475f114ff1d1d7090088d48078"
+---
+nodeName: "Node4"
+hash: "3df9af4c13b3ec0aca4fd36a2a128aaa27475e604327124408f27dd7af1e5585"
+---
+nodeName: "Node6"
+hash: "271d0bf3eddaa3f7cc7ba921f58e8b3d957bf900bf93945bb272a7dbce914a24"
+---
+nodeName: "Node1"
+hash: "af8785f1229966f86260b8ecf6fc6ce2ad1624475f114ff1d1d7090088d48078"
+---
+nodeName: "Node2"
+hash: "271d0bf3eddaa3f7cc7ba921f58e8b3d957bf900bf93945bb272a7dbce914a24"
+---
+nodeName: "Node5"
+hash: "af8785f1229966f86260b8ecf6fc6ce2ad1624475f114ff1d1d7090088d48078"
+---
+nodeName: "Node3"
+hash: "af8785f1229966f86260b8ecf6fc6ce2ad1624475f114ff1d1d7090088d48078"
+---
+nodeName: "Node6"
+hash: "271d0bf3eddaa3f7cc7ba921f58e8b3d957bf900bf93945bb272a7dbce914a24"
+---
+nodeName: "Node3"
+hash: "3df9af4c13b3ec0aca4fd36a2a128aaa27475e604327124408f27dd7af1e5585"
+---
+nodeName: "Node4"
+hash: "af8785f1229966f86260b8ecf6fc6ce2ad1624475f114ff1d1d7090088d48078"
+---
+nodeName: "Node2"
+hash: "271d0bf3eddaa3f7cc7ba921f58e8b3d957bf900bf93945bb272a7dbce914a24"
+---
+nodeName: "Node1"
+hash: "af8785f1229966f86260b8ecf6fc6ce2ad1624475f114ff1d1d7090088d48078"
+---
+nodeName: "Node5"
+hash: "271d0bf3eddaa3f7cc7ba921f58e8b3d957bf900bf93945bb272a7dbce914a24"
