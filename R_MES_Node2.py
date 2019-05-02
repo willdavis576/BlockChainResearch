@@ -614,7 +614,7 @@ def emitter():
             for i in range(len(SblockHash)):
                 for j in range(len(SblockHash[i])):
                     for z in range(len(SblockHash[i][j])):
-                        hashingArray = hashlib.sha256(hashingArray + str(fileNum) + SblockHash[i][j][z]).hexdigest()
+                        hashingArray = hashlib.sha256(hashingArray + SblockHash[i][j][z]).hexdigest()
 
             var = datetime.now()
             clock = int(float(str(var).split(':')[2]))
@@ -684,11 +684,11 @@ def nodeHacked1():
             if nodeHacked in nodeList and counter == 1 and nodeONOFF[int((str(nodeHacked))[4]) - 1] == 1:
                 var = datetime.now()
                 clock = int(float(str(var).split(':')[2]))
-                time.sleep(5 - (clock % 5) + 1)
+                time.sleep(15 - (clock % 15) + 1)
                 print(str(nodeHacked) + " has been hacked")
-		var = datetime.now()
+                var = datetime.now()
                 clock = int(float(str(var).split(':')[2])) + 1
-                time.sleep(5 - (clock % 5) + 1)
+                time.sleep(10 - (clock % 10) + 11)
                 if nodeHacked == oldNodeHacked and lNodeToRewrite == nodeHacked:
                     print("rewritestart :", rewriteStart)
                     if rewriteStart == False:
@@ -902,7 +902,7 @@ def callbackRecData(data):
                 for j in range(len(SblockHash[i])):
                     for z in range(len(SblockHash[i][j])):
                         if SblockHash[i][j] != '':
-                            hashingArray = hashlib.sha256(hashingArray + str(fileNum) + SblockHash[i][j][z]).hexdigest()
+                            hashingArray = hashlib.sha256(hashingArray + SblockHash[i][j][z]).hexdigest()
 
             print(hashingArray)
             emit = True
@@ -1214,11 +1214,11 @@ def camera():
 
 def camCallBack(data):
     global camAddress
-    if nodeName == 'Node2' and device == 'pi':
-        # http://172.21.4.153:8000/2
-        camRaw = data.data
-        camAddress = camRaw[25]
 
+        # http://172.21.4.153:8000/2
+    camRaw = data.data
+    camAddress = camRaw[25]
+    print(camRaw)
 
 ############################### TCP Server ###############################
 

@@ -614,7 +614,7 @@ def emitter():
             for i in range(len(SblockHash)):
                 for j in range(len(SblockHash[i])):
                     for z in range(len(SblockHash[i][j])):
-                        hashingArray = hashlib.sha256(hashingArray + str(fileNum) + SblockHash[i][j][z]).hexdigest()
+                        hashingArray = hashlib.sha256(hashingArray + SblockHash[i][j][z]).hexdigest()
 
             var = datetime.now()
             clock = int(float(str(var).split(':')[2]))
@@ -676,7 +676,7 @@ def nodeHacked1():
     global olderNodeHacked
     global rewriteStart
     global pubRewrite
-    
+
     counter = 0
 
     while not rospy.is_shutdown():
@@ -684,12 +684,12 @@ def nodeHacked1():
             if nodeHacked in nodeList and counter == 1 and nodeONOFF[int((str(nodeHacked))[4]) - 1] == 1:
                 var = datetime.now()
                 clock = int(float(str(var).split(':')[2]))
-                time.sleep(5 - (clock % 5) + 1)
+                time.sleep(15 - (clock % 15) + 1)
                 print(str(nodeHacked) + " has been hacked")
                 var = datetime.now()
                 clock = int(float(str(var).split(':')[2])) + 1
-                time.sleep(5 - (clock % 5) + 1)
-		if nodeHacked == oldNodeHacked and lNodeToRewrite == nodeHacked:
+                time.sleep(10 - (clock % 10) + 11)
+                if nodeHacked == oldNodeHacked and lNodeToRewrite == nodeHacked:
                     print("rewritestart :", rewriteStart)
                     if rewriteStart == False:
                         rewriteStart = True
@@ -902,7 +902,7 @@ def callbackRecData(data):
                 for j in range(len(SblockHash[i])):
                     for z in range(len(SblockHash[i][j])):
                         if SblockHash[i][j] != '':
-                            hashingArray = hashlib.sha256(hashingArray + str(fileNum) + SblockHash[i][j][z]).hexdigest()
+                            hashingArray = hashlib.sha256(hashingArray + SblockHash[i][j][z]).hexdigest()
 
             print(hashingArray)
             emit = True
@@ -1110,8 +1110,8 @@ def rewriteNodes():
     global device
     global rewriteStart
     global pubRewrite
- #   pubRewrite = rospy.Publisher('Rewrite', rewriteNode, queue_size=100)
-#    time.sleep(10)
+    #   pubRewrite = rospy.Publisher('Rewrite', rewriteNode, queue_size=100)
+    #    time.sleep(10)
 
     if rewriteStart == True:
         counter = 0
@@ -1214,10 +1214,10 @@ def camera():
 
 def camCallBack(data):
     global camAddress
-    if nodeName == 'Node2' and device == 'pi':
+
         # http://172.21.4.153:8000/2
-        camRaw = data.data
-        camAddress = camRaw[25]
+    camRaw = data.data
+    camAddress = camRaw[25]
 
 
 ############################### TCP Server ###############################
@@ -1337,7 +1337,6 @@ if __name__ == '__main__':
         p8 = threading.Thread(target=nodesOnline, args=())
         p9 = threading.Thread(target=camera, args=())
 
-
         p1.daemon = True
         p2.daemon = True
         p3.daemon = True
@@ -1347,7 +1346,6 @@ if __name__ == '__main__':
         p7.daemon = True
         p8.daemon = True
         p9.daemon = True
-
 
         p1.start()
         p2.start()
@@ -1359,7 +1357,6 @@ if __name__ == '__main__':
         p8.start()
         p9.start()
 
-
         p1.join()
         p2.join()
         p3.join()
@@ -1369,7 +1366,6 @@ if __name__ == '__main__':
         p7.join()
         p8.join()
         p9.join()
-
 
 # each stage of the production line needs to log:
 
