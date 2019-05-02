@@ -27,7 +27,7 @@ dataDes1 = "Temperature Reached (C): "
 dataDes2 = "Heating Time(s): "
 dataMag1 = 10
 dataMag2 = 10
-
+pubRewrite = rospy.Publisher('Rewrite', rewriteNode, queue_size=100)
 Range = 200
 cRange = 5
 itemNumber = 0
@@ -625,9 +625,6 @@ def emitter():
             pub.publish(message2)
             hashingArray = ''
 
-
-
-
     rate.sleep()
 
 
@@ -678,6 +675,7 @@ def nodeHacked1():
     global oldNodeHacked
     global olderNodeHacked
     global rewriteStart
+    global pubWrite
 
     counter = 0
 
@@ -688,6 +686,10 @@ def nodeHacked1():
                 clock = int(float(str(var).split(':')[2]))
                 time.sleep(5 - (clock % 5) + 1)
                 print(str(nodeHacked) + " has been hacked")
+                var = datetime.now()
+                clock = int(float(str(var).split(':')[2])) + 1
+                time.sleep(5 - (clock % 5) + 6)
+
                 if nodeHacked == oldNodeHacked and lNodeToRewrite == nodeHacked:
                     print("rewritestart :", rewriteStart)
                     if rewriteStart == False:
@@ -1108,8 +1110,9 @@ def rewriteNodes():
     global nodeName
     global device
     global rewriteStart
-    pubRewrite = rospy.Publisher('Rewrite', rewriteNode, queue_size=100)
-    time.sleep(10)
+    global pubRewrite
+    # pubRewrite = rospy.Publisher('Rewrite', rewriteNode, queue_size=100)
+    # time.sleep(5)
 
     if rewriteStart == True:
         counter = 0
@@ -1335,7 +1338,6 @@ if __name__ == '__main__':
         p8 = threading.Thread(target=nodesOnline, args=())
         p9 = threading.Thread(target=camera, args=())
 
-
         p1.daemon = True
         p2.daemon = True
         p3.daemon = True
@@ -1346,7 +1348,6 @@ if __name__ == '__main__':
         p8.daemon = True
         p9.daemon = True
 
-
         p1.start()
         p2.start()
         p3.start()
@@ -1356,7 +1357,6 @@ if __name__ == '__main__':
         p7.start()
         p8.start()
         p9.start()
-
 
         p1.join()
         p2.join()

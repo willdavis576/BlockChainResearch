@@ -27,7 +27,7 @@ dataDes1 = "No data available"
 dataDes2 = "No data available"
 dataMag1 = 10
 dataMag2 = 10
-
+pubRewrite = rospy.Publisher('Rewrite', rewriteNode, queue_size=100)
 Range = 200
 cRange = 5
 itemNumber = 0
@@ -634,7 +634,7 @@ def nodesOnline():
 
     while not rospy.is_shutdown():
         var = rosnode.rosnode_ping_all()
-       # print(var)
+        # print(var)
         for i in range(len(var[0])):
             for j in range(1):
                 # print(str(var[j][i])[1:6])
@@ -675,7 +675,7 @@ def nodeHacked1():
     global oldNodeHacked
     global olderNodeHacked
     global rewriteStart
-
+    global pubRewrite
     counter = 0
 
     while not rospy.is_shutdown():
@@ -685,6 +685,11 @@ def nodeHacked1():
                 clock = int(float(str(var).split(':')[2]))
                 time.sleep(5 - (clock % 5) + 1)
                 print(str(nodeHacked) + " has been hacked")
+
+                var = datetime.now()
+                clock = int(float(str(var).split(':')[2])) + 1
+                time.sleep(5 - (clock % 5) + 6)
+
                 if nodeHacked == oldNodeHacked and lNodeToRewrite == nodeHacked:
                     print("rewritestart :", rewriteStart)
                     if rewriteStart == False:
@@ -1106,8 +1111,9 @@ def rewriteNodes():
     global device
     global rewriteStart
     print(rewriteStart)
-    pubRewrite = rospy.Publisher('Rewrite', rewriteNode, queue_size=100)
-    time.sleep(10)
+    global pubRewrite
+    ##pubRewrite = rospy.Publisher('Rewrite', rewriteNode, queue_size=100)
+    #    time.sleep(5)
     print("after timer")
     print(rewriteStart)
     if rewriteStart == True:
@@ -1334,7 +1340,6 @@ if __name__ == '__main__':
         p8 = threading.Thread(target=nodesOnline, args=())
         p9 = threading.Thread(target=camera, args=())
 
-
         p1.daemon = True
         p2.daemon = True
         p3.daemon = True
@@ -1344,7 +1349,6 @@ if __name__ == '__main__':
         p7.daemon = True
         p8.daemon = True
         p9.daemon = True
-
 
         p1.start()
         p2.start()
@@ -1356,7 +1360,6 @@ if __name__ == '__main__':
         p8.start()
         p9.start()
 
-
         p1.join()
         p2.join()
         p3.join()
@@ -1366,7 +1369,6 @@ if __name__ == '__main__':
         p7.join()
         p8.join()
         p9.join()
-
 
 # each stage of the production line needs to log:
 

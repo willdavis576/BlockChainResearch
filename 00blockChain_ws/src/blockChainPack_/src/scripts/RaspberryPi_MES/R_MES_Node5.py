@@ -27,7 +27,7 @@ dataDes1 = "Pressure (bar): "
 dataDes2 = "Force (N): "
 dataMag1 = 100
 dataMag2 = 10
-
+pubRewrite = rospy.Publisher('Rewrite', rewriteNode, queue_size=100)
 Range = 200
 cRange = 5
 itemNumber = 0
@@ -675,7 +675,7 @@ def nodeHacked1():
     global oldNodeHacked
     global olderNodeHacked
     global rewriteStart
-
+    global pubRewrite
     counter = 0
 
     while not rospy.is_shutdown():
@@ -685,6 +685,11 @@ def nodeHacked1():
                 clock = int(float(str(var).split(':')[2]))
                 time.sleep(5 - (clock % 5) + 1)
                 print(str(nodeHacked) + " has been hacked")
+                var = datetime.now()
+                clock = int(float(str(var).split(':')[2])) + 1
+                time.sleep(5 - (clock % 5) + 6)
+
+
                 if nodeHacked == oldNodeHacked and lNodeToRewrite == nodeHacked:
                     print("rewritestart :", rewriteStart)
                     if rewriteStart == False:
@@ -1106,8 +1111,9 @@ def rewriteNodes():
     global nodeName
     global device
     global rewriteStart
-    pubRewrite = rospy.Publisher('Rewrite', rewriteNode, queue_size=100)
-    time.sleep(10)
+    global pubRewrite
+    #pubRewrite = rospy.Publisher('Rewrite', rewriteNode, queue_size=100)
+#    time.sleep(5)
 
     if rewriteStart == True:
         counter = 0
