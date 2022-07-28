@@ -16,5 +16,8 @@ If a node is compromised, its hash will be different, all other nodes will notic
 
 An obvious caveat to this project is, yes, ROS Kinetic is not decentralised like a traditional blockchain system but the software is written as if it is decentrailised, since ROS is just being used for the node based communication. 
 
+Project progress will pics and problems found here:
+https://williamdavis83.wixsite.com/website
+
 My paper on this:
 An Innovative Blockchain-Based Traceability Framework for Industry 4.0 Cyber-Physical Factory https://eprints.mdx.ac.uk/34871/
